@@ -1,0 +1,221 @@
+{
+  "confirm": {
+    "candidate": {
+      "episodes": [
+        {
+          "cultivated": 4,
+          "final_assets": 220,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 120,
+          "seed": 101
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 220,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 120,
+          "seed": 211
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 250,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 150,
+          "seed": 307
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 235,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 135,
+          "seed": 401
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 205,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 105,
+          "seed": 503
+        }
+      ],
+      "mean": {
+        "cultivated": 4.0,
+        "final_assets": 226.0,
+        "harvested": 4.0,
+        "invalid_actions": 0.0,
+        "profit": 126.0
+      },
+      "seeds": [
+        101,
+        211,
+        307,
+        401,
+        503
+      ]
+    },
+    "champion": {
+      "episodes": [
+        {
+          "cultivated": 4,
+          "final_assets": 220,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 120,
+          "seed": 101
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 220,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 120,
+          "seed": 211
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 250,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 150,
+          "seed": 307
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 235,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 135,
+          "seed": 401
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 205,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 105,
+          "seed": 503
+        }
+      ],
+      "mean": {
+        "cultivated": 4.0,
+        "final_assets": 226.0,
+        "harvested": 4.0,
+        "invalid_actions": 0.0,
+        "profit": 126.0
+      },
+      "seeds": [
+        101,
+        211,
+        307,
+        401,
+        503
+      ]
+    },
+    "passed": true,
+    "reasons": []
+  },
+  "decision": "PROMOTE",
+  "exec_compatibility": {
+    "command": "/usr/bin/python3 /workspaces/ai-dev-control-plane/.targets/kaggriculture-gpt/scripts/validate_submission.py main.py",
+    "output": "Kaggriculture submission contract: PASS",
+    "passed": true
+  },
+  "fixture": "tests/fixtures/evaluation.json",
+  "next_action": "kaggle_validation",
+  "screen": {
+    "candidate": {
+      "episodes": [
+        {
+          "cultivated": 4,
+          "final_assets": 235,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 135,
+          "seed": 11
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 220,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 120,
+          "seed": 23
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 235,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 135,
+          "seed": 47
+        }
+      ],
+      "mean": {
+        "cultivated": 4.0,
+        "final_assets": 230.0,
+        "harvested": 4.0,
+        "invalid_actions": 0.0,
+        "profit": 130.0
+      },
+      "seeds": [
+        11,
+        23,
+        47
+      ]
+    },
+    "champion": {
+      "episodes": [
+        {
+          "cultivated": 4,
+          "final_assets": 235,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 135,
+          "seed": 11
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 220,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 120,
+          "seed": 23
+        },
+        {
+          "cultivated": 4,
+          "final_assets": 235,
+          "harvested": 4,
+          "invalid_actions": 0,
+          "profit": 135,
+          "seed": 47
+        }
+      ],
+      "mean": {
+        "cultivated": 4.0,
+        "final_assets": 230.0,
+        "harvested": 4.0,
+        "invalid_actions": 0.0,
+        "profit": 130.0
+      },
+      "seeds": [
+        11,
+        23,
+        47
+      ]
+    },
+    "passed": true,
+    "reasons": []
+  },
+  "thresholds": {
+    "max_invalid_actions": 0,
+    "min_cultivated_ratio": 1.0,
+    "min_final_assets_ratio": 1.0,
+    "min_harvested_ratio": 1.0,
+    "min_profit_ratio": 1.0
+  }
+}
