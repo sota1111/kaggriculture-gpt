@@ -2,8 +2,10 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from scripts.evaluate import compare, evaluate, load_agent, run_episode
+from scripts import evaluate as evaluator
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,6 +77,56 @@ class EvaluationTest(unittest.TestCase):
             "private": {"shed": {}, "seeds": {"WHEAT": 1}, "inventories": [[]]},
         }
         self.assertIn(agent.agent(obs)["farmer"][0], {"NORTH", "WEST"})
+
+    def test_missing_market_keys_and_unknown_inventory_are_safe(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = {
+            "player": 0, "day": 1,
+            "farms": [{"money": 100, "farmer": [0, 0], "hands": [], "tiles": [[None]]}],
+            "private": {"shed": {"UNKNOWN": 3}, "seeds": {}, "inventories": [[]]},
+        }
+        result = agent.agent(obs)
+        self.assertEqual({"farmer", "hands", "market"}, set(result))
+        self.assertLessEqual(len(result["market"]), 10)
+        self.assertNotIn("UNKNOWN", [action[1] for action in result["market"] if len(action) > 1])
+
+    def test_cash_reserve_and_market_order_cap_are_preserved(self):
+        agent = load_agent(ROOT / "main.py")
+        crops = {f"CROP{i}": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3,
+                              "fallback_price": 20, "sell_above": 10} for i in range(12)}
+        obs = {
+            "player": 0, "day": 2, "crops": crops,
+            "market": {"prices": {crop: 20 for crop in crops}},
+            "farms": [{"money": 109, "farmer": [0, 0], "hands": [], "hires_today": 0, "tiles": [["LOCKED"]]}],
+            "private": {"shed": {crop: 1 for crop in crops}, "seeds": {}, "inventories": [[]]},
+        }
+        result = agent.agent(obs)
+        self.assertLessEqual(len(result["market"]), 10)
+        self.assertFalse(any(action[0] in {"BUY_SEED", "HIRE"} for action in result["market"]))
+
+    def test_price_aware_strategy_holds_inventory_below_target(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = {
+            "player": 0, "day": 3,
+            "crops": {"CORN": {"seed_price": 18, "maturity_days": 3, "expected_yield": 4,
+                                  "fallback_price": 14, "sell_above": 17}},
+            "market": {"prices": {"CORN": 12}},
+            "farms": [{"money": 100, "farmer": [0, 0], "hands": [], "tiles": [["LOCKED"]]}],
+            "private": {"shed": {"CORN": 5}, "seeds": {}, "inventories": [[]]},
+        }
+        self.assertFalse(any(action[0] == "SELL" for action in agent.agent(obs)["market"]))
+
+    def test_report_maps_champion_candidate_and_submission_artifact(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "result.json"
+            argv = ["evaluate.py", "--champion", str(ROOT / "tests/fixtures/champion_sot_2263.py"),
+                    "--candidate", str(ROOT / "main.py"), "--fixture",
+                    str(ROOT / "tests/fixtures/evaluation.json"), "--output", str(output)]
+            with mock.patch("sys.argv", argv):
+                self.assertEqual(0, evaluator.main())
+            report = json.loads(output.read_text())
+        self.assertEqual(str(ROOT / "main.py"), report["provenance"]["candidate"])
+        self.assertEqual("submission.tar.gz", report["provenance"]["submission_artifact"])
 
 
 if __name__ == "__main__":

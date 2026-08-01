@@ -67,7 +67,7 @@ def _hire_cost(hires_today: int) -> int:
     return a
 
 
-def _apply_worker(action, position, tiles, seeds, day, rng):
+def _apply_worker(action, position, tiles, seeds, day, rng, crops):
     x, y = position
     op = action[0]
     size = len(tiles)
@@ -84,17 +84,24 @@ def _apply_worker(action, position, tiles, seeds, day, rng):
     if op == "DIG" and isinstance(tile, dict) and tile.get("kind") == "WEED":
         tiles[y][x] = None
         return position, seeds, 0, 0, 0, 0
-    if op == "PLANT" and len(action) == 2 and action[1] == "WHEAT" and tile is None and seeds > 0:
-        tiles[y][x] = {"kind": "PLANT", "crop": "WHEAT", "planted_day": day, "watered_today": False, "yield_units": 0}
-        return position, seeds - 1, 1, 0, 0, 0
+    if op == "PLANT" and len(action) == 2 and action[1] in crops and tile is None and seeds.get(action[1], 0) > 0:
+        crop = action[1]
+        tiles[y][x] = {"kind": "PLANT", "crop": crop, "planted_day": day, "watered_today": False, "yield_units": 0}
+        seeds[crop] -= 1
+        return position, seeds, 1, 0, None, 0
     if op == "WATER" and isinstance(tile, dict) and tile.get("kind") == "PLANT" and not tile["watered_today"]:
         tile["watered_today"] = True
         return position, seeds, 0, 0, 0, 0
-    if op == "HARVEST" and isinstance(tile, dict) and tile.get("kind") == "PLANT" and day - tile["planted_day"] >= 2:
-        amount = 2 + rng.randint(0, 1) + min(2, max(0, day - tile["planted_day"] - 1))
+    if op == "HARVEST" and isinstance(tile, dict) and tile.get("kind") == "PLANT":
+        crop = tile.get("crop")
+        spec = crops.get(crop, {})
+        maturity = int(spec.get("maturity_days", 2))
+        if day - tile["planted_day"] < maturity:
+            return position, seeds, 0, 0, None, 1
+        amount = int(spec.get("base_yield", 2)) + rng.randint(0, int(spec.get("yield_variance", 1)))
         tiles[y][x] = None
-        return position, seeds, 0, 1, amount, 0
-    return position, seeds, 0, 0, 0, 1
+        return position, seeds, 0, 1, (crop, amount), 0
+    return position, seeds, 0, 0, None, 1
 
 
 def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metrics:
@@ -103,7 +110,12 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     turns_per_day = int(fixture.get("turns_per_day", 12))
     size = int(fixture.get("board_size", 5))
     initial_money = int(fixture["initial_money"])
-    money, seeds, shed = initial_money, int(fixture["initial_seeds"]), 0
+    crops = fixture.get("crops", {"WHEAT": {"seed_price": 10, "maturity_days": 2, "base_yield": 2,
+                                               "yield_variance": 1, "prices": [fixture["sale_price"]]}})
+    seeds = {crop: int(spec.get("initial_seeds", 0)) for crop, spec in crops.items()}
+    if "initial_seeds" in fixture:
+        seeds["WHEAT"] = int(fixture["initial_seeds"])
+    money, shed = initial_money, {crop: 0 for crop in crops}
     tiles = [[None for _ in range(size)] for _ in range(size)]
     metrics = Metrics()
 
@@ -111,13 +123,21 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
         positions = [[0, 0]]
         hires_today = 0
         for hour in range(turns_per_day):
+            prices = {crop: int(spec.get("prices", [spec.get("fallback_price", 0)])[day % len(spec.get("prices", [0]))])
+                      for crop, spec in crops.items()}
+            public_crops = {crop: {"seed_price": spec["seed_price"], "maturity_days": spec["maturity_days"],
+                                    "expected_yield": spec["base_yield"] + spec.get("yield_variance", 0) / 2,
+                                    "fallback_price": spec.get("fallback_price", prices[crop]),
+                                    "sell_above": spec.get("sell_above", spec.get("fallback_price", prices[crop]))}
+                            for crop, spec in crops.items()}
             obs = {
                 "player": 0, "step": day * turns_per_day + hour, "day": day, "hour": hour,
                 "farms": [{"money": money, "farmer": positions[0], "hands": positions[1:],
                            "hires_today": hires_today, "unlocked_quadrants": ["NW"], "tiles": copy.deepcopy(tiles)}],
-                "private": {"shed": {"WHEAT": shed}, "seeds": {"WHEAT": seeds},
+                "private": {"shed": copy.deepcopy(shed), "seeds": copy.deepcopy(seeds),
                             "inventories": [[] for _ in positions]},
-                "market": {"inventory": {"WHEAT": 10000}, "prices": {"WHEAT": fixture["sale_price"]}},
+                "market": {"inventory": {crop: 10000 for crop in crops}, "prices": prices},
+                "crops": public_crops,
                 "town": {"unlocked_shops": []},
             }
             try:
@@ -139,12 +159,13 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                         metrics.invalid_actions += 1
                 elif len(action) == 3 and isinstance(action[2], int) and action[2] > 0:
                     amount = action[2]
-                    if action[0] == "BUY_SEED" and action[1] == "WHEAT" and money >= 10 * amount:
-                        money -= 10 * amount
-                        seeds += amount
-                    elif action[0] == "SELL" and action[1] == "WHEAT" and shed >= amount:
-                        money += int(fixture["sale_price"]) * amount
-                        shed -= amount
+                    crop = action[1]
+                    if action[0] == "BUY_SEED" and crop in crops and money >= int(crops[crop]["seed_price"]) * amount:
+                        money -= int(crops[crop]["seed_price"]) * amount
+                        seeds[crop] += amount
+                    elif action[0] == "SELL" and crop in crops and shed[crop] >= amount:
+                        money += prices[crop] * amount
+                        shed[crop] -= amount
                     else:
                         metrics.invalid_actions += 1
                 else:
@@ -158,11 +179,12 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                 metrics.invalid_actions += len(targets) - len(set(targets))
             for index, action in enumerate(worker_actions):
                 positions[index], seeds, cultivated, harvested, produced, invalid = _apply_worker(
-                    action, positions[index], tiles, seeds, day, rng
+                    action, positions[index], tiles, seeds, day, rng, crops
                 )
                 metrics.cultivated += cultivated
                 metrics.harvested += harvested
-                shed += produced
+                if produced:
+                    shed[produced[0]] += produced[1]
                 metrics.invalid_actions += invalid
         for row in tiles:
             for tile in row:
@@ -174,7 +196,9 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                 x, y = rng.choice(empties)
                 tiles[y][x] = {"kind": "WEED"}
 
-    metrics.final_assets = money + shed * int(fixture["sale_price"]) + seeds * 10
+    final_prices = {crop: int(spec.get("prices", [spec.get("fallback_price", 0)])[-1]) for crop, spec in crops.items()}
+    metrics.final_assets = money + sum(shed[crop] * final_prices[crop] for crop in crops) + sum(
+        seeds[crop] * int(crops[crop]["seed_price"]) for crop in crops)
     metrics.profit = metrics.final_assets - initial_money
     return metrics
 
@@ -213,22 +237,30 @@ def main() -> int:
     champion, candidate = load_agent(args.champion), load_agent(args.candidate)
     champion_screen = evaluate(champion, fixture, fixture["screen_seeds"])
     variants = {}
-    for hire_target in fixture.get("hire_candidates", [getattr(candidate, "HIRE_TARGET", 0)]):
-        candidate.HIRE_TARGET = hire_target
-        variants[str(hire_target)] = evaluate(candidate, fixture, fixture["screen_seeds"])
-    eligible = [(value["mean"]["final_assets"], -value["mean"]["invalid_actions"], int(key))
+    strategies = fixture.get("strategy_candidates", [{"crop": "BEST_RETURN", "sell": "PRICE_AWARE"}])
+    for strategy in strategies:
+        candidate.CROP_STRATEGY = strategy["crop"]
+        candidate.SELL_STRATEGY = strategy["sell"]
+        key = f"{strategy['crop']}:{strategy['sell']}"
+        variants[key] = evaluate(candidate, fixture, fixture["screen_seeds"])
+    eligible = [(value["mean"]["final_assets"], -value["mean"]["invalid_actions"], key)
                 for key, value in variants.items() if value["mean"]["invalid_actions"] <= champion_screen["mean"]["invalid_actions"]]
-    selected = max(eligible)[2] if eligible else min(int(key) for key in variants)
-    candidate.HIRE_TARGET = selected
-    result = {"fixture": str(args.fixture), "thresholds": fixture["thresholds"], "screen": {
-        "champion": champion_screen, "hire_variants": variants, "selected_hires": selected,
+    selected = max(eligible)[2] if eligible else sorted(variants)[0]
+    selected_crop, selected_sell = selected.split(":", 1)
+    candidate.CROP_STRATEGY, candidate.SELL_STRATEGY = selected_crop, selected_sell
+    result = {"fixture": str(args.fixture),
+              "provenance": {"champion": str(args.champion), "candidate": str(args.candidate),
+                             "submission_builder": "scripts/build_submission.sh",
+                             "submission_artifact": "submission.tar.gz"},
+              "thresholds": fixture["thresholds"], "screen": {
+        "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
     passed, reasons = compare(champion_screen, variants[str(selected)], fixture["thresholds"])
     result["screen"].update({"passed": passed, "reasons": reasons})
     if passed:
         result["confirm"] = {"champion": evaluate(champion, fixture, fixture["confirm_seeds"]),
                              "candidate": evaluate(candidate, fixture, fixture["confirm_seeds"]),
-                             "selected_hires": selected}
+                             "selected_strategy": selected}
         confirmed, reasons = compare(result["confirm"]["champion"], result["confirm"]["candidate"], fixture["thresholds"])
         result["confirm"].update({"passed": confirmed, "reasons": reasons})
     else:
