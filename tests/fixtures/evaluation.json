@@ -1,15 +1,18 @@
 {
   "days": 12,
-  "initial_money": 100,
-  "initial_seeds": 1,
+  "turns_per_day": 12,
+  "board_size": 5,
+  "initial_money": 3000,
+  "initial_seeds": 4,
   "sale_price": 15,
   "base_yield": 2,
   "yield_variance": 1,
   "screen_seeds": [11, 23, 47],
   "confirm_seeds": [101, 211, 307, 401, 503],
+  "hire_candidates": [0, 1, 2, 3, 4],
   "thresholds": {
-    "min_final_assets_ratio": 1.0,
-    "min_profit_ratio": 1.0,
+    "min_final_assets_ratio": 1.02,
+    "min_profit_ratio": 1.05,
     "min_cultivated_ratio": 1.0,
     "min_harvested_ratio": 1.0,
     "max_invalid_actions": 0

@@ -1,0 +1,424 @@
+{
+  "confirm": {
+    "candidate": {
+      "episodes": [
+        {
+          "cultivated": 55,
+          "final_assets": 5061,
+          "harvested": 49,
+          "invalid_actions": 0,
+          "profit": 2061,
+          "seed": 101
+        },
+        {
+          "cultivated": 62,
+          "final_assets": 5036,
+          "harvested": 51,
+          "invalid_actions": 0,
+          "profit": 2036,
+          "seed": 211
+        },
+        {
+          "cultivated": 55,
+          "final_assets": 4776,
+          "harvested": 45,
+          "invalid_actions": 0,
+          "profit": 1776,
+          "seed": 307
+        },
+        {
+          "cultivated": 58,
+          "final_assets": 5076,
+          "harvested": 49,
+          "invalid_actions": 0,
+          "profit": 2076,
+          "seed": 401
+        },
+        {
+          "cultivated": 57,
+          "final_assets": 5161,
+          "harvested": 53,
+          "invalid_actions": 0,
+          "profit": 2161,
+          "seed": 503
+        }
+      ],
+      "mean": {
+        "cultivated": 57.4,
+        "final_assets": 5022.0,
+        "harvested": 49.4,
+        "invalid_actions": 0.0,
+        "profit": 2022.0
+      },
+      "seeds": [
+        101,
+        211,
+        307,
+        401,
+        503
+      ]
+    },
+    "champion": {
+      "episodes": [
+        {
+          "cultivated": 6,
+          "final_assets": 3265,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 265,
+          "seed": 101
+        },
+        {
+          "cultivated": 6,
+          "final_assets": 3220,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 220,
+          "seed": 211
+        },
+        {
+          "cultivated": 6,
+          "final_assets": 3235,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 235,
+          "seed": 307
+        },
+        {
+          "cultivated": 6,
+          "final_assets": 3250,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 250,
+          "seed": 401
+        },
+        {
+          "cultivated": 6,
+          "final_assets": 3235,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 235,
+          "seed": 503
+        }
+      ],
+      "mean": {
+        "cultivated": 6.0,
+        "final_assets": 3241.0,
+        "harvested": 5.0,
+        "invalid_actions": 0.0,
+        "profit": 241.0
+      },
+      "seeds": [
+        101,
+        211,
+        307,
+        401,
+        503
+      ]
+    },
+    "passed": true,
+    "reasons": [],
+    "selected_hires": 4
+  },
+  "decision": "PROMOTE",
+  "exec_compatibility": {
+    "output": "Kaggriculture submission contract: PASS",
+    "passed": true
+  },
+  "fixture": "tests/fixtures/evaluation.json",
+  "next_action": "kaggle_validation",
+  "screen": {
+    "candidate": {
+      "episodes": [
+        {
+          "cultivated": 54,
+          "final_assets": 5011,
+          "harvested": 49,
+          "invalid_actions": 0,
+          "profit": 2011,
+          "seed": 11
+        },
+        {
+          "cultivated": 57,
+          "final_assets": 4891,
+          "harvested": 47,
+          "invalid_actions": 0,
+          "profit": 1891,
+          "seed": 23
+        },
+        {
+          "cultivated": 62,
+          "final_assets": 5096,
+          "harvested": 51,
+          "invalid_actions": 0,
+          "profit": 2096,
+          "seed": 47
+        }
+      ],
+      "mean": {
+        "cultivated": 57.666666666666664,
+        "final_assets": 4999.333333333333,
+        "harvested": 49.0,
+        "invalid_actions": 0.0,
+        "profit": 1999.3333333333333
+      },
+      "seeds": [
+        11,
+        23,
+        47
+      ]
+    },
+    "champion": {
+      "episodes": [
+        {
+          "cultivated": 6,
+          "final_assets": 3235,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 235,
+          "seed": 11
+        },
+        {
+          "cultivated": 6,
+          "final_assets": 3235,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 235,
+          "seed": 23
+        },
+        {
+          "cultivated": 6,
+          "final_assets": 3250,
+          "harvested": 5,
+          "invalid_actions": 0,
+          "profit": 250,
+          "seed": 47
+        }
+      ],
+      "mean": {
+        "cultivated": 6.0,
+        "final_assets": 3240.0,
+        "harvested": 5.0,
+        "invalid_actions": 0.0,
+        "profit": 240.0
+      },
+      "seeds": [
+        11,
+        23,
+        47
+      ]
+    },
+    "hire_variants": {
+      "0": {
+        "episodes": [
+          {
+            "cultivated": 17,
+            "final_assets": 3485,
+            "harvested": 12,
+            "invalid_actions": 0,
+            "profit": 485,
+            "seed": 11
+          },
+          {
+            "cultivated": 15,
+            "final_assets": 3580,
+            "harvested": 14,
+            "invalid_actions": 0,
+            "profit": 580,
+            "seed": 23
+          },
+          {
+            "cultivated": 21,
+            "final_assets": 3715,
+            "harvested": 16,
+            "invalid_actions": 0,
+            "profit": 715,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "cultivated": 17.666666666666668,
+          "final_assets": 3593.3333333333335,
+          "harvested": 14.0,
+          "invalid_actions": 0.0,
+          "profit": 593.3333333333334
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      },
+      "1": {
+        "episodes": [
+          {
+            "cultivated": 34,
+            "final_assets": 4158,
+            "harvested": 29,
+            "invalid_actions": 0,
+            "profit": 1158,
+            "seed": 11
+          },
+          {
+            "cultivated": 29,
+            "final_assets": 4148,
+            "harvested": 26,
+            "invalid_actions": 0,
+            "profit": 1148,
+            "seed": 23
+          },
+          {
+            "cultivated": 34,
+            "final_assets": 4233,
+            "harvested": 29,
+            "invalid_actions": 0,
+            "profit": 1233,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "cultivated": 32.333333333333336,
+          "final_assets": 4179.666666666667,
+          "harvested": 28.0,
+          "invalid_actions": 0.0,
+          "profit": 1179.6666666666667
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      },
+      "2": {
+        "episodes": [
+          {
+            "cultivated": 35,
+            "final_assets": 4256,
+            "harvested": 30,
+            "invalid_actions": 0,
+            "profit": 1256,
+            "seed": 11
+          },
+          {
+            "cultivated": 42,
+            "final_assets": 4321,
+            "harvested": 32,
+            "invalid_actions": 0,
+            "profit": 1321,
+            "seed": 23
+          },
+          {
+            "cultivated": 39,
+            "final_assets": 4426,
+            "harvested": 34,
+            "invalid_actions": 0,
+            "profit": 1426,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "cultivated": 38.666666666666664,
+          "final_assets": 4334.333333333333,
+          "harvested": 32.0,
+          "invalid_actions": 0.0,
+          "profit": 1334.3333333333333
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      },
+      "3": {
+        "episodes": [
+          {
+            "cultivated": 49,
+            "final_assets": 4767,
+            "harvested": 44,
+            "invalid_actions": 0,
+            "profit": 1767,
+            "seed": 11
+          },
+          {
+            "cultivated": 43,
+            "final_assets": 4602,
+            "harvested": 38,
+            "invalid_actions": 0,
+            "profit": 1602,
+            "seed": 23
+          },
+          {
+            "cultivated": 48,
+            "final_assets": 4777,
+            "harvested": 42,
+            "invalid_actions": 0,
+            "profit": 1777,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "cultivated": 46.666666666666664,
+          "final_assets": 4715.333333333333,
+          "harvested": 41.333333333333336,
+          "invalid_actions": 0.0,
+          "profit": 1715.3333333333333
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      },
+      "4": {
+        "episodes": [
+          {
+            "cultivated": 54,
+            "final_assets": 5011,
+            "harvested": 49,
+            "invalid_actions": 0,
+            "profit": 2011,
+            "seed": 11
+          },
+          {
+            "cultivated": 57,
+            "final_assets": 4891,
+            "harvested": 47,
+            "invalid_actions": 0,
+            "profit": 1891,
+            "seed": 23
+          },
+          {
+            "cultivated": 62,
+            "final_assets": 5096,
+            "harvested": 51,
+            "invalid_actions": 0,
+            "profit": 2096,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "cultivated": 57.666666666666664,
+          "final_assets": 4999.333333333333,
+          "harvested": 49.0,
+          "invalid_actions": 0.0,
+          "profit": 1999.3333333333333
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      }
+    },
+    "passed": true,
+    "reasons": [],
+    "selected_hires": 4
+  },
+  "thresholds": {
+    "max_invalid_actions": 0,
+    "min_cultivated_ratio": 1.0,
+    "min_final_assets_ratio": 1.02,
+    "min_harvested_ratio": 1.0,
+    "min_profit_ratio": 1.05
+  }
+}
