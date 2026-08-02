@@ -20,12 +20,28 @@ class EvaluationTest(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual(0, first["mean"]["invalid_actions"])
 
+    def test_screen_and_confirm_use_independent_reproducible_seeds(self):
+        self.assertTrue(set(FIXTURE["screen_seeds"]).isdisjoint(FIXTURE["confirm_seeds"]))
+        agent = load_agent(ROOT / "main.py")
+        self.assertEqual(
+            evaluate(agent, FIXTURE, FIXTURE["confirm_seeds"]),
+            evaluate(agent, FIXTURE, FIXTURE["confirm_seeds"]),
+        )
+
     def test_invalid_action_is_detected(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "invalid.py"
             path.write_text("def agent(obs):\n return {'farmer':['FLY'], 'hands':[], 'market':[]}\n")
             result = evaluate(load_agent(path), FIXTURE, [1])
         self.assertEqual(FIXTURE["days"] * FIXTURE["turns_per_day"], result["mean"]["invalid_actions"])
+        self.assertLess(result["mean"]["leaderboard_proxy"], result["mean"]["final_assets"])
+
+    def test_submission_contract_rejects_bad_arity_and_unknown_crop(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "bad_contract.py"
+            path.write_text("def agent(obs):\n return {'farmer':['PLANT','RICE'], 'hands':[], 'market':[['HIRE', 1]]}\n")
+            result = run_episode(load_agent(path), FIXTURE, 1)
+        self.assertGreater(result.contract_violations, 0)
 
     def test_threshold_rejects_regression(self):
         champion = {"mean": {"final_assets": 100, "profit": 10, "cultivated": 2, "harvested": 2, "invalid_actions": 0}}
@@ -127,6 +143,8 @@ class EvaluationTest(unittest.TestCase):
             report = json.loads(output.read_text())
         self.assertEqual(str(ROOT / "main.py"), report["provenance"]["candidate"])
         self.assertEqual("submission.tar.gz", report["provenance"]["submission_artifact"])
+        self.assertEqual(2, report["oracle"]["version"])
+        self.assertEqual(10, report["submission_contract"]["max_market_orders"])
 
 
 if __name__ == "__main__":

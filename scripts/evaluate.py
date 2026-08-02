@@ -26,6 +26,8 @@ class Metrics:
     cultivated: int = 0
     harvested: int = 0
     invalid_actions: int = 0
+    contract_violations: int = 0
+    leaderboard_proxy: int = 0
 
     def __add__(self, other: "Metrics") -> "Metrics":
         return Metrics(**{key: getattr(self, key) + getattr(other, key) for key in asdict(self)})
@@ -42,21 +44,27 @@ def load_agent(path: Path) -> ModuleType:
     return module
 
 
-def _valid_worker_action(action: Any) -> bool:
-    return isinstance(action, list) and bool(action) and action[0] in VALID_WORKER_ACTIONS
+def _valid_worker_action(action: Any, crops: set[str]) -> bool:
+    if not isinstance(action, list) or not action or action[0] not in VALID_WORKER_ACTIONS:
+        return False
+    return len(action) == 2 and action[1] in crops if action[0] == "PLANT" else len(action) == 1
 
 
-def _valid_action(result: Any, hand_count: int) -> bool:
+def _valid_action(result: Any, hand_count: int, crops: set[str], max_market_orders: int) -> bool:
     if not isinstance(result, dict) or set(result) != {"farmer", "hands", "market"}:
         return False
-    if not _valid_worker_action(result["farmer"]):
+    if not _valid_worker_action(result["farmer"], crops):
         return False
     if not isinstance(result["hands"], list) or len(result["hands"]) != hand_count:
         return False
-    if any(not _valid_worker_action(action) for action in result["hands"]):
+    if any(not _valid_worker_action(action, crops) for action in result["hands"]):
         return False
-    return isinstance(result["market"], list) and len(result["market"]) <= 10 and all(
-        isinstance(action, list) and action and action[0] in VALID_MARKET_ACTIONS for action in result["market"]
+    return isinstance(result["market"], list) and len(result["market"]) <= max_market_orders and all(
+        isinstance(action, list) and action and action[0] in VALID_MARKET_ACTIONS and
+        ((action[0] == "HIRE" and len(action) == 1) or
+         (action[0] != "HIRE" and len(action) == 3 and action[1] in crops and
+          isinstance(action[2], int) and not isinstance(action[2], bool) and action[2] > 0))
+        for action in result["market"]
     )
 
 
@@ -118,6 +126,10 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     money, shed = initial_money, {crop: 0 for crop in crops}
     tiles = [[None for _ in range(size)] for _ in range(size)]
     metrics = Metrics()
+    contract = fixture.get("submission_contract", {})
+    max_market_orders = int(contract.get("max_market_orders", 10))
+    max_workers = int(contract.get("max_workers", 16))
+    invalid_penalty = int(fixture.get("oracle", {}).get("invalid_action_penalty", 1000))
 
     for day in range(days):
         positions = [[0, 0]]
@@ -145,13 +157,14 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
             except Exception:
                 metrics.invalid_actions += 1
                 continue
-            if not _valid_action(result, len(positions) - 1):
+            if not _valid_action(result, len(positions) - 1, set(crops), max_market_orders):
                 metrics.invalid_actions += 1
+                metrics.contract_violations += 1
                 continue
             for action in result["market"]:
                 if action[0] == "HIRE" and len(action) == 1:
                     cost = _hire_cost(hires_today)
-                    if money >= cost:
+                    if money >= cost and len(positions) < max_workers:
                         money -= cost
                         hires_today += 1
                         positions.append([0, 0])
@@ -177,6 +190,7 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                     targets.append(tuple(positions[index]))
             if len(targets) != len(set(targets)):
                 metrics.invalid_actions += len(targets) - len(set(targets))
+                metrics.contract_violations += len(targets) - len(set(targets))
             for index, action in enumerate(worker_actions):
                 positions[index], seeds, cultivated, harvested, produced, invalid = _apply_worker(
                     action, positions[index], tiles, seeds, day, rng, crops
@@ -200,6 +214,7 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     metrics.final_assets = money + sum(shed[crop] * final_prices[crop] for crop in crops) + sum(
         seeds[crop] * int(crops[crop]["seed_price"]) for crop in crops)
     metrics.profit = metrics.final_assets - initial_money
+    metrics.leaderboard_proxy = metrics.final_assets - invalid_penalty * metrics.invalid_actions
     return metrics
 
 
@@ -223,6 +238,8 @@ def compare(champion, candidate, thresholds):
     max_invalid = min(int(thresholds.get("max_invalid_actions", 0)), int(champion["mean"]["invalid_actions"]))
     if candidate["mean"]["invalid_actions"] > max_invalid:
         reasons.append(f"invalid_actions {candidate['mean']['invalid_actions']:.3f} > {max_invalid}")
+    if candidate["mean"].get("contract_violations", 0) > champion["mean"].get("contract_violations", 0):
+        reasons.append("submission contract violations increased")
     return not reasons, reasons
 
 
@@ -252,7 +269,9 @@ def main() -> int:
               "provenance": {"champion": str(args.champion), "candidate": str(args.candidate),
                              "submission_builder": "scripts/build_submission.sh",
                              "submission_artifact": "submission.tar.gz"},
-              "thresholds": fixture["thresholds"], "screen": {
+              "thresholds": fixture["thresholds"],
+              "oracle": fixture.get("oracle", {}),
+              "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
     passed, reasons = compare(champion_screen, variants[str(selected)], fixture["thresholds"])
