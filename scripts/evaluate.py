@@ -141,11 +141,12 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
             public_crops = {crop: {"seed_price": spec["seed_price"], "maturity_days": spec["maturity_days"],
                                     "expected_yield": spec["base_yield"] + spec.get("yield_variance", 0) / 2,
                                     "fallback_price": spec.get("fallback_price", prices[crop]),
-                                    "sell_above": spec.get("sell_above", spec.get("fallback_price", prices[crop]))}
+                                    "sell_above": spec.get("sell_above", spec.get("fallback_price", prices[crop])),
+                                    "price_forecast": list(spec.get("prices", []))}
                             for crop, spec in crops.items()}
             obs = {
                 "player": 0, "step": day * turns_per_day + hour, "day": day, "hour": hour,
-                "turns_per_day": turns_per_day,
+                "turns_per_day": turns_per_day, "total_days": days,
                 "farms": [{"money": money, "farmer": positions[0], "hands": positions[1:],
                            "hires_today": hires_today, "unlocked_quadrants": ["NW"], "tiles": copy.deepcopy(tiles)}],
                 "private": {"shed": copy.deepcopy(shed), "seeds": copy.deepcopy(seeds),
