@@ -1,0 +1,467 @@
+{
+  "confirm": {
+    "candidate": {
+      "episodes": [
+        {
+          "assignment_conflicts": 9,
+          "contract_violations": 0,
+          "cultivated": 51,
+          "final_assets": 5363,
+          "harvested": 39,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5363,
+          "profit": 2363,
+          "seed": 101
+        },
+        {
+          "assignment_conflicts": 10,
+          "contract_violations": 0,
+          "cultivated": 52,
+          "final_assets": 5594,
+          "harvested": 42,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5594,
+          "profit": 2594,
+          "seed": 211
+        },
+        {
+          "assignment_conflicts": 7,
+          "contract_violations": 0,
+          "cultivated": 52,
+          "final_assets": 5895,
+          "harvested": 47,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5895,
+          "profit": 2895,
+          "seed": 307
+        },
+        {
+          "assignment_conflicts": 7,
+          "contract_violations": 0,
+          "cultivated": 53,
+          "final_assets": 6220,
+          "harvested": 49,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6220,
+          "profit": 3220,
+          "seed": 401
+        },
+        {
+          "assignment_conflicts": 8,
+          "contract_violations": 0,
+          "cultivated": 50,
+          "final_assets": 5491,
+          "harvested": 41,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5491,
+          "profit": 2491,
+          "seed": 503
+        }
+      ],
+      "mean": {
+        "assignment_conflicts": 8.2,
+        "contract_violations": 0.0,
+        "cultivated": 51.6,
+        "final_assets": 5712.6,
+        "harvested": 43.6,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 5712.6,
+        "profit": 2712.6
+      },
+      "seeds": [
+        101,
+        211,
+        307,
+        401,
+        503
+      ]
+    },
+    "champion": {
+      "episodes": [
+        {
+          "assignment_conflicts": 38,
+          "contract_violations": 0,
+          "cultivated": 42,
+          "final_assets": 5039,
+          "harvested": 33,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5039,
+          "profit": 2039,
+          "seed": 101
+        },
+        {
+          "assignment_conflicts": 37,
+          "contract_violations": 0,
+          "cultivated": 41,
+          "final_assets": 4909,
+          "harvested": 32,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4909,
+          "profit": 1909,
+          "seed": 211
+        },
+        {
+          "assignment_conflicts": 24,
+          "contract_violations": 0,
+          "cultivated": 48,
+          "final_assets": 4931,
+          "harvested": 34,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4931,
+          "profit": 1931,
+          "seed": 307
+        },
+        {
+          "assignment_conflicts": 31,
+          "contract_violations": 0,
+          "cultivated": 46,
+          "final_assets": 5229,
+          "harvested": 36,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5229,
+          "profit": 2229,
+          "seed": 401
+        },
+        {
+          "assignment_conflicts": 31,
+          "contract_violations": 0,
+          "cultivated": 49,
+          "final_assets": 4736,
+          "harvested": 32,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4736,
+          "profit": 1736,
+          "seed": 503
+        }
+      ],
+      "mean": {
+        "assignment_conflicts": 32.2,
+        "contract_violations": 0.0,
+        "cultivated": 45.2,
+        "final_assets": 4968.8,
+        "harvested": 33.4,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4968.8,
+        "profit": 1968.8
+      },
+      "seeds": [
+        101,
+        211,
+        307,
+        401,
+        503
+      ]
+    },
+    "passed": true,
+    "reasons": [],
+    "selected_strategy": "BEST_RETURN:PRICE_AWARE"
+  },
+  "decision": "PROMOTE",
+  "exec_compatibility": {
+    "output": "Kaggriculture submission contract: PASS",
+    "passed": true
+  },
+  "fixture": "tests/fixtures/evaluation.json",
+  "next_action": "kaggle_validation",
+  "oracle": {
+    "invalid_action_penalty": 1000,
+    "lb_divergence_signal": "candidate offline assets rise while leaderboard_proxy or contract validity falls",
+    "primary_proxy": "leaderboard_proxy = final_assets - 1000 * invalid_actions",
+    "scale_change": "v1 final_assets-only ranking; v2 contract-invalid actions receive a hard proxy penalty",
+    "version": 2
+  },
+  "provenance": {
+    "candidate": "main.py",
+    "champion": "git:17f0fcc:main.py",
+    "submission_artifact": "submission.tar.gz",
+    "submission_builder": "scripts/build_submission.sh"
+  },
+  "screen": {
+    "candidate": {
+      "episodes": [
+        {
+          "assignment_conflicts": 7,
+          "contract_violations": 0,
+          "cultivated": 52,
+          "final_assets": 5520,
+          "harvested": 42,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5520,
+          "profit": 2520,
+          "seed": 11
+        },
+        {
+          "assignment_conflicts": 7,
+          "contract_violations": 0,
+          "cultivated": 52,
+          "final_assets": 5773,
+          "harvested": 44,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5773,
+          "profit": 2773,
+          "seed": 23
+        },
+        {
+          "assignment_conflicts": 7,
+          "contract_violations": 0,
+          "cultivated": 53,
+          "final_assets": 5908,
+          "harvested": 46,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5908,
+          "profit": 2908,
+          "seed": 47
+        }
+      ],
+      "mean": {
+        "assignment_conflicts": 7.0,
+        "contract_violations": 0.0,
+        "cultivated": 52.333333333333336,
+        "final_assets": 5733.666666666667,
+        "harvested": 44.0,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 5733.666666666667,
+        "profit": 2733.6666666666665
+      },
+      "seeds": [
+        11,
+        23,
+        47
+      ]
+    },
+    "champion": {
+      "episodes": [
+        {
+          "assignment_conflicts": 27,
+          "contract_violations": 0,
+          "cultivated": 46,
+          "final_assets": 5055,
+          "harvested": 35,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5055,
+          "profit": 2055,
+          "seed": 11
+        },
+        {
+          "assignment_conflicts": 21,
+          "contract_violations": 0,
+          "cultivated": 49,
+          "final_assets": 4979,
+          "harvested": 35,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4979,
+          "profit": 1979,
+          "seed": 23
+        },
+        {
+          "assignment_conflicts": 27,
+          "contract_violations": 0,
+          "cultivated": 50,
+          "final_assets": 5147,
+          "harvested": 36,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 5147,
+          "profit": 2147,
+          "seed": 47
+        }
+      ],
+      "mean": {
+        "assignment_conflicts": 25.0,
+        "contract_violations": 0.0,
+        "cultivated": 48.333333333333336,
+        "final_assets": 5060.333333333333,
+        "harvested": 35.333333333333336,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 5060.333333333333,
+        "profit": 2060.3333333333335
+      },
+      "seeds": [
+        11,
+        23,
+        47
+      ]
+    },
+    "passed": true,
+    "reasons": [],
+    "selected_strategy": "BEST_RETURN:PRICE_AWARE",
+    "strategy_variants": {
+      "BEST_RETURN:IMMEDIATE": {
+        "episodes": [
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 52,
+            "final_assets": 5370,
+            "harvested": 42,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 5370,
+            "profit": 2370,
+            "seed": 11
+          },
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 52,
+            "final_assets": 5621,
+            "harvested": 44,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 5621,
+            "profit": 2621,
+            "seed": 23
+          },
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 53,
+            "final_assets": 5714,
+            "harvested": 46,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 5714,
+            "profit": 2714,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "assignment_conflicts": 7.0,
+          "contract_violations": 0.0,
+          "cultivated": 52.333333333333336,
+          "final_assets": 5568.333333333333,
+          "harvested": 44.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 5568.333333333333,
+          "profit": 2568.3333333333335
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      },
+      "BEST_RETURN:PRICE_AWARE": {
+        "episodes": [
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 52,
+            "final_assets": 5520,
+            "harvested": 42,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 5520,
+            "profit": 2520,
+            "seed": 11
+          },
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 52,
+            "final_assets": 5773,
+            "harvested": 44,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 5773,
+            "profit": 2773,
+            "seed": 23
+          },
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 53,
+            "final_assets": 5908,
+            "harvested": 46,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 5908,
+            "profit": 2908,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "assignment_conflicts": 7.0,
+          "contract_violations": 0.0,
+          "cultivated": 52.333333333333336,
+          "final_assets": 5733.666666666667,
+          "harvested": 44.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 5733.666666666667,
+          "profit": 2733.6666666666665
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      },
+      "WHEAT_ONLY:IMMEDIATE": {
+        "episodes": [
+          {
+            "assignment_conflicts": 5,
+            "contract_violations": 0,
+            "cultivated": 69,
+            "final_assets": 4791,
+            "harvested": 65,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4791,
+            "profit": 1791,
+            "seed": 11
+          },
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 70,
+            "final_assets": 4764,
+            "harvested": 64,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4764,
+            "profit": 1764,
+            "seed": 23
+          },
+          {
+            "assignment_conflicts": 7,
+            "contract_violations": 0,
+            "cultivated": 69,
+            "final_assets": 4886,
+            "harvested": 64,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4886,
+            "profit": 1886,
+            "seed": 47
+          }
+        ],
+        "mean": {
+          "assignment_conflicts": 6.333333333333333,
+          "contract_violations": 0.0,
+          "cultivated": 69.33333333333333,
+          "final_assets": 4813.666666666667,
+          "harvested": 64.33333333333333,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4813.666666666667,
+          "profit": 1813.6666666666667
+        },
+        "seeds": [
+          11,
+          23,
+          47
+        ]
+      }
+    }
+  },
+  "submission_contract": {
+    "hires_available_next_turn": true,
+    "hires_today_resets_daily": true,
+    "market_before_workers": true,
+    "max_market_orders": 10,
+    "max_workers": 16,
+    "observation_clock": "step = day * turns_per_day + hour",
+    "simultaneous_tile_operations_must_be_unique": true
+  },
+  "thresholds": {
+    "max_invalid_actions": 0,
+    "min_cultivated_ratio": 0.75,
+    "min_final_assets_ratio": 1.02,
+    "min_harvested_ratio": 0.65,
+    "min_profit_ratio": 1.05
+  },
+  "experiment": {
+    "issue": "SOT-2289",
+    "axis": "global spatiotemporal worker assignment",
+    "kaggle_submission": false
+  }
+}

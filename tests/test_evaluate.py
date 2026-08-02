@@ -83,6 +83,34 @@ class EvaluationTest(unittest.TestCase):
         plant_actions = [action for action in [result["farmer"], *result["hands"]] if action[0] == "PLANT"]
         self.assertEqual(1, len(plant_actions))
 
+    def test_global_assignment_does_not_let_planting_delay_harvest(self):
+        agent = load_agent(ROOT / "main.py")
+        tiles = [["LOCKED"] * 5 for _ in range(2)]
+        tiles[0][1] = None
+        tiles[0][3] = {"kind": "PLANT", "crop": "WHEAT", "planted_day": 0,
+                       "watered_today": True, "yield_units": 3}
+        obs = {"player": 0, "day": 3, "hour": 10,
+               "farms": [{"money": 100, "farmer": [0, 0], "hands": [[4, 0]], "tiles": tiles}],
+               "private": {"shed": {}, "seeds": {"WHEAT": 1}, "inventories": [[], []]}}
+        result = agent.agent(obs)
+        self.assertEqual(["EAST"], result["farmer"])
+        self.assertEqual([["WEST"]], result["hands"])
+
+    def test_global_assignment_avoids_duplicate_move_destinations(self):
+        agent = load_agent(ROOT / "main.py")
+        tiles = [["LOCKED"] * 3 for _ in range(3)]
+        tiles[1][1] = {"kind": "WEED"}
+        tiles[1][2] = {"kind": "WEED"}
+        obs = {"player": 0, "day": 1, "hour": 2,
+               "farms": [{"money": 100, "farmer": [0, 0], "hands": [[2, 0]], "tiles": tiles}],
+               "private": {"shed": {}, "seeds": {}, "inventories": [[], []]}}
+        result = agent.agent(obs)
+        actions = [result["farmer"], *result["hands"]]
+        offsets = {"NORTH": (0, -1), "SOUTH": (0, 1), "EAST": (1, 0), "WEST": (-1, 0)}
+        destinations = [(x + offsets[action[0]][0], y + offsets[action[0]][1])
+                        for (x, y), action in zip(((0, 0), (2, 0)), actions)]
+        self.assertEqual(len(destinations), len(set(destinations)))
+
     def test_movement_stays_within_board_at_boundary(self):
         agent = load_agent(ROOT / "main.py")
         tiles = [["LOCKED" for _ in range(3)] for _ in range(3)]
