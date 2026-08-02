@@ -160,6 +160,38 @@ class EvaluationTest(unittest.TestCase):
         }
         self.assertFalse(any(action[0] == "SELL" for action in agent.agent(obs)["market"]))
 
+    def test_finite_horizon_prefers_crop_with_more_realizable_profit(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = {
+            "player": 0, "day": 8, "total_days": 12,
+            "crops": {
+                "FAST": {"seed_price": 10, "maturity_days": 1, "expected_yield": 2,
+                         "fallback_price": 12, "price_forecast": [12] * 12},
+                "SLOW": {"seed_price": 10, "maturity_days": 4, "expected_yield": 10,
+                         "fallback_price": 20, "price_forecast": [20] * 12},
+            },
+            "market": {"prices": {"FAST": 12, "SLOW": 20}},
+            "farms": [{"money": 100, "farmer": [0, 0], "hands": [], "tiles": [[None]]}],
+            "private": {"shed": {}, "seeds": {"FAST": 1, "SLOW": 1}, "inventories": [[]]},
+        }
+        crop, _ = agent._choose_crop(obs, obs["private"]["seeds"])
+        self.assertEqual("FAST", crop)
+
+    def test_finite_horizon_waits_for_forecast_peak_and_sells_on_final_day(self):
+        agent = load_agent(ROOT / "main.py")
+        base = {
+            "player": 0, "total_days": 3,
+            "crops": {"WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3,
+                                    "fallback_price": 10, "sell_above": 10,
+                                    "price_forecast": [10, 20, 15]}},
+            "farms": [{"money": 100, "farmer": [0, 0], "hands": [], "tiles": [["LOCKED"]]}],
+            "private": {"shed": {"WHEAT": 2}, "seeds": {}, "inventories": [[]]},
+        }
+        day_zero = dict(base, day=0, market={"prices": {"WHEAT": 10}})
+        self.assertFalse(any(order[0] == "SELL" for order in agent.agent(day_zero)["market"]))
+        final_day = dict(base, day=2, market={"prices": {"WHEAT": 15}})
+        self.assertTrue(any(order[0] == "SELL" for order in agent.agent(final_day)["market"]))
+
     def test_report_maps_champion_candidate_and_submission_artifact(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "result.json"

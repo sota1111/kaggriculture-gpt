@@ -8,6 +8,7 @@ MIN_CASH_RESERVE = 100
 MAX_MARKET_ORDERS = 10
 CROP_STRATEGY = "BEST_RETURN"
 SELL_STRATEGY = "PRICE_AWARE"
+ECONOMY_STRATEGY = "FINITE_HORIZON"
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -156,6 +157,18 @@ def _crop_specs(obs):
     return specs
 
 
+def _remaining_harvests(spec, day, total_days):
+    maturity = max(1, int(spec["maturity_days"]))
+    return max(0, (total_days - day - 1) // maturity)
+
+
+def _future_prices(spec, day, current_price):
+    forecast = spec.get("price_forecast", [])
+    if isinstance(forecast, list) and forecast:
+        return [int(value) for value in forecast[day:] if isinstance(value, (int, float))]
+    return [current_price]
+
+
 def _choose_crop(obs, seeds):
     specs = _crop_specs(obs)
     prices = obs.get("market", {}).get("prices", {})
@@ -163,10 +176,18 @@ def _choose_crop(obs, seeds):
     if not known or CROP_STRATEGY == "WHEAT_ONLY":
         return "WHEAT", specs
 
+    day = int(obs.get("day", 0))
+    total_days = int(obs.get("total_days", 12))
+
     def daily_return(crop):
         spec = specs[crop]
         sale = int(prices.get(crop, spec["fallback_price"]))
-        margin = sale * int(spec["expected_yield"]) - int(spec["seed_price"])
+        if ECONOMY_STRATEGY == "FINITE_HORIZON":
+            harvests = _remaining_harvests(spec, day, total_days)
+            sale = max(_future_prices(spec, day, sale))
+            margin = sale * float(spec["expected_yield"]) - int(spec["seed_price"])
+            return harvests * margin, harvests, margin, crop
+        margin = sale * float(spec["expected_yield"]) - int(spec["seed_price"])
         return margin / max(1, int(spec["maturity_days"])), margin, crop
 
     return max(known, key=daily_return), specs
@@ -176,6 +197,7 @@ def agent(obs):
     me = obs["farms"][int(obs["player"])]
     private = obs["private"]
     day = int(obs.get("day", 0))
+    total_days = int(obs.get("total_days", 12))
     hands = me.get("hands", [])
     worker_count = 1 + len(hands)
 
@@ -189,11 +211,14 @@ def agent(obs):
         stored = int(stored_inventory.get(stored_crop, 0))
         price = int(prices.get(stored_crop, crop_specs[stored_crop]["fallback_price"]))
         target = int(crop_specs[stored_crop].get("sell_above", crop_specs[stored_crop]["fallback_price"]))
-        if stored > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= target or day >= 11):
+        future_peak = max(_future_prices(crop_specs[stored_crop], day, price))
+        final_day = day >= total_days - 1
+        if stored > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day):
             market.append(["SELL", stored_crop, stored])
 
     seeds = int(seed_inventory.get(crop, 0))
-    desired_seeds = worker_count * SEED_RESERVE_PER_WORKER
+    harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
+    desired_seeds = worker_count * SEED_RESERVE_PER_WORKER if harvests_left else 0
     buy_count = max(0, desired_seeds - seeds)
     seed_price = int(crop_specs[crop]["seed_price"])
     affordable = max(0, (money - MIN_CASH_RESERVE) // max(1, seed_price))
@@ -203,9 +228,11 @@ def agent(obs):
         money -= seed_price * buy_count
 
     hires_today = int(me.get("hires_today", len(hands)))
-    if len(hands) < HIRE_TARGET:
+    future_sale = max(_future_prices(crop_specs[crop], day, int(prices.get(crop, crop_specs[crop]["fallback_price"]))))
+    expected_crop_margin = future_sale * float(crop_specs[crop]["expected_yield"]) - seed_price
+    if len(hands) < HIRE_TARGET and harvests_left > 0:
         cost = _hire_cost(hires_today)
-        if money - cost >= MIN_CASH_RESERVE:
+        if money - cost >= MIN_CASH_RESERVE and expected_crop_margin * harvests_left > cost:
             market.append(["HIRE"])
 
     actions = _plan_workers(me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)), int(obs.get("turns_per_day", 12)))
