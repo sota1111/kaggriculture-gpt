@@ -1,5 +1,7 @@
 """Deterministic multi-worker Kaggriculture agent."""
 
+from functools import lru_cache
+
 HIRE_TARGET = 4
 SEED_RESERVE_PER_WORKER = 2
 MIN_CASH_RESERVE = 100
@@ -33,6 +35,13 @@ def _move(position, target):
     return ["PASS"]
 
 
+def _next_position(position, action):
+    x, y = position
+    offsets = {"NORTH": (0, -1), "SOUTH": (0, 1), "EAST": (1, 0), "WEST": (-1, 0)}
+    dx, dy = offsets.get(action[0], (0, 0))
+    return x + dx, y + dy
+
+
 def _task_priority(tile, day, crop_specs=None):
     if isinstance(tile, dict) and tile.get("kind") == "PLANT":
         crop = tile.get("crop", "WHEAT")
@@ -62,7 +71,7 @@ def _action_at(tile, day, available_seeds, crop, crop_specs):
     return ["PASS"], available_seeds
 
 
-def _plan_workers(me, day, seeds, crop, crop_specs):
+def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
     tiles = me["tiles"]
     workers = [me["farmer"]] + list(me.get("hands", []))
     candidates = []
@@ -70,26 +79,62 @@ def _plan_workers(me, day, seeds, crop, crop_specs):
         for x, tile in enumerate(row):
             priority = _task_priority(tile, day, crop_specs)
             if priority is not None:
-                candidates.append((priority, y, x))
+                if priority == 0:
+                    distance_to_deadline = 1
+                elif priority == 1:
+                    distance_to_deadline = max(0, turns_per_day - hour - 1)
+                else:
+                    distance_to_deadline = turns_per_day + 1
+                candidates.append((priority, distance_to_deadline, y, x))
 
-    remaining = set(range(len(candidates)))
+    # A bounded global search is enough for the maximum five workers we hire. Keeping
+    # the most urgent nearby tasks avoids factorial growth on a fully open field.
+    candidates.sort(key=lambda task: (task[0], task[1], task[2], task[3]))
+    candidates = candidates[:max(len(workers), len(workers) + 2)]
+
+    @lru_cache(maxsize=None)
+    def assign(worker_index, used_mask, occupied_next):
+        if worker_index == len(workers):
+            return (0, 0, 0), ()
+        px, py = workers[worker_index]
+        best = None
+        occupied = set(occupied_next)
+        for task_index, (priority, deadline, ty, tx) in enumerate(candidates):
+            if used_mask & (1 << task_index):
+                continue
+            distance = abs(tx - px) + abs(ty - py)
+            action = _move((px, py), (tx, ty)) if distance else ["PASS"]
+            next_position = _next_position((px, py), action)
+            conflict = int(next_position in occupied and next_position != (px, py))
+            overdue = int(distance > deadline)
+            future_cost, future_choices = assign(
+                worker_index + 1,
+                used_mask | (1 << task_index),
+                tuple(sorted(occupied | {next_position})),
+            )
+            # Deadline misses and movement conflicts dominate travel. Priority weights
+            # ensure low-value planting cannot delay harvest/water work.
+            cost = (
+                future_cost[0] + overdue,
+                future_cost[1] + conflict,
+                future_cost[2] + priority * 100 + distance * (4 - min(priority, 3)),
+            )
+            proposal = cost, (task_index,) + future_choices
+            if best is None or proposal < best:
+                best = proposal
+        if best is None:
+            future_cost, future_choices = assign(worker_index + 1, used_mask, occupied_next)
+            return future_cost, (-1,) + future_choices
+        return best
+
+    choices = assign(0, 0, ())[1] if candidates else (-1,) * len(workers)
     actions = []
-    for position in workers:
-        if not remaining:
+    for position, choice in zip(workers, choices):
+        if choice < 0:
             actions.append(["PASS"])
             continue
         px, py = position
-        choice = min(
-            remaining,
-            key=lambda index: (
-                candidates[index][0],
-                abs(candidates[index][2] - px) + abs(candidates[index][1] - py),
-                candidates[index][1],
-                candidates[index][2],
-            ),
-        )
-        remaining.remove(choice)
-        _, ty, tx = candidates[choice]
+        _, _, ty, tx = candidates[choice]
         if [px, py] == [tx, ty]:
             action, seeds = _action_at(tiles[ty][tx], day, seeds, crop, crop_specs)
         else:
@@ -163,7 +208,7 @@ def agent(obs):
         if money - cost >= MIN_CASH_RESERVE:
             market.append(["HIRE"])
 
-    actions = _plan_workers(me, day, seeds, crop, crop_specs)
+    actions = _plan_workers(me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)), int(obs.get("turns_per_day", 12)))
     return {
         "farmer": actions[0],
         "hands": actions[1:],

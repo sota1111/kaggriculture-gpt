@@ -27,6 +27,7 @@ class Metrics:
     harvested: int = 0
     invalid_actions: int = 0
     contract_violations: int = 0
+    assignment_conflicts: int = 0
     leaderboard_proxy: int = 0
 
     def __add__(self, other: "Metrics") -> "Metrics":
@@ -144,6 +145,7 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                             for crop, spec in crops.items()}
             obs = {
                 "player": 0, "step": day * turns_per_day + hour, "day": day, "hour": hour,
+                "turns_per_day": turns_per_day,
                 "farms": [{"money": money, "farmer": positions[0], "hands": positions[1:],
                            "hires_today": hires_today, "unlocked_quadrants": ["NW"], "tiles": copy.deepcopy(tiles)}],
                 "private": {"shed": copy.deepcopy(shed), "seeds": copy.deepcopy(seeds),
@@ -184,6 +186,14 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                 else:
                     metrics.invalid_actions += 1
             worker_actions = [result["farmer"]] + result["hands"]
+            projected = []
+            move_offsets = {"NORTH": (0, -1), "SOUTH": (0, 1), "EAST": (1, 0), "WEST": (-1, 0)}
+            for position, action in zip(positions, worker_actions):
+                dx, dy = move_offsets.get(action[0], (0, 0))
+                projected.append((position[0] + dx, position[1] + dy))
+            moving_destinations = [destination for destination, action in zip(projected, worker_actions)
+                                   if action[0] in move_offsets]
+            metrics.assignment_conflicts += len(moving_destinations) - len(set(moving_destinations))
             targets = []
             for index, action in enumerate(worker_actions):
                 if action[0] in {"DIG", "PLANT", "WATER", "HARVEST"}:
@@ -240,6 +250,8 @@ def compare(champion, candidate, thresholds):
         reasons.append(f"invalid_actions {candidate['mean']['invalid_actions']:.3f} > {max_invalid}")
     if candidate["mean"].get("contract_violations", 0) > champion["mean"].get("contract_violations", 0):
         reasons.append("submission contract violations increased")
+    if candidate["mean"].get("assignment_conflicts", 0) > champion["mean"].get("assignment_conflicts", 0):
+        reasons.append("worker movement conflicts increased")
     return not reasons, reasons
 
 
