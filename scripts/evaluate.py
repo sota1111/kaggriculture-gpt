@@ -16,6 +16,7 @@ import json
 import random
 import subprocess
 import sys
+from math import ceil
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from types import ModuleType
@@ -154,6 +155,9 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     money, shed = initial_money, {crop: 0 for crop in crops}
     quadrant = int(fixture.get("initial_quadrant_size", size // 2))
     tiles = [[None if x < quadrant and y < quadrant else "LOCKED" for x in range(size)] for y in range(size)]
+    for x, y in fixture.get("initial_weeds", []):
+        if 0 <= x < quadrant and 0 <= y < quadrant:
+            tiles[y][x] = {"kind": "WEED"}
     metrics = Metrics()
     contract = fixture.get("submission_contract", {})
     max_market_orders = int(contract.get("max_market_orders", 10))
@@ -161,8 +165,11 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     invalid_penalty = int(fixture.get("oracle", {}).get("invalid_action_penalty", 1000))
 
     for day in range(days):
+        initial_hands = max(0, int(fixture.get("initial_hands", 0)))
         positions = [[0, 0]]
-        inventories = [{}]
+        while len(positions) <= initial_hands and len(positions) < max_workers:
+            positions.append(_spawn_hand(positions, quadrant))
+        inventories = [{} for _ in positions]
         hires_today = 0
         for hour in range(turns_per_day):
             prices = {crop: int(spec.get("prices", [spec.get("fallback_price", 0)])[day % len(spec.get("prices", [0]))])
@@ -280,6 +287,34 @@ def evaluate(module: ModuleType, fixture: dict[str, Any], seeds: list[int]) -> d
     return {"seeds": seeds, "episodes": episodes, "mean": averages}
 
 
+def _merge_fixture(base: dict[str, Any], overrides: dict[str, Any]) -> dict[str, Any]:
+    merged = copy.deepcopy(base)
+    for key, value in overrides.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _merge_fixture(merged[key], value)
+        else:
+            merged[key] = copy.deepcopy(value)
+    return merged
+
+
+def evaluate_scenarios(module: ModuleType, fixture: dict[str, Any], scenarios: list[dict[str, Any]]) -> dict[str, Any]:
+    """Evaluate named distribution shifts and report tail and worst-case metrics."""
+    scenario_results, episodes = {}, []
+    for scenario in scenarios:
+        result = evaluate(module, _merge_fixture(fixture, scenario.get("overrides", {})), scenario["seeds"])
+        scenario_results[scenario["name"]] = result
+        episodes.extend({**episode, "scenario": scenario["name"]} for episode in result["episodes"])
+    metric_names = tuple(asdict(Metrics()))
+    mean = {metric: sum(float(episode[metric]) for episode in episodes) / len(episodes) for metric in metric_names}
+    lower_quantile, worst = {}, {}
+    for metric in metric_names:
+        values = sorted(float(episode[metric]) for episode in episodes)
+        lower_quantile[metric] = values[max(0, ceil(0.2 * len(values)) - 1)]
+        worst[metric] = max(values) if metric in {"invalid_actions", "contract_violations", "assignment_conflicts"} else min(values)
+    return {"scenario_names": [scenario["name"] for scenario in scenarios], "scenarios": scenario_results,
+            "episodes": episodes, "mean": mean, "lower_quantile": lower_quantile, "worst": worst}
+
+
 def compare(champion, candidate, thresholds):
     reasons = []
     for metric in ("final_assets", "profit", "cultivated", "harvested"):
@@ -298,6 +333,21 @@ def compare(champion, candidate, thresholds):
     return not reasons, reasons
 
 
+def compare_distribution(champion, candidate, thresholds):
+    reasons = []
+    for statistic in ("lower_quantile", "worst"):
+        for metric in ("final_assets", "profit"):
+            minimum = float(thresholds.get(f"min_{statistic}_{metric}_ratio", 1.0))
+            base = champion[statistic][metric]
+            ratio = (1.0 if candidate[statistic][metric] == 0 else float("inf")) if base == 0 else candidate[statistic][metric] / base
+            if ratio < minimum:
+                reasons.append(f"{statistic} {metric} ratio {ratio:.3f} < {minimum:.3f}")
+    for metric in ("invalid_actions", "contract_violations"):
+        if candidate["worst"][metric] > champion["worst"][metric]:
+            reasons.append(f"worst {metric} increased")
+    return not reasons, reasons
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--champion", type=Path, required=True)
@@ -307,14 +357,16 @@ def main() -> int:
     args = parser.parse_args()
     fixture = json.loads(args.fixture.read_text())
     champion, candidate = load_agent(args.champion), load_agent(args.candidate)
-    champion_screen = evaluate(champion, fixture, fixture["screen_seeds"])
+    screen_scenarios = fixture.get("screen_scenarios", [{"name": "baseline", "seeds": fixture["screen_seeds"]}])
+    confirm_scenarios = fixture.get("confirm_scenarios", [{"name": "baseline", "seeds": fixture["confirm_seeds"]}])
+    champion_screen = evaluate_scenarios(champion, fixture, screen_scenarios)
     variants = {}
     strategies = fixture.get("strategy_candidates", [{"crop": "BEST_RETURN", "sell": "PRICE_AWARE"}])
     for strategy in strategies:
         candidate.CROP_STRATEGY = strategy["crop"]
         candidate.SELL_STRATEGY = strategy["sell"]
         key = f"{strategy['crop']}:{strategy['sell']}"
-        variants[key] = evaluate(candidate, fixture, fixture["screen_seeds"])
+        variants[key] = evaluate_scenarios(candidate, fixture, screen_scenarios)
     eligible = [(value["mean"]["final_assets"], -value["mean"]["invalid_actions"], key)
                 for key, value in variants.items() if value["mean"]["invalid_actions"] <= champion_screen["mean"]["invalid_actions"]]
     selected = max(eligible)[2] if eligible else sorted(variants)[0]
@@ -329,13 +381,19 @@ def main() -> int:
               "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
-    passed, reasons = compare(champion_screen, variants[str(selected)], fixture["thresholds"])
+    mean_passed, reasons = compare(champion_screen, variants[str(selected)], fixture["thresholds"])
+    tail_passed, tail_reasons = compare_distribution(champion_screen, variants[str(selected)], fixture["thresholds"])
+    passed = mean_passed and tail_passed
+    reasons.extend(tail_reasons)
     result["screen"].update({"passed": passed, "reasons": reasons})
     if passed:
-        result["confirm"] = {"champion": evaluate(champion, fixture, fixture["confirm_seeds"]),
-                             "candidate": evaluate(candidate, fixture, fixture["confirm_seeds"]),
+        result["confirm"] = {"champion": evaluate_scenarios(champion, fixture, confirm_scenarios),
+                             "candidate": evaluate_scenarios(candidate, fixture, confirm_scenarios),
                              "selected_strategy": selected}
-        confirmed, reasons = compare(result["confirm"]["champion"], result["confirm"]["candidate"], fixture["thresholds"])
+        mean_confirmed, reasons = compare(result["confirm"]["champion"], result["confirm"]["candidate"], fixture["thresholds"])
+        tail_confirmed, tail_reasons = compare_distribution(result["confirm"]["champion"], result["confirm"]["candidate"], fixture["thresholds"])
+        confirmed = mean_confirmed and tail_confirmed
+        reasons.extend(tail_reasons)
         result["confirm"].update({"passed": confirmed, "reasons": reasons})
     else:
         result["confirm"] = {"skipped": True, "reason": "candidate did not pass screen"}
