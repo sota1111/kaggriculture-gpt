@@ -43,6 +43,49 @@ class EvaluationTest(unittest.TestCase):
             result = run_episode(load_agent(path), FIXTURE, 1)
         self.assertGreater(result.contract_violations, 0)
 
+    def test_runtime_observation_and_clock_match_public_contract(self):
+        seen = []
+
+        class Recorder:
+            @staticmethod
+            def agent(obs):
+                seen.append(obs)
+                return {"farmer": ["PASS"], "hands": [["PASS"] for _ in obs["farms"][0]["hands"]], "market": []}
+
+        run_episode(Recorder, FIXTURE, 1)
+        self.assertEqual(30 * 24, len(seen))
+        self.assertEqual({"player", "step", "day", "hour", "farms", "private", "market", "town"}, set(seen[0]))
+        self.assertEqual(10, len(seen[0]["farms"][0]["tiles"]))
+        self.assertEqual("LOCKED", seen[0]["farms"][0]["tiles"][0][5])
+
+    def test_harvest_is_carried_then_dropped_and_only_cash_is_rewarded(self):
+        fixture = {**FIXTURE, "days": 3, "turns_per_day": 1, "initial_seeds": 1}
+
+        class Farmer:
+            @staticmethod
+            def agent(obs):
+                actions = {0: ["PLANT", "WHEAT"], 1: ["WATER"], 2: ["HARVEST"]}
+                return {"farmer": actions[obs["day"]], "hands": [], "market": []}
+
+        result = run_episode(Farmer, fixture, 1)
+        self.assertEqual(1, result.harvested)
+        self.assertEqual(fixture["initial_money"], result.reward)
+        self.assertEqual(result.reward, result.final_assets)
+
+    def test_two_unwatered_day_refreshes_turn_plant_into_weed(self):
+        fixture = {**FIXTURE, "days": 3, "turns_per_day": 1, "initial_seeds": 1}
+        observed = []
+
+        class NeglectfulFarmer:
+            @staticmethod
+            def agent(obs):
+                observed.append(obs["farms"][0]["tiles"][0][0])
+                action = ["PLANT", "WHEAT"] if obs["day"] == 0 else ["PASS"]
+                return {"farmer": action, "hands": [], "market": []}
+
+        run_episode(NeglectfulFarmer, fixture, 1)
+        self.assertEqual("WEED", observed[2]["kind"])
+
     def test_threshold_rejects_regression(self):
         champion = {"mean": {"final_assets": 100, "profit": 10, "cultivated": 2, "harvested": 2, "invalid_actions": 0}}
         candidate = {"mean": {"final_assets": 99, "profit": 10, "cultivated": 2, "harvested": 2, "invalid_actions": 0}}
@@ -203,7 +246,7 @@ class EvaluationTest(unittest.TestCase):
             report = json.loads(output.read_text())
         self.assertEqual(str(ROOT / "main.py"), report["provenance"]["candidate"])
         self.assertEqual("submission.tar.gz", report["provenance"]["submission_artifact"])
-        self.assertEqual(2, report["oracle"]["version"])
+        self.assertEqual(3, report["oracle"]["version"])
         self.assertEqual(10, report["submission_contract"]["max_market_orders"])
 
 
