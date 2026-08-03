@@ -154,6 +154,14 @@ class EvaluationTest(unittest.TestCase):
         self.assertTrue(any("lower_quantile final_assets" in reason for reason in reasons))
         self.assertIn("worst invalid_actions increased", reasons)
 
+    def test_distribution_gate_requires_strict_tail_or_worst_improvement(self):
+        metrics = {"final_assets": 100, "profit": 20, "invalid_actions": 0,
+                   "contract_violations": 0}
+        result = {"lower_quantile": dict(metrics), "worst": dict(metrics)}
+        passed, reasons = compare_distribution(result, result, FIXTURE["thresholds"])
+        self.assertFalse(passed)
+        self.assertIn("no strict lower-tail or worst-case improvement", reasons)
+
     def test_distribution_scenarios_cover_requested_shift_dimensions(self):
         scenarios = FIXTURE["screen_scenarios"] + FIXTURE["confirm_scenarios"]
         overrides = [scenario["overrides"] for scenario in scenarios]

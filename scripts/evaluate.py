@@ -466,6 +466,14 @@ def compare_distribution(champion, candidate, thresholds):
     for metric in ("invalid_actions", "contract_violations"):
         if candidate["worst"][metric] > champion["worst"][metric]:
             reasons.append(f"worst {metric} increased")
+    if thresholds.get("require_tail_or_worst_improvement"):
+        improved = any(
+            candidate[statistic][metric] > champion[statistic][metric]
+            for statistic in ("lower_quantile", "worst")
+            for metric in ("final_assets", "profit")
+        )
+        if not improved:
+            reasons.append("no strict lower-tail or worst-case improvement")
     return not reasons, reasons
 
 
