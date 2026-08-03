@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Deterministic screen/confirm evaluator with routing and farm-hand simulation."""
+"""Deterministic, runtime-shaped screen/confirm Kaggriculture evaluator.
+
+The simulator intentionally covers the crop/market subset used by this lineage.  Its
+clock, observations, action timing, inventory flow, crop survival, and terminal
+reward follow the public competition contract; unsupported animal/build actions are
+accepted by the contract but remain silent no-ops.
+"""
 
 from __future__ import annotations
 
@@ -15,12 +21,17 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any
 
-VALID_WORKER_ACTIONS = {"PASS", "NORTH", "SOUTH", "EAST", "WEST", "DIG", "PLANT", "WATER", "HARVEST"}
-VALID_MARKET_ACTIONS = {"SELL", "BUY_SEED", "HIRE"}
+VALID_WORKER_ACTIONS = {
+    "PASS", "NORTH", "SOUTH", "EAST", "WEST", "DIG", "PLANT", "WATER", "HARVEST",
+    "PICKUP", "PLACE", "DROP", "FERTILIZE", "BUILD_COOP", "BUILD_PASTURE", "FEED",
+    "COLLECT_FERTILIZER", "CARE",
+}
+VALID_MARKET_ACTIONS = {"SELL", "BUY_SEED", "BUY_PRODUCT", "BUY_ANIMAL", "HIRE", "BUY_LAND"}
 
 
 @dataclass
 class Metrics:
+    reward: int = 0
     final_assets: int = 0
     profit: int = 0
     cultivated: int = 0
@@ -48,7 +59,13 @@ def load_agent(path: Path) -> ModuleType:
 def _valid_worker_action(action: Any, crops: set[str]) -> bool:
     if not isinstance(action, list) or not action or action[0] not in VALID_WORKER_ACTIONS:
         return False
-    return len(action) == 2 and action[1] in crops if action[0] == "PLANT" else len(action) == 1
+    if action[0] == "PLANT":
+        return len(action) == 2 and action[1] in crops
+    if action[0] in {"PICKUP", "PLACE"}:
+        return len(action) in {2, 3} and isinstance(action[1], str) and (
+            len(action) == 2 or (isinstance(action[2], int) and not isinstance(action[2], bool) and action[2] > 0)
+        )
+    return len(action) == 1
 
 
 def _valid_action(result: Any, hand_count: int, crops: set[str], max_market_orders: int) -> bool:
@@ -62,8 +79,8 @@ def _valid_action(result: Any, hand_count: int, crops: set[str], max_market_orde
         return False
     return isinstance(result["market"], list) and len(result["market"]) <= max_market_orders and all(
         isinstance(action, list) and action and action[0] in VALID_MARKET_ACTIONS and
-        ((action[0] == "HIRE" and len(action) == 1) or
-         (action[0] != "HIRE" and len(action) == 3 and action[1] in crops and
+        ((action[0] in {"HIRE", "BUY_LAND"} and len(action) == 1) or
+         (action[0] not in {"HIRE", "BUY_LAND"} and len(action) == 3 and isinstance(action[1], str) and
           isinstance(action[2], int) and not isinstance(action[2], bool) and action[2] > 0))
         for action in result["market"]
     )
@@ -76,7 +93,15 @@ def _hire_cost(hires_today: int) -> int:
     return a
 
 
-def _apply_worker(action, position, tiles, seeds, day, rng, crops):
+def _spawn_hand(positions: list[list[int]], quadrant: int) -> list[int]:
+    """Choose the nearest free unlocked cell, with deterministic NWSE-style ties."""
+    cells = sorted(((x, y) for y in range(quadrant) for x in range(quadrant)),
+                   key=lambda value: (value[0] + value[1], value[1], value[0]))
+    occupied = {tuple(position) for position in positions}
+    return list(next((cell for cell in cells if cell not in occupied), cells[0]))
+
+
+def _apply_worker(action, position, tiles, seeds, inventory, day, crops):
     x, y = position
     op = action[0]
     size = len(tiles)
@@ -84,7 +109,7 @@ def _apply_worker(action, position, tiles, seeds, day, rng, crops):
     if op in moves:
         dx, dy = moves[op]
         nx, ny = x + dx, y + dy
-        if 0 <= nx < size and 0 <= ny < size:
+        if 0 <= nx < size and 0 <= ny < size and tiles[ny][nx] != "LOCKED":
             return [nx, ny], seeds, 0, 0, 0, 0
         return position, seeds, 0, 0, 0, 1
     tile = tiles[y][x]
@@ -95,7 +120,8 @@ def _apply_worker(action, position, tiles, seeds, day, rng, crops):
         return position, seeds, 0, 0, 0, 0
     if op == "PLANT" and len(action) == 2 and action[1] in crops and tile is None and seeds.get(action[1], 0) > 0:
         crop = action[1]
-        tiles[y][x] = {"kind": "PLANT", "crop": crop, "planted_day": day, "watered_today": False, "yield_units": 0}
+        tiles[y][x] = {"kind": "PLANT", "crop": crop, "planted_day": day, "watered_today": False,
+                       "consecutive_unwatered": 0, "yield_units": 0, "fertilized_until_day": -1}
         seeds[crop] -= 1
         return position, seeds, 1, 0, None, 0
     if op == "WATER" and isinstance(tile, dict) and tile.get("kind") == "PLANT" and not tile["watered_today"]:
@@ -104,10 +130,11 @@ def _apply_worker(action, position, tiles, seeds, day, rng, crops):
     if op == "HARVEST" and isinstance(tile, dict) and tile.get("kind") == "PLANT":
         crop = tile.get("crop")
         spec = crops.get(crop, {})
-        maturity = int(spec.get("maturity_days", 2))
-        if day - tile["planted_day"] < maturity:
+        maturity = int(spec.get("first_yield_day", spec.get("maturity_days", 2)))
+        if day - tile["planted_day"] < maturity or int(tile.get("yield_units", 0)) <= 0:
             return position, seeds, 0, 0, None, 1
-        amount = int(spec.get("base_yield", 2)) + rng.randint(0, int(spec.get("yield_variance", 1)))
+        amount = int(tile["yield_units"])
+        inventory[crop] = inventory.get(crop, 0) + amount
         tiles[y][x] = None
         return position, seeds, 0, 1, (crop, amount), 0
     return position, seeds, 0, 0, None, 1
@@ -117,7 +144,7 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     rng = random.Random(seed)
     days = int(fixture["days"])
     turns_per_day = int(fixture.get("turns_per_day", 12))
-    size = int(fixture.get("board_size", 5))
+    size = int(fixture.get("board_size", 10))
     initial_money = int(fixture["initial_money"])
     crops = fixture.get("crops", {"WHEAT": {"seed_price": 10, "maturity_days": 2, "base_yield": 2,
                                                "yield_variance": 1, "prices": [fixture["sale_price"]]}})
@@ -125,7 +152,8 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     if "initial_seeds" in fixture:
         seeds["WHEAT"] = int(fixture["initial_seeds"])
     money, shed = initial_money, {crop: 0 for crop in crops}
-    tiles = [[None for _ in range(size)] for _ in range(size)]
+    quadrant = int(fixture.get("initial_quadrant_size", size // 2))
+    tiles = [[None if x < quadrant and y < quadrant else "LOCKED" for x in range(size)] for y in range(size)]
     metrics = Metrics()
     contract = fixture.get("submission_contract", {})
     max_market_orders = int(contract.get("max_market_orders", 10))
@@ -134,25 +162,18 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
 
     for day in range(days):
         positions = [[0, 0]]
+        inventories = [{}]
         hires_today = 0
         for hour in range(turns_per_day):
             prices = {crop: int(spec.get("prices", [spec.get("fallback_price", 0)])[day % len(spec.get("prices", [0]))])
                       for crop, spec in crops.items()}
-            public_crops = {crop: {"seed_price": spec["seed_price"], "maturity_days": spec["maturity_days"],
-                                    "expected_yield": spec["base_yield"] + spec.get("yield_variance", 0) / 2,
-                                    "fallback_price": spec.get("fallback_price", prices[crop]),
-                                    "sell_above": spec.get("sell_above", spec.get("fallback_price", prices[crop])),
-                                    "price_forecast": list(spec.get("prices", []))}
-                            for crop, spec in crops.items()}
             obs = {
                 "player": 0, "step": day * turns_per_day + hour, "day": day, "hour": hour,
-                "turns_per_day": turns_per_day, "total_days": days,
                 "farms": [{"money": money, "farmer": positions[0], "hands": positions[1:],
                            "hires_today": hires_today, "unlocked_quadrants": ["NW"], "tiles": copy.deepcopy(tiles)}],
                 "private": {"shed": copy.deepcopy(shed), "seeds": copy.deepcopy(seeds),
-                            "inventories": [[] for _ in positions]},
+                            "inventories": [copy.deepcopy(value) for value in inventories]},
                 "market": {"inventory": {crop: 10000 for crop in crops}, "prices": prices},
-                "crops": public_crops,
                 "town": {"unlocked_shops": []},
             }
             try:
@@ -170,7 +191,8 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                     if money >= cost and len(positions) < max_workers:
                         money -= cost
                         hires_today += 1
-                        positions.append([0, 0])
+                        positions.append(_spawn_hand(positions, quadrant))
+                        inventories.append({})
                     else:
                         metrics.invalid_actions += 1
                 elif len(action) == 3 and isinstance(action[2], int) and action[2] > 0:
@@ -204,28 +226,48 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                 metrics.contract_violations += len(targets) - len(set(targets))
             for index, action in enumerate(worker_actions):
                 positions[index], seeds, cultivated, harvested, produced, invalid = _apply_worker(
-                    action, positions[index], tiles, seeds, day, rng, crops
+                    action, positions[index], tiles, seeds, inventories[index], day, crops
                 )
                 metrics.cultivated += cultivated
                 metrics.harvested += harvested
-                if produced:
-                    shed[produced[0]] += produced[1]
                 metrics.invalid_actions += invalid
         for row in tiles:
             for tile in row:
                 if isinstance(tile, dict) and tile.get("kind") == "PLANT":
+                    spec = crops[tile["crop"]]
+                    next_age = day + 1 - int(tile["planted_day"])
+                    if next_age >= int(spec.get("first_yield_day", spec.get("maturity_days", 2))):
+                        tile["yield_units"] = max(1, int(tile.get("yield_units", 0)))
+                    if tile.get("watered_today"):
+                        age = day - int(tile["planted_day"])
+                        bonus_start = (int(spec.get("max_yield_day", 4)) + 1) // 2
+                        if age >= bonus_start:
+                            tile["yield_units"] = min(int(spec.get("max_yield", 6)),
+                                                      int(tile.get("yield_units", 1)) + 1)
+                        tile["consecutive_unwatered"] = 0
+                    else:
+                        tile["consecutive_unwatered"] = int(tile.get("consecutive_unwatered", 0)) + 1
                     tile["watered_today"] = False
+                    if tile["consecutive_unwatered"] >= 2:
+                        tile.clear()
+                        tile.update({"kind": "WEED"})
+        # Runtime workers carry harvested goods; the end-of-day refresh drops them
+        # into the capped shed before hands disappear.
+        capacity = int(fixture.get("shed_capacity", 100))
+        for inventory in inventories:
+            for crop, amount in inventory.items():
+                room = max(0, capacity - sum(shed.values()))
+                shed[crop] += min(amount, room)
         if rng.random() < 0.2:
             empties = [(x, y) for y, row in enumerate(tiles) for x, tile in enumerate(row) if tile is None]
             if empties:
                 x, y = rng.choice(empties)
                 tiles[y][x] = {"kind": "WEED"}
 
-    final_prices = {crop: int(spec.get("prices", [spec.get("fallback_price", 0)])[-1]) for crop, spec in crops.items()}
-    metrics.final_assets = money + sum(shed[crop] * final_prices[crop] for crop in crops) + sum(
-        seeds[crop] * int(crops[crop]["seed_price"]) for crop in crops)
+    metrics.reward = money
+    metrics.final_assets = money
     metrics.profit = metrics.final_assets - initial_money
-    metrics.leaderboard_proxy = metrics.final_assets - invalid_penalty * metrics.invalid_actions
+    metrics.leaderboard_proxy = metrics.reward - invalid_penalty * metrics.invalid_actions
     return metrics
 
 
