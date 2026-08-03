@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts.evaluate import compare, evaluate, load_agent, run_episode
+from scripts.evaluate import compare, compare_distribution, evaluate, evaluate_scenarios, load_agent, run_episode
 from scripts import evaluate as evaluator
 
 
@@ -22,6 +22,11 @@ class EvaluationTest(unittest.TestCase):
 
     def test_screen_and_confirm_use_independent_reproducible_seeds(self):
         self.assertTrue(set(FIXTURE["screen_seeds"]).isdisjoint(FIXTURE["confirm_seeds"]))
+        screen_seeds = {seed for scenario in FIXTURE["screen_scenarios"] for seed in scenario["seeds"]}
+        confirm_seeds = {seed for scenario in FIXTURE["confirm_scenarios"] for seed in scenario["seeds"]}
+        self.assertTrue(screen_seeds.isdisjoint(confirm_seeds))
+        self.assertTrue(set(s["name"] for s in FIXTURE["screen_scenarios"]).isdisjoint(
+            s["name"] for s in FIXTURE["confirm_scenarios"]))
         agent = load_agent(ROOT / "main.py")
         self.assertEqual(
             evaluate(agent, FIXTURE, FIXTURE["confirm_seeds"]),
@@ -92,6 +97,32 @@ class EvaluationTest(unittest.TestCase):
         passed, reasons = compare(champion, candidate, FIXTURE["thresholds"])
         self.assertFalse(passed)
         self.assertIn("final_assets ratio", reasons[0])
+
+    def test_distribution_gate_rejects_tail_or_worst_case_regression(self):
+        champion = {"lower_quantile": {"final_assets": 100, "profit": 20},
+                    "worst": {"final_assets": 90, "profit": 10, "invalid_actions": 0, "contract_violations": 0}}
+        candidate = {"lower_quantile": {"final_assets": 99, "profit": 20},
+                     "worst": {"final_assets": 90, "profit": 10, "invalid_actions": 1, "contract_violations": 0}}
+        passed, reasons = compare_distribution(champion, candidate, FIXTURE["thresholds"])
+        self.assertFalse(passed)
+        self.assertTrue(any("lower_quantile final_assets" in reason for reason in reasons))
+        self.assertIn("worst invalid_actions increased", reasons)
+
+    def test_distribution_scenarios_cover_requested_shift_dimensions(self):
+        scenarios = FIXTURE["screen_scenarios"] + FIXTURE["confirm_scenarios"]
+        overrides = [scenario["overrides"] for scenario in scenarios]
+        self.assertTrue(any("prices" in value.get("crops", {}).get("WHEAT", {}) for value in overrides))
+        self.assertTrue(any("CORN" in value.get("crops", {}) for value in overrides))
+        self.assertTrue(any("board_size" in value for value in overrides))
+        self.assertTrue(any("initial_weeds" in value for value in overrides))
+        self.assertTrue(any("days" in value for value in overrides))
+        self.assertTrue(any("initial_hands" in value for value in overrides))
+
+    def test_scenario_evaluation_reports_lower_quantile_and_worst(self):
+        result = evaluate_scenarios(load_agent(ROOT / "main.py"), FIXTURE, FIXTURE["screen_scenarios"])
+        self.assertEqual([s["name"] for s in FIXTURE["screen_scenarios"]], result["scenario_names"])
+        self.assertLessEqual(result["worst"]["final_assets"], result["lower_quantile"]["final_assets"])
+        self.assertGreaterEqual(result["worst"]["invalid_actions"], result["mean"]["invalid_actions"])
 
     def test_zero_baseline_metric_does_not_divide_by_zero(self):
         champion = {"mean": {"final_assets": 0, "profit": 0, "cultivated": 0, "harvested": 0, "invalid_actions": 0}}
@@ -246,7 +277,7 @@ class EvaluationTest(unittest.TestCase):
             report = json.loads(output.read_text())
         self.assertEqual(str(ROOT / "main.py"), report["provenance"]["candidate"])
         self.assertEqual("submission.tar.gz", report["provenance"]["submission_artifact"])
-        self.assertEqual(3, report["oracle"]["version"])
+        self.assertEqual(4, report["oracle"]["version"])
         self.assertEqual(10, report["submission_contract"]["max_market_orders"])
 
 

@@ -17,10 +17,10 @@
     "simultaneous_tile_operations_must_be_unique": true
   },
   "oracle": {
-    "version": 3,
+    "version": 4,
     "primary_proxy": "leaderboard_proxy = terminal bank reward - 1000 * invalid_actions",
     "invalid_action_penalty": 1000,
-    "scale_change": "v3 uses the public 10x10/30x24 clock, locked quadrants, carried harvest inventory, crop survival, and cash-only terminal reward",
+    "scale_change": "v4 keeps the runtime-shaped oracle and adds independent domain-randomized screen/confirm suites with tail and worst-case promotion gates",
     "lb_divergence_signal": "candidate offline assets rise while leaderboard_proxy or contract validity falls"
   },
   "crops": {
@@ -28,6 +28,14 @@
   },
   "screen_seeds": [11, 23, 47],
   "confirm_seeds": [101, 211, 307, 401, 503],
+  "screen_scenarios": [
+    {"name": "volatile-market-small-board", "seeds": [11, 23], "overrides": {"board_size": 8, "initial_quadrant_size": 4, "initial_weeds": [[1, 1], [3, 2]], "crops": {"WHEAT": {"seed_price": 12, "prices": [18,30,16,28,15,27,17,26,18,25,19,24,20,23,21,22,20,24,18,26,16,28,15,29,17,27,19,25,21,23]}}}},
+    {"name": "short-season-worker-pressure", "seeds": [47, 59], "overrides": {"days": 18, "initial_hands": 2, "submission_contract": {"max_workers": 6}, "initial_weeds": [[2, 1], [4, 4]]}}
+  ],
+  "confirm_scenarios": [
+    {"name": "multi-crop-wide-board", "seeds": [101, 211, 307], "overrides": {"board_size": 12, "initial_quadrant_size": 6, "crops": {"WHEAT": {"prices": [24,22,20,18,20,22,24,26,25,23,21,19,18,20,22,24,26,28,27,25,23,21,20,22,24,26,28,29,27,25]}, "CORN": {"seed_price": 18, "first_yield_day": 3, "max_yield_day": 5, "max_yield": 7, "maturity_days": 3, "initial_seeds": 0, "fallback_price": 30, "sell_above": 32, "prices": [30,31,33,35,34,32,30,29,31,34,36,35,33,31,30,32,35,37,36,34,32,31,33,36,38,37,35,33,32,34]}}}},
+    {"name": "weed-heavy-long-season", "seeds": [401, 503, 607], "overrides": {"days": 36, "initial_hands": 1, "initial_weeds": [[1, 0], [2, 2], [4, 3]], "submission_contract": {"max_workers": 10}}}
+  ],
   "strategy_candidates": [
     {"crop": "WHEAT_ONLY", "sell": "IMMEDIATE"},
     {"crop": "BEST_RETURN", "sell": "IMMEDIATE"},
@@ -38,6 +46,10 @@
     "min_profit_ratio": 1.0,
     "min_cultivated_ratio": 0.75,
     "min_harvested_ratio": 0.65,
+    "min_lower_quantile_final_assets_ratio": 1.0,
+    "min_lower_quantile_profit_ratio": 1.0,
+    "min_worst_final_assets_ratio": 1.0,
+    "min_worst_profit_ratio": 1.0,
     "max_invalid_actions": 0
   }
 }
