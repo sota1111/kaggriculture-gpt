@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts.evaluate import compare, compare_distribution, evaluate, evaluate_scenarios, load_agent, run_episode
+from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_scenarios, load_agent, run_episode
 from scripts import evaluate as evaluator
 
 
@@ -13,6 +13,52 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_bounded_rollout_is_deterministic_and_does_not_mutate_observation(self):
+        rollout = FIXTURE["rollout"]
+        observation = rollout["observation"]
+        before = json.loads(json.dumps(observation))
+        kwargs = {"horizon": rollout["horizon"], "crop_specs": FIXTURE["crops"],
+                  "total_days": FIXTURE["days"], "turns_per_day": FIXTURE["turns_per_day"]}
+        first = bounded_rollout(observation, rollout["candidate"], **kwargs)
+        second = bounded_rollout(observation, rollout["candidate"], **kwargs)
+        self.assertEqual(first, second)
+        self.assertEqual(before, observation)
+        self.assertEqual(0, first["invalid_actions"])
+        self.assertEqual(0, first["contract_violations"])
+
+    def test_bounded_rollout_compares_sequences_under_the_same_screen(self):
+        rollout = FIXTURE["rollout"]
+        kwargs = {"horizon": rollout["horizon"], "crop_specs": FIXTURE["crops"],
+                  "total_days": FIXTURE["days"], "turns_per_day": FIXTURE["turns_per_day"]}
+        champion = bounded_rollout(rollout["observation"], rollout["champion"], **kwargs)
+        candidate = bounded_rollout(rollout["observation"], rollout["candidate"], **kwargs)
+        self.assertGreater(candidate["score"], champion["score"])
+        self.assertEqual(champion["deadline_step"], candidate["deadline_step"])
+
+    def test_bounded_rollout_uses_no_future_market_or_randomness(self):
+        rollout = FIXTURE["rollout"]
+        observation = json.loads(json.dumps(rollout["observation"]))
+        observation["future_prices"] = {"WHEAT": [999999]}
+        kwargs = {"horizon": 1, "crop_specs": FIXTURE["crops"],
+                  "total_days": FIXTURE["days"], "turns_per_day": FIXTURE["turns_per_day"]}
+        with_hint = bounded_rollout(observation, rollout["candidate"], **kwargs)
+        observation.pop("future_prices")
+        without_hint = bounded_rollout(observation, rollout["candidate"], **kwargs)
+        self.assertEqual(with_hint, without_hint)
+
+    def test_bounded_rollout_caps_horizon_at_deadline_and_detects_collision(self):
+        rollout = FIXTURE["rollout"]
+        observation = json.loads(json.dumps(rollout["observation"]))
+        observation["step"] = FIXTURE["days"] * FIXTURE["turns_per_day"] - 1
+        observation["farms"][0]["hands"] = [[2, 0]]
+        observation["private"]["inventories"] = [{}, {}]
+        actions = [{"farmer": ["EAST"], "hands": [["WEST"]], "market": []}] * 3
+        result = bounded_rollout(observation, actions, horizon=3, crop_specs=FIXTURE["crops"],
+                                 total_days=FIXTURE["days"], turns_per_day=FIXTURE["turns_per_day"])
+        self.assertEqual(1, result["steps_simulated"])
+        self.assertEqual(0, result["remaining_steps"])
+        self.assertEqual(1, result["assignment_conflicts"])
+
     def test_fixed_seeds_are_reproducible(self):
         agent = load_agent(ROOT / "main.py")
         first = evaluate(agent, FIXTURE, FIXTURE["screen_seeds"])
