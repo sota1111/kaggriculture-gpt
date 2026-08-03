@@ -70,6 +70,7 @@
     "min_lower_quantile_profit_ratio": 1.0,
     "min_worst_final_assets_ratio": 1.0,
     "min_worst_profit_ratio": 1.0,
+    "require_tail_or_worst_improvement": true,
     "max_invalid_actions": 0
   }
 }
