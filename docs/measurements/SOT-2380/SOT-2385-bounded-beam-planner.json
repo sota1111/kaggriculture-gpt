@@ -1,0 +1,1034 @@
+{
+  "confirm": {
+    "reason": "candidate did not pass screen",
+    "skipped": true
+  },
+  "decision": "REJECT",
+  "exec_compatibility": {
+    "reason": "candidate rejected",
+    "skipped": true
+  },
+  "fixture": "tests/fixtures/evaluation.json",
+  "next_action": "revert_candidate_keep_measurement",
+  "oracle": {
+    "invalid_action_penalty": 1000,
+    "lb_divergence_signal": "candidate offline assets rise while leaderboard_proxy or contract validity falls",
+    "primary_proxy": "leaderboard_proxy = terminal bank reward - 1000 * invalid_actions",
+    "scale_change": "v4 keeps the runtime-shaped oracle and adds independent domain-randomized screen/confirm suites with tail and worst-case promotion gates",
+    "version": 4
+  },
+  "provenance": {
+    "candidate": "main.py",
+    "champion": "/tmp/sot2385-baseline-wHeK.py",
+    "submission_artifact": "submission.tar.gz",
+    "submission_builder": "scripts/build_submission.sh"
+  },
+  "rollout": {
+    "candidate": {
+      "assignment_conflicts": 0,
+      "cash": 35,
+      "contract_violations": 0,
+      "deadline_step": 720,
+      "invalid_actions": 0,
+      "remaining_steps": 0,
+      "score": 35,
+      "seeds": {
+        "WHEAT": 0
+      },
+      "steps_simulated": 3,
+      "tiles": [
+        [
+          {
+            "consecutive_unwatered": 0,
+            "crop": "WHEAT",
+            "fertilized_until_day": -1,
+            "kind": "PLANT",
+            "planted_day": 29,
+            "watered_today": true,
+            "yield_units": 0
+          },
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "workers": [
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "champion": {
+      "assignment_conflicts": 0,
+      "cash": 20,
+      "contract_violations": 0,
+      "deadline_step": 720,
+      "invalid_actions": 0,
+      "remaining_steps": 0,
+      "score": 20,
+      "seeds": {
+        "WHEAT": 0
+      },
+      "steps_simulated": 3,
+      "tiles": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "workers": [
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "information_boundary": "supplied observation only; current prices held constant"
+  },
+  "screen": {
+    "candidate": {
+      "episodes": [
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 90,
+          "final_assets": 4107,
+          "harvested": 89,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4107,
+          "profit": 1107,
+          "reward": 4107,
+          "scenario": "volatile-market-small-board",
+          "seed": 11
+        },
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 90,
+          "final_assets": 4130,
+          "harvested": 90,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4130,
+          "profit": 1130,
+          "reward": 4130,
+          "scenario": "volatile-market-small-board",
+          "seed": 23
+        },
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 125,
+          "final_assets": 4541,
+          "harvested": 124,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4541,
+          "profit": 1541,
+          "reward": 4541,
+          "scenario": "short-season-worker-pressure",
+          "seed": 47
+        },
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 125,
+          "final_assets": 4539,
+          "harvested": 124,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4539,
+          "profit": 1539,
+          "reward": 4539,
+          "scenario": "short-season-worker-pressure",
+          "seed": 59
+        }
+      ],
+      "lower_quantile": {
+        "assignment_conflicts": 0.0,
+        "contract_violations": 0.0,
+        "cultivated": 90.0,
+        "final_assets": 4107.0,
+        "harvested": 89.0,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4107.0,
+        "profit": 1107.0,
+        "reward": 4107.0
+      },
+      "mean": {
+        "assignment_conflicts": 0.0,
+        "contract_violations": 0.0,
+        "cultivated": 107.5,
+        "final_assets": 4329.25,
+        "harvested": 106.75,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4329.25,
+        "profit": 1329.25,
+        "reward": 4329.25
+      },
+      "scenario_names": [
+        "volatile-market-small-board",
+        "short-season-worker-pressure"
+      ],
+      "scenarios": {
+        "short-season-worker-pressure": {
+          "episodes": [
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 125,
+              "final_assets": 4541,
+              "harvested": 124,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4541,
+              "profit": 1541,
+              "reward": 4541,
+              "seed": 47
+            },
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 125,
+              "final_assets": 4539,
+              "harvested": 124,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4539,
+              "profit": 1539,
+              "reward": 4539,
+              "seed": 59
+            }
+          ],
+          "mean": {
+            "assignment_conflicts": 0.0,
+            "contract_violations": 0.0,
+            "cultivated": 125.0,
+            "final_assets": 4540.0,
+            "harvested": 124.0,
+            "invalid_actions": 0.0,
+            "leaderboard_proxy": 4540.0,
+            "profit": 1540.0,
+            "reward": 4540.0
+          },
+          "seeds": [
+            47,
+            59
+          ]
+        },
+        "volatile-market-small-board": {
+          "episodes": [
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 90,
+              "final_assets": 4107,
+              "harvested": 89,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4107,
+              "profit": 1107,
+              "reward": 4107,
+              "seed": 11
+            },
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 90,
+              "final_assets": 4130,
+              "harvested": 90,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4130,
+              "profit": 1130,
+              "reward": 4130,
+              "seed": 23
+            }
+          ],
+          "mean": {
+            "assignment_conflicts": 0.0,
+            "contract_violations": 0.0,
+            "cultivated": 90.0,
+            "final_assets": 4118.5,
+            "harvested": 89.5,
+            "invalid_actions": 0.0,
+            "leaderboard_proxy": 4118.5,
+            "profit": 1118.5,
+            "reward": 4118.5
+          },
+          "seeds": [
+            11,
+            23
+          ]
+        }
+      },
+      "worst": {
+        "assignment_conflicts": 0.0,
+        "contract_violations": 0.0,
+        "cultivated": 90.0,
+        "final_assets": 4107.0,
+        "harvested": 89.0,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4107.0,
+        "profit": 1107.0,
+        "reward": 4107.0
+      }
+    },
+    "champion": {
+      "episodes": [
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 90,
+          "final_assets": 4123,
+          "harvested": 90,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4123,
+          "profit": 1123,
+          "reward": 4123,
+          "scenario": "volatile-market-small-board",
+          "seed": 11
+        },
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 90,
+          "final_assets": 4126,
+          "harvested": 90,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4126,
+          "profit": 1126,
+          "reward": 4126,
+          "scenario": "volatile-market-small-board",
+          "seed": 23
+        },
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 130,
+          "final_assets": 4630,
+          "harvested": 130,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4630,
+          "profit": 1630,
+          "reward": 4630,
+          "scenario": "short-season-worker-pressure",
+          "seed": 47
+        },
+        {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 128,
+          "final_assets": 4588,
+          "harvested": 127,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 4588,
+          "profit": 1588,
+          "reward": 4588,
+          "scenario": "short-season-worker-pressure",
+          "seed": 59
+        }
+      ],
+      "lower_quantile": {
+        "assignment_conflicts": 0.0,
+        "contract_violations": 0.0,
+        "cultivated": 90.0,
+        "final_assets": 4123.0,
+        "harvested": 90.0,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4123.0,
+        "profit": 1123.0,
+        "reward": 4123.0
+      },
+      "mean": {
+        "assignment_conflicts": 0.0,
+        "contract_violations": 0.0,
+        "cultivated": 109.5,
+        "final_assets": 4366.75,
+        "harvested": 109.25,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4366.75,
+        "profit": 1366.75,
+        "reward": 4366.75
+      },
+      "scenario_names": [
+        "volatile-market-small-board",
+        "short-season-worker-pressure"
+      ],
+      "scenarios": {
+        "short-season-worker-pressure": {
+          "episodes": [
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 130,
+              "final_assets": 4630,
+              "harvested": 130,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4630,
+              "profit": 1630,
+              "reward": 4630,
+              "seed": 47
+            },
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 128,
+              "final_assets": 4588,
+              "harvested": 127,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4588,
+              "profit": 1588,
+              "reward": 4588,
+              "seed": 59
+            }
+          ],
+          "mean": {
+            "assignment_conflicts": 0.0,
+            "contract_violations": 0.0,
+            "cultivated": 129.0,
+            "final_assets": 4609.0,
+            "harvested": 128.5,
+            "invalid_actions": 0.0,
+            "leaderboard_proxy": 4609.0,
+            "profit": 1609.0,
+            "reward": 4609.0
+          },
+          "seeds": [
+            47,
+            59
+          ]
+        },
+        "volatile-market-small-board": {
+          "episodes": [
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 90,
+              "final_assets": 4123,
+              "harvested": 90,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4123,
+              "profit": 1123,
+              "reward": 4123,
+              "seed": 11
+            },
+            {
+              "assignment_conflicts": 0,
+              "contract_violations": 0,
+              "cultivated": 90,
+              "final_assets": 4126,
+              "harvested": 90,
+              "invalid_actions": 0,
+              "leaderboard_proxy": 4126,
+              "profit": 1126,
+              "reward": 4126,
+              "seed": 23
+            }
+          ],
+          "mean": {
+            "assignment_conflicts": 0.0,
+            "contract_violations": 0.0,
+            "cultivated": 90.0,
+            "final_assets": 4124.5,
+            "harvested": 90.0,
+            "invalid_actions": 0.0,
+            "leaderboard_proxy": 4124.5,
+            "profit": 1124.5,
+            "reward": 4124.5
+          },
+          "seeds": [
+            11,
+            23
+          ]
+        }
+      },
+      "worst": {
+        "assignment_conflicts": 0.0,
+        "contract_violations": 0.0,
+        "cultivated": 90.0,
+        "final_assets": 4123.0,
+        "harvested": 90.0,
+        "invalid_actions": 0.0,
+        "leaderboard_proxy": 4123.0,
+        "profit": 1123.0,
+        "reward": 4123.0
+      }
+    },
+    "passed": false,
+    "reasons": [
+      "final_assets ratio 0.991 < 1.000",
+      "profit ratio 0.973 < 1.000",
+      "lower_quantile final_assets ratio 0.996 < 1.000",
+      "lower_quantile profit ratio 0.986 < 1.000",
+      "worst final_assets ratio 0.996 < 1.000",
+      "worst profit ratio 0.986 < 1.000"
+    ],
+    "selected_strategy": "WHEAT_ONLY:IMMEDIATE",
+    "strategy_variants": {
+      "BEST_RETURN:IMMEDIATE": {
+        "episodes": [
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 90,
+            "final_assets": 4107,
+            "harvested": 89,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4107,
+            "profit": 1107,
+            "reward": 4107,
+            "scenario": "volatile-market-small-board",
+            "seed": 11
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 90,
+            "final_assets": 4130,
+            "harvested": 90,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4130,
+            "profit": 1130,
+            "reward": 4130,
+            "scenario": "volatile-market-small-board",
+            "seed": 23
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 125,
+            "final_assets": 4541,
+            "harvested": 124,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4541,
+            "profit": 1541,
+            "reward": 4541,
+            "scenario": "short-season-worker-pressure",
+            "seed": 47
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 125,
+            "final_assets": 4539,
+            "harvested": 124,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4539,
+            "profit": 1539,
+            "reward": 4539,
+            "scenario": "short-season-worker-pressure",
+            "seed": 59
+          }
+        ],
+        "lower_quantile": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 90.0,
+          "final_assets": 4107.0,
+          "harvested": 89.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4107.0,
+          "profit": 1107.0,
+          "reward": 4107.0
+        },
+        "mean": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 107.5,
+          "final_assets": 4329.25,
+          "harvested": 106.75,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4329.25,
+          "profit": 1329.25,
+          "reward": 4329.25
+        },
+        "scenario_names": [
+          "volatile-market-small-board",
+          "short-season-worker-pressure"
+        ],
+        "scenarios": {
+          "short-season-worker-pressure": {
+            "episodes": [
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 125,
+                "final_assets": 4541,
+                "harvested": 124,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4541,
+                "profit": 1541,
+                "reward": 4541,
+                "seed": 47
+              },
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 125,
+                "final_assets": 4539,
+                "harvested": 124,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4539,
+                "profit": 1539,
+                "reward": 4539,
+                "seed": 59
+              }
+            ],
+            "mean": {
+              "assignment_conflicts": 0.0,
+              "contract_violations": 0.0,
+              "cultivated": 125.0,
+              "final_assets": 4540.0,
+              "harvested": 124.0,
+              "invalid_actions": 0.0,
+              "leaderboard_proxy": 4540.0,
+              "profit": 1540.0,
+              "reward": 4540.0
+            },
+            "seeds": [
+              47,
+              59
+            ]
+          },
+          "volatile-market-small-board": {
+            "episodes": [
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 90,
+                "final_assets": 4107,
+                "harvested": 89,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4107,
+                "profit": 1107,
+                "reward": 4107,
+                "seed": 11
+              },
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 90,
+                "final_assets": 4130,
+                "harvested": 90,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4130,
+                "profit": 1130,
+                "reward": 4130,
+                "seed": 23
+              }
+            ],
+            "mean": {
+              "assignment_conflicts": 0.0,
+              "contract_violations": 0.0,
+              "cultivated": 90.0,
+              "final_assets": 4118.5,
+              "harvested": 89.5,
+              "invalid_actions": 0.0,
+              "leaderboard_proxy": 4118.5,
+              "profit": 1118.5,
+              "reward": 4118.5
+            },
+            "seeds": [
+              11,
+              23
+            ]
+          }
+        },
+        "worst": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 90.0,
+          "final_assets": 4107.0,
+          "harvested": 89.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4107.0,
+          "profit": 1107.0,
+          "reward": 4107.0
+        }
+      },
+      "BEST_RETURN:PRICE_AWARE": {
+        "episodes": [
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 90,
+            "final_assets": 4107,
+            "harvested": 89,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4107,
+            "profit": 1107,
+            "reward": 4107,
+            "scenario": "volatile-market-small-board",
+            "seed": 11
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 90,
+            "final_assets": 4130,
+            "harvested": 90,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4130,
+            "profit": 1130,
+            "reward": 4130,
+            "scenario": "volatile-market-small-board",
+            "seed": 23
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 125,
+            "final_assets": 4541,
+            "harvested": 124,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4541,
+            "profit": 1541,
+            "reward": 4541,
+            "scenario": "short-season-worker-pressure",
+            "seed": 47
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 125,
+            "final_assets": 4539,
+            "harvested": 124,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4539,
+            "profit": 1539,
+            "reward": 4539,
+            "scenario": "short-season-worker-pressure",
+            "seed": 59
+          }
+        ],
+        "lower_quantile": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 90.0,
+          "final_assets": 4107.0,
+          "harvested": 89.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4107.0,
+          "profit": 1107.0,
+          "reward": 4107.0
+        },
+        "mean": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 107.5,
+          "final_assets": 4329.25,
+          "harvested": 106.75,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4329.25,
+          "profit": 1329.25,
+          "reward": 4329.25
+        },
+        "scenario_names": [
+          "volatile-market-small-board",
+          "short-season-worker-pressure"
+        ],
+        "scenarios": {
+          "short-season-worker-pressure": {
+            "episodes": [
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 125,
+                "final_assets": 4541,
+                "harvested": 124,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4541,
+                "profit": 1541,
+                "reward": 4541,
+                "seed": 47
+              },
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 125,
+                "final_assets": 4539,
+                "harvested": 124,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4539,
+                "profit": 1539,
+                "reward": 4539,
+                "seed": 59
+              }
+            ],
+            "mean": {
+              "assignment_conflicts": 0.0,
+              "contract_violations": 0.0,
+              "cultivated": 125.0,
+              "final_assets": 4540.0,
+              "harvested": 124.0,
+              "invalid_actions": 0.0,
+              "leaderboard_proxy": 4540.0,
+              "profit": 1540.0,
+              "reward": 4540.0
+            },
+            "seeds": [
+              47,
+              59
+            ]
+          },
+          "volatile-market-small-board": {
+            "episodes": [
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 90,
+                "final_assets": 4107,
+                "harvested": 89,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4107,
+                "profit": 1107,
+                "reward": 4107,
+                "seed": 11
+              },
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 90,
+                "final_assets": 4130,
+                "harvested": 90,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4130,
+                "profit": 1130,
+                "reward": 4130,
+                "seed": 23
+              }
+            ],
+            "mean": {
+              "assignment_conflicts": 0.0,
+              "contract_violations": 0.0,
+              "cultivated": 90.0,
+              "final_assets": 4118.5,
+              "harvested": 89.5,
+              "invalid_actions": 0.0,
+              "leaderboard_proxy": 4118.5,
+              "profit": 1118.5,
+              "reward": 4118.5
+            },
+            "seeds": [
+              11,
+              23
+            ]
+          }
+        },
+        "worst": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 90.0,
+          "final_assets": 4107.0,
+          "harvested": 89.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4107.0,
+          "profit": 1107.0,
+          "reward": 4107.0
+        }
+      },
+      "WHEAT_ONLY:IMMEDIATE": {
+        "episodes": [
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 90,
+            "final_assets": 4107,
+            "harvested": 89,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4107,
+            "profit": 1107,
+            "reward": 4107,
+            "scenario": "volatile-market-small-board",
+            "seed": 11
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 90,
+            "final_assets": 4130,
+            "harvested": 90,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4130,
+            "profit": 1130,
+            "reward": 4130,
+            "scenario": "volatile-market-small-board",
+            "seed": 23
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 125,
+            "final_assets": 4541,
+            "harvested": 124,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4541,
+            "profit": 1541,
+            "reward": 4541,
+            "scenario": "short-season-worker-pressure",
+            "seed": 47
+          },
+          {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 125,
+            "final_assets": 4539,
+            "harvested": 124,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 4539,
+            "profit": 1539,
+            "reward": 4539,
+            "scenario": "short-season-worker-pressure",
+            "seed": 59
+          }
+        ],
+        "lower_quantile": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 90.0,
+          "final_assets": 4107.0,
+          "harvested": 89.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4107.0,
+          "profit": 1107.0,
+          "reward": 4107.0
+        },
+        "mean": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 107.5,
+          "final_assets": 4329.25,
+          "harvested": 106.75,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4329.25,
+          "profit": 1329.25,
+          "reward": 4329.25
+        },
+        "scenario_names": [
+          "volatile-market-small-board",
+          "short-season-worker-pressure"
+        ],
+        "scenarios": {
+          "short-season-worker-pressure": {
+            "episodes": [
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 125,
+                "final_assets": 4541,
+                "harvested": 124,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4541,
+                "profit": 1541,
+                "reward": 4541,
+                "seed": 47
+              },
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 125,
+                "final_assets": 4539,
+                "harvested": 124,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4539,
+                "profit": 1539,
+                "reward": 4539,
+                "seed": 59
+              }
+            ],
+            "mean": {
+              "assignment_conflicts": 0.0,
+              "contract_violations": 0.0,
+              "cultivated": 125.0,
+              "final_assets": 4540.0,
+              "harvested": 124.0,
+              "invalid_actions": 0.0,
+              "leaderboard_proxy": 4540.0,
+              "profit": 1540.0,
+              "reward": 4540.0
+            },
+            "seeds": [
+              47,
+              59
+            ]
+          },
+          "volatile-market-small-board": {
+            "episodes": [
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 90,
+                "final_assets": 4107,
+                "harvested": 89,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4107,
+                "profit": 1107,
+                "reward": 4107,
+                "seed": 11
+              },
+              {
+                "assignment_conflicts": 0,
+                "contract_violations": 0,
+                "cultivated": 90,
+                "final_assets": 4130,
+                "harvested": 90,
+                "invalid_actions": 0,
+                "leaderboard_proxy": 4130,
+                "profit": 1130,
+                "reward": 4130,
+                "seed": 23
+              }
+            ],
+            "mean": {
+              "assignment_conflicts": 0.0,
+              "contract_violations": 0.0,
+              "cultivated": 90.0,
+              "final_assets": 4118.5,
+              "harvested": 89.5,
+              "invalid_actions": 0.0,
+              "leaderboard_proxy": 4118.5,
+              "profit": 1118.5,
+              "reward": 4118.5
+            },
+            "seeds": [
+              11,
+              23
+            ]
+          }
+        },
+        "worst": {
+          "assignment_conflicts": 0.0,
+          "contract_violations": 0.0,
+          "cultivated": 90.0,
+          "final_assets": 4107.0,
+          "harvested": 89.0,
+          "invalid_actions": 0.0,
+          "leaderboard_proxy": 4107.0,
+          "profit": 1107.0,
+          "reward": 4107.0
+        }
+      }
+    }
+  },
+  "submission_contract": {
+    "hires_available_next_turn": true,
+    "hires_today_resets_daily": true,
+    "market_before_workers": true,
+    "max_market_orders": 10,
+    "max_workers": 16,
+    "observation_clock": "step = day * turns_per_day + hour",
+    "simultaneous_tile_operations_must_be_unique": true
+  },
+  "thresholds": {
+    "max_invalid_actions": 0,
+    "min_cultivated_ratio": 0.75,
+    "min_final_assets_ratio": 1.0,
+    "min_harvested_ratio": 0.65,
+    "min_lower_quantile_final_assets_ratio": 1.0,
+    "min_lower_quantile_profit_ratio": 1.0,
+    "min_profit_ratio": 1.0,
+    "min_worst_final_assets_ratio": 1.0,
+    "min_worst_profit_ratio": 1.0
+  }
+}
