@@ -132,11 +132,20 @@ class EvaluationTest(unittest.TestCase):
 
     def test_multi_worker_candidate_routes_without_invalid_actions(self):
         agent = load_agent(ROOT / "main.py")
-        agent.HIRE_TARGET = 3
+        agent.MIN_HAND_TARGET = 3
+        agent.MAX_HAND_TARGET = 3
         result = run_episode(agent, FIXTURE, 11)
         self.assertEqual(0, result.invalid_actions)
         self.assertGreater(result.cultivated, 1)
         self.assertGreater(result.harvested, 1)
+
+    def test_worker_target_adapts_to_observed_land_and_remaining_harvests(self):
+        agent = load_agent(ROOT / "main.py")
+        small = {"tiles": [[None] * 4 for _ in range(4)]}
+        wide = {"tiles": [[None] * 6 for _ in range(6)]}
+        self.assertEqual(4, agent._hand_target(small, harvests_left=3))
+        self.assertEqual(5, agent._hand_target(wide, harvests_left=3))
+        self.assertEqual(0, agent._hand_target(wide, harvests_left=0))
 
     def test_worker_assignments_are_unique_and_respect_seed_count(self):
         agent = load_agent(ROOT / "main.py")
