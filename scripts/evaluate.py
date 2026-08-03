@@ -20,7 +20,7 @@ from math import ceil
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from types import ModuleType
-from typing import Any
+from typing import Any, Sequence
 
 VALID_WORKER_ACTIONS = {
     "PASS", "NORTH", "SOUTH", "EAST", "WEST", "DIG", "PLANT", "WATER", "HARVEST",
@@ -100,6 +100,127 @@ def _spawn_hand(positions: list[list[int]], quadrant: int) -> list[int]:
                    key=lambda value: (value[0] + value[1], value[1], value[0]))
     occupied = {tuple(position) for position in positions}
     return list(next((cell for cell in cells if cell not in occupied), cells[0]))
+
+
+def bounded_rollout(
+    observation: dict[str, Any],
+    action_sequence: Sequence[dict[str, Any]],
+    *,
+    horizon: int,
+    crop_specs: dict[str, dict[str, Any]],
+    total_days: int,
+    turns_per_day: int = 24,
+) -> dict[str, Any]:
+    """Deterministically score actions using only the supplied observation.
+
+    This is deliberately a small limited-horizon search primitive rather than a
+    second environment implementation.  Unknown future prices, weeds, and crop
+    yields are never sampled or inferred: the current observed price is held
+    constant, and crops only advance according to their public lifecycle fields.
+    Callers can enumerate action sequences (or use them as MCTS leaves) without
+    adding a runtime dependency.
+    """
+    if horizon < 0:
+        raise ValueError("horizon must be non-negative")
+    if total_days <= 0 or turns_per_day <= 0:
+        raise ValueError("total_days and turns_per_day must be positive")
+    obs = copy.deepcopy(observation)
+    farm = obs["farms"][int(obs.get("player", 0))]
+    private = obs.get("private", {})
+    positions = [list(farm["farmer"]), *[list(value) for value in farm.get("hands", [])]]
+    tiles = copy.deepcopy(farm["tiles"])
+    seeds = {crop: int(value) for crop, value in private.get("seeds", {}).items()}
+    shed = {crop: int(value) for crop, value in private.get("shed", {}).items()}
+    inventories = [copy.deepcopy(value) for value in private.get("inventories", [])]
+    inventories.extend({} for _ in range(max(0, len(positions) - len(inventories))))
+    money = int(farm.get("money", 0))
+    hires_today = int(farm.get("hires_today", 0))
+    start_step = int(obs.get("step", int(obs.get("day", 0)) * turns_per_day + int(obs.get("hour", 0))))
+    deadline_step = total_days * turns_per_day
+    steps = min(horizon, len(action_sequence), max(0, deadline_step - start_step))
+    prices = {crop: int(value) for crop, value in obs.get("market", {}).get("prices", {}).items()}
+    invalid_actions = contract_violations = assignment_conflicts = 0
+    max_market_orders = 10
+    max_workers = 16
+
+    for offset, result in enumerate(action_sequence[:steps]):
+        day = (start_step + offset) // turns_per_day
+        if not _valid_action(result, len(positions) - 1, set(crop_specs), max_market_orders):
+            invalid_actions += 1
+            contract_violations += 1
+            continue
+        for action in result["market"]:
+            op = action[0]
+            if op == "HIRE":
+                cost = _hire_cost(hires_today)
+                if money < cost or len(positions) >= max_workers:
+                    invalid_actions += 1
+                    continue
+                money -= cost
+                hires_today += 1
+                positions.append(_spawn_hand(positions, len(tiles)))
+                inventories.append({})
+            elif op == "BUY_SEED" and action[1] in crop_specs:
+                crop, amount = action[1], action[2]
+                cost = int(crop_specs[crop].get("seed_price", 0)) * amount
+                if money < cost:
+                    invalid_actions += 1
+                else:
+                    money -= cost
+                    seeds[crop] = seeds.get(crop, 0) + amount
+            elif op == "SELL" and action[1] in crop_specs:
+                crop, amount = action[1], action[2]
+                if shed.get(crop, 0) < amount:
+                    invalid_actions += 1
+                else:
+                    shed[crop] -= amount
+                    money += prices.get(crop, 0) * amount
+            else:
+                invalid_actions += 1
+
+        worker_actions = [result["farmer"], *result["hands"]]
+        move_offsets = {"NORTH": (0, -1), "SOUTH": (0, 1), "EAST": (1, 0), "WEST": (-1, 0)}
+        destinations = []
+        targets = []
+        for position, action in zip(positions, worker_actions):
+            if action[0] in move_offsets:
+                dx, dy = move_offsets[action[0]]
+                destinations.append((position[0] + dx, position[1] + dy))
+            if action[0] in {"DIG", "PLANT", "WATER", "HARVEST"}:
+                targets.append(tuple(position))
+        assignment_conflicts += len(destinations) - len(set(destinations))
+        duplicate_targets = len(targets) - len(set(targets))
+        invalid_actions += duplicate_targets
+        contract_violations += duplicate_targets
+        for index, action in enumerate(worker_actions):
+            positions[index], seeds, _, _, _, invalid = _apply_worker(
+                action, positions[index], tiles, seeds, inventories[index], day, crop_specs
+            )
+            invalid_actions += invalid
+
+    seed_value = sum(seeds.get(crop, 0) * int(spec.get("seed_price", 0)) for crop, spec in crop_specs.items())
+    inventory_value = sum(
+        amount * prices.get(crop, 0)
+        for source in [shed, *inventories]
+        for crop, amount in source.items()
+    )
+    remaining_steps = max(0, deadline_step - start_step - steps)
+    # Terminal competition reward is cash only; before the deadline, liquid
+    # observed inventory and unused seed at current prices for leaf ordering.
+    score = money if remaining_steps == 0 else money + seed_value + inventory_value
+    return {
+        "cash": money,
+        "seeds": seeds,
+        "workers": positions,
+        "tiles": tiles,
+        "steps_simulated": steps,
+        "deadline_step": deadline_step,
+        "remaining_steps": remaining_steps,
+        "invalid_actions": invalid_actions,
+        "contract_violations": contract_violations,
+        "assignment_conflicts": assignment_conflicts,
+        "score": score - 1000 * invalid_actions,
+    }
 
 
 def _apply_worker(action, position, tiles, seeds, inventory, day, crops):
@@ -381,6 +502,19 @@ def main() -> int:
               "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
+    if "rollout" in fixture:
+        rollout = fixture["rollout"]
+        rollout_kwargs = {
+            "horizon": int(rollout["horizon"]),
+            "crop_specs": fixture["crops"],
+            "total_days": int(fixture["days"]),
+            "turns_per_day": int(fixture.get("turns_per_day", 24)),
+        }
+        result["rollout"] = {
+            "information_boundary": "supplied observation only; current prices held constant",
+            "champion": bounded_rollout(rollout["observation"], rollout["champion"], **rollout_kwargs),
+            "candidate": bounded_rollout(rollout["observation"], rollout["candidate"], **rollout_kwargs),
+        }
     mean_passed, reasons = compare(champion_screen, variants[str(selected)], fixture["thresholds"])
     tail_passed, tail_reasons = compare_distribution(champion_screen, variants[str(selected)], fixture["thresholds"])
     passed = mean_passed and tail_passed
