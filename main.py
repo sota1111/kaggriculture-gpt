@@ -1,8 +1,10 @@
 """Deterministic multi-worker Kaggriculture agent."""
 
 from functools import lru_cache
+from math import ceil
 
-HIRE_TARGET = 4
+MIN_HAND_TARGET = 4
+MAX_HAND_TARGET = 5
 SEED_RESERVE_PER_WORKER = 2
 MIN_CASH_RESERVE = 100
 MAX_MARKET_ORDERS = 10
@@ -116,8 +118,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
             # Deadline misses and movement conflicts dominate travel. Priority weights
             # ensure low-value planting cannot delay harvest/water work.
             cost = (
-                future_cost[0] + overdue,
-                future_cost[1] + conflict,
+                future_cost[0] + conflict,
+                future_cost[1] + overdue,
                 future_cost[2] + priority * 100 + distance * (4 - min(priority, 3)),
             )
             proposal = cost, (task_index,) + future_choices
@@ -160,6 +162,15 @@ def _crop_specs(obs):
 def _remaining_harvests(spec, day, total_days):
     maturity = max(1, int(spec["maturity_days"]))
     return max(0, (total_days - day - 1) // maturity)
+
+
+def _hand_target(me, harvests_left):
+    """Scale labor to observed cultivable capacity without hiring for a spent season."""
+    if harvests_left <= 0:
+        return 0
+    usable_tiles = sum(tile != "LOCKED" for row in me["tiles"] for tile in row)
+    capacity_target = ceil(usable_tiles / 6) - 1
+    return max(MIN_HAND_TARGET, min(MAX_HAND_TARGET, capacity_target))
 
 
 def _future_prices(spec, day, current_price):
@@ -230,7 +241,8 @@ def agent(obs):
     hires_today = int(me.get("hires_today", len(hands)))
     future_sale = max(_future_prices(crop_specs[crop], day, int(prices.get(crop, crop_specs[crop]["fallback_price"]))))
     expected_crop_margin = future_sale * float(crop_specs[crop]["expected_yield"]) - seed_price
-    if len(hands) < HIRE_TARGET and harvests_left > 0:
+    hand_target = _hand_target(me, harvests_left)
+    if len(hands) < hand_target:
         cost = _hire_cost(hires_today)
         if money - cost >= MIN_CASH_RESERVE and expected_crop_margin * harvests_left > cost:
             market.append(["HIRE"])
