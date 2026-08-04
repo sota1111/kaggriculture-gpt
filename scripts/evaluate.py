@@ -202,6 +202,31 @@ def _competitive_gate(results: list[dict[str, Any]]) -> dict[str, Any]:
     return {"passed": all(checks.values()), "checks": checks}
 
 
+def evaluate_opponent_policy(module: ModuleType, scenarios: list[dict[str, Any]]) -> dict[str, Any]:
+    """Score deterministic public-observation decisions for competitive pressure."""
+    results = []
+    for scenario in scenarios:
+        observation = copy.deepcopy(scenario["observation"])
+        action = module.agent(observation)
+        orders = action["market"]
+        checks = []
+        for expected in scenario["expect"]:
+            matching = [order for order in orders if order[0] == expected["op"]]
+            present = bool(matching)
+            amount = matching[0][2] if matching and len(matching[0]) == 3 else None
+            amount_ok = (expected.get("max_amount") is None or
+                         (amount is not None and amount <= expected["max_amount"]))
+            checks.append({"op": expected["op"], "expected": expected["present"],
+                           "actual": present, "amount": amount,
+                           "passed": present == expected["present"] and amount_ok})
+        results.append({"name": scenario["name"], "orders": orders, "checks": checks,
+                        "passed": all(check["passed"] for check in checks)})
+    score = sum(check["passed"] for result in results for check in result["checks"])
+    total = sum(len(result["checks"]) for result in results)
+    return {"scenarios": results, "score": score, "total": total,
+            "passed": bool(results) and all(result["passed"] for result in results)}
+
+
 def _spawn_hand(positions: list[list[int]], quadrant: int) -> list[int]:
     """Choose the nearest free unlocked cell, with deterministic NWSE-style ties."""
     cells = sorted(((x, y) for y in range(quadrant) for x in range(quadrant)),
@@ -600,6 +625,10 @@ def main() -> int:
         champion.ROBUST_ONLINE_PLANNER = False
     if hasattr(candidate, "ROBUST_ONLINE_PLANNER"):
         candidate.ROBUST_ONLINE_PLANNER = True
+    if hasattr(champion, "OPPONENT_AWARE_POLICY"):
+        champion.OPPONENT_AWARE_POLICY = False
+    if hasattr(candidate, "OPPONENT_AWARE_POLICY"):
+        candidate.OPPONENT_AWARE_POLICY = True
     screen_scenarios = fixture.get("screen_scenarios", [{"name": "baseline", "seeds": fixture["screen_seeds"]}])
     confirm_scenarios = fixture.get("confirm_scenarios", [{"name": "baseline", "seeds": fixture["confirm_seeds"]}])
     champion_screen = evaluate_scenarios(champion, fixture, screen_scenarios)
@@ -633,6 +662,7 @@ def main() -> int:
               "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
+    policy_screen_passed = policy_confirmed = True
     if "competitive_oracle" in fixture:
         competitive_screen = [run_competitive_market(fixture, value)
                               for value in fixture["competitive_oracle"]["screen"]]
@@ -650,6 +680,28 @@ def main() -> int:
             result["competitive_oracle"]["confirm"] = {
                 "skipped": True, "reason": "competitive oracle did not pass fixed-seed screen"
             }
+    if "opponent_policy" in fixture:
+        champion_policy_screen = evaluate_opponent_policy(champion, fixture["opponent_policy"]["screen"])
+        policy_screen = evaluate_opponent_policy(candidate, fixture["opponent_policy"]["screen"])
+        promoted = policy_screen["passed"] and policy_screen["score"] > champion_policy_screen["score"]
+        policy_screen_passed = promoted
+        result["opponent_policy"] = {
+            "information_boundary": "public farm cash/workers/tiles and shared market inventory only",
+            "permutation_invariant": True,
+            "screen": {"champion": champion_policy_screen, "candidate": policy_screen,
+                       "passed": promoted,
+                       "score_delta": policy_screen["score"] - champion_policy_screen["score"]},
+        }
+        if promoted:
+            result["opponent_policy"]["confirm"] = evaluate_opponent_policy(
+                candidate, fixture["opponent_policy"]["confirm"]
+            )
+            policy_confirmed = result["opponent_policy"]["confirm"]["passed"]
+        else:
+            policy_confirmed = False
+            result["opponent_policy"]["confirm"] = {
+                "skipped": True, "reason": "opponent policy did not beat champion on fixed-seed screen"
+            }
     if "rollout" in fixture:
         rollout = fixture["rollout"]
         rollout_kwargs = {
@@ -665,7 +717,7 @@ def main() -> int:
         }
     mean_passed, reasons = compare(champion_screen, variants[str(selected)], fixture["thresholds"])
     tail_passed, tail_reasons = compare_distribution(champion_screen, variants[str(selected)], fixture["thresholds"])
-    passed = mean_passed and tail_passed
+    passed = mean_passed and tail_passed and policy_screen_passed
     reasons.extend(tail_reasons)
     result["screen"].update({"passed": passed, "reasons": reasons})
     if passed:
@@ -674,7 +726,7 @@ def main() -> int:
                              "selected_strategy": selected}
         mean_confirmed, reasons = compare(result["confirm"]["champion"], result["confirm"]["candidate"], fixture["thresholds"])
         tail_confirmed, tail_reasons = compare_distribution(result["confirm"]["champion"], result["confirm"]["candidate"], fixture["thresholds"])
-        confirmed = mean_confirmed and tail_confirmed
+        confirmed = mean_confirmed and tail_confirmed and policy_confirmed
         reasons.extend(tail_reasons)
         result["confirm"].update({"passed": confirmed, "reasons": reasons})
     else:

@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_scenarios, load_agent, run_competitive_market, run_episode
+from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_scenarios, load_agent, run_competitive_market, run_episode
 from scripts import evaluate as evaluator
 
 
@@ -13,6 +13,22 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_scarcity_pressure_uses_public_state_and_is_opponent_order_invariant(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = json.loads(json.dumps(FIXTURE["opponent_policy"]["screen"][0]["observation"]))
+        expected = agent._scarcity_pressure(obs, "WHEAT")
+        obs["farms"][1:] = reversed(obs["farms"][1:])
+        obs["private"] = {"shed": {"SECRET": 999}, "seeds": {"WHEAT": 1}, "inventories": [[]]}
+        self.assertEqual(expected, agent._scarcity_pressure(obs, "WHEAT"))
+        self.assertTrue(all(0 <= value <= 1 for value in expected.values()))
+
+    def test_scarcity_policy_handles_stock_hire_and_market_pressure_scenarios(self):
+        agent = load_agent(ROOT / "main.py")
+        screen = evaluate_opponent_policy(agent, FIXTURE["opponent_policy"]["screen"])
+        confirm = evaluate_opponent_policy(agent, FIXTURE["opponent_policy"]["confirm"])
+        self.assertTrue(screen["passed"], screen)
+        self.assertTrue(confirm["passed"], confirm)
+
     def test_online_identification_is_public_bounded_and_deterministic(self):
         agent = load_agent(ROOT / "main.py")
         base = {
@@ -396,6 +412,8 @@ class EvaluationTest(unittest.TestCase):
         self.assertEqual(4, report["oracle"]["version"])
         self.assertEqual(10, report["submission_contract"]["max_market_orders"])
         self.assertIn("screen", report["competitive_oracle"])
+        self.assertTrue(report["opponent_policy"]["screen"]["passed"])
+        self.assertTrue(report["opponent_policy"]["confirm"]["passed"])
         if report["competitive_oracle"]["screen"]["passed"]:
             self.assertTrue(report["competitive_oracle"]["confirm"]["passed"])
             self.assertIsInstance(report["competitive_oracle"]["confirm"]["scenarios"], list)
