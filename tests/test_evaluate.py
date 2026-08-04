@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_scenarios, load_agent, run_episode
+from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_scenarios, load_agent, run_competitive_market, run_episode
 from scripts import evaluate as evaluator
 
 
@@ -13,6 +13,28 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_competitive_oracle_replays_multiple_farms_and_relative_rank(self):
+        result = run_competitive_market(FIXTURE, FIXTURE["competitive_oracle"]["screen"][0])
+        self.assertEqual(2, len(result["farms"]))
+        self.assertEqual(sorted(result["ranks"]), [1, 2])
+        self.assertEqual(result["scores"][0] - result["scores"][1], result["relative_score"])
+        self.assertEqual(result["scores"].index(max(result["scores"])), result["winner"])
+
+    def test_competitive_oracle_uses_shared_market_lockstep_quotes(self):
+        result = run_competitive_market(FIXTURE, FIXTURE["competitive_oracle"]["screen"][0])
+        simultaneous = next(row for row in result["trace"] if len(row["pre_commit_quotes"]) == 2)
+        self.assertEqual(len(set(simultaneous["pre_commit_quotes"].values())), 1)
+        self.assertNotEqual(10000, result["shared_market"]["inventory"]["WHEAT"])
+
+    def test_competitive_oracle_keeps_private_stock_per_farm_and_shared_per_worker(self):
+        scenario = FIXTURE["competitive_oracle"]["screen"][0]
+        before = json.loads(json.dumps(scenario))
+        result = run_competitive_market(FIXTURE, scenario)
+        self.assertEqual(before, scenario)
+        self.assertIn("seeds", result["farms"][0]["private"])
+        self.assertIn("inventories", result["farms"][0]["private"])
+        self.assertNotEqual(result["farms"][0]["private"]["shed"], result["farms"][1]["private"]["shed"])
+
     def test_bounded_rollout_is_deterministic_and_does_not_mutate_observation(self):
         rollout = FIXTURE["rollout"]
         observation = rollout["observation"]
@@ -342,6 +364,12 @@ class EvaluationTest(unittest.TestCase):
         self.assertEqual("submission.tar.gz", report["provenance"]["submission_artifact"])
         self.assertEqual(4, report["oracle"]["version"])
         self.assertEqual(10, report["submission_contract"]["max_market_orders"])
+        self.assertIn("screen", report["competitive_oracle"])
+        if report["competitive_oracle"]["screen"]["passed"]:
+            self.assertTrue(report["competitive_oracle"]["confirm"]["passed"])
+            self.assertIsInstance(report["competitive_oracle"]["confirm"]["scenarios"], list)
+        else:
+            self.assertTrue(report["competitive_oracle"]["confirm"]["skipped"])
 
 
 if __name__ == "__main__":
