@@ -12,6 +12,7 @@ CROP_STRATEGY = "BEST_RETURN"
 SELL_STRATEGY = "PRICE_AWARE"
 ECONOMY_STRATEGY = "FINITE_HORIZON"
 ROBUST_ONLINE_PLANNER = True
+OPPONENT_AWARE_POLICY = True
 HISTORY_LIMIT = 48
 
 DEFAULT_CROPS = {
@@ -240,8 +241,48 @@ def _hand_target(me, harvests_left):
 def _future_prices(spec, day, current_price):
     forecast = spec.get("price_forecast", [])
     if isinstance(forecast, list) and forecast:
-        return [int(value) for value in forecast[day:] if isinstance(value, (int, float))]
+        remaining = [int(value) for value in forecast[day:] if isinstance(value, (int, float))]
+        return remaining or [current_price]
     return [current_price]
+
+
+def _scarcity_pressure(obs, crop):
+    """Summarize competition using only public farms and shared market state.
+
+    The aggregate deliberately ignores opponent ordering and every ``private``
+    object.  Values are bounded so unexpected public observations cannot cause
+    unbounded purchases.
+    """
+    player = int(obs.get("player", 0))
+    opponents = [farm for index, farm in enumerate(obs.get("farms", [])) if index != player]
+    market = obs.get("market", {})
+    inventory = max(0, int(market.get("inventory", {}).get(crop, 10000)))
+    anchor = max(1, int(market.get("inventory_anchor", {}).get(crop, 10000)))
+    inventory_pressure = max(0.0, min(1.0, (anchor - inventory) / anchor))
+    if not opponents:
+        return {"inventory": inventory_pressure, "labor": 0.0, "field_demand": 0.0,
+                "cash": 0.0, "total": inventory_pressure}
+    labor = sum(len(farm.get("hands", [])) for farm in opponents) / (len(opponents) * MAX_HAND_TARGET)
+    open_tiles = occupied_tiles = 0
+    my_cash = int(obs.get("farms", [{}])[player].get("money", 0))
+    richer = 0
+    for farm in opponents:
+        richer += int(int(farm.get("money", 0)) >= my_cash)
+        for row in farm.get("tiles", []):
+            for tile in row:
+                if tile != "LOCKED":
+                    open_tiles += 1
+                    occupied_tiles += int(isinstance(tile, dict) and tile.get("kind") == "PLANT")
+    field_demand = occupied_tiles / max(1, open_tiles)
+    cash = richer / len(opponents)
+    values = {
+        "inventory": inventory_pressure,
+        "labor": max(0.0, min(1.0, labor)),
+        "field_demand": max(0.0, min(1.0, field_demand)),
+        "cash": cash,
+    }
+    values["total"] = sum(values.values()) / 4
+    return values
 
 
 def _choose_crop(obs, seeds, history=()):
@@ -288,21 +329,30 @@ def agent(obs):
     crop, crop_specs = _choose_crop({**obs, "total_days": total_days}, seed_inventory, history)
     prices = obs.get("market", {}).get("prices", {})
     stored_inventory = private.get("shed", {})
+    pressure = _scarcity_pressure(obs, crop) if OPPONENT_AWARE_POLICY else {
+        "inventory": 0.0, "labor": 0.0, "field_demand": 0.0, "cash": 0.0, "total": 0.0
+    }
     for stored_crop in sorted(crop_specs):
         stored = int(stored_inventory.get(stored_crop, 0))
         price = int(prices.get(stored_crop, crop_specs[stored_crop]["fallback_price"]))
         target = int(crop_specs[stored_crop].get("sell_above", crop_specs[stored_crop]["fallback_price"]))
         future_peak = max(_future_prices(crop_specs[stored_crop], day, price))
         final_day = day >= total_days - 1
-        if stored > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day):
+        crowded_sale = pressure["inventory"] >= 0.25 and price >= target
+        if stored > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day or crowded_sale):
             market.append(["SELL", stored_crop, stored])
 
     seeds = int(seed_inventory.get(crop, 0))
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
-    desired_seeds = worker_count * SEED_RESERVE_PER_WORKER if harvests_left else 0
+    advance_reserve = 1 if pressure["labor"] + pressure["field_demand"] >= 0.75 else 0
+    desired_seeds = worker_count * SEED_RESERVE_PER_WORKER + advance_reserve if harvests_left else 0
     buy_count = max(0, desired_seeds - seeds)
     seed_price = int(crop_specs[crop]["seed_price"])
     affordable = max(0, (money - MIN_CASH_RESERVE) // max(1, seed_price))
+    # When the shared crop stock is already depleted, preserve cash and avoid
+    # joining a crowded buy queue; one reserve unit still keeps planting live.
+    if pressure["inventory"] >= 0.6:
+        buy_count = min(buy_count, max(0, 1 - seeds))
     buy_count = min(buy_count, affordable)
     if buy_count:
         market.append(["BUY_SEED", crop, buy_count])
@@ -314,7 +364,8 @@ def agent(obs):
     hand_target = _hand_target(me, harvests_left)
     if len(hands) < hand_target:
         cost = _hire_cost(hires_today)
-        if money - cost >= MIN_CASH_RESERVE and expected_crop_margin * harvests_left > cost:
+        opportunity = expected_crop_margin * harvests_left * (1 + pressure["field_demand"])
+        if money - cost >= MIN_CASH_RESERVE and opportunity > cost:
             market.append(["HIRE"])
 
     actions = _plan_workers(me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)), int(obs.get("turns_per_day", 12)))
