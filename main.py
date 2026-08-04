@@ -11,10 +11,63 @@ MAX_MARKET_ORDERS = 10
 CROP_STRATEGY = "BEST_RETURN"
 SELL_STRATEGY = "PRICE_AWARE"
 ECONOMY_STRATEGY = "FINITE_HORIZON"
+ROBUST_ONLINE_PLANNER = True
+HISTORY_LIMIT = 48
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
 }
+
+_PUBLIC_HISTORY = []
+_LAST_STEP = None
+
+
+def _update_public_history(obs):
+    """Keep a bounded, deterministic summary made only from public observations."""
+    global _LAST_STEP
+    step = int(obs.get("step", int(obs.get("day", 0)) * int(obs.get("turns_per_day", 24)) + int(obs.get("hour", 0))))
+    if _LAST_STEP is None or step <= _LAST_STEP:
+        _PUBLIC_HISTORY.clear()
+    me = obs["farms"][int(obs["player"])]
+    plants = [tile for row in me.get("tiles", []) for tile in row
+              if isinstance(tile, dict) and tile.get("kind") == "PLANT"]
+    weeds = sum(isinstance(tile, dict) and tile.get("kind") == "WEED"
+                for row in me.get("tiles", []) for tile in row)
+    _PUBLIC_HISTORY.append({
+        "step": step,
+        "prices": {str(crop): int(price) for crop, price in obs.get("market", {}).get("prices", {}).items()},
+        "yields": {str(tile.get("crop", "WHEAT")): int(tile.get("yield_units", 0)) for tile in plants},
+        "weeds": weeds,
+    })
+    del _PUBLIC_HISTORY[:-HISTORY_LIMIT]
+    _LAST_STEP = step
+    return tuple(_PUBLIC_HISTORY)
+
+
+def _uncertainty_scenarios(crop, spec, history):
+    """Return a small uncertainty set for a public-observation-only short rollout."""
+    prices = [row["prices"][crop] for row in history if crop in row["prices"]]
+    yields = [row["yields"][crop] for row in history if row["yields"].get(crop, 0) > 0]
+    price = prices[-1] if prices else int(spec["fallback_price"])
+    observed_yield = yields[-1] if yields else float(spec["expected_yield"])
+    price_spread = max(prices) - min(prices) if len(prices) > 1 else max(1, price // 10)
+    yield_spread = max(yields) - min(yields) if len(yields) > 1 else 1
+    weed_pressure = max((row["weeds"] for row in history), default=0)
+    return (
+        (max(1, price - price_spread), max(1.0, observed_yield - yield_spread), weed_pressure),
+        (price, max(1.0, observed_yield), weed_pressure),
+        (price + price_spread, observed_yield + yield_spread, max(0, weed_pressure - 1)),
+    )
+
+
+def _robust_crop_value(crop, spec, day, total_days, history):
+    """CVaR proxy: mean of the two worst bounded scenario returns."""
+    harvests = _remaining_harvests(spec, day, total_days)
+    values = sorted(
+        harvests * (price * expected_yield - int(spec["seed_price"])) - weeds * int(spec["seed_price"])
+        for price, expected_yield, weeds in _uncertainty_scenarios(crop, spec, history)
+    )
+    return sum(values[:2]) / min(2, len(values))
 
 
 def _hire_cost(hires_today):
@@ -143,6 +196,17 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
         else:
             action = _move(position, (tx, ty))
         actions.append(action)
+    # A later worker may approach a different task through the same intermediate
+    # cell. Resolve that one-turn collision deterministically after assignment.
+    reserved_moves = set()
+    for index, (position, action) in enumerate(zip(workers, actions)):
+        if action[0] not in {"NORTH", "SOUTH", "EAST", "WEST"}:
+            continue
+        destination = _next_position(position, action)
+        if destination in reserved_moves:
+            actions[index] = ["PASS"]
+        else:
+            reserved_moves.add(destination)
     return actions
 
 
@@ -180,7 +244,7 @@ def _future_prices(spec, day, current_price):
     return [current_price]
 
 
-def _choose_crop(obs, seeds):
+def _choose_crop(obs, seeds, history=()):
     specs = _crop_specs(obs)
     prices = obs.get("market", {}).get("prices", {})
     known = [crop for crop in specs if int(seeds.get(crop, 0)) > 0 or crop in prices]
@@ -189,6 +253,9 @@ def _choose_crop(obs, seeds):
 
     day = int(obs.get("day", 0))
     total_days = int(obs.get("total_days", 12))
+
+    if ROBUST_ONLINE_PLANNER and history:
+        return max(known, key=lambda crop: (_robust_crop_value(crop, specs[crop], day, total_days, history), crop)), specs
 
     def daily_return(crop):
         spec = specs[crop]
@@ -205,17 +272,20 @@ def _choose_crop(obs, seeds):
 
 
 def agent(obs):
+    history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
     me = obs["farms"][int(obs["player"])]
     private = obs["private"]
     day = int(obs.get("day", 0))
-    total_days = int(obs.get("total_days", 12))
+    # The public competition horizon is known a priori; shifted evaluators may
+    # supply an explicit horizon, but no private/future field is consulted.
+    total_days = int(obs.get("total_days", 30 if ROBUST_ONLINE_PLANNER else 12))
     hands = me.get("hands", [])
     worker_count = 1 + len(hands)
 
     market = []
     money = int(me["money"])
     seed_inventory = private.get("seeds", {})
-    crop, crop_specs = _choose_crop(obs, seed_inventory)
+    crop, crop_specs = _choose_crop({**obs, "total_days": total_days}, seed_inventory, history)
     prices = obs.get("market", {}).get("prices", {})
     stored_inventory = private.get("shed", {})
     for stored_crop in sorted(crop_specs):
