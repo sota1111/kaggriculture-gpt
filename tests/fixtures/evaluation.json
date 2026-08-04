@@ -23,6 +23,56 @@
     "scale_change": "v4 keeps the runtime-shaped oracle and adds independent domain-randomized screen/confirm suites with tail and worst-case promotion gates",
     "lb_divergence_signal": "candidate offline assets rise while leaderboard_proxy or contract validity falls"
   },
+  "competitive_oracle": {
+    "contract": {
+      "source": "Kaggle kaggriculture environment README/json, package version 0.1.0",
+      "farms": "two public farms; shed, seeds, and worker inventories private per player",
+      "worker_resources": "farmer and hands consume one player-shared seed pool; inventories remain per worker",
+      "market": "one shared inventory/price state; equal queue positions quote pre-commit then commit one unit per player",
+      "processing_order": "player actions, market queues, town demand, observation refresh, farm update",
+      "score": "terminal bank money; relative rank descending by money"
+    },
+    "seed_prices": {"WHEAT": 10},
+    "market_params": {
+      "WHEAT": {
+        "base": 25,
+        "initial_inventory": 10000,
+        "throughput": 400,
+        "below_func": "sqrt",
+        "below_target": 0.8,
+        "above_func": "log",
+        "above_target": 0.2
+      }
+    },
+    "screen": [
+      {
+        "name": "fixed-screen-seed-2414",
+        "seed": 2414,
+        "farms": [
+          {"money": 3000, "farmer": [0,0], "hands": [[1,0]], "private": {"shed": {"WHEAT": 4}, "seeds": {"WHEAT": 1}, "inventories": [{},{}]}},
+          {"money": 3000, "farmer": [0,0], "hands": [], "private": {"shed": {"WHEAT": 3}, "seeds": {"WHEAT": 0}, "inventories": [{}]}}
+        ],
+        "turns": [
+          [[ ["SELL","WHEAT",2], ["BUY_SEED","WHEAT",1] ], [ ["SELL","WHEAT",2] ]],
+          [[ ["SELL","WHEAT",1] ], [ ["BUY_PRODUCT","WHEAT",1] ]]
+        ]
+      }
+    ],
+    "confirm": [
+      {
+        "name": "independent-confirm-seed-9413",
+        "seed": 9413,
+        "farms": [
+          {"money": 3000, "farmer": [0,0], "hands": [[1,0],[2,0]], "private": {"shed": {"WHEAT": 6}, "seeds": {"WHEAT": 2}, "inventories": [{},{},{}]}},
+          {"money": 3000, "farmer": [0,0], "hands": [[1,0]], "private": {"shed": {"WHEAT": 5}, "seeds": {"WHEAT": 1}, "inventories": [{},{}]}}
+        ],
+        "turns": [
+          [[ ["SELL","WHEAT",3] ], [ ["SELL","WHEAT",1], ["BUY_PRODUCT","WHEAT",1] ]],
+          [[ ["BUY_SEED","WHEAT",2] ], [ ["SELL","WHEAT",2] ]]
+        ]
+      }
+    ]
+  },
   "crops": {
     "WHEAT": {"seed_price": 10, "first_yield_day": 2, "max_yield_day": 4, "max_yield": 6, "maturity_days": 2, "base_yield": 1, "initial_seeds": 0, "fallback_price": 25, "sell_above": 25, "prices": [25,25,25,24,24,24,23,23,23,22,22,22,21,21,21,20,20,20,21,21,22,22,23,23,24,24,25,25,26,26]}
   },

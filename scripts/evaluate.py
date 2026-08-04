@@ -16,7 +16,7 @@ import json
 import random
 import subprocess
 import sys
-from math import ceil
+from math import ceil, log1p, sqrt
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from types import ModuleType
@@ -92,6 +92,114 @@ def _hire_cost(hires_today: int) -> int:
     for _ in range(hires_today):
         a, b = b, a + b
     return a
+
+
+def _market_price(item: str, inventory: int, fixture: dict[str, Any]) -> int:
+    """Return the public environment's rounded shared-market quote."""
+    params = fixture["competitive_oracle"]["market_params"][item]
+    base, anchor = float(params["base"]), int(params["initial_inventory"])
+    throughput = max(1, int(params["throughput"]))
+    delta = anchor - inventory
+    side = "below" if delta >= 0 else "above"
+    shape_name = params[f"{side}_func"]
+    shape = {"linear": lambda x: x, "sqrt": sqrt, "log": log1p}[shape_name]
+    target = float(params[f"{side}_target"])
+    move = target * base * shape(abs(delta)) / shape(throughput)
+    return max(1, round(base + move if delta >= 0 else base - move))
+
+
+def run_competitive_market(fixture: dict[str, Any], scenario: dict[str, Any]) -> dict[str, Any]:
+    """Replay public multi-farm market orders with Kaggriculture lockstep ordering.
+
+    The replay deliberately covers the coupling absent from ``run_episode``: all
+    farms observe one market, orders at the same queue position receive the same
+    pre-commit quote, and each unit changes the quote seen by later queue entries.
+    Private sheds/seeds remain farm-local, while seeds are one shared pool for a
+    farm's farmer and hands as required by the public runtime contract.
+    """
+    config = fixture["competitive_oracle"]
+    products = tuple(config["market_params"])
+    farms = copy.deepcopy(scenario["farms"])
+    initial_market = {p: int(config["market_params"][p]["initial_inventory"]) for p in products}
+    market = {"inventory": copy.deepcopy(initial_market)}
+    market["prices"] = {p: _market_price(p, market["inventory"][p], fixture) for p in products}
+    trace = []
+    max_orders = int(fixture.get("submission_contract", {}).get("max_market_orders", 10))
+
+    for turn, queues in enumerate(scenario["turns"]):
+        queues = [list(queue[:max_orders]) for queue in queues]
+        for order_index in range(max(map(len, queues), default=0)):
+            active = []
+            for player, queue in enumerate(queues):
+                if order_index < len(queue):
+                    op, item, amount = queue[order_index]
+                    active.append({"player": player, "op": op, "item": item, "remaining": int(amount)})
+            unit = 0
+            while any(order["remaining"] > 0 for order in active):
+                quoted = {}
+                for order in active:
+                    if order["remaining"] <= 0 or order["item"] not in products:
+                        continue
+                    item = order["item"]
+                    inventory = market["inventory"][item]
+                    quoted[order["player"]] = _market_price(
+                        item, inventory - (1 if order["op"] == "BUY_PRODUCT" else 0), fixture
+                    )
+                commits = []
+                for order in active:
+                    player, op, item = order["player"], order["op"], order["item"]
+                    if order["remaining"] <= 0 or player not in quoted:
+                        continue
+                    price, farm = quoted[player], farms[player]
+                    private = farm["private"]
+                    ok = False
+                    if op == "SELL" and private["shed"].get(item, 0) > 0:
+                        private["shed"][item] -= 1
+                        farm["money"] += price
+                        market["inventory"][item] += 1
+                        ok = True
+                    elif op == "BUY_PRODUCT" and market["inventory"][item] > 0 and farm["money"] >= price:
+                        farm["money"] -= price
+                        private["shed"][item] = private["shed"].get(item, 0) + 1
+                        market["inventory"][item] -= 1
+                        ok = True
+                    elif op == "BUY_SEED" and item in private["seeds"]:
+                        seed_price = int(config["seed_prices"][item])
+                        if farm["money"] >= seed_price:
+                            farm["money"] -= seed_price
+                            private["seeds"][item] += 1
+                            price, ok = seed_price, True
+                    order["remaining"] -= 1
+                    commits.append({"player": player, "op": op, "item": item, "price": price, "accepted": ok})
+                trace.append({"turn": turn, "order_index": order_index, "unit": unit,
+                              "pre_commit_quotes": quoted, "commits": commits})
+                unit += 1
+        market["prices"] = {p: _market_price(p, market["inventory"][p], fixture) for p in products}
+
+    scores = [int(farm["money"]) for farm in farms]
+    order = sorted(range(len(scores)), key=lambda player: (-scores[player], player))
+    ranks = [order.index(player) + 1 for player in range(len(scores))]
+    return {"name": scenario["name"], "farms": farms, "initial_market_inventory": initial_market,
+            "shared_market": market,
+            "scores": scores, "ranks": ranks, "relative_score": scores[0] - max(scores[1:]),
+            "winner": order[0], "trace": trace}
+
+
+def _competitive_gate(results: list[dict[str, Any]]) -> dict[str, Any]:
+    checks = {
+        "multiple_farms": all(len(result["farms"]) >= 2 for result in results),
+        "relative_rank_matches_cash": all(
+            result["winner"] == result["scores"].index(max(result["scores"])) for result in results
+        ),
+        "shared_market_mutates": all(
+            result["shared_market"]["inventory"] != result["initial_market_inventory"] for result in results
+        ),
+        "lockstep_quotes": all(
+            all(len(set(row["pre_commit_quotes"].values())) <= 1 for row in result["trace"])
+            for result in results
+        ),
+    }
+    return {"passed": all(checks.values()), "checks": checks}
 
 
 def _spawn_hand(positions: list[list[int]], quadrant: int) -> list[int]:
@@ -510,6 +618,23 @@ def main() -> int:
               "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
+    if "competitive_oracle" in fixture:
+        competitive_screen = [run_competitive_market(fixture, value)
+                              for value in fixture["competitive_oracle"]["screen"]]
+        result["competitive_oracle"] = {
+            "contract": fixture["competitive_oracle"]["contract"],
+            "screen": {"scenarios": competitive_screen, **_competitive_gate(competitive_screen)},
+        }
+        if result["competitive_oracle"]["screen"]["passed"]:
+            competitive_confirm = [run_competitive_market(fixture, value)
+                                   for value in fixture["competitive_oracle"]["confirm"]]
+            result["competitive_oracle"]["confirm"] = {
+                "scenarios": competitive_confirm, **_competitive_gate(competitive_confirm)
+            }
+        else:
+            result["competitive_oracle"]["confirm"] = {
+                "skipped": True, "reason": "competitive oracle did not pass fixed-seed screen"
+            }
     if "rollout" in fixture:
         rollout = fixture["rollout"]
         rollout_kwargs = {
