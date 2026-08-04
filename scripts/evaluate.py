@@ -594,6 +594,12 @@ def main() -> int:
     args = parser.parse_args()
     fixture = json.loads(args.fixture.read_text())
     champion, candidate = load_agent(args.champion), load_agent(args.candidate)
+    # The frozen policy baseline shares the compact submission source, so isolate
+    # this experiment axis explicitly instead of attributing unrelated constants.
+    if hasattr(champion, "ROBUST_ONLINE_PLANNER"):
+        champion.ROBUST_ONLINE_PLANNER = False
+    if hasattr(candidate, "ROBUST_ONLINE_PLANNER"):
+        candidate.ROBUST_ONLINE_PLANNER = True
     screen_scenarios = fixture.get("screen_scenarios", [{"name": "baseline", "seeds": fixture["screen_seeds"]}])
     confirm_scenarios = fixture.get("confirm_scenarios", [{"name": "baseline", "seeds": fixture["confirm_seeds"]}])
     champion_screen = evaluate_scenarios(champion, fixture, screen_scenarios)
@@ -615,6 +621,15 @@ def main() -> int:
                              "submission_artifact": "submission.tar.gz"},
               "thresholds": fixture["thresholds"],
               "oracle": fixture.get("oracle", {}),
+              "robust_online_planner": {
+                  "enabled_for_candidate": bool(getattr(candidate, "ROBUST_ONLINE_PLANNER", False)),
+                  "enabled_for_champion": bool(getattr(champion, "ROBUST_ONLINE_PLANNER", False)),
+                  "information_boundary": "bounded public price, crop-yield, and weed observations only",
+                  "history_limit": int(getattr(candidate, "HISTORY_LIMIT", 0)),
+                  "scenario_count": 3,
+                  "objective": "mean of two worst scenario returns (CVaR proxy)",
+                  "fixed_screen_then_independent_confirm": True,
+              },
               "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}

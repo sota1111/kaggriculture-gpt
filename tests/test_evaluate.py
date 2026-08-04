@@ -13,6 +13,37 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_online_identification_is_public_bounded_and_deterministic(self):
+        agent = load_agent(ROOT / "main.py")
+        base = {
+            "player": 0, "step": 0, "day": 0, "hour": 0,
+            "farms": [{"money": 100, "farmer": [0, 0], "hands": [],
+                       "tiles": [[{"kind": "WEED"}]]}],
+            "private": {"shed": {}, "seeds": {"WHEAT": 1}, "inventories": [[]]},
+            "market": {"prices": {"WHEAT": 20}},
+        }
+        first = agent.agent(json.loads(json.dumps(base)))
+        second = agent.agent(json.loads(json.dumps(base)))
+        self.assertEqual(first, second)
+        self.assertEqual(1, len(agent._PUBLIC_HISTORY))
+        for step in range(1, agent.HISTORY_LIMIT + 8):
+            obs = json.loads(json.dumps(base))
+            obs["step"], obs["hour"] = step, step
+            obs["market"]["prices"]["WHEAT"] = 20 + step % 3
+            agent.agent(obs)
+        self.assertEqual(agent.HISTORY_LIMIT, len(agent._PUBLIC_HISTORY))
+        self.assertTrue(all(set(row) == {"step", "prices", "yields", "weeds"}
+                            for row in agent._PUBLIC_HISTORY))
+
+    def test_uncertainty_set_and_cvar_proxy_react_to_observed_tail(self):
+        agent = load_agent(ROOT / "main.py")
+        spec = agent.DEFAULT_CROPS["WHEAT"]
+        stable = ({"prices": {"WHEAT": 30}, "yields": {"WHEAT": 3}, "weeds": 0},)
+        shifted = stable + ({"prices": {"WHEAT": 10}, "yields": {"WHEAT": 1}, "weeds": 3},)
+        self.assertEqual(3, len(agent._uncertainty_scenarios("WHEAT", spec, shifted)))
+        self.assertLess(agent._robust_crop_value("WHEAT", spec, 1, 30, shifted),
+                        agent._robust_crop_value("WHEAT", spec, 1, 30, stable))
+
     def test_competitive_oracle_replays_multiple_farms_and_relative_rank(self):
         result = run_competitive_market(FIXTURE, FIXTURE["competitive_oracle"]["screen"][0])
         self.assertEqual(2, len(result["farms"]))
