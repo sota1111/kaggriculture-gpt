@@ -569,6 +569,115 @@ def evaluate_scenarios(module: ModuleType, fixture: dict[str, Any], scenarios: l
             "episodes": episodes, "mean": mean, "lower_quantile": lower_quantile, "worst": worst}
 
 
+def validate_cv_holdouts(config: dict[str, Any]) -> dict[str, Any]:
+    """Mechanically validate entity and temporal isolation for screen/confirm.
+
+    An episode identity includes the opponent, seat, seed, and time index.  Entity
+    isolation is stricter than episode isolation: opponents and seeds may not be
+    reused across windows, and confirm must be later than every screen episode.
+    """
+    windows = {name: list(config.get(name, [])) for name in ("screen", "confirm")}
+    def contains_key(value: Any, forbidden: set[str]) -> bool:
+        if isinstance(value, dict):
+            return bool(forbidden & set(value)) or any(contains_key(child, forbidden) for child in value.values())
+        if isinstance(value, list):
+            return any(contains_key(child, forbidden) for child in value)
+        return False
+
+    checks: dict[str, bool] = {
+        "windows_nonempty": all(windows.values()),
+        "required_fields": all(
+            {"opponent", "seed", "time_index"} <= set(row)
+            for rows in windows.values() for row in rows
+        ),
+        "no_private_information": all(
+            not contains_key(row, {"private"}) for rows in windows.values() for row in rows
+        ),
+        "no_future_price_reference": all(
+            not contains_key(row, {"future_prices", "price_forecast"})
+            for rows in windows.values() for row in rows
+        ),
+    }
+    identities: dict[str, set[tuple[Any, ...]]] = {}
+    for name, rows in windows.items():
+        identities[name] = {
+            (row.get("opponent"), seat, row.get("seed"), row.get("time_index"))
+            for row in rows for seat in (0, 1)
+        }
+    checks["both_seats"] = all(
+        all({identity[1] for identity in identities[name] if identity[0] == row.get("opponent")
+             and identity[2] == row.get("seed") and identity[3] == row.get("time_index")} == {0, 1}
+            for row in rows)
+        for name, rows in windows.items()
+    )
+    checks["no_episode_overlap"] = identities["screen"].isdisjoint(identities["confirm"])
+    checks["opponent_holdout"] = {
+        row.get("opponent") for row in windows["screen"]
+    }.isdisjoint(row.get("opponent") for row in windows["confirm"])
+    checks["seed_holdout"] = {
+        row.get("seed") for row in windows["screen"]
+    }.isdisjoint(row.get("seed") for row in windows["confirm"])
+    screen_times = [int(row.get("time_index", -1)) for row in windows["screen"]]
+    confirm_times = [int(row.get("time_index", -1)) for row in windows["confirm"]]
+    checks["temporal_order"] = bool(screen_times and confirm_times) and max(screen_times) < min(confirm_times)
+    return {
+        "passed": all(checks.values()), "checks": checks,
+        "episode_ids": {name: ["|".join(map(str, identity)) for identity in sorted(values)]
+                        for name, values in identities.items()},
+    }
+
+
+def evaluate_paired_cv(
+    champion: ModuleType,
+    candidate: ModuleType,
+    fixture: dict[str, Any],
+    entities: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Run champion/candidate on identical seeds in both seat assignments."""
+    episodes = []
+    for entity in entities:
+        episode_fixture = _merge_fixture(fixture, entity.get("overrides", {}))
+        for seat in (0, 1):
+            # Fresh deterministic runs prevent module state and episode data from
+            # crossing the A/B boundary. Seat swaps which policy is player zero.
+            modules = (candidate, champion) if seat == 0 else (champion, candidate)
+            metrics = [asdict(run_episode(module, episode_fixture, int(entity["seed"])))
+                       for module in modules]
+            candidate_metrics, champion_metrics = (metrics[0], metrics[1]) if seat == 0 else (metrics[1], metrics[0])
+            candidate_score = candidate_metrics["reward"]
+            champion_score = champion_metrics["reward"]
+            episodes.append({
+                "episode_id": f'{entity["opponent"]}|{seat}|{entity["seed"]}|{entity["time_index"]}',
+                "opponent": entity["opponent"], "seat": seat, "seed": int(entity["seed"]),
+                "time_index": int(entity["time_index"]), "candidate": candidate_metrics,
+                "champion": champion_metrics, "reward_delta": candidate_score - champion_score,
+                "candidate_rank": 1 if candidate_score >= champion_score else 2,
+                "champion_rank": 1 if champion_score >= candidate_score else 2,
+            })
+    deltas = sorted(float(row["reward_delta"]) for row in episodes)
+    candidate_ranks = [int(row["candidate_rank"]) for row in episodes]
+    return {
+        "episodes": episodes,
+        "summary": {
+            "mean_reward_delta": sum(deltas) / len(deltas),
+            "lower_tail_reward_delta": deltas[max(0, ceil(0.2 * len(deltas)) - 1)],
+            "worst_reward_delta": deltas[0],
+            "mean_candidate_rank": sum(candidate_ranks) / len(candidate_ranks),
+            "candidate_wins_or_ties": sum(rank == 1 for rank in candidate_ranks),
+            "episode_count": len(episodes),
+        },
+        "checks": {
+            "same_seed_direct_ab": all(row["candidate"]["reward"] is not None and row["champion"]["reward"] is not None
+                                       for row in episodes),
+            "both_seats": {row["seat"] for row in episodes} == {0, 1},
+            "deterministic_episode_ids": len({row["episode_id"] for row in episodes}) == len(episodes),
+            "terminal_bank_reward": all(row[side]["reward"] == row[side]["final_assets"]
+                                        for row in episodes for side in ("candidate", "champion")),
+            "paired_non_regression": deltas[0] >= 0,
+        },
+    }
+
+
 def compare(champion, candidate, thresholds):
     reasons = []
     for metric in ("final_assets", "profit", "cultivated", "harvested"):
@@ -662,6 +771,21 @@ def main() -> int:
               "submission_contract": fixture.get("submission_contract", {}), "screen": {
         "champion": champion_screen, "strategy_variants": variants, "selected_strategy": selected,
         "candidate": variants[str(selected)]}}
+    if "leak_free_cv" in fixture:
+        cv_config = fixture["leak_free_cv"]
+        isolation = validate_cv_holdouts(cv_config)
+        result["leak_free_cv"] = {"isolation": isolation}
+        screen_cv = evaluate_paired_cv(champion, candidate, fixture, cv_config["screen"])
+        screen_cv["passed"] = isolation["passed"] and all(screen_cv["checks"].values())
+        result["leak_free_cv"]["screen"] = screen_cv
+        if screen_cv["passed"]:
+            confirm_cv = evaluate_paired_cv(champion, candidate, fixture, cv_config["confirm"])
+            confirm_cv["passed"] = all(confirm_cv["checks"].values())
+            result["leak_free_cv"]["confirm"] = confirm_cv
+        else:
+            result["leak_free_cv"]["confirm"] = {
+                "skipped": True, "reason": "leak-free CV screen or isolation checks failed"
+            }
     policy_screen_passed = policy_confirmed = True
     if "competitive_oracle" in fixture:
         competitive_screen = [run_competitive_market(fixture, value)

@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_scenarios, load_agent, run_competitive_market, run_episode
+from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_cv_holdouts
 from scripts import evaluate as evaluator
 
 
@@ -13,6 +13,48 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_cv_holdouts_isolate_entity_seed_episode_and_time(self):
+        result = validate_cv_holdouts(FIXTURE["leak_free_cv"])
+        self.assertTrue(result["passed"], result)
+        self.assertTrue(set(result["episode_ids"]["screen"]).isdisjoint(result["episode_ids"]["confirm"]))
+
+    def test_cv_holdout_rejects_reused_opponent_seed_and_future_window(self):
+        bad = {
+            "screen": [{"opponent": "same", "seed": 1, "time_index": 2}],
+            "confirm": [{"opponent": "same", "seed": 1, "time_index": 1}],
+        }
+        result = validate_cv_holdouts(bad)
+        self.assertFalse(result["passed"])
+        self.assertFalse(result["checks"]["opponent_holdout"])
+        self.assertFalse(result["checks"]["seed_holdout"])
+        self.assertFalse(result["checks"]["temporal_order"])
+
+    def test_paired_cv_runs_same_seed_both_seats_with_tail_worst_and_rank(self):
+        champion = load_agent(ROOT / "tests/fixtures/champion_sot_2263.py")
+        candidate = load_agent(ROOT / "main.py")
+        entities = FIXTURE["leak_free_cv"]["screen"][:1]
+        first = evaluate_paired_cv(champion, candidate, FIXTURE, entities)
+        second = evaluate_paired_cv(champion, candidate, FIXTURE, entities)
+        self.assertEqual(first, second)
+        self.assertEqual({0, 1}, {row["seat"] for row in first["episodes"]})
+        self.assertEqual({entities[0]["seed"]}, {row["seed"] for row in first["episodes"]})
+        self.assertEqual(2, first["summary"]["episode_count"])
+        self.assertIn("lower_tail_reward_delta", first["summary"])
+        self.assertIn("worst_reward_delta", first["summary"])
+        self.assertIn("mean_candidate_rank", first["summary"])
+        self.assertTrue(all(first["checks"].values()), first)
+
+    def test_private_and_future_hints_do_not_enter_cv_identity(self):
+        base = json.loads(json.dumps(FIXTURE["leak_free_cv"]))
+        mutated = json.loads(json.dumps(base))
+        mutated["screen"][0]["private"] = {"opponent_bank": 999999}
+        mutated["screen"][0]["future_prices"] = [999999]
+        self.assertTrue(validate_cv_holdouts(base)["passed"])
+        result = validate_cv_holdouts(mutated)
+        self.assertFalse(result["passed"])
+        self.assertFalse(result["checks"]["no_private_information"])
+        self.assertFalse(result["checks"]["no_future_price_reference"])
+
     def test_scarcity_pressure_uses_public_state_and_is_opponent_order_invariant(self):
         agent = load_agent(ROOT / "main.py")
         obs = json.loads(json.dumps(FIXTURE["opponent_policy"]["screen"][0]["observation"]))
