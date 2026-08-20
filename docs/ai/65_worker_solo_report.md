@@ -1,41 +1,39 @@
-# Solo Worker Report — SOT-2853
+# Solo Worker Report — SOT-2850
 
 ## Summary
 
-Integrated the SOT-2851 public-state capacity oracle with the SOT-2852 dispatcher in a sealed, leak-free promotion panel. The same-seed/both-seat screen produced direct intervention evidence and improved rank/margin while reducing travel, but productive density regressed and repair work increased. The candidate was therefore rejected, confirm remained sealed, and the dispatcher stays default-OFF. PR #69 merged as `4b11fe3`; no Kaggle submission occurred.
+Aggregated completed children SOT-2851/SOT-2852/SOT-2853. The measurement oracle was promoted, but the capacity-aware runtime dispatcher was rejected by the sealed direct A/B because productive density regressed and repair work increased. Confirm remained sealed, the dispatcher stays default-OFF, no artifact was promoted, and the strict improvement gate required no Kaggle submission.
 
 ## Changed Files
 
-- `scripts/measure_capacity_dispatcher_sealed_panel.py` — sealed holdout, deterministic rerun, screen/confirm, decision, fingerprint, and contract gate.
-- `tests/test_evaluate.py` — rejection evidence and fail-closed oracle coverage.
-- `docs/measurements/SOT-2850/SOT-2853-capacity-dispatcher-sealed-panel.json` — complete decision evidence.
-- `docs/ai/experiment_ledger.jsonl` — cycle-7 rejected axis record.
+- `docs/ai/experiment_ledger.jsonl` — parent aggregation and strict no-submit decision.
+- `docs/ai/linear/SOT-2850.md` — child results, submission decision, and handoff.
+- `docs/ai/65_worker_solo_report.md` — final solo lifecycle report.
 
 ## Verification
 
 - Python compileall: PASS.
 - Unit tests: 107/107 PASS.
-- GitHub CI submission and GitGuardian: PASS.
-- Submission contract and exec compatibility: PASS.
-- Diff review and mergeability: PASS; no conflict.
+- Submission contract and last-callable exec compatibility: PASS.
+- Existing submission archive integrity and `main.py` equivalence: PASS.
+- Deterministic sealed evidence: PASS.
 - npm lint/typecheck/e2e: N/A (Python-only repository; no package.json/e2e configuration).
 
 ## Acceptance Criteria
 
-- [x] Same-seed/both-seat direct A/B screen saved.
-- [x] Independent confirm is consumed only after a passing screen; it remained untouched after rejection.
-- [x] Rank/margin/tails and productive/travel/repair metrics drive the decision.
-- [x] Rejected result and direct firing evidence appended to the ledger.
-- [x] Candidate remains default-OFF; no promoted artifact was generated.
-- [x] Submission contract and exec compatibility pass.
-- [x] No Kaggle submission was performed.
+- [x] Improvement direction and rationale recorded.
+- [x] All children reached Done and their results were aggregated.
+- [x] Candidate/evidence correspondence and effective default-OFF config recorded.
+- [x] No-submit decision explicitly recorded because no champion was promoted.
+- [x] Rejection is backed by same-seed/both-seat direct A/B and 2,880 firings.
+- [x] Handoff prepared for the parent completion comment.
 
 ## Risks
 
-The candidate improved mean rank by 1, paired mean/lower-tail/worst margin by +110, and reduced travel by 344, but productive density fell by 0.004156 and 52 repair interventions were added. The disabled implementation remains only as an auditable ablation.
+The disabled candidate remains an auditable ablation. A future cycle should use a new upstream useful-work-per-repair assignment objective and must not retry this rejected axis without new evidence.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Acceptance: PASS
 
-## Next Action: READY_FOR_REVIEW
+## Next Action: NEEDS_DEBUG
