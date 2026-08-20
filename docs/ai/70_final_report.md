@@ -1,9 +1,18 @@
-# Final Report — SOT-2845
+# Final Report — SOT-2842
 
-The sequence planner was rejected by the sealed multi-archetype closed-loop screen. Although it fired 801 times, paired rank and reward did not improve, lower-tail/worst margin regressed by 138, productive actions decreased by 521, and travel increased by 489. Confirm was correctly skipped. The champion default and deterministic archive were restored, all 102 tests and submission checks passed, and no Kaggle submission was made.
+## Summary
 
-## Acceptance: PASS
+Cycle 6 evaluated a portable public-state receding-horizon sequence planner after building a leak-free multi-step oracle. The sealed closed-loop screen rejected the runtime candidate, so the champion configuration was restored and no Kaggle submission was made.
 
-## Linear Report: PENDING
+## Verification
 
-## Next Action: READY_FOR_REVIEW
+- All children SOT-2843/SOT-2844/SOT-2845: Done
+- Python compile: PASS
+- Unit tests: 102/102 PASS
+- Submission contract and exec compatibility: PASS
+- Candidate direct A/B: 801 live planner firings; rank/reward uplift 0; lower-tail/worst margin -138
+- Effective runtime flag: `RECEDING_HORIZON_SEQUENCE_PLANNER=false`
+
+## Acceptance
+
+All cycle acceptance criteria are met through the child results, parent aggregation record, strict no-submit decision, and Linear handoff/completion reports.
