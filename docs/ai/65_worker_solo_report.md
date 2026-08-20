@@ -1,41 +1,44 @@
-# Worker Report — SOT-2825
+# Solo Worker Report — SOT-2823
 
 ## Summary
 
-Added a reproducible sealed closed-loop gate for the distilled compact policy. Four unseen same-seed/both-seat A/B matches completed successfully. The candidate preserved rank and improved relative margin, but regressed own reward by 1,194 in every match, so the strict gate rejected it, skipped independent confirm, and retained `COMPACT_REPLAY_POLICY=false`.
+The resumed cycle-3 parent aggregated all three completed children and rejected the distilled compact runtime policy with direct A/B and firing evidence. The executable champion remains unchanged, so no Kaggle submission was made.
 
-## Changed Files
+## Task Check
 
-- `scripts/measure_compact_policy_sealed_gate.py` — sealed panel, strict rank/reward/tail/runtime/contract gate, fingerprint and evidence output
-- `tests/test_evaluate.py` — isolation, fail-closed manifest, and reward non-regression coverage
-- `docs/measurements/SOT-2823/SOT-2825-compact-policy-sealed-gate.json` — complete match evidence
-- `docs/ai/experiment_ledger.jsonl` — one cycle-3 rejected-axis entry
-- `docs/ai/linear/SOT-2825.md` — lifecycle and decision note
-- `docs/ai/70_final_report.md` — acceptance summary
+- Classification: PLAN / Kaggle improvement-cycle parent
+- Actionable: yes; this was the automatic parent resume for aggregation and submission judgment.
+- 分解判断: already completed; SOT-2824, SOT-2826, and SOT-2825 were reused rather than recreated.
+- Latest parent comments were re-read before the aggregation decision; no human override, `cycle=stop`, or `submit=hold` directive was present.
 
-## Commands Run
+## Child Aggregation
 
-- `.venv/bin/python scripts/measure_compact_policy_sealed_gate.py` twice — PASS; deterministic excluding runtime timing
-- `.venv/bin/python -m unittest discover -s tests -v` — 84/84 PASS
-- `.venv/bin/python -m py_compile main.py scripts/*.py tests/test_evaluate.py` — PASS
-- `bash scripts/build_submission.sh` and submission validation — PASS; one gzip member containing only `main.py`
+- SOT-2824: Done; promoted the deterministic, leak-free current-top winner-only teacher dataset.
+- SOT-2826: Done; distilled and tested the compact land/labor policy, then rejected it at screen.
+- SOT-2825: Done; reproduced the rejection on untouched sealed identities with same-seed/both-seat direct A/B.
 
-## Acceptance Criteria
+## Submission Decision
 
-- [x] Unseen closed-loop both-seat direct A/B completed on opponent/seed/time-disjoint identities
-- [x] Rank, reward, tails, runtime, and contract gate recorded
-- [x] Land/labor firing evidence corresponds to the effective-config fingerprint
-- [x] Disabled decision is reproducible; independent confirm skipped after strict screen failure
-- [x] Rejection has same-seed direct A/B plus firing evidence
-- [x] Exactly one JSONL ledger entry appended
+- Candidate/champion mapping: `COMPACT_REPLAY_POLICY=true` candidate versus the existing `false` champion.
+- Candidate intervention: land 2 and labor 396 firings in every sealed match.
+- Result: rank tied; margin mean/lower-tail/worst deltas +6299/+912/+912; own reward delta -1194 in all four matches.
+- Decision: strict reward non-regression failed; candidate rejected and flag remains false.
+- Artifact: no executable change and no new champion fingerprint.
+- Kaggle submission: NOT PERFORMED; no promotion and daily budget already consumed 5/5.
 
-## Risks
+## Verification
 
-The candidate improves relative margin while reducing its own reward; the strict gate intentionally prioritizes non-regression across both. No third cohort was consumed after screen failure.
+- Python compile: PASS.
+- Unit tests: 84/84 PASS.
+- Fresh sealed deterministic rerun: PASS; result reproduced excluding runtime timing.
+- Submission contract and single-`main.py` archive: PASS.
+- Diff review and merge-conflict gate: PASS.
+- npm lint/typecheck/e2e: N/A; Python-only repository with no package.json or browser surface.
 
-## Linear Report
+## GitHub
 
-Completion Report and PR merge sync posted successfully; Issue moved to In Review.
+- Branch: `feat/sot-2823-cycle-3-results`
+- Parent aggregation PR: https://github.com/sota1111/kaggriculture-gpt/pull/53
 
 ## Linear Report: POSTED
 
