@@ -1,0 +1,182 @@
+{
+  "axis": "Kaggle last-callable runtime entrypoint contract",
+  "checks": {
+    "both_seats": true,
+    "candidate_contract": true,
+    "candidate_entrypoint_is_agent": true,
+    "candidate_productive": true,
+    "champion_all_invalid": true,
+    "champion_entrypoint_reproduced": true,
+    "independent_episode_seed": true,
+    "runtime_under_one_second": true,
+    "screen_confirm": true
+  },
+  "issue": "SOT-2796",
+  "kaggle_submission": "NOT_PERFORMED",
+  "official_contract": {
+    "agents_sha256": "0ad68d6de1acd0625177eaf4df9225c3cd9a609fb3efd62e15739b71bc37ddd5",
+    "loader_sha256": "9b7682ce9921c8f34080a8be0f7b41598cc12ac7eb14d24e4b707883f25213b6",
+    "selection": "last callable in executed module"
+  },
+  "result": "promoted",
+  "windows": {
+    "confirm": {
+      "archive_sha256": "11c798024e6399b52aa75ad204802c5644185667caf020d8108785d527b7630b",
+      "episode_id": 95237428,
+      "seats": {
+        "0": {
+          "candidate": {
+            "first_productive": {
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": [
+                  [
+                    "BUY_SEED",
+                    "WHEAT",
+                    2
+                  ],
+                  [
+                    "HIRE"
+                  ]
+                ]
+              },
+              "step": 0
+            },
+            "invalid_actions": 0,
+            "max_runtime_ms": 7.945036981254816,
+            "productive_actions": 672,
+            "total_runtime_seconds": 0.04600357357412577,
+            "turns": 720
+          },
+          "champion": {
+            "first_productive": null,
+            "invalid_actions": 720,
+            "max_runtime_ms": 0.003464985638856888,
+            "productive_actions": 0,
+            "total_runtime_seconds": 0.00016559590585529804,
+            "turns": 720
+          }
+        },
+        "1": {
+          "candidate": {
+            "first_productive": {
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": [
+                  [
+                    "BUY_SEED",
+                    "WHEAT",
+                    2
+                  ],
+                  [
+                    "HIRE"
+                  ]
+                ]
+              },
+              "step": 0
+            },
+            "invalid_actions": 0,
+            "max_runtime_ms": 1.202865969389677,
+            "productive_actions": 718,
+            "total_runtime_seconds": 0.1150495046749711,
+            "turns": 720
+          },
+          "champion": {
+            "first_productive": null,
+            "invalid_actions": 720,
+            "max_runtime_ms": 0.001001870259642601,
+            "productive_actions": 0,
+            "total_runtime_seconds": 0.00015879236161708832,
+            "turns": 720
+          }
+        }
+      },
+      "seed": 638123783
+    },
+    "screen": {
+      "archive_sha256": "1997bd4a0b58cfddd3f33a79e9a607f0accf51678411cbcc183b20d4cc858656",
+      "episode_id": 95235121,
+      "seats": {
+        "0": {
+          "candidate": {
+            "first_productive": {
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": [
+                  [
+                    "BUY_SEED",
+                    "WHEAT",
+                    2
+                  ],
+                  [
+                    "HIRE"
+                  ]
+                ]
+              },
+              "step": 0
+            },
+            "invalid_actions": 0,
+            "max_runtime_ms": 5.840055178850889,
+            "productive_actions": 672,
+            "total_runtime_seconds": 0.043080048635602,
+            "turns": 720
+          },
+          "champion": {
+            "first_productive": null,
+            "invalid_actions": 720,
+            "max_runtime_ms": 0.004517147317528725,
+            "productive_actions": 0,
+            "total_runtime_seconds": 0.00016560149379074574,
+            "turns": 720
+          }
+        },
+        "1": {
+          "candidate": {
+            "first_productive": {
+              "action": {
+                "farmer": [
+                  "PASS"
+                ],
+                "hands": [],
+                "market": [
+                  [
+                    "BUY_SEED",
+                    "WHEAT",
+                    2
+                  ],
+                  [
+                    "HIRE"
+                  ]
+                ]
+              },
+              "step": 0
+            },
+            "invalid_actions": 0,
+            "max_runtime_ms": 47.07253398373723,
+            "productive_actions": 720,
+            "total_runtime_seconds": 1.6591463882941753,
+            "turns": 720
+          },
+          "champion": {
+            "first_productive": null,
+            "invalid_actions": 720,
+            "max_runtime_ms": 0.0011480879038572311,
+            "productive_actions": 0,
+            "total_runtime_seconds": 0.00015758909285068512,
+            "turns": 720
+          }
+        }
+      },
+      "seed": 510962258
+    }
+  }
+}

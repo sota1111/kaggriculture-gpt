@@ -534,7 +534,7 @@ def _choose_crop(obs, seeds, history=()):
     return max(known, key=daily_return), specs
 
 
-def agent(obs):
+def _policy_action(obs):
     global PROJECTED_MARKET_FIRES
     history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
     me = obs["farms"][int(obs["player"])]
@@ -635,3 +635,8 @@ def component_firing_counts():
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
         "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
     }
+
+
+def agent(obs):
+    """Kaggle entrypoint; keep this as the final module-level callable."""
+    return _policy_action(obs)
