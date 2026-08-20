@@ -113,6 +113,13 @@ local. This measurement does not change `main.py` or submit to Kaggle.
 
 ## Adaptive route-repair ablation
 
+`FEED_ECONOMIC_DECISION` is an independent, default-off ablation distilled
+from zansued/kaggriculture-ai-agent@9de2779. It computes a bounded feed-wheat
+runway from the current herd, wheat inventory, cash runway, remaining days,
+and public shop demand. The SOT-2833 direct screen produced no live firings or
+strict improvement, so the candidate remains disabled and confirm was not
+consumed; targeted both-seat intervention evidence is retained.
+
 `scripts/measure_adaptive_route_repair.py` evaluates a public-state-only route
 expert classifier and bounded suffix repair against the authenticated replay
 manifest's seeds in both runtime seats. The mechanism is distilled from
