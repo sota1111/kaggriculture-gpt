@@ -1,11 +1,9 @@
-# Final Report — SOT-2831
+# Final Report — SOT-2845
 
-Cycle 4 is complete. Economic-family attribution succeeded, but the derived feed-wheat runway decision did not fire in either live closed-loop screen and produced no rank, reward, margin, or tail improvement. The candidate is rejected with direct A/B and isolated intervention evidence; production defaults remain disabled.
-
-All child issues are Done and PRs #54–#56 are merged. The parent did not submit: no candidate passed the leak-free promotion gate, confirm was not consumed after screen failure, and the daily submission budget was already exhausted. The next cycle should re-anchor why targeted feed-economic actions do not become reachable in live trajectories before selecting a different non-closed decision family.
+The sequence planner was rejected by the sealed multi-archetype closed-loop screen. Although it fired 801 times, paired rank and reward did not improve, lower-tail/worst margin regressed by 138, productive actions decreased by 521, and travel increased by 489. Confirm was correctly skipped. The champion default and deterministic archive were restored, all 102 tests and submission checks passed, and no Kaggle submission was made.
 
 ## Acceptance: PASS
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Next Action: READY_FOR_REVIEW

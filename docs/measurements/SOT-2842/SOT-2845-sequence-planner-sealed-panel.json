@@ -1,0 +1,354 @@
+{
+  "axis": "sequence planner sealed multi-archetype closed-loop gate",
+  "candidate_artifact": {
+    "path": "main.py",
+    "sha256": "f9efa95b34efeeabcd0ab0bd1650b08d074ee14fedddcbe5e8262bea54c40865"
+  },
+  "confirm": {
+    "reason": "screen failed; sealed confirm not consumed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "effective_config": {
+    "RECEDING_HORIZON_SEQUENCE_PLANNER": false
+  },
+  "issue": "SOT-2845",
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "3319d610e4c70fbc1096abb220996cb27b311dbda99356cfcf00d1aecc8b14ff",
+  "noise_width": {
+    "margin": 0.0,
+    "rank": 0.0,
+    "reward": 0.0
+  },
+  "panel_checks": {
+    "artifacts_unique": true,
+    "auditable_licenses": true,
+    "closed_loop_evidence_boundary": true,
+    "confirm_after_screen": true,
+    "entity_holdout": true,
+    "environment_pinned": true,
+    "episode_holdout": true,
+    "episode_ids_present": true,
+    "fetch_only": true,
+    "immutable_full_digests": true,
+    "manifest_digest": true,
+    "no_kaggle_submission": true,
+    "no_sensitive_or_replay_payload_fields": true,
+    "opponent_holdout": true,
+    "panel_artifacts_exist": true,
+    "panels_nonempty": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "seed_holdout_explicit": true,
+    "source_commit_hash_license_present": true,
+    "time_holdout": true,
+    "time_holdout_explicit": true,
+    "times_parseable": true,
+    "unique_panel_identity": true
+  },
+  "passed": true,
+  "runtime_candidate_retained": false,
+  "same_seed_both_seat": true,
+  "screen": {
+    "evidence_sha256": "4e70e07032bb339fb437e43b34f31a650e891118dc55820f808b28b5c7af6817",
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -37524.0,
+          "opponent_reward": 38818.0,
+          "planner": {
+            "firings": 199,
+            "horizon": 3,
+            "multi_step_firings": 199,
+            "repairs": 301
+          },
+          "productive_actions": 2553,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.216561750974506,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 429
+        },
+        "champion": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -37386.0,
+          "opponent_reward": 38680.0,
+          "planner": {
+            "firings": 0,
+            "horizon": 3,
+            "multi_step_firings": 0,
+            "repairs": 0
+          },
+          "productive_actions": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8306989050470293,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 280
+        },
+        "delta": {
+          "margin": -138.0,
+          "productive_actions": -156,
+          "reward": 0.0,
+          "travel_actions": 149
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "sealed-screen-cok-284501",
+          "opponent": "cok-v7-58c91c3",
+          "seed": 284501,
+          "time_utc": "2026-08-20T22:00:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -37420.0,
+          "opponent_reward": 38714.0,
+          "planner": {
+            "firings": 152,
+            "horizon": 3,
+            "multi_step_firings": 152,
+            "repairs": 244
+          },
+          "productive_actions": 2686,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.222041798988357,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 298
+        },
+        "champion": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -37420.0,
+          "opponent_reward": 38714.0,
+          "planner": {
+            "firings": 0,
+            "horizon": 3,
+            "multi_step_firings": 0,
+            "repairs": 0
+          },
+          "productive_actions": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.842187216039747,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 280
+        },
+        "delta": {
+          "margin": 0.0,
+          "productive_actions": -23,
+          "reward": 0.0,
+          "travel_actions": 18
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "sealed-screen-cok-284501",
+          "opponent": "cok-v7-58c91c3",
+          "seed": 284501,
+          "time_utc": "2026-08-20T22:00:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -118730.0,
+          "opponent_reward": 120024.0,
+          "planner": {
+            "firings": 221,
+            "horizon": 3,
+            "multi_step_firings": 221,
+            "repairs": 336
+          },
+          "productive_actions": 2540,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.203268241137266,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 440
+        },
+        "champion": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -123510.0,
+          "opponent_reward": 124804.0,
+          "planner": {
+            "firings": 0,
+            "horizon": 3,
+            "multi_step_firings": 0,
+            "repairs": 0
+          },
+          "productive_actions": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.972259626025334,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 280
+        },
+        "delta": {
+          "margin": 4780.0,
+          "productive_actions": -169,
+          "reward": 0.0,
+          "travel_actions": 160
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "sealed-screen-v17-284502",
+          "opponent": "lonespear-v17-774b260",
+          "seed": 284502,
+          "time_utc": "2026-08-20T22:01:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -117518.0,
+          "opponent_reward": 118812.0,
+          "planner": {
+            "firings": 229,
+            "horizon": 3,
+            "multi_step_firings": 229,
+            "repairs": 344
+          },
+          "productive_actions": 2524,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.1894770469516516,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 455
+        },
+        "champion": {
+          "capacity_violations": 0,
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -119342.0,
+          "opponent_reward": 120636.0,
+          "planner": {
+            "firings": 0,
+            "horizon": 3,
+            "multi_step_firings": 0,
+            "repairs": 0
+          },
+          "productive_actions": 2697,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8429739470593631,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "travel_actions": 293
+        },
+        "delta": {
+          "margin": 1824.0,
+          "productive_actions": -173,
+          "reward": 0.0,
+          "travel_actions": 162
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "sealed-screen-v17-284502",
+          "opponent": "lonespear-v17-774b260",
+          "seed": 284502,
+          "time_utc": "2026-08-20T22:01:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "primary rank KPI did not improve beyond deterministic noise width",
+      "lower_tail_margin_delta regressed",
+      "worst_margin_delta regressed"
+    ],
+    "runtime": {
+      "candidate_seconds": 8.831348838051781,
+      "champion_seconds": 7.488119694171473,
+      "passed": true,
+      "primary_kpi_beyond_noise": {
+        "margin": true,
+        "rank": false,
+        "reward": false
+      },
+      "ratio": 1.1793813665833677,
+      "threshold": 2.0
+    },
+    "summary": {
+      "capacity_violations": 0,
+      "contract_violations": 0,
+      "invalid_actions": 0,
+      "lower_tail_margin_delta": -138.0,
+      "lower_tail_reward_delta": 0.0,
+      "matches": 4,
+      "mean_margin_delta": 1616.5,
+      "mean_rank_improvement": 0.0,
+      "mean_reward_delta": 0.0,
+      "multi_step_firings": 801,
+      "planner_firings": 801,
+      "planner_repairs": 1225,
+      "productive_action_delta": -521,
+      "travel_action_delta": 489,
+      "worst_margin_delta": -138.0,
+      "worst_reward_delta": 0.0
+    }
+  },
+  "sealed_identity_sha256": {
+    "confirm": "46b562a7f5701fc41942fce02273d5479396c8d9bd71b7126c98d6601209447e",
+    "screen": "d21637fc20413bf56ed74bb8f275e8f97267167e4da541d11ca592facd5595f3"
+  },
+  "submission_contract": "PASS"
+}
