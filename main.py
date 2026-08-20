@@ -14,6 +14,8 @@ ECONOMY_STRATEGY = "FINITE_HORIZON"
 ROBUST_ONLINE_PLANNER = True
 OPPONENT_AWARE_POLICY = True
 LONG_HORIZON_MIXED_FARM_ROUTE = False
+PUBLIC_SCHEDULER_COMPONENT = True
+PROJECTED_MARKET_EXECUTION = False
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -25,7 +27,21 @@ MIXED_FARM_ROUTE_SOURCE = {
     "license": "Apache-2.0",
     "artifact_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
 }
+PUBLIC_EXECUTION_SOURCES = {
+    "scheduler": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+        "license": "MIT",
+    },
+    "market": {
+        "url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "license": "Apache-2.0",
+    },
+}
 MIXED_FARM_ROUTE_FIRES = 0
+PUBLIC_SCHEDULER_FIRES = 0
+PROJECTED_MARKET_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -141,13 +157,27 @@ def _action_at(tile, day, available_seeds, crop, crop_specs):
 
 
 def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
+    global PUBLIC_SCHEDULER_FIRES
     tiles = me["tiles"]
     workers = [me["farmer"]] + list(me.get("hands", []))
+    standing_actions = {}
+    standing_positions = set()
+    if PUBLIC_SCHEDULER_COMPONENT:
+        PUBLIC_SCHEDULER_FIRES += 1
+        # Public lonespear v13 insight: consume zero-travel work before global
+        # matching so a priority handicap cannot pull a worker off its tile.
+        for worker_index, (x, y) in enumerate(workers):
+            priority = _task_priority(tiles[y][x], day, crop_specs)
+            if priority is None or (x, y) in standing_positions:
+                continue
+            action, seeds = _action_at(tiles[y][x], day, seeds, crop, crop_specs)
+            standing_actions[worker_index] = action
+            standing_positions.add((x, y))
     candidates = []
     for y, row in enumerate(tiles):
         for x, tile in enumerate(row):
             priority = _task_priority(tile, day, crop_specs)
-            if priority is not None:
+            if priority is not None and (x, y) not in standing_positions:
                 if priority == 0:
                     distance_to_deadline = 1
                 elif priority == 1:
@@ -165,6 +195,9 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
     def assign(worker_index, used_mask, occupied_next):
         if worker_index == len(workers):
             return (0, 0, 0), ()
+        if worker_index in standing_actions:
+            future_cost, future_choices = assign(worker_index + 1, used_mask, occupied_next)
+            return future_cost, (-2,) + future_choices
         px, py = workers[worker_index]
         best = None
         occupied = set(occupied_next)
@@ -196,9 +229,13 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
             return future_cost, (-1,) + future_choices
         return best
 
-    choices = assign(0, 0, ())[1] if candidates else (-1,) * len(workers)
+    choices = assign(0, 0, ())[1] if candidates or standing_actions else (-1,) * len(workers)
     actions = []
     for position, choice in zip(workers, choices):
+        worker_index = len(actions)
+        if choice == -2:
+            actions.append(standing_actions[worker_index])
+            continue
         if choice < 0:
             actions.append(["PASS"])
             continue
@@ -221,6 +258,39 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
         else:
             reserved_moves.add(destination)
     return actions
+
+
+def _projected_shed_inventory(private, actions):
+    """Project products dropped before same-turn market orders execute."""
+    projected = {str(item): max(0, int(amount))
+                 for item, amount in private.get("shed", {}).items()}
+    inventories = list(private.get("inventories", []))
+    for index, action in enumerate(actions):
+        if action and action[0] == "DROP" and index < len(inventories):
+            carried = inventories[index]
+            if isinstance(carried, dict):
+                for item, amount in carried.items():
+                    projected[str(item)] = projected.get(str(item), 0) + max(0, int(amount))
+    return projected
+
+
+def _sale_priority(obs, crop):
+    """Order fragile sales before publicly exposed, glut-sensitive products."""
+    player = int(obs.get("player", 0))
+    exposure = 0
+    for index, farm in enumerate(obs.get("farms", [])):
+        if index == player:
+            continue
+        exposure += sum(
+            max(0, int(tile.get("yield_units", 0)))
+            for row in farm.get("tiles", []) for tile in row
+            if isinstance(tile, dict) and tile.get("kind") == "PLANT" and tile.get("crop") == crop
+        )
+    market = obs.get("market", {})
+    inventory = max(0, int(market.get("inventory", {}).get(crop, 0)))
+    anchor = max(1, int(market.get("inventory_anchor", {}).get(crop, max(1, inventory))))
+    glut = inventory / anchor
+    return (-exposure, -glut, crop)
 
 
 def _crop_specs(obs):
@@ -375,6 +445,7 @@ def _choose_crop(obs, seeds, history=()):
 
 
 def agent(obs):
+    global PROJECTED_MARKET_FIRES
     history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
     me = obs["farms"][int(obs["player"])]
     private = obs["private"]
@@ -394,10 +465,16 @@ def agent(obs):
         mixed_route = _mixed_farm_route({**obs, "total_days": total_days}, crop_specs, seed_inventory)
         crop = mixed_route["crop"]
     prices = obs.get("market", {}).get("prices", {})
+    seeds = int(seed_inventory.get(crop, 0))
+    actions = _plan_workers(me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)), int(obs.get("turns_per_day", 12)))
     stored_inventory = private.get("shed", {})
+    if PROJECTED_MARKET_EXECUTION:
+        PROJECTED_MARKET_FIRES += 1
+        stored_inventory = _projected_shed_inventory(private, actions)
     pressure = _scarcity_pressure(obs, crop) if OPPONENT_AWARE_POLICY else {
         "inventory": 0.0, "labor": 0.0, "field_demand": 0.0, "cash": 0.0, "total": 0.0
     }
+    sale_orders = []
     for stored_crop in sorted(crop_specs):
         stored = int(stored_inventory.get(stored_crop, 0))
         price = int(prices.get(stored_crop, crop_specs[stored_crop]["fallback_price"]))
@@ -408,12 +485,15 @@ def agent(obs):
         reserved = mixed_route["feed_reserve"] if mixed_route and stored_crop == "WHEAT" else 0
         sellable = max(0, stored - reserved)
         if sellable > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day or crowded_sale):
-            market.append(["SELL", stored_crop, sellable])
+            sale_orders.append(["SELL", stored_crop, sellable])
+
+    if PROJECTED_MARKET_EXECUTION:
+        sale_orders.sort(key=lambda order: _sale_priority(obs, order[1]))
+    market.extend(sale_orders)
 
     if mixed_route:
         market.extend(mixed_route["market"])
 
-    seeds = int(seed_inventory.get(crop, 0))
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
     advance_reserve = 1 if pressure["labor"] + pressure["field_demand"] >= 0.75 else 0
     desired_seeds = worker_count * SEED_RESERVE_PER_WORKER + advance_reserve if harvests_left else 0
@@ -439,9 +519,15 @@ def agent(obs):
         if money - cost >= MIN_CASH_RESERVE and opportunity > cost:
             market.append(["HIRE"])
 
-    actions = _plan_workers(me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)), int(obs.get("turns_per_day", 12)))
     return {
         "farmer": actions[0],
         "hands": actions[1:],
         "market": market[:MAX_MARKET_ORDERS],
+    }
+
+
+def component_firing_counts():
+    return {
+        "public_scheduler": PUBLIC_SCHEDULER_FIRES,
+        "projected_market": PROJECTED_MARKET_FIRES,
     }
