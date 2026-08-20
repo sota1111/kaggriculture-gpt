@@ -427,7 +427,8 @@ class EvaluationTest(unittest.TestCase):
 
         run_episode(Recorder, FIXTURE, 1)
         self.assertEqual(30 * 24, len(seen))
-        self.assertEqual({"player", "step", "day", "hour", "farms", "private", "market", "town"}, set(seen[0]))
+        self.assertEqual({"player", "step", "day", "hour", "total_days", "turns_per_day",
+                          "shed_capacity", "farms", "private", "market", "town"}, set(seen[0]))
         self.assertEqual(10, len(seen[0]["farms"][0]["tiles"]))
         self.assertEqual("LOCKED", seen[0]["farms"][0]["tiles"][0][5])
 
@@ -611,6 +612,37 @@ class EvaluationTest(unittest.TestCase):
                           "inventory_anchor": {"CORN": 100, "WHEAT": 100}}}
         ordered = sorted(("WHEAT", "CORN"), key=lambda crop: agent._sale_priority(obs, crop))
         self.assertEqual(["CORN", "WHEAT"], ordered)
+
+    def test_shed_overflow_policy_sells_only_required_room_and_drops_carried_goods(self):
+        agent = load_agent(ROOT / "main.py")
+        agent.SHED_OVERFLOW_PROTECTION = True
+        obs = {
+            "player": 0, "day": 4, "hour": 2, "turns_per_day": 3,
+            "shed_capacity": 10,
+            "farms": [{"money": 100, "farmer": [0, 0], "hands": [[1, 0]],
+                       "tiles": [["LOCKED", "LOCKED"]]}],
+            "private": {"shed": {"WHEAT": 8}, "seeds": {},
+                        "inventories": [{"WHEAT": 3}, {"WHEAT": 1}]},
+            "market": {"prices": {"WHEAT": 5}},
+        }
+        before = agent.component_firing_counts()["shed_overflow"]
+        actions, orders = agent._protect_shed_capacity(obs, [["FERTILIZE"], ["PASS"]], agent.DEFAULT_CROPS)
+        self.assertEqual([["FERTILIZE"], ["DROP"]], actions)
+        self.assertEqual([["SELL", "WHEAT", 2]], orders)
+        self.assertGreater(agent.component_firing_counts()["shed_overflow"], before)
+        self.assertFalse(agent.PROJECTED_MARKET_EXECUTION)
+
+    def test_overflow_fixture_records_discarded_units(self):
+        fixture = {**FIXTURE, "days": 4, "turns_per_day": 3, "shed_capacity": 2,
+                   "initial_hands": 2, "initial_seeds": 12}
+        baseline = load_agent(ROOT / "main.py")
+        baseline.SHED_OVERFLOW_PROTECTION = False
+        candidate = load_agent(ROOT / "main.py")
+        candidate.SHED_OVERFLOW_PROTECTION = True
+        old = run_episode(baseline, fixture, 17)
+        new = run_episode(candidate, fixture, 17)
+        self.assertGreaterEqual(old.discarded_units, new.discarded_units)
+        self.assertEqual(0, new.invalid_actions)
 
     def test_movement_stays_within_board_at_boundary(self):
         agent = load_agent(ROOT / "main.py")

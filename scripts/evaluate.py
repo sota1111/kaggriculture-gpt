@@ -37,6 +37,8 @@ class Metrics:
     profit: int = 0
     cultivated: int = 0
     harvested: int = 0
+    productive_actions: int = 0
+    discarded_units: int = 0
     invalid_actions: int = 0
     contract_violations: int = 0
     assignment_conflicts: int = 0
@@ -370,6 +372,9 @@ def _apply_worker(action, position, tiles, seeds, inventory, day, crops):
     tile = tiles[y][x]
     if op == "PASS":
         return position, seeds, 0, 0, 0, 0
+    if op == "DROP":
+        # The caller transfers carried goods into the capacity-bounded shed.
+        return position, seeds, 0, 0, ("__DROP__", sum(inventory.values())), 0
     if op == "DIG" and isinstance(tile, dict) and tile.get("kind") == "WEED":
         tiles[y][x] = None
         return position, seeds, 0, 0, 0, 0
@@ -430,6 +435,8 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                       for crop, spec in crops.items()}
             obs = {
                 "player": 0, "step": day * turns_per_day + hour, "day": day, "hour": hour,
+                "total_days": days, "turns_per_day": turns_per_day,
+                "shed_capacity": int(fixture.get("shed_capacity", 100)),
                 "farms": [{"money": money, "farmer": positions[0], "hands": positions[1:],
                            "hires_today": hires_today, "unlocked_quadrants": ["NW"], "tiles": copy.deepcopy(tiles)}],
                 "private": {"shed": copy.deepcopy(shed), "seeds": copy.deepcopy(seeds),
@@ -491,7 +498,17 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                 )
                 metrics.cultivated += cultivated
                 metrics.harvested += harvested
+                metrics.productive_actions += int(action[0] not in {"PASS", "NORTH", "SOUTH", "EAST", "WEST"})
                 metrics.invalid_actions += invalid
+                if action[0] == "DROP":
+                    capacity = int(fixture.get("shed_capacity", 100))
+                    room = max(0, capacity - sum(shed.values()))
+                    for crop in sorted(inventories[index]):
+                        amount = inventories[index][crop]
+                        moved = min(amount, room)
+                        shed[crop] += moved
+                        inventories[index][crop] -= moved
+                        room -= moved
         for row in tiles:
             for tile in row:
                 if isinstance(tile, dict) and tile.get("kind") == "PLANT":
@@ -518,7 +535,9 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
         for inventory in inventories:
             for crop, amount in inventory.items():
                 room = max(0, capacity - sum(shed.values()))
-                shed[crop] += min(amount, room)
+                moved = min(amount, room)
+                shed[crop] += moved
+                metrics.discarded_units += amount - moved
         if rng.random() < 0.2:
             empties = [(x, y) for y, row in enumerate(tiles) for x, tile in enumerate(row) if tile is None]
             if empties:

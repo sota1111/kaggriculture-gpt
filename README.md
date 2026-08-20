@@ -24,6 +24,18 @@ is held below its configured sell target and sold into stronger markets. Cash is
 reserved before seed purchases or hiring, market orders are capped, and each
 available seed is reserved for at most one worker action.
 
+The independent `SHED_OVERFLOW_PROTECTION` component coordinates carried
+inventory, the public shed capacity, and the nightly clock. It drops goods when
+room exists and sells only the minimum low-value shed stock needed to prevent
+the next refresh from discarding carried harvest. It does not enable projected
+market execution or terminal recovery. Reproduce its same-seed/both-seat
+screen and independent confirm with:
+
+```bash
+python3 scripts/measure_shed_overflow.py \
+  --output docs/measurements/SOT-2795/SOT-2798-shed-overflow.json
+```
+
 ## Reproducible offline evaluation
 
 Run a candidate through the fixed-seed screen and confirm gates:
