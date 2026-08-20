@@ -1,0 +1,220 @@
+{
+  "axis": "feed-economic decision sealed closed-loop gate",
+  "candidate_artifact": {
+    "path": "main.py",
+    "sha256": "632b2b27a5f1253339058f78690f1915f38e91264cffb90e6c2506d25b8774c2"
+  },
+  "confirm": {
+    "reason": "screen failed; sealed confirm not consumed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "effective_config": {
+    "FEED_ECONOMIC_DECISION": false
+  },
+  "issue": "SOT-2834",
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "f73ea13a893b733e02672bbfdb7e8b3d901b93b836e82833ecf332a34a47dd2c",
+  "noise_width": {
+    "margin": 0.0,
+    "rank": 0.0,
+    "reward": 0.0
+  },
+  "panel_checks": {
+    "artifacts_unique": true,
+    "auditable_licenses": true,
+    "closed_loop_evidence_boundary": true,
+    "confirm_after_screen": true,
+    "entity_holdout": true,
+    "environment_pinned": true,
+    "episode_holdout": true,
+    "episode_ids_present": true,
+    "fetch_only": true,
+    "immutable_full_digests": true,
+    "manifest_digest": true,
+    "no_kaggle_submission": true,
+    "no_sensitive_or_replay_payload_fields": true,
+    "opponent_holdout": true,
+    "panel_artifacts_exist": true,
+    "panels_nonempty": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "seed_holdout_explicit": true,
+    "source_commit_hash_license_present": true,
+    "time_holdout": true,
+    "time_holdout_explicit": true,
+    "times_parseable": true,
+    "unique_panel_identity": true
+  },
+  "passed": true,
+  "runtime_candidate_retained": false,
+  "same_seed_both_seat": true,
+  "screen": {
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "feed_economic_firings": 0,
+          "invalid_actions": 0,
+          "margin": -115619.0,
+          "opponent_reward": 116913.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8065964030101895,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -115619.0,
+          "opponent_reward": 116913.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.000236520078033,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "sealed-screen-v18-283401",
+          "opponent": "lonespear-v18-774b260",
+          "seed": 283401,
+          "time_utc": "2026-08-20T20:20:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "feed_economic_firings": 0,
+          "invalid_actions": 0,
+          "margin": -117399.0,
+          "opponent_reward": 118693.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8108700700104237,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -117399.0,
+          "opponent_reward": 118693.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8313719518482685,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "sealed-screen-v18-283401",
+          "opponent": "lonespear-v18-774b260",
+          "seed": 283401,
+          "time_utc": "2026-08-20T20:20:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "no primary KPI improvement beyond deterministic noise width",
+      "candidate produced no live intervention"
+    ],
+    "runtime": {
+      "candidate_seconds": 3.617466473020613,
+      "champion_seconds": 3.8316084719263017,
+      "passed": true,
+      "primary_kpi_beyond_noise": {
+        "margin": false,
+        "rank": false,
+        "reward": false
+      },
+      "ratio": 0.944111722146279,
+      "threshold": 2.0
+    },
+    "summary": {
+      "candidate_interventions": 0,
+      "contract_violations": 0,
+      "invalid_actions": 0,
+      "lower_tail_margin_delta": 0.0,
+      "lower_tail_reward_delta": 0.0,
+      "matches": 2,
+      "mean_margin_delta": 0.0,
+      "mean_rank_improvement": 0.0,
+      "mean_reward_delta": 0.0,
+      "worst_margin_delta": 0.0,
+      "worst_reward_delta": 0.0
+    }
+  },
+  "submission_contract": "PASS",
+  "targeted_trace": {
+    "actual_intervention": true,
+    "both_seats": true,
+    "firings": 4,
+    "rows": [
+      {
+        "identity_seed_invariant": true,
+        "order": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            8
+          ]
+        ],
+        "seat": 0
+      },
+      {
+        "identity_seed_invariant": true,
+        "order": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            8
+          ]
+        ],
+        "seat": 1
+      }
+    ]
+  }
+}
