@@ -1,8 +1,6 @@
-# Final Report — SOT-2820
+# Final Report — SOT-2821
 
-SOT-2820 re-anchors the oracle on live, closed-loop Kaggriculture matches against four immutable public artifacts. Screen/confirm isolation and sensitive-payload exclusions fail closed. Eight both-seat matches and a deterministic rerun passed every runtime/provenance check. The champion lost all eight matches, so the evaluation oracle is promoted without a policy change or Kaggle submission.
-
-## Linear Report: PENDING
+The public shop-prefix route selector was implemented and evaluated without importing static route traces. All five public branches and privacy boundaries are verified. Because the paired live screen tied 4/4, the axis was rejected, confirm was skipped, and the champion flag remains off. All applicable repository and archive checks pass; no Kaggle submission was made.
 
 ## Acceptance: PASS
 

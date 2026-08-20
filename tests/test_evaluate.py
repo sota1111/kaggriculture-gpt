@@ -23,6 +23,48 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_shop_prefix_selector_uses_only_public_prefix_and_logs_every_branch(self):
+        agent = load_agent(ROOT / "main.py")
+        cases = {
+            "yarn_first": ["YARN_STORE", "PIZZA_SHOP"],
+            "yarn_second": ["PIZZA_SHOP", "YARN_STORE"],
+            "yarn_third": ["PIZZA_SHOP", "BAKERY", "YARN_STORE"],
+            "early_milk_support": ["BAKERY", "SMOOTHIE_SHOP"],
+            "default": ["BAKERY", "JUICE_SHOP", "CAFE"],
+        }
+        for label, shops in cases.items():
+            obs = {"town": {"unlocked_shops": (shops + ["CAFE"] * 3)[:3]
+                             + ["YARN_STORE"]},
+                   "private": {"identity": label, "seed": 1},
+                   "episode_id": label, "submission_id": label, "seed": 1}
+            before = agent.PUBLIC_SHOP_PREFIX_ROUTE_FIRES[label]
+            selected, route = agent._public_shop_prefix_route(obs, record=True)
+            self.assertEqual(label, selected)
+            self.assertEqual(before + 1, agent.PUBLIC_SHOP_PREFIX_ROUTE_FIRES[label])
+            self.assertIn(route["crop"], {"WHEAT", "STRAWBERRY"})
+            mutated = json.loads(json.dumps(obs))
+            mutated["private"] = {"identity": "changed", "seed": 999}
+            mutated.update({"episode_id": "changed", "submission_id": "changed", "seed": 999})
+            self.assertEqual((selected, route), agent._public_shop_prefix_route(mutated))
+
+    def test_shop_prefix_route_normalizes_livestock_to_cash_feasible_orders(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = {"player": 0, "day": 3, "total_days": 30,
+               "farms": [{"money": 650, "farmer": [0, 0], "hands": [],
+                           "tiles": [[None]], "daily_operating_cost": 100}],
+               "private": {"animals": {}, "shed": {}, "seeds": {}, "inventories": [{}]},
+               "market": {"prices": {"FEED": 20, "MILK": 100, "WOOL": 100}},
+               "animals": {"COW": {"price": 500}, "SHEEP": {"price": 400}},
+               "capabilities": ["BUY_ANIMAL"]}
+        _, route = agent._public_shop_prefix_route(
+            {"town": {"unlocked_shops": ["YARN_STORE"]}})
+        self.assertEqual([], agent._care_livestock_orders(obs, route))
+        obs["farms"][0]["money"] = 2400
+        orders = agent._care_livestock_orders(obs, route)
+        self.assertEqual(1, sum(order[0] == "BUY_ANIMAL" for order in orders))
+        self.assertEqual("SHEEP", next(order[1] for order in orders
+                                      if order[0] == "BUY_ANIMAL"))
+
     def test_public_closed_loop_manifest_is_pinned_isolated_and_leak_free(self):
         path = ROOT / "tests/fixtures/public_closed_loop_holdout.json"
         manifest = json.loads(path.read_text())
