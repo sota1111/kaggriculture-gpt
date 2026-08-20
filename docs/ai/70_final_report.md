@@ -1,7 +1,13 @@
-# Final Report — SOT-2821
+# Final Report — SOT-2822
 
-The public shop-prefix route selector was implemented and evaluated without importing static route traces. All five public branches and privacy boundaries are verified. Because the paired live screen tied 4/4, the axis was rejected, confirm was skipped, and the champion flag remains off. All applicable repository and archive checks pass; no Kaggle submission was made.
+The sealed public closed-loop screen rejected the shop-prefix selector. Four
+same-opponent/seed/seat paired rows tied exactly, despite 2,876 selector
+firings. All runs completed 720 states with no invalid actions or contract
+violations; runtime ratio was 0.951. Confirm was correctly skipped and
+`PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR` remains false.
 
 ## Acceptance: PASS
+
+## Linear Report: PENDING
 
 ## Next Action: READY_FOR_REVIEW

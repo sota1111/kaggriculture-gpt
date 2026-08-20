@@ -23,6 +23,35 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_shop_prefix_closed_loop_gate_requires_tail_and_runtime_integrity(self):
+        from scripts.measure_shop_prefix_closed_loop import _gate
+
+        healthy = {
+            "summary": {"mean_margin_delta": 1, "lower_tail_margin_delta": 0,
+                        "worst_margin_delta": 0, "candidate_mean_rank": 1.5},
+            "raw_rows": [{"identity": {"seed": 1}, "champion": {
+                "states": 720, "statuses": ["DONE", "DONE"], "invalid_actions": 0,
+                "contract_violations": 0, "stderr": ""}, "candidate": {
+                "states": 720, "statuses": ["DONE", "DONE"], "invalid_actions": 0,
+                "contract_violations": 0, "stderr": ""}}],
+        }
+        self.assertEqual((True, []), _gate(healthy, True))
+        healthy["summary"]["worst_margin_delta"] = -1
+        passed, reasons = _gate(healthy, True)
+        self.assertFalse(passed)
+        self.assertIn("worst_margin_delta regressed", reasons)
+
+    def test_shop_prefix_closed_loop_summary_preserves_direct_ablation_delta(self):
+        from scripts.measure_shop_prefix_closed_loop import _summary
+
+        rows = [{"candidate": {"rank": rank, "margin": margin},
+                 "candidate_delta": {"reward": reward, "margin": margin}}
+                for rank, reward, margin in ((1, 5, 10), (2, -2, -4), (1, 3, 6), (1, 0, 0))]
+        summary = _summary(rows)
+        self.assertEqual(-4, summary["worst_margin_delta"])
+        self.assertEqual(-4, summary["lower_tail_margin_delta"])
+        self.assertEqual(1.25, summary["candidate_mean_rank"])
+
     def test_shop_prefix_selector_uses_only_public_prefix_and_logs_every_branch(self):
         agent = load_agent(ROOT / "main.py")
         cases = {

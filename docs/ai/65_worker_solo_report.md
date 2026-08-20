@@ -1,43 +1,45 @@
-# Solo Worker Report — SOT-2821
+# Worker Report — SOT-2822
 
 ## Summary
 
-Ported COK V7's first-three-public-shop selector as a portable, Apache-attributed ablation with five observable branches and normalized crop/livestock targets. The strict live screen tied in all four paired matches, so the selector remains disabled and the champion runtime is unchanged; evidence, tests, and the rejected ledger result are retained.
+Added and executed a sealed screen→confirm promotion gate for the shop-prefix
+route selector. The screen rejected the selector after a firing-logged paired
+tie, so confirm was correctly skipped and the runtime flag remains off.
 
 ## Changed Files
 
-- `main.py` — disabled public shop-prefix selector, branch counters, route targets, and bounded integration.
-- `scripts/measure_shop_prefix_route.py` — same-seed/both-seat screen and gated confirm measurement.
-- `tests/test_evaluate.py` — all-branch, leakage-resistance, and cash-feasibility tests.
-- `docs/measurements/SOT-2819/SOT-2821-shop-prefix-route.json` — direct A/B and branch evidence.
-- `docs/ai/experiment_ledger.jsonl` — rejected axis entry.
-- `submission.tar.gz` — rebuilt validated offline artifact.
+- `scripts/measure_shop_prefix_closed_loop.py` — sealed same-seed/both-seat gate
+- `tests/test_evaluate.py` — gate and raw-delta unit coverage
+- `docs/measurements/SOT-2819/SOT-2822-shop-prefix-closed-loop.json` — raw evidence
+- `docs/ai/experiment_ledger.jsonl` — rejected axis entry
+- `docs/ai/linear/SOT-2822.md` — local issue record
 
 ## Verification
 
-- `python3 -m py_compile main.py scripts/*.py tests/test_evaluate.py` — PASS
-- `python3 -m unittest discover -s tests -v` — PASS (74 tests)
-- `python3 scripts/validate_submission.py main.py` — PASS
-- `bash scripts/build_submission.sh` — PASS
-- gzip/archive content checks — PASS
-- `git diff --check` — PASS
-- npm lint/typecheck/test/e2e — N/A (Python-only repository; no `package.json` or browser surface)
+- `.venv/bin/python -m py_compile main.py scripts/*.py tests/test_evaluate.py` — PASS
+- `.venv/bin/python -m unittest discover -s tests -v` — PASS (76 tests)
+- sealed closed-loop measurement — PASS; candidate rejected, confirm skipped
+- `.venv/bin/python scripts/validate_submission.py main.py` — PASS
+- submission rebuild, gzip single-member/archive-content validation — PASS
+- `git diff --check` and merge-conflict precheck — PASS
+- npm lint/typecheck/test/e2e — N/A (Python-only repository; no package.json/browser)
 
 ## Acceptance Criteria
 
-- [x] Public observations only: first three unlocked shops; private/identity/episode/submission/seed mutation invariant.
-- [x] All selector branches recorded in unit and measurement evidence.
-- [x] Same-seed/both-seat A/B saved; non-improvement led to disabled runtime and rejected ledger result.
-- [x] stdlib/offline submission compatibility preserved.
-- [x] No Kaggle submission performed.
+- [x] screen result and raw rows saved
+- [x] rejection has same-seed A/B and selector firing records
+- [x] promotion-only fingerprint handoff is not applicable
+- [x] non-promoted runtime remains disabled
+- [x] no Kaggle submission
 
 ## Risks
 
-- The selector was not promoted because the strict screen produced ties rather than improvement.
-- Independent confirm was intentionally skipped by the predeclared screen gate.
+The selector fired but did not alter terminal behavior on the screen panel.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Acceptance: PASS
 
-## Next Action: READY_FOR_REVIEW
+## Next Action
+
+READY_FOR_REVIEW
