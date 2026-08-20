@@ -1,0 +1,514 @@
+{
+  "axis": "bounded public-state receding-horizon sequence planner",
+  "confirm": {
+    "both_seats": true,
+    "contract_violations": 0,
+    "firings": 6,
+    "intervention_steps": 6,
+    "invalid_actions": 0,
+    "multi_step_firings": 4,
+    "passed": true,
+    "rows": [
+      {
+        "baseline_actions": [
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "candidate_actions": [
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "changed_steps": [
+          0,
+          1,
+          2
+        ],
+        "contract_violations": 0,
+        "firing_counts": {
+          "firings": 3,
+          "horizon": 3,
+          "multi_step_firings": 2,
+          "repairs": 0
+        },
+        "identity": {
+          "episode": "confirm-a",
+          "opponent": "lonespear-v18",
+          "seat": 0,
+          "seed": 284411
+        },
+        "invalid_actions": 0
+      },
+      {
+        "baseline_actions": [
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "candidate_actions": [
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "changed_steps": [
+          0,
+          1,
+          2
+        ],
+        "contract_violations": 0,
+        "firing_counts": {
+          "firings": 3,
+          "horizon": 3,
+          "multi_step_firings": 2,
+          "repairs": 0
+        },
+        "identity": {
+          "episode": "confirm-b",
+          "opponent": "lonespear-v23",
+          "seat": 1,
+          "seed": 284411
+        },
+        "invalid_actions": 0
+      }
+    ]
+  },
+  "deterministic_report_sha256": "fa152f54e2a8a2562d81f430b938719335131649aef55c5d185a69845ae33229",
+  "issue": "SOT-2844",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "runtime_candidate_changed": true,
+  "screen": {
+    "both_seats": true,
+    "contract_violations": 0,
+    "firings": 6,
+    "intervention_steps": 6,
+    "invalid_actions": 0,
+    "multi_step_firings": 4,
+    "passed": true,
+    "rows": [
+      {
+        "baseline_actions": [
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "candidate_actions": [
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "changed_steps": [
+          0,
+          1,
+          2
+        ],
+        "contract_violations": 0,
+        "firing_counts": {
+          "firings": 3,
+          "horizon": 3,
+          "multi_step_firings": 2,
+          "repairs": 0
+        },
+        "identity": {
+          "episode": "screen-a",
+          "opponent": "cok-v7",
+          "seat": 0,
+          "seed": 284401
+        },
+        "invalid_actions": 0
+      },
+      {
+        "baseline_actions": [
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "PLANT",
+              "WHEAT"
+            ],
+            "hands": [
+              [
+                "PLANT",
+                "WHEAT"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "candidate_actions": [
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          },
+          {
+            "farmer": [
+              "EAST"
+            ],
+            "hands": [
+              [
+                "WEST"
+              ]
+            ],
+            "market": [
+              [
+                "HIRE"
+              ]
+            ]
+          }
+        ],
+        "changed_steps": [
+          0,
+          1,
+          2
+        ],
+        "contract_violations": 0,
+        "firing_counts": {
+          "firings": 3,
+          "horizon": 3,
+          "multi_step_firings": 2,
+          "repairs": 0
+        },
+        "identity": {
+          "episode": "screen-b",
+          "opponent": "cok-v7",
+          "seat": 1,
+          "seed": 284401
+        },
+        "invalid_actions": 0
+      }
+    ]
+  }
+}

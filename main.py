@@ -27,6 +27,8 @@ PRODUCTIVE_ACTION_CAPACITY = False
 PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR = False
 COMPACT_REPLAY_POLICY = False
 SEQUENCE_PRECURSOR_POLICY = False
+RECEDING_HORIZON_SEQUENCE_PLANNER = True
+SEQUENCE_PLANNER_HORIZON = 3
 HISTORY_LIMIT = 48
 
 # Deterministically distilled from the SOT-2824 screen split only.  These
@@ -130,6 +132,9 @@ PUBLIC_SHOP_PREFIX_ROUTE_FIRES = {
 COMPACT_REPLAY_POLICY_FIRES = {"land": 0, "labor": 0}
 SEQUENCE_PRECURSOR_POLICY_FIRES = 0
 SEQUENCE_PRECURSOR_ECONOMIC_REACHED = 0
+SEQUENCE_PLANNER_FIRES = 0
+SEQUENCE_PLANNER_REPAIRS = 0
+SEQUENCE_PLANNER_MULTI_STEP_FIRES = 0
 
 _MILK_SUPPORT_SHOPS = {"PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"}
 _SHOP_PREFIX_ROUTES = {
@@ -150,6 +155,135 @@ _SEQUENCE_PRECURSOR_STATE = {
     "phase": "idle", "started_step": None, "fired": False,
     "public_inventory": (),
 }
+_SEQUENCE_PLANNER_STATE = {"last_step": None, "last_signature": (), "streak": 0}
+
+
+def _sequence_planner_actions(obs, baseline, crop, crop_specs):
+    """Choose the first action of a bounded task sequence and replan each turn.
+
+    Search inputs are limited to the current observation: own visible tiles and
+    locations, current own resources, the shared market and the public clock.
+    No replay identity, future state, fixed action trace, or external weights
+    enter the score.  Resource feasibility is checked before a candidate may
+    replace the one-step scheduler action.
+    """
+    global SEQUENCE_PLANNER_FIRES, SEQUENCE_PLANNER_REPAIRS
+    global SEQUENCE_PLANNER_MULTI_STEP_FIRES
+    if not RECEDING_HORIZON_SEQUENCE_PLANNER:
+        return baseline
+    me = obs["farms"][int(obs["player"])]
+    tiles = me.get("tiles", [])
+    workers = [me.get("farmer", [0, 0]), *me.get("hands", [])]
+    private = obs.get("private", {})
+    inventories = list(private.get("inventories", ()))
+    seeds = max(0, int(private.get("seeds", {}).get(crop, 0)))
+    fertilizer = sum(max(0, int(row.get("FERTILIZER", 0)))
+                     for row in inventories if isinstance(row, dict))
+    shed = private.get("shed", {}) if isinstance(private.get("shed", {}), dict) else {}
+    shed_capacity = max(0, int(me.get("shed_capacity", 100)))
+    shed_used = sum(max(0, int(value)) for value in shed.values())
+    step = int(obs.get("step", int(obs.get("day", 0)) * int(obs.get("turns_per_day", 24))
+                              + int(obs.get("hour", 0))))
+    total_steps = int(obs.get("total_days", 30)) * int(obs.get("turns_per_day", 24))
+    remaining = max(0, total_steps - step)
+    day = int(obs.get("day", 0))
+
+    tasks = []
+    for y, row in enumerate(tiles):
+        for x, tile in enumerate(row):
+            priority = _task_priority(tile, day, crop_specs, fertilizer)
+            if priority is None:
+                continue
+            # Hard resource and remaining-horizon constraints.
+            if priority == 4 and (seeds <= 0 or remaining < 2):
+                continue
+            if priority == 1 and fertilizer <= 0:
+                continue
+            if priority == 0 and shed_used >= shed_capacity:
+                continue
+            tasks.append((priority, y, x))
+    tasks.sort()
+    if not tasks or not workers:
+        return baseline
+
+    def tail_cost(first_index, start):
+        """Two additional stops: bounded multi-stop bundling, deterministic."""
+        _, fy, fx = tasks[first_index]
+        unused = [task for index, task in enumerate(tasks) if index != first_index]
+        cursor = (fx, fy)
+        cost = 0
+        for _ in range(max(0, SEQUENCE_PLANNER_HORIZON - 1)):
+            if not unused:
+                break
+            choice = min(unused, key=lambda task: (
+                task[0], abs(task[2] - cursor[0]) + abs(task[1] - cursor[1]),
+                task[1], task[2]))
+            cost += abs(choice[2] - cursor[0]) + abs(choice[1] - cursor[1])
+            cursor = (choice[2], choice[1])
+            unused.remove(choice)
+        return cost
+
+    proposals = []
+    for worker_index, position in enumerate(workers):
+        px, py = int(position[0]), int(position[1])
+        for task_index, (priority, ty, tx) in enumerate(tasks):
+            distance = abs(tx - px) + abs(ty - py)
+            # Travel and labor/action capacity: the first task must be reachable
+            # within the remaining horizon and one worker receives one action.
+            if distance + 1 > remaining:
+                continue
+            proposals.append((priority * 100 + distance * 4 + tail_cost(task_index, (px, py)),
+                              ty, tx, worker_index, task_index))
+    if not proposals:
+        return baseline
+
+    amended = list(baseline)
+    used_workers, used_tasks, reserved = set(), set(), set()
+    chosen_signature = []
+    seed_budget, fertilizer_budget, shed_budget = seeds, fertilizer, shed_capacity - shed_used
+    for _, ty, tx, worker_index, task_index in sorted(proposals):
+        if worker_index in used_workers or task_index in used_tasks:
+            continue
+        priority = tasks[task_index][0]
+        if priority == 4 and seed_budget <= 0:
+            continue
+        if priority == 1 and fertilizer_budget <= 0:
+            continue
+        if priority == 0 and shed_budget <= 0:
+            continue
+        position = tuple(workers[worker_index])
+        action = (_move(position, (tx, ty)) if position != (tx, ty)
+                  else _action_at(tiles[ty][tx], day, seed_budget, crop, crop_specs,
+                                  fertilizer_budget)[0])
+        destination = _next_position(position, action)
+        if action[0] in {"NORTH", "SOUTH", "EAST", "WEST"} and destination in reserved:
+            continue
+        if action[0] == "PLANT":
+            seed_budget -= 1
+        elif action[0] == "FERTILIZE":
+            fertilizer_budget -= 1
+        elif action[0] == "HARVEST":
+            shed_budget -= 1
+        amended[worker_index] = action
+        used_workers.add(worker_index)
+        used_tasks.add(task_index)
+        reserved.add(destination)
+        chosen_signature.append((worker_index, ty, tx, action[0]))
+
+    signature = tuple(chosen_signature)
+    state = _SEQUENCE_PLANNER_STATE
+    if state["last_step"] is not None and step > state["last_step"]:
+        if signature and signature != state["last_signature"]:
+            SEQUENCE_PLANNER_REPAIRS += 1
+        state["streak"] = state["streak"] + 1 if signature else 0
+    else:
+        state["streak"] = int(bool(signature))
+    state.update({"last_step": step, "last_signature": signature})
+    if amended != baseline:
+        SEQUENCE_PLANNER_FIRES += 1
+        if state["streak"] >= 2:
+            SEQUENCE_PLANNER_MULTI_STEP_FIRES += 1
+    return amended
 
 
 def _sequence_precursor_actions(obs, actions):
@@ -249,6 +383,8 @@ def _update_public_history(obs):
             "phase": "idle", "started_step": None, "fired": False,
             "public_inventory": (),
         })
+        _SEQUENCE_PLANNER_STATE.update(
+            {"last_step": None, "last_signature": (), "streak": 0})
     me = obs["farms"][int(obs["player"])]
     plants = [tile for row in me.get("tiles", []) for tile in row
               if isinstance(tile, dict) and tile.get("kind") == "PLANT"]
@@ -1048,6 +1184,7 @@ def _policy_action(obs):
     actions = _plan_workers(
         me, day, planting_seeds, crop, crop_specs, int(obs.get("hour", 0)),
         int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
+    actions = _sequence_planner_actions(obs, actions, crop, crop_specs)
     actions = _sequence_precursor_actions(obs, actions)
     actions, overflow_orders = _protect_shed_capacity(obs, actions, crop_specs)
     stored_inventory = private.get("shed", {})
@@ -1160,6 +1297,12 @@ def component_firing_counts():
             "firings": SEQUENCE_PRECURSOR_POLICY_FIRES,
             "economic_reached": SEQUENCE_PRECURSOR_ECONOMIC_REACHED,
             "phase": _SEQUENCE_PRECURSOR_STATE["phase"],
+        },
+        "receding_horizon_sequence_planner": {
+            "firings": SEQUENCE_PLANNER_FIRES,
+            "repairs": SEQUENCE_PLANNER_REPAIRS,
+            "multi_step_firings": SEQUENCE_PLANNER_MULTI_STEP_FIRES,
+            "horizon": SEQUENCE_PLANNER_HORIZON,
         },
     }
 
