@@ -1,39 +1,47 @@
-# Solo Worker Report — SOT-2770
+# Solo Worker Report — SOT-2779
 
 ## Summary
 
 - Classified the issue as IMPLEMENT and judged decomposition unnecessary.
-- Added a fetch-only public-opponent manifest pinned by repository, commit, path, SHA-256, and license.
-- Added a reproducible leak-free CV measurement that verifies artifact hashes, executes fixed screen and independent confirm panels in both seats, and reports opponent-level rank, margin, tail, and local↔public gap diagnostics.
-- Recorded the promoted oracle re-anchor in the experiment ledger; no candidate policy was promoted and no Kaggle submission was made.
+- Evaluated the Seyamalam V21 demand-timed premium-sale and matched-rival price-floor mechanism as an independent temporary candidate.
+- Confirmed both-seat intervention firing and cap behavior, while keeping `PROJECTED_MARKET_EXECUTION` disabled.
+- Rejected and reverted the production candidate because screen and confirm metrics tied the champion exactly; retained reproducible measurement/test/ledger evidence only.
 
 ## Changed Files
 
-- `scripts/measure_leak_free_cv.py` — pinned artifact retrieval, hash validation, screen/confirm execution, and diagnostics.
-- `tests/fixtures/public_opponents.json` — four audited public agents from two source lineages.
-- `tests/fixtures/evaluation.json` — entity/seed/time-isolated public-opponent panels.
-- `tests/test_evaluate.py` — manifest and measurement coverage.
-- `docs/measurements/SOT-2769/SOT-2770-public-opponent-cv.json` — reproducible evidence.
-- `docs/ai/experiment_ledger.jsonl` — re-anchor outcome and evidence boundary.
-- `docs/ai/linear/SOT-2770.md` — local lifecycle record.
+- `scripts/measure_demand_premium_sales.py` — temporary independent flag ablation, source attribution, matched-rival floor cap, firing evidence, and strict gate.
+- `tests/test_evaluate.py` — strict-gate regression coverage.
+- `docs/measurements/SOT-2777/SOT-2779-demand-premium-sales.json` — same-seed/both-seat screen and independent confirm evidence.
+- `docs/ai/experiment_ledger.jsonl` — rejected axis, source, result, and evidence.
+- `docs/ai/linear/SOT-2779.md` — lifecycle record.
 
 ## Verification
 
-- `python3 -m py_compile main.py scripts/*.py tests/*.py` — PASS.
-- `python3 -m unittest discover -s tests` — PASS, 42 tests.
-- `python3 scripts/measure_leak_free_cv.py --output docs/measurements/SOT-2769/SOT-2770-public-opponent-cv.json` — PASS.
-- Manifest/source/hash/license, entity/seed/episode/time isolation, both seats, and no private/future-price leakage — PASS.
-- Screen mean/lower-tail/worst margin: `+1409/-333/-333`; independent confirm: `-1046.5/-1895/-1895`; confirm-minus-screen mean shift: `-2455.5`.
+- Python compile — PASS.
+- `python3 -m unittest discover -s tests` — PASS, 49 tests.
+- Measurement rerun — PASS; decision and intervention results reproduced.
 - `python3 scripts/validate_submission.py main.py` — PASS.
-- `bash scripts/build_submission.sh`, `gzip -t`, exact archive-member check — PASS.
-- npm lint/typecheck/test/e2e — N/A; this repository has no `package.json` and is Python-only.
+- Submission archive gzip/member validation — PASS (`main.py` only).
+- npm lint/typecheck/test/e2e — N/A; Python-only repository without `package.json`.
 - `git diff --check` and scoped diff review — PASS.
-- Kaggle submission — NOT PERFORMED, as required.
+- Kaggle submission — NOT PERFORMED.
+- Baseline and candidate screen rank/mean/lower-tail/worst: `1.0 / 1904 / 169 / 169`.
+- Baseline and candidate confirm: `1.5 / -606.5 / -1382 / -1382`.
+- Targeted both-seat interventions: MILK stock `20` capped to `18`; WOOL stock `20` capped to `10`.
+
+## Acceptance Criteria
+
+- [x] Candidate used current observation/own shed only and added no dependency.
+- [x] Direct A/B and targeted both-seat firing evidence are recorded independently of the rejected projected-market axis.
+- [x] Strict gate rejected the tie and production `main.py` was reverted.
+- [x] Submission contract and exec compatibility pass.
+- [x] Ledger records source URL, commit, license, rejected result, and evidence.
+- [x] No Kaggle submission was performed.
 
 ## Risks
 
-- The compact local simulator does not reproduce every animal/build mechanic or live matchmaking; leaderboard rank remains authoritative. The large negative confirm shift is therefore a drift signal, not an absolute LB prediction.
-- Public sources may move, but retrieval is pinned to immutable commits and refuses any SHA-256 mismatch.
+- The compact replay-identity corpus contains no premium production, so its direct A/B could only establish non-regression/tie; targeted observation cases establish mechanism firing but not competitive gain.
+- The rejected axis must not be retried without new premium-producing replay evidence.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS
