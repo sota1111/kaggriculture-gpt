@@ -15,6 +15,7 @@ ROBUST_ONLINE_PLANNER = True
 OPPONENT_AWARE_POLICY = True
 LONG_HORIZON_MIXED_FARM_ROUTE = False
 PUBLIC_SCHEDULER_COMPONENT = True
+MULTI_STOP_TASK_BUNDLING = True
 PROJECTED_MARKET_EXECUTION = False
 FERTILIZER_COVERAGE = True
 HISTORY_LIMIT = 48
@@ -34,6 +35,11 @@ PUBLIC_EXECUTION_SOURCES = {
         "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
         "license": "MIT",
     },
+    "task_bundling": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "license": "MIT",
+    },
     "market": {
         "url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
         "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
@@ -42,6 +48,7 @@ PUBLIC_EXECUTION_SOURCES = {
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
+MULTI_STOP_TASK_BUNDLE_FIRES = 0
 PROJECTED_MARKET_FIRES = 0
 FERTILIZER_COVERAGE_FIRES = 0
 
@@ -166,7 +173,7 @@ def _action_at(tile, day, available_seeds, crop, crop_specs, fertilizer_availabl
 
 
 def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fertilizer_by_worker=()):
-    global PUBLIC_SCHEDULER_FIRES
+    global PUBLIC_SCHEDULER_FIRES, MULTI_STOP_TASK_BUNDLE_FIRES
     tiles = me["tiles"]
     workers = [me["farmer"]] + list(me.get("hands", []))
     fertilizer_by_worker = tuple(max(0, int(value)) for value in fertilizer_by_worker)
@@ -205,6 +212,18 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
     candidates.sort(key=lambda task: (task[0], task[1], task[2], task[3]))
     candidates = candidates[:max(len(workers), len(workers) + 2)]
 
+    def bundled_tail_cost(task_index):
+        """Bounded two-stop VRP proxy using only the current public task set."""
+        if not MULTI_STOP_TASK_BUNDLING or len(candidates) < 2:
+            return 0
+        priority, _, ty, tx = candidates[task_index]
+        compatible = [
+            abs(nx - tx) + abs(ny - ty)
+            for index, (next_priority, _, ny, nx) in enumerate(candidates)
+            if index != task_index and next_priority <= priority + 1
+        ]
+        return min(compatible, default=0)
+
     @lru_cache(maxsize=None)
     def assign(worker_index, used_mask, occupied_next):
         if worker_index == len(workers):
@@ -235,7 +254,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
             cost = (
                 future_cost[0] + conflict,
                 future_cost[1] + overdue,
-                future_cost[2] + priority * 100 + distance * (4 - min(priority, 3)),
+                future_cost[2] + priority * 100 + distance * (4 - min(priority, 3))
+                + bundled_tail_cost(task_index),
             )
             proposal = cost, (task_index,) + future_choices
             if best is None or proposal < best:
@@ -246,6 +266,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
         return best
 
     choices = assign(0, 0, ())[1] if candidates or standing_actions else (-1,) * len(workers)
+    if MULTI_STOP_TASK_BUNDLING and len(candidates) >= 2 and any(choice >= 0 for choice in choices):
+        MULTI_STOP_TASK_BUNDLE_FIRES += 1
     actions = []
     for position, choice in zip(workers, choices):
         worker_index = len(actions)
@@ -552,6 +574,7 @@ def agent(obs):
 def component_firing_counts():
     return {
         "public_scheduler": PUBLIC_SCHEDULER_FIRES,
+        "multi_stop_task_bundling": MULTI_STOP_TASK_BUNDLE_FIRES,
         "projected_market": PROJECTED_MARKET_FIRES,
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
     }
