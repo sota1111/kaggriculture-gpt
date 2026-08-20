@@ -1,38 +1,44 @@
-# Worker Report — SOT-2819
+# Worker Report — SOT-2826
 
 ## Summary
 
-Aggregated the three completed child issues, reran the sealed closed-loop gate on latest `origin/main`, and recorded a strict non-promotion. The public shop-prefix selector fired 2,876 times but changed neither reward nor margin, so confirm remained locked, the runtime flag stayed off, and no Kaggle submission was made.
+Distilled a portable state-conditioned land/labor threshold table from the hash-pinned SOT-2824 winner-only screen split. The independent component and counters are auditable and stdlib-only. Its same-seed/both-seat screen ablation fired every adopted branch without invalid actions, but materially regressed reward and tail margin, so the strict gate rejected it, confirm was skipped, and `COMPACT_REPLAY_POLICY` remains disabled.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — parent aggregation and no-submit decision
-- `docs/ai/linear/SOT-2819.md` — parent lifecycle record and handoff
-- `docs/ai/65_worker_solo_report.md` — solo final report
-- `docs/ai/70_final_report.md` — acceptance summary
+- `main.py` / `submission.tar.gz` — independent compact policy flag, embedded constants, and land/labor counters
+- `scripts/distill_compact_replay_policy.py` — deterministic screen-only reproduction
+- `scripts/measure_compact_replay_policy.py` — targeted firing trace and direct closed-loop screen A/B
+- `tests/test_evaluate.py` — provenance, independence, and branch-firing checks
+- `docs/measurements/SOT-2823/` — distillation and ablation evidence
+- `docs/ai/experiment_ledger.jsonl` — one rejected cycle-3 axis entry
 
 ## Verification
 
-- `python3 -m py_compile main.py scripts/*.py tests/*.py` — PASS
-- `python3 -m unittest discover -s tests -v` — PASS (76/76)
-- sealed closed-loop rerun under the retained SOT-2822 environment — PASS; rejected, confirm skipped, evidence identical excluding runtime timing
-- `python3 scripts/validate_submission.py main.py` — PASS
-- submission archive — PASS; one gzip member containing only `main.py`
-- npm lint/typecheck/e2e — N/A (Python-only repository; no package.json/browser)
-- Kaggle submission — NOT PERFORMED (strict improvement gate failed)
+- Python compile: PASS
+- Unit tests: 81/81 PASS
+- Teacher reproduction: PASS; 2,160 screen rows, dataset SHA-256 `c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f`, confirm tuning rows 0
+- Targeted trace: PASS; land and labor branches fired
+- Direct screen A/B: REJECTED as designed; mean/lower-tail/worst margin delta `-8586.5/-14240/-14240`, mean reward delta `-1194`
+- Runtime contract: PASS; zero invalid actions/contract violations
+- Semantic measurement rerun: byte-equivalent after excluding runtime timing
+- Submission contract/archive: PASS; one gzip member containing only `main.py`
+- GitHub PR #50: mergeable, CI submission and GitGuardian checks PASS
+- npm lint/typecheck/e2e: N/A (Python-only repository; closed-loop A/B replaces browser E2E)
+- Kaggle submission: NOT PERFORMED
 
 ## Acceptance Criteria
 
-- [x] Improvement strategy and source-backed selection were recorded during decomposition
-- [x] SOT-2820, SOT-2821, and SOT-2822 are all Done
-- [x] Candidate/effective config and verification evidence are recorded
-- [x] Parent resume confirmed all children and explicitly recorded non-promotion/no-submit
-- [x] Rejection is backed by same-seed/both-seat A/B plus 2,876 intervention firings
-- [x] Parent handoff comment is posted to Linear
+- [x] Portable compact policy exists behind an independent flag
+- [x] Methodology, dataset hash, split boundary, and generated constants are recorded
+- [x] Standalone ablation records adopted-branch firings
+- [x] Strict screen result controls retention; rejected policy remains disabled and confirm is skipped
+- [x] Rejection includes direct A/B and intervention evidence
+- [x] Exactly one JSONL experiment entry was appended
 
 ## Risks
 
-The closed-loop oracle shows a large gap to pinned public top agents. The next cycle should diagnose the first behavioral divergence rather than retrying a static route or another selector that normalizes back to unchanged actions.
+The teacher's land/labor cadence does not transfer independently to the current champion. The code remains inert by default; downstream SOT-2825 can consume the evidence without treating it as a promoted candidate.
 
 ## Linear Report: POSTED
 

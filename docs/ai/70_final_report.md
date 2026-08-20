@@ -1,18 +1,17 @@
-# Final Report — SOT-2819
+# Final Report — SOT-2826
 
 ## Outcome
 
-Cycle 2 is complete with no champion promotion. The evaluation re-anchor succeeded, but the transferred shop-prefix selector was rejected after firing 2,876 times with zero reward or margin delta. The production flag remains disabled and no Kaggle submission was performed.
+The screen-only compact policy was implemented, reproduced, and independently ablated. The strict screen gate rejected it with firing evidence and no contract errors, so the feature remains disabled and confirm/Kaggle submission were correctly skipped.
 
 ## Quality Gates
 
 - Python compile: PASS
-- Unit tests: 76/76 PASS
-- Fresh sealed-panel reproduction: PASS (rejected, confirm skipped)
-- Submission contract/archive: PASS
-- Diff review: PASS
-- Child issues: 3/3 Done
+- Unit tests: 81/81 PASS
+- Deterministic distillation and semantic A/B rerun: PASS
+- Submission contract and main.py-only archive: PASS
+- PR #50 CI and conflict review: PASS
 
 ## Acceptance: PASS
 
-All parent criteria are satisfied, including evidence-backed rejection, explicit no-submit reporting, and next-cycle handoff.
+All SOT-2826 criteria are satisfied, including auditable provenance and evidence-backed rejection.
