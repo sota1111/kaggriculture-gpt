@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "competition": "kaggriculture",
+  "submission": {
+    "id": 55648381,
+    "submitted_at_utc": "2026-08-20T14:34:33.867Z",
+    "artifact_sha256": "fae729596163af75c0e5a81538e5098b5ce464438be7358fb2e0778a5c7610c7",
+    "authenticated_cv_reward": 6600.0,
+    "public_score_at_submission_query": 373.0
+  },
+  "acquisition": {
+    "status": "authenticated-kaggle-api",
+    "cutoff_utc": "2026-08-20T14:54:00Z",
+    "path": "KaggleApi.competition_list_episodes / competition_episode_replay",
+    "fallback_boundary": "Only two completed public episodes existed after submission 55648381 at the cutoff. They provide one chronological screen episode and one independent confirm episode with both participant seats, but not a candidate seat swap. This is authenticated live evidence, not a current-top cohort or a same-seed counterfactual A/B."
+  },
+  "leaderboard_snapshot": {
+    "captured_at_utc": "2026-08-20T14:56:00Z",
+    "team_id": 16625663,
+    "team_name": "sota1111",
+    "rank": 4987,
+    "rating": 292.1,
+    "submission_count": 2,
+    "source": "authenticated leaderboard CSV"
+  },
+  "observation_policy": {
+    "attribution_inputs": "chronological public actions, public farm state, terminal public rewards, and immutable identity only",
+    "excluded": "private observations, future observations at decision time, and replay bytes as candidate policy inputs"
+  },
+  "entries": [
+    {
+      "window": "screen",
+      "submission_id": 55648381,
+      "episode_id": 95235121,
+      "seed": 510962258,
+      "time_utc": "2026-08-20T14:42:46.266Z",
+      "candidate_seat": 0,
+      "candidate_entity_id": "team:16625663",
+      "candidate_name": "sota1111",
+      "opponent_seat": 1,
+      "opponent_entity_id": "team:16631609",
+      "opponent_name": "dlougen",
+      "opponent_submission_id": 55245298,
+      "archive": "episode-95235121-replay.json.gz",
+      "replay_sha256": "534f2a7c46f37282a2a3cde60a7f160671a990bf3d0e4d2cff3e3b19b7630a73",
+      "archive_sha256": "1997bd4a0b58cfddd3f33a79e9a607f0accf51678411cbcc183b20d4cc858656"
+    },
+    {
+      "window": "confirm",
+      "submission_id": 55648381,
+      "episode_id": 95237428,
+      "seed": 638123783,
+      "time_utc": "2026-08-20T14:46:46.567Z",
+      "candidate_seat": 0,
+      "candidate_entity_id": "team:16625663",
+      "candidate_name": "sota1111",
+      "opponent_seat": 1,
+      "opponent_entity_id": "team:16666018",
+      "opponent_name": "H vv sathwik",
+      "opponent_submission_id": 55439505,
+      "archive": "episode-95237428-replay.json.gz",
+      "replay_sha256": "e46f90491103e6bb87d1da2b936537a10629d8cff87cfd9c03b0cedd809fba5c",
+      "archive_sha256": "11c798024e6399b52aa75ad204802c5644185667caf020d8108785d527b7630b"
+    }
+  ],
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "048c7b4a7fce754ae4350382b62043a0e4aa6fd3976485352bda8779644bcadc"
+}
