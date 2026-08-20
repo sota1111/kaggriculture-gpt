@@ -38,7 +38,7 @@ The resumed cycle-3 parent aggregated all three completed children and rejected 
 ## GitHub
 
 - Branch: `feat/sot-2823-cycle-3-results`
-- Parent aggregation PR: pending at report authoring; must be merged before completion.
+- Parent aggregation PR: https://github.com/sota1111/kaggriculture-gpt/pull/53
 
 ## Linear Report: POSTED
 
