@@ -1,0 +1,16 @@
+{
+  "source": {
+    "url": "https://github.com/lonespear/kaggriculture",
+    "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+    "license": "MIT",
+    "portability": "stdlib public-state unit economics; no route trace, replay bytes, GPU weights, or external runtime"
+  },
+  "screen": [
+    {"seed": 279701, "days_remaining": 18, "cash": 2400, "animal": "COW", "animal_cost": 500, "feed_price": 12, "product_price": 95, "care_interval_days": 2, "product_per_care": 1, "feed_per_care": 1},
+    {"seed": 279702, "days_remaining": 16, "cash": 2200, "animal": "SHEEP", "animal_cost": 420, "feed_price": 10, "product_price": 80, "care_interval_days": 2, "product_per_care": 1, "feed_per_care": 1}
+  ],
+  "confirm": [
+    {"seed": 279711, "days_remaining": 14, "cash": 2100, "animal": "COW", "animal_cost": 480, "feed_price": 14, "product_price": 105, "care_interval_days": 2, "product_per_care": 1, "feed_per_care": 1},
+    {"seed": 279712, "days_remaining": 12, "cash": 1900, "animal": "SHEEP", "animal_cost": 360, "feed_price": 11, "product_price": 88, "care_interval_days": 2, "product_per_care": 1, "feed_per_care": 1}
+  ]
+}

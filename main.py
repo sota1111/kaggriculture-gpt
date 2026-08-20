@@ -19,6 +19,7 @@ MULTI_STOP_TASK_BUNDLING = True
 PROJECTED_MARKET_EXECUTION = False
 FERTILIZER_COVERAGE = True
 STAGGERED_STRAWBERRY_RENEWAL = True
+CARE_LIVESTOCK_COMPONENT = True
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -51,6 +52,12 @@ PUBLIC_EXECUTION_SOURCES = {
         "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
         "license": "Apache-2.0",
     },
+    "care_livestock": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+        "license": "MIT",
+        "boundary": "public-state unit economics only; no fixed route, replay trace, or weights",
+    },
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
@@ -58,6 +65,7 @@ MULTI_STOP_TASK_BUNDLE_FIRES = 0
 PROJECTED_MARKET_FIRES = 0
 FERTILIZER_COVERAGE_FIRES = 0
 STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
+CARE_LIVESTOCK_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -144,6 +152,13 @@ def _next_position(position, action):
 
 
 def _task_priority(tile, day, crop_specs=None, fertilizer_available=0):
+    if (CARE_LIVESTOCK_COMPONENT and isinstance(tile, dict)
+            and tile.get("kind") == "ANIMAL"
+            and tile.get("animal") in {"COW", "SHEEP"}):
+        if tile.get("care_required", tile.get("needs_care", False)):
+            return -2
+        if tile.get("feed_required", tile.get("needs_feed", False)):
+            return -1
     if isinstance(tile, dict) and tile.get("kind") == "PLANT":
         crop = tile.get("crop", "WHEAT")
         maturity = int((crop_specs or {}).get(crop, {}).get("maturity_days", 2))
@@ -165,6 +180,10 @@ def _task_priority(tile, day, crop_specs=None, fertilizer_available=0):
 def _action_at(tile, day, available_seeds, crop, crop_specs, fertilizer_available=0):
     global FERTILIZER_COVERAGE_FIRES
     priority = _task_priority(tile, day, crop_specs, fertilizer_available)
+    if priority == -2:
+        return ["CARE"], available_seeds, fertilizer_available
+    if priority == -1:
+        return ["FEED"], available_seeds, fertilizer_available
     if priority == 0:
         return ["HARVEST"], available_seeds, fertilizer_available
     if priority == 1:
@@ -460,6 +479,56 @@ def _hand_target(me, harvests_left):
     return max(MIN_HAND_TARGET, min(MAX_HAND_TARGET, capacity_target))
 
 
+def _care_livestock_orders(obs):
+    """Buy bounded cow/sheep capacity only when remaining CARE cycles repay it."""
+    global CARE_LIVESTOCK_FIRES
+    if not CARE_LIVESTOCK_COMPONENT:
+        return []
+    capabilities = set(obs.get("capabilities", ()))
+    if "BUY_ANIMAL" not in capabilities:
+        return []
+    day = max(0, int(obs.get("day", 0)))
+    total_days = max(day + 1, int(obs.get("total_days", 30)))
+    remaining_days = total_days - day
+    me = obs["farms"][int(obs["player"])]
+    money = max(0, int(me.get("money", 0)))
+    private = obs.get("private", {})
+    herd = private.get("animals", {})
+    shed = private.get("shed", {})
+    prices = obs.get("market", {}).get("prices", {})
+    animal_specs = obs.get("animals", {})
+    orders = []
+    committed = 0
+    candidates = []
+    for animal, product in (("COW", "MILK"), ("SHEEP", "WOOL")):
+        spec = animal_specs.get(animal, {})
+        capital = max(0, int(spec.get("price", 0)))
+        interval = max(1, int(spec.get("care_interval_days", 2)))
+        cycles = remaining_days // interval
+        units = max(1, int(spec.get("product_per_care", 1)))
+        feed_per_cycle = max(0, int(spec.get("feed_per_care", 1)))
+        feed_price = max(0, int(prices.get("FEED", spec.get("feed_price", 0))))
+        product_price = max(0, int(prices.get(product, spec.get("product_price", 0))))
+        net = cycles * (units * product_price - feed_per_cycle * feed_price) - capital
+        candidates.append((net, animal, capital, cycles))
+    for net, animal, capital, cycles in sorted(candidates, reverse=True):
+        owned = max(0, int(herd.get(animal, 0)))
+        runway = max(MIN_CASH_RESERVE * 2, int(me.get("daily_operating_cost", 0)) * 3)
+        if owned < 2 and cycles >= 2 and net > 0 and money - committed - capital >= runway:
+            orders.append(["BUY_ANIMAL", animal, 1])
+            committed += capital
+            CARE_LIVESTOCK_FIRES += 1
+            break
+    herd_size = sum(max(0, int(herd.get(animal, 0))) for animal in ("COW", "SHEEP"))
+    feed_needed = max(0, herd_size * 2 - int(shed.get("FEED", 0)))
+    feed_price = max(0, int(prices.get("FEED", 0)))
+    affordable_feed = max(0, (money - committed - MIN_CASH_RESERVE) // max(1, feed_price))
+    if feed_needed and feed_price and "BUY_PRODUCT" in capabilities:
+        orders.append(["BUY_PRODUCT", "FEED", min(feed_needed, affordable_feed)])
+        CARE_LIVESTOCK_FIRES += 1
+    return [order for order in orders if len(order) < 3 or order[2] > 0]
+
+
 def _future_prices(spec, day, current_price):
     forecast = spec.get("price_forecast", [])
     if isinstance(forecast, list) and forecast:
@@ -535,7 +604,7 @@ def _choose_crop(obs, seeds, history=()):
 
 
 def _policy_action(obs):
-    global PROJECTED_MARKET_FIRES
+    global PROJECTED_MARKET_FIRES, CARE_LIVESTOCK_FIRES
     history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
     me = obs["farms"][int(obs["player"])]
     private = obs["private"]
@@ -588,12 +657,24 @@ def _policy_action(obs):
         if sellable > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day or crowded_sale):
             sale_orders.append(["SELL", stored_crop, sellable])
 
+    if CARE_LIVESTOCK_COMPONENT:
+        for animal, product in (("COW", "MILK"), ("SHEEP", "WOOL")):
+            stored = max(0, int(stored_inventory.get(product, 0)))
+            price = max(0, int(prices.get(product, 0)))
+            spec = obs.get("animals", {}).get(animal, {})
+            target = max(0, int(spec.get("product_sell_above", price)))
+            if stored and price and (day >= total_days - 1 or price >= target):
+                sale_orders.append(["SELL", product, stored])
+                CARE_LIVESTOCK_FIRES += 1
+
     if PROJECTED_MARKET_EXECUTION:
         sale_orders.sort(key=lambda order: _sale_priority(obs, order[1]))
     market.extend(sale_orders)
 
     if mixed_route:
         market.extend(mixed_route["market"])
+
+    market.extend(_care_livestock_orders({**obs, "total_days": total_days}))
 
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
     advance_reserve = 1 if pressure["labor"] + pressure["field_demand"] >= 0.75 else 0
@@ -634,6 +715,7 @@ def component_firing_counts():
         "projected_market": PROJECTED_MARKET_FIRES,
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
         "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
+        "care_livestock": CARE_LIVESTOCK_FIRES,
     }
 
 
