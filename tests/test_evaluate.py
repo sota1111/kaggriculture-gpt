@@ -540,6 +540,44 @@ class EvaluationTest(unittest.TestCase):
         self.assertLessEqual(len(result["market"]), 10)
         self.assertNotIn("UNKNOWN", [action[1] for action in result["market"] if len(action) > 1])
 
+    def test_adaptive_route_expert_is_public_and_private_mutation_resistant(self):
+        from scripts.measure_adaptive_route_repair import AdaptiveRouteOverlay, SOURCE
+        agent = load_agent(ROOT / "main.py")
+        overlay = AdaptiveRouteOverlay(agent)
+        obs = {
+            "player": 0, "day": 5,
+            "farms": [
+                {"money": 200, "farmer": [0, 0], "hands": [],
+                 "tiles": [[{"kind": "WEED"}, None], [None, None]]},
+                {"money": 999, "farmer": [0, 0], "hands": [],
+                 "tiles": [[None, None], [None, None]]},
+            ],
+            "private": {"seeds": {"WHEAT": 1}, "shed": {"SECRET": 1}},
+        }
+        specs = agent._crop_specs(obs)
+        expected = overlay.public_route_expert(obs, specs)
+        obs["private"] = {"seeds": {"SECRET": 999}, "future_route": ["EAST"]}
+        obs["farms"][1]["money"] = 1
+        self.assertEqual("RECOVERY", expected)
+        self.assertEqual(expected, overlay.public_route_expert(obs, specs))
+        self.assertEqual("MIT", SOURCE["license"])
+
+    def test_adaptive_suffix_repair_is_bounded_and_collision_safe(self):
+        from scripts.measure_adaptive_route_repair import AdaptiveRouteOverlay
+        agent = load_agent(ROOT / "main.py")
+        overlay = AdaptiveRouteOverlay(agent)
+        me = {"farmer": [0, 0], "hands": [[2, 0]],
+              "tiles": [["LOCKED", "LOCKED", "LOCKED"],
+                        [{"kind": "WEED"}, "LOCKED", {"kind": "WEED"}]]}
+        before = overlay.counts()["adaptive_suffix_repair"]
+        actions = overlay.bounded_suffix_repair(me, [["PASS"], ["PASS"]], 1,
+                                                 agent.DEFAULT_CROPS, radius=3)
+        self.assertEqual([["SOUTH"], ["SOUTH"]], actions)
+        destinations = [agent._next_position(position, action)
+                        for position, action in zip(([0, 0], [2, 0]), actions)]
+        self.assertEqual(2, len(set(destinations)))
+        self.assertEqual(before + 2,
+                         overlay.counts()["adaptive_suffix_repair"])
     def test_late_capital_latch_is_public_one_shot_and_suppresses_investment(self):
         from scripts.measure_late_capital_latch import _load, _wrapper
 
