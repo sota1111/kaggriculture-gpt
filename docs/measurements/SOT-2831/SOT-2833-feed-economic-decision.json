@@ -1,0 +1,297 @@
+{
+  "axis": "winner-derived public-state feed-wheat runway",
+  "candidate_artifact": {
+    "path": "main.py",
+    "sha256": "632b2b27a5f1253339058f78690f1915f38e91264cffb90e6c2506d25b8774c2"
+  },
+  "confirm": {
+    "reason": "screen gate failed; confirm not consumed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "effective_config": {
+    "FEED_ECONOMIC_DECISION": false
+  },
+  "issue": "SOT-2833",
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_checks": {
+    "artifacts_unique": true,
+    "auditable_licenses": true,
+    "closed_loop_evidence_boundary": true,
+    "confirm_after_screen": true,
+    "entity_holdout": true,
+    "environment_pinned": true,
+    "fetch_only": true,
+    "immutable_full_digests": true,
+    "manifest_digest": true,
+    "no_kaggle_submission": true,
+    "no_sensitive_or_replay_payload_fields": true,
+    "panel_artifacts_exist": true,
+    "panels_nonempty": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "source_commit_hash_license_present": true,
+    "time_holdout": true,
+    "times_parseable": true,
+    "unique_panel_identity": true
+  },
+  "passed": false,
+  "runtime_candidate_retained": false,
+  "screen": {
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "feed_economic_firings": 0,
+          "invalid_actions": 0,
+          "margin": -23221.0,
+          "opponent_reward": 24515.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8308089198544621,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -23221.0,
+          "opponent_reward": 24515.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8309839209541678,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "opponent": "cok-v7-58c91c3",
+          "seed": 282001,
+          "time_utc": "2026-08-20T17:00:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "feed_economic_firings": 0,
+          "invalid_actions": 0,
+          "margin": -23221.0,
+          "opponent_reward": 24515.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8399848809931427,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -23221.0,
+          "opponent_reward": 24515.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8139514359645545,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "opponent": "cok-v7-58c91c3",
+          "seed": 282001,
+          "time_utc": "2026-08-20T17:00:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "feed_economic_firings": 0,
+          "invalid_actions": 0,
+          "margin": -122514.0,
+          "opponent_reward": 123808.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.807548861950636,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -122514.0,
+          "opponent_reward": 123808.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.976306278957054,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "opponent": "lonespear-v17-774b260",
+          "seed": 282002,
+          "time_utc": "2026-08-20T17:01:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "feed_economic_firings": 0,
+          "invalid_actions": 0,
+          "margin": -124269.0,
+          "opponent_reward": 125563.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8173197258729488,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -124269.0,
+          "opponent_reward": 125563.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8108905639965087,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "opponent": "lonespear-v17-774b260",
+          "seed": 282002,
+          "time_utc": "2026-08-20T17:01:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "no strict margin, tail, or worst improvement"
+    ],
+    "summary": {
+      "candidate_mean_rank": 2.0,
+      "candidate_wins": 0,
+      "lower_tail_margin_delta": 0.0,
+      "matches": 4,
+      "mean_margin_delta": 0.0,
+      "mean_reward_delta": 0.0,
+      "worst_margin_delta": 0.0
+    }
+  },
+  "selected_family": "economic",
+  "source": {
+    "commit": "9de2779147c004ab9e7b1545cd62ace4ef7ad1cd",
+    "license": "MIT",
+    "url": "https://github.com/zansued/kaggriculture-ai-agent"
+  },
+  "submission_contract": "PASS",
+  "targeted_trace": {
+    "actual_intervention": true,
+    "both_seats": true,
+    "firings": 4,
+    "rows": [
+      {
+        "identity_seed_invariant": true,
+        "order": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            8
+          ]
+        ],
+        "seat": 0
+      },
+      {
+        "identity_seed_invariant": true,
+        "order": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            8
+          ]
+        ],
+        "seat": 1
+      }
+    ]
+  }
+}

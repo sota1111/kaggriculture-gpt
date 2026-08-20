@@ -20,6 +20,7 @@ PROJECTED_MARKET_EXECUTION = False
 FERTILIZER_COVERAGE = True
 STAGGERED_STRAWBERRY_RENEWAL = True
 CARE_LIVESTOCK_COMPONENT = True
+FEED_ECONOMIC_DECISION = False
 SHED_OVERFLOW_PROTECTION = True
 CASH_RUNWAY_ACREAGE_EXPANSION = False
 PRODUCTIVE_ACTION_CAPACITY = False
@@ -72,6 +73,12 @@ PUBLIC_EXECUTION_SOURCES = {
         "license": "MIT",
         "boundary": "public-state unit economics only; no fixed route, replay trace, or weights",
     },
+    "feed_economic": {
+        "url": "https://github.com/zansued/kaggriculture-ai-agent",
+        "commit": "9de2779147c004ab9e7b1545cd62ace4ef7ad1cd",
+        "license": "MIT",
+        "boundary": "current own livestock/feed/wheat/cash plus public shop demand; no schedule, trace, replay bytes, identity, seed, or weights",
+    },
     "shed_overflow": {
         "url": "https://github.com/lonespear/kaggriculture",
         "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
@@ -106,6 +113,7 @@ PROJECTED_MARKET_FIRES = 0
 FERTILIZER_COVERAGE_FIRES = 0
 STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
 CARE_LIVESTOCK_FIRES = 0
+FEED_ECONOMIC_FIRES = 0
 SHED_OVERFLOW_FIRES = 0
 CASH_RUNWAY_ACREAGE_FIRES = 0
 PRODUCTIVE_ACTION_CAPACITY_FIRES = 0
@@ -786,6 +794,55 @@ def _care_livestock_orders(obs, route=None):
     return [order for order in orders if len(order) < 3 or order[2] > 0]
 
 
+def _feed_economic_order(obs):
+    """Fund a bounded wheat runway for the current herd from current state.
+
+    The source winner used a coherent schedule with large feed-wheat buys.  We
+    retain only its economic decision: buy enough wheat for the observable
+    herd's near-term feed cycles when cash runway and public shop demand make
+    those cycles supportable.  No schedule position or replay identity enters
+    this calculation, and the independent flag permits a clean ablation.
+    """
+    global FEED_ECONOMIC_FIRES
+    if not FEED_ECONOMIC_DECISION or "BUY_PRODUCT" not in set(obs.get("capabilities", ())):
+        return []
+    player = int(obs.get("player", 0))
+    me = obs.get("farms", [{}])[player]
+    private = obs.get("private", {})
+    herd = sum(max(0, int(count)) for count in private.get("animals", {}).values())
+    if not herd:
+        return []
+    day = max(0, int(obs.get("day", 0)))
+    remaining_days = max(0, int(obs.get("total_days", 30)) - day)
+    if not remaining_days:
+        return []
+    prices = obs.get("market", {}).get("prices", {})
+    wheat_price = max(0, int(prices.get("WHEAT", 0)))
+    if not wheat_price:
+        return []
+    shops = obs.get("town", {}).get("unlocked_shops", ()) or ()
+    livestock_demand = sum(any(token in str(shop) for token in ("MILK", "WOOL", "YARN", "CHEESE"))
+                           for shop in shops)
+    # Cover at most four current feed cycles.  Public downstream demand adds
+    # one cycle, but never changes the herd-bounded maximum.
+    cycles = min(4, remaining_days, 2 + int(bool(livestock_demand)))
+    target = herd * cycles
+    shed_wheat = max(0, int(private.get("shed", {}).get("WHEAT", 0)))
+    carried_wheat = sum(max(0, int(inventory.get("WHEAT", 0)))
+                        for inventory in private.get("inventories", ())
+                        if isinstance(inventory, dict))
+    needed = max(0, target - shed_wheat - carried_wheat)
+    money = max(0, int(me.get("money", 0)))
+    operating = max(0, int(me.get("daily_operating_cost", 0)))
+    reserve = max(MIN_CASH_RESERVE * 2, operating * min(3, remaining_days))
+    affordable = max(0, (money - reserve) // wheat_price)
+    quantity = min(20, needed, affordable)
+    if not quantity:
+        return []
+    FEED_ECONOMIC_FIRES += 1
+    return [["BUY_PRODUCT", "WHEAT", quantity]]
+
+
 def _future_prices(spec, day, current_price):
     forecast = spec.get("price_forecast", [])
     if isinstance(forecast, list) and forecast:
@@ -950,6 +1007,7 @@ def _policy_action(obs):
 
     market.extend(_care_livestock_orders(
         {**obs, "total_days": total_days}, public_route))
+    market.extend(_feed_economic_order({**obs, "total_days": total_days}))
 
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
     compact = _compact_replay_production(
@@ -1006,6 +1064,7 @@ def component_firing_counts():
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
         "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
         "care_livestock": CARE_LIVESTOCK_FIRES,
+        "feed_economic": FEED_ECONOMIC_FIRES,
         "shed_overflow": SHED_OVERFLOW_FIRES,
         "cash_runway_acreage": CASH_RUNWAY_ACREAGE_FIRES,
         "productive_action_capacity": PRODUCTIVE_ACTION_CAPACITY_FIRES,
