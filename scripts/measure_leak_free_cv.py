@@ -113,6 +113,11 @@ def measure(candidate_path: Path, fixture: dict[str, Any], manifest: dict[str, A
                 "tail_shift": panels["confirm"]["summary"]["lower_tail_margin"] - panels["screen"]["summary"]["lower_tail_margin"],
                 "interpretation": "confirm-minus-screen proxy; public leaderboard remains authoritative",
             },
+            "route_firings": int(
+                candidate.route_firing_count()
+                if callable(getattr(candidate, "route_firing_count", None))
+                else getattr(candidate, "MIXED_FARM_ROUTE_FIRES", 0)
+            ),
             "kaggle_submission": "NOT_PERFORMED",
         }
 

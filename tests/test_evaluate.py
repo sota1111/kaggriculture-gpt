@@ -408,6 +408,40 @@ class EvaluationTest(unittest.TestCase):
         }
         result = agent.agent(obs)
         self.assertEqual({"farmer", "hands", "market"}, set(result))
+
+    def test_mixed_farm_route_is_independent_and_uses_public_horizon(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = {
+            "player": 0, "day": 14, "total_days": 30,
+            "crops": {
+                "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
+                "MELON": {"seed_price": 40, "maturity_days": 5, "expected_yield": 2, "fallback_price": 80},
+                "STRAWBERRY": {"seed_price": 25, "maturity_days": 3, "expected_yield": 3, "fallback_price": 50},
+            },
+            "market": {"prices": {"WHEAT": 15, "MELON": 80, "STRAWBERRY": 50}},
+            "farms": [{"money": 2000, "farmer": [0, 0], "hands": [], "tiles": [[None]]}],
+            "private": {"seeds": {"WHEAT": 1, "MELON": 1, "STRAWBERRY": 1}, "shed": {}},
+        }
+        specs = agent._crop_specs(obs)
+        route = agent._mixed_farm_route(obs, specs, obs["private"]["seeds"])
+        self.assertEqual("STRAWBERRY", route["crop"])
+        self.assertEqual([], route["market"])
+        self.assertEqual("Apache-2.0", agent.MIXED_FARM_ROUTE_SOURCE["license"])
+
+    def test_mixed_farm_route_flag_records_firing_without_online_dependency(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = {
+            "player": 0, "day": 1, "total_days": 30,
+            "crops": {"WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15}},
+            "market": {"prices": {"WHEAT": 15}},
+            "farms": [{"money": 200, "farmer": [0, 0], "hands": [], "tiles": [[None]]}],
+            "private": {"seeds": {"WHEAT": 1}, "shed": {}},
+        }
+        agent.LONG_HORIZON_MIXED_FARM_ROUTE = True
+        before = agent.MIXED_FARM_ROUTE_FIRES
+        result = agent.agent(obs)
+        self.assertEqual(before + 1, agent.MIXED_FARM_ROUTE_FIRES)
+        self.assertEqual({"farmer", "hands", "market"}, set(result))
         self.assertLessEqual(len(result["market"]), 10)
         self.assertNotIn("UNKNOWN", [action[1] for action in result["market"] if len(action) > 1])
 
