@@ -10,6 +10,7 @@ from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
 from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
+from scripts.build_replay_teacher_dataset import public_projection, validate_manifest as validate_teacher_manifest
 from scripts.measure_fertilizer_coverage import classify_bottleneck
 from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
@@ -23,6 +24,42 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_replay_teacher_manifest_is_current_top_hash_pinned_and_isolated(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/replay_teacher_manifest.json").read_text()
+        )
+        checks = validate_teacher_manifest(manifest)
+        self.assertTrue(all(checks.values()), checks)
+        self.assertEqual(6, len(manifest["entries"]))
+        self.assertEqual(
+            {0, 1}, {row["winner_seat"] for row in manifest["entries"]}
+        )
+        self.assertEqual("NOT_PERFORMED", manifest["kaggle_submission"])
+
+    def test_replay_teacher_manifest_rejects_split_and_digest_drift(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/replay_teacher_manifest.json").read_text()
+        )
+        manifest["entries"][3]["winner_team_id"] = manifest["entries"][0]["winner_team_id"]
+        checks = validate_teacher_manifest(manifest)
+        self.assertFalse(checks["manifest_digest"])
+        self.assertFalse(checks["entity_holdout"])
+
+    def test_teacher_projection_removes_private_future_and_credentials(self):
+        observation = {
+            "step": 4, "day": 1, "market": {"prices": {"WHEAT": 20}},
+            "farms": [{"money": 100}], "private": {"shed": {"WHEAT": 99}},
+            "future_prices": [999], "credentialToken": "never-emit",
+            "remainingOverageTime": 12.5,
+        }
+        projected = public_projection(observation, 4)
+        self.assertEqual(
+            {"step": 4, "day": 1, "market": {"prices": {"WHEAT": 20}},
+             "farms": [{"money": 100}]}, projected
+        )
+        with self.assertRaises(ValueError):
+            public_projection(observation, 5)
+
     def test_shop_prefix_closed_loop_gate_requires_tail_and_runtime_integrity(self):
         from scripts.measure_shop_prefix_closed_loop import _gate
 
