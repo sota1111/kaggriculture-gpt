@@ -1,4 +1,5 @@
 import json
+import runpy
 import tempfile
 import unittest
 from pathlib import Path
@@ -17,6 +18,11 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_agent_is_last_callable_for_kaggle_file_loader(self):
+        namespace = runpy.run_path(str(ROOT / "main.py"))
+        callables = [name for name, value in namespace.items() if callable(value)]
+        self.assertEqual("agent", callables[-1])
+
     def test_fresh_live_lb_reanchor_is_deterministic_and_leak_free(self):
         manifest = json.loads((ROOT / "tests/fixtures/live_lb_reanchor_manifest.json").read_text())
         replay_dir = ROOT / "docs/measurements/SOT-2785/replays"
