@@ -13,6 +13,7 @@ from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.measure_fertilizer_coverage import classify_bottleneck
 from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
+from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +21,42 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_runway_expansion_is_independent_reserve_bounded_and_fires(self):
+        agent = load_agent(ROOT / "main.py")
+        rows = _targeted_trace(agent, True)
+        self.assertEqual({0, 1}, {row["seat"] for row in rows})
+        self.assertTrue(any(row["land"] for row in rows))
+        self.assertTrue(any(row["hire"] for row in rows))
+        self.assertTrue(any(row["plant"] for row in rows))
+        self.assertTrue(any(row["water"] for row in rows))
+        agent.CASH_RUNWAY_ACREAGE_EXPANSION = True
+        plan = agent._runway_expansion_plan({
+            "player": 0, "day": 5, "total_days": 30, "capabilities": ["BUY_LAND"],
+            "land_costs": [1000],
+            "farms": [{"money": 1100, "hands": [], "daily_operating_cost": 100,
+                       "unlocked_quadrants": ["NW"], "tiles": [[None] * 6]}],
+            "private": {"animals": {}}, "market": {"prices": {"FEED": 20}},
+        }, {"seed_price": 10, "maturity_days": 2}, "WHEAT", 5)
+        agent.CASH_RUNWAY_ACREAGE_EXPANSION = False
+        self.assertEqual([], plan["land"])
+        self.assertGreaterEqual(plan["reserve"], 300)
+        self.assertFalse(agent.CASH_RUNWAY_ACREAGE_EXPANSION)
+        self.assertFalse(agent.LONG_HORIZON_MIXED_FARM_ROUTE)
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["runway_acreage"]["license"])
+
+    def test_runway_gate_rejects_non_improving_candidate(self):
+        summary = {"mean_rank": 1, "lower_tail_margin": 1, "worst_margin": 1}
+        base = {window: {"summary": dict(summary)} for window in ("screen", "confirm")}
+        base["cash"] = {"mean_day_10_cash": 10, "mean_terminal_cash": 20,
+                        "invalid_actions": 0, "contract_violations": 0}
+        candidate = json.loads(json.dumps(base))
+        candidate["component_firings"] = {"cash_runway_acreage": 1}
+        paired = {window: {"checks": {"both_seats": True}} for window in ("screen", "confirm")}
+        targeted = [{"land": 1, "hire": 1, "plant": 1, "water": 1}]
+        passed, reasons = runway_gate(base, candidate, paired, 1.0, targeted)
+        self.assertFalse(passed)
+        self.assertIn("neither day-10 nor terminal cash improved", reasons)
+
     def test_post_repair_cash_flow_is_deterministic_isolated_and_auditable(self):
         manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
         corpus = json.loads((ROOT / "tests/fixtures/replay_corpus_manifest.json").read_text())
