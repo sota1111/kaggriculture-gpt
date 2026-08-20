@@ -24,7 +24,17 @@ SHED_OVERFLOW_PROTECTION = True
 CASH_RUNWAY_ACREAGE_EXPANSION = False
 PRODUCTIVE_ACTION_CAPACITY = False
 PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR = False
+COMPACT_REPLAY_POLICY = False
 HISTORY_LIMIT = 48
+
+# Deterministically distilled from the SOT-2824 screen split only.  These
+# constants capture a state-conditioned production cadence; they contain no
+# replay actions, episode identity, or external model weights.
+COMPACT_REPLAY_POLICY_CONSTANTS = {
+    "teacher_dataset_sha256": "c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f",
+    "hands_per_unlocked_quadrant": (4, 8, 12),
+    "land_milestones": ((5, 2, 2), (8, 8, 3)),
+}
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
 # The source agent uses a fixed action trace; this implementation retains only
@@ -103,6 +113,7 @@ PUBLIC_SHOP_PREFIX_ROUTE_FIRES = {
     "yarn_first": 0, "yarn_second": 0, "yarn_third": 0,
     "early_milk_support": 0, "default": 0,
 }
+COMPACT_REPLAY_POLICY_FIRES = {"land": 0, "labor": 0}
 
 _MILK_SUPPORT_SHOPS = {"PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"}
 _SHOP_PREFIX_ROUTES = {
@@ -637,6 +648,40 @@ def _hand_target(me, harvests_left):
     return max(MIN_HAND_TARGET, min(MAX_HAND_TARGET, capacity_target))
 
 
+def _compact_replay_production(obs, harvests_left, record=False):
+    """Return the screen-distilled land/labor targets from public state.
+
+    The policy is deliberately a tiny threshold table.  It claims no task
+    coordinates and consumes neither replay identity nor private inventory.
+    Land count conditions labor, so this is not the rejected static headcount
+    axis: additional workers are requested only after the matching production
+    capacity milestone has actually become public.
+    """
+    if not COMPACT_REPLAY_POLICY or harvests_left <= 0:
+        return {"land": [], "hand_target": None, "branch": "disabled"}
+    me = obs["farms"][int(obs["player"])]
+    day = max(0, int(obs.get("day", 0)))
+    unlocked = len(me.get("unlocked_quadrants", ()))
+    desired_land = 1
+    milestone_hour = None
+    for milestone_day, hour, target in COMPACT_REPLAY_POLICY_CONSTANTS["land_milestones"]:
+        if day >= milestone_day:
+            desired_land = target
+            if day == milestone_day:
+                milestone_hour = hour
+    land = ([['BUY_LAND']] if unlocked < desired_land
+            and milestone_hour == int(obs.get("hour", 0)) else [])
+    if land and record:
+        COMPACT_REPLAY_POLICY_FIRES["land"] += 1
+    hand_targets = COMPACT_REPLAY_POLICY_CONSTANTS["hands_per_unlocked_quadrant"]
+    target_index = max(0, min(len(hand_targets) - 1, unlocked - 1))
+    hand_target = hand_targets[target_index]
+    if len(me.get("hands", ())) < hand_target and record:
+        COMPACT_REPLAY_POLICY_FIRES["labor"] += 1
+    return {"land": land, "hand_target": hand_target,
+            "branch": f"land_{unlocked}_target_{desired_land}"}
+
+
 def _runway_expansion_plan(obs, crop_spec, crop, harvests_left):
     """Permit one public-state capacity step after operating reserves are funded."""
     global CASH_RUNWAY_ACREAGE_FIRES
@@ -907,12 +952,15 @@ def _policy_action(obs):
         {**obs, "total_days": total_days}, public_route))
 
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
+    compact = _compact_replay_production(
+        {**obs, "total_days": total_days}, harvests_left, record=True)
     expansion = _runway_expansion_plan(
         {**obs, "total_days": total_days}, crop_specs[crop], crop, harvests_left)
     if capacity is not None and capacity["observed_acreage"] >= capacity["acreage_limit"]:
         expansion["land"] = []
         expansion["extra_seeds"] = 0
     market.extend(expansion["land"])
+    market.extend(compact["land"])
     advance_reserve = 1 if pressure["labor"] + pressure["field_demand"] >= 0.75 else 0
     desired_seeds = (worker_count * SEED_RESERVE_PER_WORKER + advance_reserve
                      + expansion["extra_seeds"] if harvests_left else 0)
@@ -932,6 +980,8 @@ def _policy_action(obs):
     future_sale = max(_future_prices(crop_specs[crop], day, int(prices.get(crop, crop_specs[crop]["fallback_price"]))))
     expected_crop_margin = future_sale * float(crop_specs[crop]["expected_yield"]) - seed_price
     hand_target = _hand_target(me, harvests_left)
+    if compact["hand_target"] is not None:
+        hand_target = compact["hand_target"]
     if expansion["serviceable_hands"] is not None:
         hand_target = min(hand_target, expansion["serviceable_hands"])
     if len(hands) < hand_target:
@@ -960,6 +1010,7 @@ def component_firing_counts():
         "cash_runway_acreage": CASH_RUNWAY_ACREAGE_FIRES,
         "productive_action_capacity": PRODUCTIVE_ACTION_CAPACITY_FIRES,
         "public_shop_prefix_routes": dict(PUBLIC_SHOP_PREFIX_ROUTE_FIRES),
+        "compact_replay_policy": dict(COMPACT_REPLAY_POLICY_FIRES),
     }
 
 

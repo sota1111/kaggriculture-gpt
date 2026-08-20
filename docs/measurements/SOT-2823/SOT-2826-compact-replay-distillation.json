@@ -1,0 +1,25 @@
+{
+  "confirm_rows_used_for_tuning": 0,
+  "constants": {
+    "hands_per_unlocked_quadrant": [
+      4,
+      8,
+      12
+    ],
+    "land_milestones": [
+      [
+        5,
+        2,
+        2
+      ],
+      [
+        8,
+        8,
+        3
+      ]
+    ]
+  },
+  "dataset_sha256": "c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f",
+  "fit_split": "screen",
+  "screen_rows": 2160
+}
