@@ -22,6 +22,7 @@ from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
 from scripts.measure_public_action_capacity_oracle import measure as measure_public_capacity, validate_fixture as validate_capacity_fixture
 from scripts.measure_capacity_dispatcher import _targeted_trace as dispatcher_trace
+from scripts.measure_capacity_dispatcher_sealed_panel import measure as measure_dispatcher_sealed
 from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
@@ -1135,6 +1136,23 @@ class EvaluationTest(unittest.TestCase):
         self.assertTrue(trace["telemetry"]["last_tier_budgets"])
         self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["capacity_dispatcher"]["license"])
         self.assertIn("public clock", agent.PUBLIC_EXECUTION_SOURCES["capacity_dispatcher"]["boundary"])
+
+    def test_capacity_dispatcher_sealed_panel_rejects_with_direct_firing_evidence(self):
+        oracle = json.loads((ROOT / "docs/measurements/SOT-2850/SOT-2851-public-action-capacity-oracle.json").read_text())
+        report = measure_dispatcher_sealed(ROOT / "main.py", FIXTURE, oracle)
+        self.assertEqual("rejected", report["decision"])
+        self.assertTrue(report["passed"])
+        self.assertFalse(report["screen"]["passed"])
+        self.assertTrue(report["confirm"]["skipped"])
+        self.assertTrue(report["screen_pass_only_confirm"])
+        self.assertGreater(report["intervention_evidence"]["firings_delta"], 0)
+        self.assertFalse(report["effective_config"]["CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER"])
+
+    def test_capacity_dispatcher_sealed_panel_fails_closed_on_oracle_failure(self):
+        oracle = {"issue": "SOT-2851", "result": "inconclusive", "passed": False}
+        report = measure_dispatcher_sealed(ROOT / "main.py", FIXTURE, oracle)
+        self.assertEqual("inconclusive", report["decision"])
+        self.assertFalse(report["passed"])
 
     def test_sequence_precursor_policy_is_independent_bounded_and_auditable(self):
         agent = load_agent(ROOT / "main.py")

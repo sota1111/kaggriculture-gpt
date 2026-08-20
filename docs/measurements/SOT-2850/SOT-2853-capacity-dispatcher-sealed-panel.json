@@ -1,0 +1,357 @@
+{
+  "axis": "capacity-aware dispatcher sealed promotion panel",
+  "candidate_artifact": {
+    "path": "main.py",
+    "retained": false,
+    "sha256": "44e1b880e779fd3fe1b1a8e55941e2fd3967834c6bb1dcd795f55568b08b6b96"
+  },
+  "confirm": {
+    "reason": "screen promotion gate failed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "deterministic_rerun": {
+    "passed": true,
+    "sha256": "507851f5ca083b20eb597d6357ebf8427630c336c62cd04bda76429d09d1b5b4"
+  },
+  "effective_config": {
+    "CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER": false
+  },
+  "gate_reasons": [
+    "screen: productive density did not improve"
+  ],
+  "information_boundary": "current public clock, visible task tiers, and worker positions; recalculated every turn",
+  "intervention_evidence": {
+    "actions": [
+      [
+        "HARVEST"
+      ],
+      [
+        "DIG"
+      ]
+    ],
+    "firings_delta": 1,
+    "inputs": [
+      "public clock",
+      "visible task tiers",
+      "worker positions"
+    ],
+    "telemetry": {
+      "budget_repairs": 0,
+      "firings": 1,
+      "last_tier_budgets": {
+        "0": 0
+      },
+      "last_travel_budget": 0,
+      "productive_assignments": 2,
+      "standing": 2,
+      "tier_assignments": {},
+      "travel_steps": 0,
+      "turns": 1
+    }
+  },
+  "issue": "SOT-2853",
+  "kaggle_submission": "NOT_PERFORMED",
+  "oracle": {
+    "issue": "SOT-2851",
+    "passed": true,
+    "result": "promoted",
+    "sha256": "958f72c36d898f6b16979146d26310c5c1622ac08efdade0be647be6aa00eb98"
+  },
+  "passed": true,
+  "screen": {
+    "baseline_actions": {
+      "intervention": {
+        "budget_repairs": 0,
+        "firings": 0,
+        "last_tier_budgets": {},
+        "last_travel_budget": 0,
+        "productive_assignments": 0,
+        "standing": 0,
+        "tier_assignments": {},
+        "travel_steps": 0,
+        "turns": 0
+      },
+      "productive": 5576,
+      "productive_density": 0.44565217391304346,
+      "travel": 3488,
+      "travel_ratio": 0.27877237851662406,
+      "worker": 12512
+    },
+    "candidate_actions": {
+      "intervention": {
+        "budget_repairs": 52,
+        "firings": 2880,
+        "last_tier_budgets": {
+          "0": 1
+        },
+        "last_travel_budget": 1,
+        "productive_assignments": 8724,
+        "standing": 5528,
+        "tier_assignments": {
+          "0": 1508,
+          "2": 1576,
+          "4": 112
+        },
+        "travel_steps": 3196,
+        "turns": 2880
+      },
+      "productive": 5524,
+      "productive_density": 0.44149616368286443,
+      "travel": 3144,
+      "travel_ratio": 0.25127877237851665,
+      "worker": 12512
+    },
+    "direct_ab": {
+      "checks": {
+        "both_seats": true,
+        "deterministic_episode_ids": true,
+        "paired_non_regression": true,
+        "same_seed_direct_ab": true,
+        "terminal_bank_reward": true
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6793,
+            "harvested": 335,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6793,
+            "productive_actions": 1473,
+            "profit": 3793,
+            "reward": 6793
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "cok-v7-58c91c3|0|277001|1",
+          "opponent": "cok-v7-58c91c3",
+          "reward_delta": 110,
+          "seat": 0,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6793,
+            "harvested": 335,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6793,
+            "productive_actions": 1473,
+            "profit": 3793,
+            "reward": 6793
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "cok-v7-58c91c3|1|277001|1",
+          "opponent": "cok-v7-58c91c3",
+          "reward_delta": 110,
+          "seat": 1,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6793,
+            "harvested": 335,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6793,
+            "productive_actions": 1473,
+            "profit": 3793,
+            "reward": 6793
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v17-774b260|0|277002|2",
+          "opponent": "lonespear-v17-774b260",
+          "reward_delta": 110,
+          "seat": 0,
+          "seed": 277002,
+          "time_index": 2
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6793,
+            "harvested": 335,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6793,
+            "productive_actions": 1473,
+            "profit": 3793,
+            "reward": 6793
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v17-774b260|1|277002|2",
+          "opponent": "lonespear-v17-774b260",
+          "reward_delta": 110,
+          "seat": 1,
+          "seed": 277002,
+          "time_index": 2
+        }
+      ],
+      "summary": {
+        "candidate_wins_or_ties": 4,
+        "episode_count": 4,
+        "lower_tail_reward_delta": 110.0,
+        "mean_candidate_rank": 1.0,
+        "mean_reward_delta": 110.0,
+        "worst_reward_delta": 110.0
+      }
+    },
+    "gate_reasons": [
+      "productive density did not improve"
+    ],
+    "passed": false,
+    "primary": {
+      "candidate_wins_or_ties": 4,
+      "lower_tail_margin_delta": 110.0,
+      "mean_margin_delta": 110.0,
+      "mean_rank_improvement": 1.0,
+      "worst_margin_delta": 110.0
+    }
+  },
+  "screen_pass_only_confirm": true,
+  "sealed_holdout_checks": {
+    "checks": {
+      "both_seats": true,
+      "no_episode_overlap": true,
+      "no_future_price_reference": true,
+      "no_private_information": true,
+      "opponent_holdout": true,
+      "required_fields": true,
+      "seed_holdout": true,
+      "temporal_order": true,
+      "windows_nonempty": true
+    },
+    "episode_ids": {
+      "confirm": [
+        "lonespear-v18-774b260|0|277011|11",
+        "lonespear-v18-774b260|1|277011|11",
+        "lonespear-v23-774b260|0|277012|12",
+        "lonespear-v23-774b260|1|277012|12"
+      ],
+      "screen": [
+        "cok-v7-58c91c3|0|277001|1",
+        "cok-v7-58c91c3|1|277001|1",
+        "lonespear-v17-774b260|0|277002|2",
+        "lonespear-v17-774b260|1|277002|2"
+      ]
+    },
+    "passed": true
+  },
+  "secondary": {
+    "baseline": {
+      "intervention": {
+        "budget_repairs": 0,
+        "firings": 0,
+        "last_tier_budgets": {},
+        "last_travel_budget": 0,
+        "productive_assignments": 0,
+        "standing": 0,
+        "tier_assignments": {},
+        "travel_steps": 0,
+        "turns": 0
+      },
+      "productive": 5576,
+      "productive_density": 0.44565217391304346,
+      "travel": 3488,
+      "travel_ratio": 0.27877237851662406,
+      "worker": 12512
+    },
+    "candidate": {
+      "intervention": {
+        "budget_repairs": 52,
+        "firings": 2880,
+        "last_tier_budgets": {
+          "0": 1
+        },
+        "last_travel_budget": 1,
+        "productive_assignments": 8724,
+        "standing": 5528,
+        "tier_assignments": {
+          "0": 1508,
+          "2": 1576,
+          "4": 112
+        },
+        "travel_steps": 3196,
+        "turns": 2880
+      },
+      "productive": 5524,
+      "productive_density": 0.44149616368286443,
+      "travel": 3144,
+      "travel_ratio": 0.25127877237851665,
+      "worker": 12512
+    },
+    "productive_density_delta": -0.00415601023017903,
+    "repair_delta": 52,
+    "travel_delta": -344
+  },
+  "submission_contract": "PASS"
+}
