@@ -23,6 +23,7 @@ from scripts.measure_public_closed_loop_holdout import validate_manifest as vali
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
 from scripts.measure_feed_economic_sealed_panel import gate as feed_sealed_gate, panel_checks
+from scripts.measure_winner_sequence_support import measure as measure_winner_sequence_support
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,38 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_winner_sequence_support_manifest_and_measurement_are_leak_free(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/winner_sequence_support_manifest.json").read_text()
+        )
+        report = json.loads(
+            (ROOT / "docs/measurements/SOT-2835/SOT-2836-winner-sequence-support.json").read_text()
+        )
+        self.assertTrue(report["passed"])
+        self.assertTrue(all(report["checks"].values()), report["checks"])
+        self.assertEqual(manifest["dataset_sha256"], report["provenance"]["dataset_sha256"])
+        self.assertEqual({0, 1}, {row["winner_seat"] for row in manifest["entries"]})
+        self.assertEqual("task", report["confirm"]["stable_first_precursor"])
+        self.assertGreater(report["screen"]["sequence_support_gap"], 0)
+        self.assertGreater(report["confirm_panel"]["sequence_support_gap"], 0)
+        self.assertIn("no causal uplift", report["causal_boundary"])
+        self.assertFalse(report["runtime_candidate_changed"])
+        self.assertEqual("NOT_PERFORMED", report["kaggle_submission"])
+
+    def test_winner_sequence_support_fails_closed_on_dataset_digest_drift(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/winner_sequence_support_manifest.json").read_text()
+        )
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl") as dataset:
+            dataset.write("{}\n")
+            dataset.flush()
+            report = measure_winner_sequence_support(
+                Path(dataset.name), manifest, ROOT / "main.py", manifest["dataset_sha256"]
+            )
+        self.assertFalse(report["passed"])
+        self.assertTrue(report["confirm"]["skipped"])
+        self.assertFalse(report["checks"]["dataset_digest"])
+
     def test_feed_economic_sealed_panel_holds_out_every_split_dimension(self):
         manifest = json.loads((ROOT / "tests/fixtures/feed_economic_sealed_panel.json").read_text())
         checks = panel_checks(manifest)
