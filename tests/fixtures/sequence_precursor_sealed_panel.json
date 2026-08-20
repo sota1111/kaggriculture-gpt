@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "environment": {"name": "kaggriculture", "version": "1.32.2", "episode_steps": 720},
+  "evidence_policy": {
+    "mode": "live-closed-loop",
+    "recorded_action_replay": "open-loop-stress-only",
+    "live_win_probability_claimed": false,
+    "committed_payloads": "manifest-and-derived-match-metrics-only"
+  },
+  "artifacts": [
+    {"id": "cok-v7-58c91c3", "lineage": "COK-ZhangZiliang/Kaggriculture", "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture", "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff", "path": "main.py", "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794", "license": "Apache-2.0", "redistribution": "fetch-only"},
+    {"id": "lonespear-v17-774b260", "lineage": "lonespear/kaggriculture", "source_url": "https://github.com/lonespear/kaggriculture", "commit": "774b26093ccf4246525517d48420349b841b6e50", "path": "main_v17.py", "sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b", "license": "MIT", "redistribution": "fetch-only"},
+    {"id": "lonespear-v18-774b260", "lineage": "lonespear/kaggriculture", "source_url": "https://github.com/lonespear/kaggriculture", "commit": "774b26093ccf4246525517d48420349b841b6e50", "path": "main_v18.py", "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0", "license": "MIT", "redistribution": "fetch-only"},
+    {"id": "lonespear-v23-774b260", "lineage": "lonespear/kaggriculture", "source_url": "https://github.com/lonespear/kaggriculture", "commit": "774b26093ccf4246525517d48420349b841b6e50", "path": "main_v23.py", "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee", "license": "MIT", "redistribution": "fetch-only"}
+  ],
+  "panels": {
+    "screen": [
+      {"opponent": "cok-v7-58c91c3", "episode_id": "sealed-screen-cok-283801", "seed": 283801, "time_utc": "2026-08-20T21:30:00Z"},
+      {"opponent": "lonespear-v17-774b260", "episode_id": "sealed-screen-v17-283802", "seed": 283802, "time_utc": "2026-08-20T21:31:00Z"}
+    ],
+    "confirm": [
+      {"opponent": "lonespear-v18-774b260", "episode_id": "sealed-confirm-v18-283811", "seed": 283811, "time_utc": "2026-08-20T21:40:00Z"},
+      {"opponent": "lonespear-v23-774b260", "episode_id": "sealed-confirm-v23-283812", "seed": 283812, "time_utc": "2026-08-20T21:41:00Z"}
+    ]
+  },
+  "noise_width": {"rank": 0.0, "reward": 0.0, "margin": 0.0},
+  "runtime_ratio_threshold": 2.0,
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "a9a0b3c571f6a963dfcacbc93a898a05b3d9a715b34eee82e11d6c79afc7e6fd"
+}
