@@ -24,6 +24,7 @@ FEED_ECONOMIC_DECISION = False
 SHED_OVERFLOW_PROTECTION = True
 CASH_RUNWAY_ACREAGE_EXPANSION = False
 PRODUCTIVE_ACTION_CAPACITY = False
+CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER = False
 PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR = False
 COMPACT_REPLAY_POLICY = False
 SEQUENCE_PRECURSOR_POLICY = False
@@ -101,6 +102,12 @@ PUBLIC_EXECUTION_SOURCES = {
         "license": "MIT",
         "boundary": "public worker positions and crop-service backlog only; no fixed route, replay trace, private inventory, or weights",
     },
+    "capacity_dispatcher": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+        "license": "MIT",
+        "boundary": "current public clock, visible tasks, and worker positions only; no fixed trace, future state, private inventory, or weights",
+    },
     "shop_prefix_route_selector": {
         "url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
         "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
@@ -125,6 +132,12 @@ FEED_ECONOMIC_FIRES = 0
 SHED_OVERFLOW_FIRES = 0
 CASH_RUNWAY_ACREAGE_FIRES = 0
 PRODUCTIVE_ACTION_CAPACITY_FIRES = 0
+CAPACITY_DISPATCHER_FIRES = 0
+CAPACITY_DISPATCHER_TELEMETRY = {
+    "turns": 0, "standing": 0, "productive_assignments": 0,
+    "travel_steps": 0, "budget_repairs": 0, "tier_assignments": {},
+    "last_tier_budgets": {}, "last_travel_budget": 0,
+}
 PUBLIC_SHOP_PREFIX_ROUTE_FIRES = {
     "yarn_first": 0, "yarn_second": 0, "yarn_third": 0,
     "early_milk_support": 0, "default": 0,
@@ -554,6 +567,7 @@ def _action_at(tile, day, available_seeds, crop, crop_specs, fertilizer_availabl
 
 def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fertilizer_by_worker=()):
     global PUBLIC_SCHEDULER_FIRES, MULTI_STOP_TASK_BUNDLE_FIRES
+    global CAPACITY_DISPATCHER_FIRES
     tiles = me["tiles"]
     workers = [me["farmer"]] + list(me.get("hands", []))
     fertilizer_by_worker = tuple(max(0, int(value)) for value in fertilizer_by_worker)
@@ -577,7 +591,10 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
     candidates = []
     for y, row in enumerate(tiles):
         for x, tile in enumerate(row):
-            priority = _task_priority(tile, day, crop_specs, sum(fertilizer_remaining))
+            # The capacity controller observes task demand, not private stock.
+            # Resource feasibility remains an execution constraint below.
+            visible_fertilizer = 1 if CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER else sum(fertilizer_remaining)
+            priority = _task_priority(tile, day, crop_specs, visible_fertilizer)
             if priority is not None and (x, y) not in standing_positions:
                 if priority == 0:
                     distance_to_deadline = 1
@@ -591,6 +608,35 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
     # the most urgent nearby tasks avoids factorial growth on a fully open field.
     candidates.sort(key=lambda task: (task[0], task[1], task[2], task[3]))
     candidates = candidates[:max(len(workers), len(workers) + 2)]
+
+    # SOT-2852: rebuild the dispatcher budget from the current public state on
+    # every turn. Standing work is already fixed above. Remaining workforce is
+    # split by observed task-tier demand, with an explicit movement allowance;
+    # no assignment or route is carried across turns.
+    tier_budgets = {}
+    travel_budget = len(workers)
+    if CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER:
+        CAPACITY_DISPATCHER_FIRES += 1
+        available = max(0, len(workers) - len(standing_actions))
+        demand = {}
+        for priority, _, _, _ in candidates:
+            demand[priority] = demand.get(priority, 0) + 1
+        remaining = available
+        for priority in sorted(demand):
+            higher_demand = sum(demand[p] for p in demand if p > priority)
+            reserve = 1 if higher_demand and remaining > 1 else 0
+            tier_budgets[priority] = min(demand[priority], max(0, remaining - reserve))
+            remaining -= tier_budgets[priority]
+        # Spare workforce goes to the most urgent unfilled tiers.
+        for priority in sorted(demand):
+            extra = min(remaining, demand[priority] - tier_budgets[priority])
+            tier_budgets[priority] += extra
+            remaining -= extra
+        turns_left = max(1, turns_per_day - hour)
+        immediate_capacity = max(1, available * min(3, turns_left))
+        travel_budget = max(available, immediate_capacity - sum(demand.values()))
+        CAPACITY_DISPATCHER_TELEMETRY["last_tier_budgets"] = dict(tier_budgets)
+        CAPACITY_DISPATCHER_TELEMETRY["last_travel_budget"] = travel_budget
 
     def bundled_tail_cost(task_index):
         """Bounded two-stop VRP proxy using only the current public task set."""
@@ -620,6 +666,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
             if priority == 1 and fertilizer_by_worker[worker_index] <= 0:
                 continue
             distance = abs(tx - px) + abs(ty - py)
+            if CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER and distance > travel_budget:
+                continue
             action = _move((px, py), (tx, ty)) if distance else ["PASS"]
             next_position = _next_position((px, py), action)
             conflict = int(next_position in occupied and next_position != (px, py))
@@ -631,11 +679,22 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
             )
             # Deadline misses and movement conflicts dominate travel. Priority weights
             # ensure low-value planting cannot delay harvest/water work.
+            density_cost = 0
+            if CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER:
+                # Spending scarce action capacity on travel has an explicit
+                # opportunity cost. Tier demand determines the workforce cap.
+                density_cost = distance * (20 + 5 * sum(demand.values()))
+                assigned_same_tier = sum(
+                    candidates[index][0] == priority
+                    for index in range(len(candidates)) if used_mask & (1 << index)
+                )
+                if assigned_same_tier >= tier_budgets.get(priority, 0):
+                    continue
             cost = (
                 future_cost[0] + conflict,
                 future_cost[1] + overdue,
                 future_cost[2] + priority * 100 + distance * (4 - min(priority, 3))
-                + bundled_tail_cost(task_index),
+                + bundled_tail_cost(task_index) + density_cost,
             )
             proposal = cost, (task_index,) + future_choices
             if best is None or proposal < best:
@@ -665,6 +724,20 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
         else:
             action = _move(position, (tx, ty))
         actions.append(action)
+    if CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER:
+        CAPACITY_DISPATCHER_TELEMETRY["turns"] += 1
+        CAPACITY_DISPATCHER_TELEMETRY["standing"] += len(standing_actions)
+        CAPACITY_DISPATCHER_TELEMETRY["productive_assignments"] += len(standing_actions)
+        for position, choice, action in zip(workers, choices, actions):
+            if choice < 0:
+                continue
+            priority = candidates[choice][0]
+            key = str(priority)
+            tiers = CAPACITY_DISPATCHER_TELEMETRY["tier_assignments"]
+            tiers[key] = tiers.get(key, 0) + 1
+            CAPACITY_DISPATCHER_TELEMETRY["productive_assignments"] += 1
+            if action[0] in {"NORTH", "SOUTH", "EAST", "WEST"}:
+                CAPACITY_DISPATCHER_TELEMETRY["travel_steps"] += 1
     # A later worker may approach a different task through the same intermediate
     # cell. Resolve that one-turn collision deterministically after assignment.
     reserved_moves = set()
@@ -674,6 +747,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
         destination = _next_position(position, action)
         if destination in reserved_moves:
             actions[index] = ["PASS"]
+            if CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER:
+                CAPACITY_DISPATCHER_TELEMETRY["budget_repairs"] += 1
         else:
             reserved_moves.add(destination)
     return actions
@@ -1291,6 +1366,12 @@ def component_firing_counts():
         "shed_overflow": SHED_OVERFLOW_FIRES,
         "cash_runway_acreage": CASH_RUNWAY_ACREAGE_FIRES,
         "productive_action_capacity": PRODUCTIVE_ACTION_CAPACITY_FIRES,
+        "capacity_aware_closed_loop_dispatcher": {
+            "firings": CAPACITY_DISPATCHER_FIRES,
+            **CAPACITY_DISPATCHER_TELEMETRY,
+            "tier_assignments": dict(CAPACITY_DISPATCHER_TELEMETRY["tier_assignments"]),
+            "last_tier_budgets": dict(CAPACITY_DISPATCHER_TELEMETRY["last_tier_budgets"]),
+        },
         "public_shop_prefix_routes": dict(PUBLIC_SHOP_PREFIX_ROUTE_FIRES),
         "compact_replay_policy": dict(COMPACT_REPLAY_POLICY_FIRES),
         "sequence_precursor_policy": {
