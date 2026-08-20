@@ -137,6 +137,17 @@ python3 scripts/measure_adaptive_route_repair.py \
 The candidate is kept in the measurement harness only unless both screen and
 independent confirm meet the strict rank/margin/tail promotion gate.
 
+The follow-up sealed decision gate is reproducible with:
+
+```bash
+python3 scripts/measure_feed_economic_sealed_panel.py
+```
+
+It uses opponent-, episode-, seed-, and time-disjoint screen/confirm identities,
+compares the flag off/on with the same seed in both seats, and opens confirm only
+after screen clears the rank/reward/margin noise and tail/contract gates. A
+rejection leaves `FEED_ECONOMIC_DECISION = False` and performs no Kaggle submit.
+
 ## Fertilizer coverage ablation
 
 `scripts/measure_fertilizer_coverage.py` first compares recurring strawberry

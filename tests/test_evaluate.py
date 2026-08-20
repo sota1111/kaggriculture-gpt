@@ -22,6 +22,7 @@ from scripts.measure_productive_action_capacity import _gate as capacity_gate, _
 from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
+from scripts.measure_feed_economic_sealed_panel import gate as feed_sealed_gate, panel_checks
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +30,30 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_feed_economic_sealed_panel_holds_out_every_split_dimension(self):
+        manifest = json.loads((ROOT / "tests/fixtures/feed_economic_sealed_panel.json").read_text())
+        checks = panel_checks(manifest)
+        self.assertTrue(all(checks.values()), checks)
+        self.assertEqual("NOT_PERFORMED", manifest["kaggle_submission"])
+
+    def test_feed_economic_sealed_gate_requires_live_intervention_and_kpi_uplift(self):
+        run = {"rank": 1, "states": 720, "statuses": ["DONE", "DONE"],
+               "invalid_actions": 0, "contract_violations": 0, "stderr": "", "seconds": 1.0}
+        candidate = {**run, "feed_economic_firings": 0}
+        window = {"summary": {
+            "mean_rank_improvement": 0, "mean_reward_delta": 0,
+            "lower_tail_reward_delta": 0, "worst_reward_delta": 0,
+            "mean_margin_delta": 0, "lower_tail_margin_delta": 0,
+            "worst_margin_delta": 0, "candidate_interventions": 0,
+            "invalid_actions": 0, "contract_violations": 0,
+        }, "raw_rows": [{"identity": {"episode_id": "screen"},
+                           "champion": run, "candidate": candidate}]}
+        passed, reasons, runtime = feed_sealed_gate(
+            window, {"rank": 0, "reward": 0, "margin": 0}, 2.0)
+        self.assertFalse(passed)
+        self.assertIn("candidate produced no live intervention", reasons)
+        self.assertFalse(any(runtime["primary_kpi_beyond_noise"].values()))
+
     def test_feed_economic_decision_is_independent_public_state_and_fires_both_seats(self):
         agent = load_agent(ROOT / "main.py")
         trace = feed_economic_trace(ROOT / "main.py")
