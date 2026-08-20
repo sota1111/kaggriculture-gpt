@@ -74,6 +74,24 @@ projects identity and chronological public metadata; private observations and
 future steps are excluded. The older public-source corpus remains an explicitly
 separate fallback and is never presented as authenticated live-ladder evidence.
 
+### Winner-only teacher dataset
+
+`scripts/build_replay_teacher_dataset.py` materializes a local JSONL teacher
+dataset from the current top-ladder identities pinned in
+`tests/fixtures/replay_teacher_manifest.json`. Each row contains the winning
+seat's same-step public observation and next action. Winner team, episode, seed,
+and time are isolated between screen and confirm; private/future/credential
+fields fail closed. Replay bytes and the generated dataset stay local, while the
+committed measurement records their deterministic hashes and coverage:
+
+```bash
+python3 scripts/build_replay_teacher_dataset.py \
+  --dataset-output /tmp/kaggriculture-winner-teacher.jsonl
+```
+
+If authenticated acquisition is unavailable, do not describe fallback public
+artifacts as current-top data; retain their hash/license-pinned fallback label.
+
 ## Adaptive route-repair ablation
 
 `scripts/measure_adaptive_route_repair.py` evaluates a public-state-only route
