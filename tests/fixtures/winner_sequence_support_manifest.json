@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "capture_cutoff_utc": "2026-08-20T19:24:54Z",
+  "competition": "kaggriculture",
+  "dataset_sha256": "c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f",
+  "leaderboard_snapshot": {"captured_at_utc":"2026-08-20T19:25:49Z","top_teams":[{"rank":1,"team_id":16644287,"team_name":"Ryo Hasegawa","submission_id":55614463,"public_score":3169.9},{"rank":2,"team_id":16623716,"team_name":"tetsuya","submission_id":55574890,"public_score":3059.5},{"rank":3,"team_id":16714457,"team_name":"Crop Dusta","submission_id":55623460,"public_score":3051.0}]},
+  "acquisition": {"status":"authenticated-kaggle-api","path":"KaggleApi.competition_leaderboard_view / competition_team_submissions / competition_list_episodes / competition_episode_replay","selection":"completed public episodes won by snapshot top-3 submissions; chronological entity holdout","fallback_boundary":"If authenticated acquisition is unavailable, this manifest must not be regenerated or described as current-top; use an existing hash/license-pinned public artifact with fallback status instead."},
+  "information_boundary": {"features":"same-step public observation with private/future/credential fields removed","label":"winner action from the same replay step","split":"winner team, episode, seed, and time are disjoint; confirm occurs strictly after screen","sequence":"current and preceding public observations/actions only; inventory and feed balances are prefix-inferred"},
+  "artifact_policy": {"committed":"manifest, measurement, and source only; no replay bytes, credentials, or external weights","dataset_materialization":"deterministic JSONL is generated locally and identified by SHA-256"},
+  "entries": [
+    {"window":"screen","episode_id":95118941,"seed":1559568124,"time_utc":"2026-08-20T11:18:14.496Z","winner_team_id":16714457,"winner_team_name":"Crop Dusta","winner_submission_id":55623460,"winner_seat":0,"steps":720,"replay_sha256":"d32563f9a2f305393a5c38386cb9a197d45c97a0ab1308bba618c6c236f13bf1"},
+    {"window":"screen","episode_id":95118993,"seed":880394922,"time_utc":"2026-08-20T11:18:14.570Z","winner_team_id":16714457,"winner_team_name":"Crop Dusta","winner_submission_id":55623460,"winner_seat":1,"steps":720,"replay_sha256":"4cd68e74a63b1f9d4767616c750b65012dd1fed3930a271162ad2bf63d62d17d"},
+    {"window":"screen","episode_id":95217131,"seed":1138501176,"time_utc":"2026-08-20T14:10:46.271Z","winner_team_id":16714457,"winner_team_name":"Crop Dusta","winner_submission_id":55623460,"winner_seat":0,"steps":720,"replay_sha256":"20f29c23edf4e436776ab0ee791f3ecdec701e9345984b0472e547b8f65c3b25"},
+    {"window":"confirm","episode_id":95265096,"seed":285297507,"time_utc":"2026-08-20T15:34:49.205Z","winner_team_id":16644287,"winner_team_name":"Ryo Hasegawa","winner_submission_id":55614463,"winner_seat":0,"steps":720,"replay_sha256":"398840f3e61e286ec0e732c5debee2fb24feda3e2fe800c54f954ceb91b39b01"},
+    {"window":"confirm","episode_id":95329038,"seed":812665366,"time_utc":"2026-08-20T17:26:49.065Z","winner_team_id":16644287,"winner_team_name":"Ryo Hasegawa","winner_submission_id":55614463,"winner_seat":1,"steps":720,"replay_sha256":"6f69ef143e8b0a273a59b22929f06b2f3cc7c9bd28c555841717e2218b41aef2"},
+    {"window":"confirm","episode_id":95381518,"seed":316581082,"time_utc":"2026-08-20T18:59:20.381Z","winner_team_id":16644287,"winner_team_name":"Ryo Hasegawa","winner_submission_id":55614463,"winner_seat":1,"steps":720,"replay_sha256":"5e5261fdd4761286c4b0a95c914e648eb845d44a354be4a3a130559a8f770e38"}
+  ],
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "dfa76b0992006efa81ce721b65aac8cbe91e53b45d8a4594740746a1aee2972d"
+}

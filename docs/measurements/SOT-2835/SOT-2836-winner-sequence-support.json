@@ -1,0 +1,172 @@
+{
+  "artifact_policy": "aggregate evidence/source/manifest only; no dataset, replay bytes, credentials, private/future fields, or external weights",
+  "axis": "winner economic action prefix decision-sequence support",
+  "causal_boundary": "attribution proxy only; no causal uplift or live-trajectory reachability claim",
+  "checks": {
+    "both_seats_measured": true,
+    "dataset_digest": true,
+    "manifest_valid": true,
+    "no_child_submission": true,
+    "no_forbidden_field_names": true,
+    "public_prefix_only": true,
+    "screen_confirm_entity_holdout": true,
+    "screen_confirm_episode_holdout": true,
+    "screen_confirm_seed_holdout": true,
+    "screen_confirm_time_holdout": true
+  },
+  "confirm": {
+    "passed": true,
+    "skipped": false,
+    "stable_first_precursor": "task"
+  },
+  "confirm_panel": {
+    "economic_events": 811,
+    "first_precursor_counts": {
+      "task": 3
+    },
+    "first_unreachable_precursors": [
+      {
+        "champion_verb": "WEST",
+        "economic_step": 3,
+        "episode_id": 95265096,
+        "precursor": "task",
+        "precursor_step": 1,
+        "public_conditions": {
+          "animal_tiles": 0,
+          "cash_band": 0,
+          "coop_count": 0,
+          "locations": "4,4|5,4|4,5|5,5|4,4|5,4",
+          "pasture_count": 1,
+          "prefix_feed_balance": 0,
+          "prefix_inventory_balance": 0,
+          "worker_count": 5
+        },
+        "teacher_verb": "BUILD_PASTURE",
+        "winner_seat": 0
+      },
+      {
+        "champion_verb": "WEST",
+        "economic_step": 3,
+        "episode_id": 95329038,
+        "precursor": "task",
+        "precursor_step": 1,
+        "public_conditions": {
+          "animal_tiles": 0,
+          "cash_band": 0,
+          "coop_count": 0,
+          "locations": "4,4|5,4|4,5|5,5|4,4|5,4",
+          "pasture_count": 1,
+          "prefix_feed_balance": 0,
+          "prefix_inventory_balance": 0,
+          "worker_count": 5
+        },
+        "teacher_verb": "BUILD_PASTURE",
+        "winner_seat": 1
+      },
+      {
+        "champion_verb": "WEST",
+        "economic_step": 3,
+        "episode_id": 95381518,
+        "precursor": "task",
+        "precursor_step": 1,
+        "public_conditions": {
+          "animal_tiles": 0,
+          "cash_band": 0,
+          "coop_count": 0,
+          "locations": "4,4|5,4|4,5|5,5|4,4|5,4",
+          "pasture_count": 1,
+          "prefix_feed_balance": 0,
+          "prefix_inventory_balance": 0,
+          "worker_count": 5
+        },
+        "teacher_verb": "BUILD_PASTURE",
+        "winner_seat": 1
+      }
+    ],
+    "sequence_support_gap": 0.996301,
+    "sequence_support_rate": 0.003699,
+    "sequence_supported_events": 3
+  },
+  "decision": "inconclusive",
+  "inventory_definition": "prefix-inferred from same/past public actions only; private shed and future state are excluded",
+  "issue": "SOT-2836",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": {
+    "champion_sha256": "632b2b27a5f1253339058f78690f1915f38e91264cffb90e6c2506d25b8774c2",
+    "dataset_sha256": "c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f",
+    "manifest_sha256": "dfa76b0992006efa81ce721b65aac8cbe91e53b45d8a4594740746a1aee2972d",
+    "measurement_input_sha256": "e72a81f8ddaab5bfc494dc78d53916e56ea40760ab640354f244cf6d93a7a6f9"
+  },
+  "runtime_candidate_changed": false,
+  "screen": {
+    "economic_events": 992,
+    "first_precursor_counts": {
+      "task": 3
+    },
+    "first_unreachable_precursors": [
+      {
+        "champion_verb": "WEST",
+        "economic_step": 2,
+        "episode_id": 95118941,
+        "precursor": "task",
+        "precursor_step": 1,
+        "public_conditions": {
+          "animal_tiles": 0,
+          "cash_band": 1,
+          "coop_count": 0,
+          "locations": "4,4|5,4|4,5|5,5|4,4",
+          "pasture_count": 1,
+          "prefix_feed_balance": 0,
+          "prefix_inventory_balance": 0,
+          "worker_count": 4
+        },
+        "teacher_verb": "BUILD_PASTURE",
+        "winner_seat": 0
+      },
+      {
+        "champion_verb": "WEST",
+        "economic_step": 2,
+        "episode_id": 95118993,
+        "precursor": "task",
+        "precursor_step": 1,
+        "public_conditions": {
+          "animal_tiles": 0,
+          "cash_band": 1,
+          "coop_count": 0,
+          "locations": "4,4|5,4|4,5|5,5|4,4",
+          "pasture_count": 1,
+          "prefix_feed_balance": 0,
+          "prefix_inventory_balance": 0,
+          "worker_count": 4
+        },
+        "teacher_verb": "BUILD_PASTURE",
+        "winner_seat": 1
+      },
+      {
+        "champion_verb": "WEST",
+        "economic_step": 2,
+        "episode_id": 95217131,
+        "precursor": "task",
+        "precursor_step": 1,
+        "public_conditions": {
+          "animal_tiles": 0,
+          "cash_band": 1,
+          "coop_count": 0,
+          "locations": "4,4|5,4|4,5|5,5|4,4",
+          "pasture_count": 1,
+          "prefix_feed_balance": 0,
+          "prefix_inventory_balance": 0,
+          "worker_count": 4
+        },
+        "teacher_verb": "BUILD_PASTURE",
+        "winner_seat": 0
+      }
+    ],
+    "sequence_support_gap": 0.996976,
+    "sequence_support_rate": 0.003024,
+    "sequence_supported_events": 3
+  },
+  "sequence_length": 8,
+  "support_definition": "winner first-action verbs supported by champion decisions on the same public observation across the preceding bounded prefix"
+}
