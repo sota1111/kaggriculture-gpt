@@ -1,36 +1,40 @@
-# Solo Worker Report — SOT-2831
+# Solo Worker Report — SOT-2845
 
 ## Summary
 
-Aggregated completed children SOT-2832/SOT-2833/SOT-2834. The leak-free attribution selected `economic`, but the isolated feed-economic candidate failed both live closed-loop screens with zero interventions and zero KPI improvement. The candidate remains disabled and no Kaggle submission was made.
+Built and executed a hash-pinned, opponent-diverse, both-seat sealed closed-loop gate for the sequence planner. The strict rank-first screen rejected the candidate and correctly preserved confirm identities. The planner default was reverted to the champion (`false`), evidence was recorded, and no Kaggle submission was made.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — cycle 4 parent aggregation and strict no-submit decision.
-- `docs/ai/linear/SOT-2831.md` — child results, artifact state, submission decision, and acceptance tracking.
-- `docs/ai/65_worker_solo_report.md`, `docs/ai/70_final_report.md` — final lifecycle reports.
+- `scripts/measure_sequence_planner_sealed_panel.py` — live paired A/B harness and screen→confirm gate.
+- `tests/fixtures/sequence_planner_sealed_panel.json` — immutable artifacts and isolated identities.
+- `docs/measurements/SOT-2842/SOT-2845-sequence-planner-sealed-panel.{json,md}` — all match rows, hashes, metrics, and decision.
+- `main.py` / `submission.tar.gz` — rejected planner default reverted and champion archive rebuilt.
+- `tests/test_evaluate.py` — strict rank/firing gate regression coverage.
+- `docs/ai/experiment_ledger.jsonl` — rejected axis appended.
+- `docs/ai/linear/SOT-2845.md` — lifecycle record.
 
 ## Verification
 
-- All three children: Done; PRs #54–#56 merged.
-- Python compile and unit suite: PASS.
-- Submission contract/build: PASS.
-- Ledger JSONL parse and diff whitespace: PASS.
-- `main.py` SHA-256: `632b2b27a5f1253339058f78690f1915f38e91264cffb90e6c2506d25b8774c2`.
-- `submission.tar.gz` SHA-256: `916608500cb297dc1058fdbf95a9f48be57db9c94c5aca30f5605ccc705b48b9`.
+- Python compile: PASS.
+- Unit tests: PASS (102/102).
+- Sealed screen: completed (4 matches, two archetypes, both seats).
+- Sealed confirm: correctly skipped because screen failed.
+- Submission contract / exec compatibility: PASS.
+- Deterministic archive: PASS (`cc15f7efe168a874132c91d74e0dd9c082b73517118ef8a0133c6e922d348819` twice).
 - npm lint/typecheck/test and e2e: N/A (Python-only repository; no package.json or browser suite).
-- Kaggle submission: NOT PERFORMED; strict improvement gate failed and daily budget was 5/5.
+- Kaggle submission: NOT_PERFORMED.
 
 ## Acceptance Criteria
 
-- [x] Improvement axis and rationale recorded.
-- [x] All children completed and results aggregated.
-- [x] Candidate/evaluation evidence and effective flags recorded.
-- [x] No-promotion/no-submission decision recorded.
-- [x] Rejection backed by isolated firing evidence and same-seed/both-seat direct A/B.
-- [x] Linear completion and handoff reports posted.
+- [x] Opponent-diverse both-seat screen completed.
+- [x] Confirm remained sealed after the screen failed.
+- [x] Rank/tail/constraint/firing and productive/travel evidence saved with rows and hashes.
+- [x] Rejection supported by direct A/B and live firing evidence and appended to ledger.
+- [x] Submission contract and exec compatibility passed.
+- [x] No Kaggle submission was executed.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Acceptance: PASS
 

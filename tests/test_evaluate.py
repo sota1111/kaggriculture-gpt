@@ -27,6 +27,7 @@ from scripts.measure_feed_economic_sealed_panel import gate as feed_sealed_gate,
 from scripts.measure_sequence_precursor_sealed_panel import gate as precursor_sealed_gate
 from scripts.measure_winner_sequence_support import measure as measure_winner_sequence_support
 from scripts.measure_sequence_planner import measure as measure_sequence_planner, planner_observation
+from scripts.measure_sequence_planner_sealed_panel import gate as sequence_planner_sealed_gate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,26 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_sequence_planner_sealed_gate_requires_rank_and_live_multistep_firing(self):
+        run = {"rank": 1, "states": 720, "statuses": ["DONE", "DONE"],
+               "invalid_actions": 0, "contract_violations": 0, "stderr": "", "seconds": 1.0,
+               "capacity_violations": 0}
+        candidate = {**run, "planner": {"firings": 0, "multi_step_firings": 0, "repairs": 0}}
+        window = {"summary": {
+            "mean_rank_improvement": 0, "mean_reward_delta": 10,
+            "lower_tail_reward_delta": 0, "worst_reward_delta": 0,
+            "mean_margin_delta": 10, "lower_tail_margin_delta": 0,
+            "worst_margin_delta": 0, "planner_firings": 0, "multi_step_firings": 0,
+            "capacity_violations": 0, "invalid_actions": 0, "contract_violations": 0,
+        }, "raw_rows": [{"identity": {"episode_id": "screen"},
+                           "champion": run, "candidate": candidate}]}
+        passed, reasons, runtime = sequence_planner_sealed_gate(
+            window, {"rank": 0, "reward": 0, "margin": 0}, 2.0)
+        self.assertFalse(passed)
+        self.assertIn("primary rank KPI did not improve beyond deterministic noise width", reasons)
+        self.assertIn("planner did not fire as a multi-step intervention in closed loop", reasons)
+        self.assertFalse(runtime["primary_kpi_beyond_noise"]["rank"])
+
     def test_receding_horizon_planner_ablation_fires_both_seats_and_changes_sequence(self):
         fixture = json.loads((ROOT / "tests/fixtures/sequence_planner_panel.json").read_text())
         report = measure_sequence_planner(ROOT / "main.py", fixture)
