@@ -13,6 +13,7 @@ from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.build_replay_teacher_dataset import public_projection, validate_manifest as validate_teacher_manifest
 from scripts.distill_compact_replay_policy import distill as distill_compact_policy
 from scripts.measure_compact_replay_policy import targeted_trace as compact_targeted_trace
+from scripts.measure_compact_policy_sealed_gate import measure as measure_compact_sealed_gate
 from scripts.measure_fertilizer_coverage import classify_bottleneck
 from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
@@ -26,6 +27,50 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_compact_sealed_gate_uses_only_untouched_confirm_identities(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/public_closed_loop_holdout.json").read_text()
+        )
+        screen = manifest["panels"]["screen"]
+        confirm = manifest["panels"]["confirm"]
+        self.assertTrue({row["opponent"] for row in screen}.isdisjoint(
+            row["opponent"] for row in confirm
+        ))
+        self.assertTrue({row["seed"] for row in screen}.isdisjoint(
+            row["seed"] for row in confirm
+        ))
+
+    def test_compact_sealed_gate_fails_closed_without_manifest_integrity(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/public_closed_loop_holdout.json").read_text()
+        )
+        manifest["manifest_sha256"] = "0" * 64
+        report = measure_compact_sealed_gate(ROOT / "main.py", manifest)
+        self.assertEqual("inconclusive", report["decision"])
+        self.assertFalse(report["passed"])
+        self.assertFalse(report["manifest_checks"]["manifest_digest"])
+
+    def test_compact_sealed_gate_requires_reward_non_regression(self):
+        from scripts.measure_compact_policy_sealed_gate import _sealed_gate
+
+        window = {
+            "summary": {
+                "mean_margin_delta": 5, "lower_tail_margin_delta": 1,
+                "worst_margin_delta": 1, "mean_reward_delta": -1,
+                "candidate_mean_rank": 1,
+            },
+            "raw_rows": [{
+                "identity": {"seed": 1},
+                "champion": {"rank": 1, "states": 720, "statuses": ["DONE", "DONE"],
+                             "invalid_actions": 0, "contract_violations": 0, "stderr": ""},
+                "candidate": {"rank": 1, "states": 720, "statuses": ["DONE", "DONE"],
+                              "invalid_actions": 0, "contract_violations": 0, "stderr": ""},
+            }],
+        }
+        passed, reasons = _sealed_gate(window)
+        self.assertFalse(passed)
+        self.assertIn("mean reward regressed", reasons)
+
     def test_compact_replay_policy_constants_reproduce_from_screen_only(self):
         recorded = json.loads((ROOT / "docs/measurements/SOT-2823/"
                                "SOT-2826-compact-replay-distillation.json").read_text())

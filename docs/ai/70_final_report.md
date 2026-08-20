@@ -1,17 +1,15 @@
-# Final Report — SOT-2826
+# Final Report — SOT-2825
 
-## Outcome
+## Decision
 
-The screen-only compact policy was implemented, reproduced, and independently ablated. The strict screen gate rejected it with firing evidence and no contract errors, so the feature remains disabled and confirm/Kaggle submission were correctly skipped.
+REJECTED. The compact policy remains disabled (`COMPACT_REPLAY_POLICY=false`).
 
-## Quality Gates
+## Evidence
 
-- Python compile: PASS
-- Unit tests: 81/81 PASS
-- Deterministic distillation and semantic A/B rerun: PASS
-- Submission contract and main.py-only archive: PASS
-- PR #50 CI and conflict review: PASS
+The untouched sealed panel ran four same-seed/both-seat real Kaggriculture matches. All reached 720 states and DONE/DONE with no stderr, invalid actions, or contract violations. Candidate mean rank stayed 2.0; margin deltas were +6299 mean and +912 lower-tail/worst, but own reward delta was -1194 in every match. Runtime ratio was 1.083 and the submission contract passed. A second run reproduced all non-timing output exactly.
+
+## Acceptance
+
+All SOT-2825 criteria are satisfied. The evidence-backed reward regression justifies rejection; independent confirm was skipped according to the screen→confirm contract, and no Kaggle submission was performed.
 
 ## Acceptance: PASS
-
-All SOT-2826 criteria are satisfied, including auditable provenance and evidence-backed rejection.
