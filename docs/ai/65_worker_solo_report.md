@@ -1,45 +1,41 @@
-# Worker Report — SOT-2822
+# Worker Report — SOT-2819
 
 ## Summary
 
-Added and executed a sealed screen→confirm promotion gate for the shop-prefix
-route selector. The screen rejected the selector after a firing-logged paired
-tie, so confirm was correctly skipped and the runtime flag remains off.
+Aggregated the three completed child issues, reran the sealed closed-loop gate on latest `origin/main`, and recorded a strict non-promotion. The public shop-prefix selector fired 2,876 times but changed neither reward nor margin, so confirm remained locked, the runtime flag stayed off, and no Kaggle submission was made.
 
 ## Changed Files
 
-- `scripts/measure_shop_prefix_closed_loop.py` — sealed same-seed/both-seat gate
-- `tests/test_evaluate.py` — gate and raw-delta unit coverage
-- `docs/measurements/SOT-2819/SOT-2822-shop-prefix-closed-loop.json` — raw evidence
-- `docs/ai/experiment_ledger.jsonl` — rejected axis entry
-- `docs/ai/linear/SOT-2822.md` — local issue record
+- `docs/ai/experiment_ledger.jsonl` — parent aggregation and no-submit decision
+- `docs/ai/linear/SOT-2819.md` — parent lifecycle record and handoff
+- `docs/ai/65_worker_solo_report.md` — solo final report
+- `docs/ai/70_final_report.md` — acceptance summary
 
 ## Verification
 
-- `.venv/bin/python -m py_compile main.py scripts/*.py tests/test_evaluate.py` — PASS
-- `.venv/bin/python -m unittest discover -s tests -v` — PASS (76 tests)
-- sealed closed-loop measurement — PASS; candidate rejected, confirm skipped
-- `.venv/bin/python scripts/validate_submission.py main.py` — PASS
-- submission rebuild, gzip single-member/archive-content validation — PASS
-- `git diff --check` and merge-conflict precheck — PASS
-- npm lint/typecheck/test/e2e — N/A (Python-only repository; no package.json/browser)
+- `python3 -m py_compile main.py scripts/*.py tests/*.py` — PASS
+- `python3 -m unittest discover -s tests -v` — PASS (76/76)
+- sealed closed-loop rerun under the retained SOT-2822 environment — PASS; rejected, confirm skipped, evidence identical excluding runtime timing
+- `python3 scripts/validate_submission.py main.py` — PASS
+- submission archive — PASS; one gzip member containing only `main.py`
+- npm lint/typecheck/e2e — N/A (Python-only repository; no package.json/browser)
+- Kaggle submission — NOT PERFORMED (strict improvement gate failed)
 
 ## Acceptance Criteria
 
-- [x] screen result and raw rows saved
-- [x] rejection has same-seed A/B and selector firing records
-- [x] promotion-only fingerprint handoff is not applicable
-- [x] non-promoted runtime remains disabled
-- [x] no Kaggle submission
+- [x] Improvement strategy and source-backed selection were recorded during decomposition
+- [x] SOT-2820, SOT-2821, and SOT-2822 are all Done
+- [x] Candidate/effective config and verification evidence are recorded
+- [x] Parent resume confirmed all children and explicitly recorded non-promotion/no-submit
+- [x] Rejection is backed by same-seed/both-seat A/B plus 2,876 intervention firings
+- [x] Parent handoff comment is posted to Linear
 
 ## Risks
 
-The selector fired but did not alter terminal behavior on the screen panel.
+The closed-loop oracle shows a large gap to pinned public top agents. The next cycle should diagnose the first behavioral divergence rather than retrying a static route or another selector that normalizes back to unchanged actions.
 
 ## Linear Report: POSTED
 
 ## Acceptance: PASS
 
-## Next Action
-
-READY_FOR_REVIEW
+## Next Action: READY_FOR_REVIEW

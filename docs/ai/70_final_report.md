@@ -1,13 +1,18 @@
-# Final Report — SOT-2822
+# Final Report — SOT-2819
 
-The sealed public closed-loop screen rejected the shop-prefix selector. Four
-same-opponent/seed/seat paired rows tied exactly, despite 2,876 selector
-firings. All runs completed 720 states with no invalid actions or contract
-violations; runtime ratio was 0.951. Confirm was correctly skipped and
-`PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR` remains false.
+## Outcome
+
+Cycle 2 is complete with no champion promotion. The evaluation re-anchor succeeded, but the transferred shop-prefix selector was rejected after firing 2,876 times with zero reward or margin delta. The production flag remains disabled and no Kaggle submission was performed.
+
+## Quality Gates
+
+- Python compile: PASS
+- Unit tests: 76/76 PASS
+- Fresh sealed-panel reproduction: PASS (rejected, confirm skipped)
+- Submission contract/archive: PASS
+- Diff review: PASS
+- Child issues: 3/3 Done
 
 ## Acceptance: PASS
 
-## Linear Report: POSTED
-
-## Next Action: READY_FOR_REVIEW
+All parent criteria are satisfied, including evidence-backed rejection, explicit no-submit reporting, and next-cycle handoff.
