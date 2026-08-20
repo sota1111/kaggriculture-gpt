@@ -20,6 +20,7 @@ PROJECTED_MARKET_EXECUTION = False
 FERTILIZER_COVERAGE = True
 STAGGERED_STRAWBERRY_RENEWAL = True
 CARE_LIVESTOCK_COMPONENT = True
+SHED_OVERFLOW_PROTECTION = True
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -58,6 +59,12 @@ PUBLIC_EXECUTION_SOURCES = {
         "license": "MIT",
         "boundary": "public-state unit economics only; no fixed route, replay trace, or weights",
     },
+    "shed_overflow": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+        "license": "MIT",
+        "boundary": "capacity/clock/own-inventory logistics only; no projected market or terminal recovery",
+    },
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
@@ -66,6 +73,7 @@ PROJECTED_MARKET_FIRES = 0
 FERTILIZER_COVERAGE_FIRES = 0
 STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
 CARE_LIVESTOCK_FIRES = 0
+SHED_OVERFLOW_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -337,6 +345,50 @@ def _projected_shed_inventory(private, actions):
                 for item, amount in carried.items():
                     projected[str(item)] = projected.get(str(item), 0) + max(0, int(amount))
     return projected
+
+
+def _protect_shed_capacity(obs, actions, crop_specs):
+    """Bound nightly loss using only own inventory, public capacity, and clock."""
+    global SHED_OVERFLOW_FIRES
+    if not SHED_OVERFLOW_PROTECTION:
+        return actions, []
+    private = obs.get("private", {})
+    shed = private.get("shed", {})
+    inventories = list(private.get("inventories", []))
+    capacity = max(0, int(obs.get("shed_capacity", 100)))
+    shed_total = sum(max(0, int(amount)) for amount in shed.values())
+    carried = [sum(max(0, int(amount)) for amount in inventory.values())
+               if isinstance(inventory, dict) else 0 for inventory in inventories]
+    carried_total = sum(carried)
+    if carried_total <= 0:
+        return actions, []
+
+    protected_actions = list(actions)
+    room = max(0, capacity - shed_total)
+    for index, amount in enumerate(carried):
+        if (amount > 0 and amount <= room and index < len(protected_actions)
+                and protected_actions[index][0] == "PASS"):
+            protected_actions[index] = ["DROP"]
+            room -= amount
+            SHED_OVERFLOW_FIRES += 1
+
+    hour = max(0, int(obs.get("hour", 0)))
+    turns_per_day = max(1, int(obs.get("turns_per_day", 24)))
+    overflow = max(0, shed_total + carried_total - capacity)
+    if hour < turns_per_day - 1 or overflow <= 0:
+        return protected_actions, []
+    orders = []
+    remaining = overflow
+    prices = obs.get("market", {}).get("prices", {})
+    for item in sorted(shed, key=lambda value: (int(prices.get(value, 0)), value)):
+        amount = min(max(0, int(shed.get(item, 0))), remaining)
+        if amount > 0 and (item in crop_specs or int(prices.get(item, 0)) > 0):
+            orders.append(["SELL", item, amount])
+            remaining -= amount
+            SHED_OVERFLOW_FIRES += 1
+        if remaining <= 0:
+            break
+    return protected_actions, orders
 
 
 def _sale_priority(obs, crop):
@@ -637,6 +689,7 @@ def _policy_action(obs):
     actions = _plan_workers(
         me, day, planting_seeds, crop, crop_specs, int(obs.get("hour", 0)),
         int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
+    actions, overflow_orders = _protect_shed_capacity(obs, actions, crop_specs)
     stored_inventory = private.get("shed", {})
     if PROJECTED_MARKET_EXECUTION:
         PROJECTED_MARKET_FIRES += 1
@@ -669,7 +722,11 @@ def _policy_action(obs):
 
     if PROJECTED_MARKET_EXECUTION:
         sale_orders.sort(key=lambda order: _sale_priority(obs, order[1]))
-    market.extend(sale_orders)
+    overflow_sold = {order[1]: order[2] for order in overflow_orders}
+    market.extend(overflow_orders)
+    market.extend([order[0], order[1], order[2] - overflow_sold.get(order[1], 0)]
+                  for order in sale_orders
+                  if order[2] > overflow_sold.get(order[1], 0))
 
     if mixed_route:
         market.extend(mixed_route["market"])
@@ -716,6 +773,7 @@ def component_firing_counts():
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
         "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
         "care_livestock": CARE_LIVESTOCK_FIRES,
+        "shed_overflow": SHED_OVERFLOW_FIRES,
     }
 
 
