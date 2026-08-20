@@ -1,7 +1,7 @@
-# Final Report — SOT-2853
+# Final Report — SOT-2850
 
-The sealed capacity-aware dispatcher panel is complete. Direct same-seed/both-seat evidence supports a rejected decision: primary rank/margin improved and travel decreased, but productive density regressed and repair work increased. Confirm was correctly skipped, the dispatcher remains default-OFF, all 107 tests and submission compatibility checks pass, PR #69 is merged, and no Kaggle submission occurred.
+Cycle 7 completed through three child issues. The public-state action-capacity oracle was promoted as measurement infrastructure. The runtime dispatcher was rejected by a sealed same-seed/both-seat direct A/B: 2,880 firings improved rank/margin and reduced travel, but productive density fell by 0.004156 and repairs increased by 52. Confirm remained unused and the candidate remains default-OFF.
 
-## Acceptance: PASS
+All 107 unit tests, Python compilation, submission validation, archive integrity, and exec compatibility pass. No promoted artifact exists and the daily budget is exhausted, so the governed Kaggle submission command was intentionally not run.
 
-## Next Action: READY_FOR_REVIEW
+Acceptance criteria are met: all children are Done, the evidence and effective configuration are recorded, the non-promotion/no-submit decision is explicit, and the rejection has direct intervention evidence.
