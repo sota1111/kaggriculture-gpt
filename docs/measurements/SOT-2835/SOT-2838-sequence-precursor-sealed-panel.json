@@ -1,0 +1,340 @@
+{
+  "axis": "sequence precursor sealed closed-loop gate",
+  "candidate_artifact": {
+    "path": "main.py",
+    "sha256": "764283cca5b62ae1d307c311b8187493cde2acb8e0f2a6efec5a3f6ad6acb1ee"
+  },
+  "confirm": {
+    "reason": "screen failed; sealed confirm not consumed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "effective_config": {
+    "SEQUENCE_PRECURSOR_POLICY": false
+  },
+  "issue": "SOT-2838",
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "a9a0b3c571f6a963dfcacbc93a898a05b3d9a715b34eee82e11d6c79afc7e6fd",
+  "noise_width": {
+    "margin": 0.0,
+    "rank": 0.0,
+    "reward": 0.0
+  },
+  "panel_checks": {
+    "artifacts_unique": true,
+    "auditable_licenses": true,
+    "closed_loop_evidence_boundary": true,
+    "confirm_after_screen": true,
+    "entity_holdout": true,
+    "environment_pinned": true,
+    "episode_holdout": true,
+    "episode_ids_present": true,
+    "fetch_only": true,
+    "immutable_full_digests": true,
+    "manifest_digest": true,
+    "no_kaggle_submission": true,
+    "no_sensitive_or_replay_payload_fields": true,
+    "opponent_holdout": true,
+    "panel_artifacts_exist": true,
+    "panels_nonempty": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "seed_holdout_explicit": true,
+    "source_commit_hash_license_present": true,
+    "time_holdout": true,
+    "time_holdout_explicit": true,
+    "times_parseable": true,
+    "unique_panel_identity": true
+  },
+  "passed": true,
+  "runtime_candidate_retained": false,
+  "same_seed_both_seat": true,
+  "screen": {
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -17092.0,
+          "opponent_reward": 18386.0,
+          "precursor": {
+            "economic_reached": 0,
+            "firings": 0,
+            "phase": "idle"
+          },
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7443100030068308,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -17092.0,
+          "opponent_reward": 18386.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.730396426981315,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "sealed-screen-cok-283801",
+          "opponent": "cok-v7-58c91c3",
+          "seed": 283801,
+          "time_utc": "2026-08-20T21:30:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -17223.0,
+          "opponent_reward": 18517.0,
+          "precursor": {
+            "economic_reached": 0,
+            "firings": 0,
+            "phase": "idle"
+          },
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7072688930202276,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -17223.0,
+          "opponent_reward": 18517.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7152837901376188,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "sealed-screen-cok-283801",
+          "opponent": "cok-v7-58c91c3",
+          "seed": 283801,
+          "time_utc": "2026-08-20T21:30:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -106992.0,
+          "opponent_reward": 108286.0,
+          "precursor": {
+            "economic_reached": 0,
+            "firings": 0,
+            "phase": "idle"
+          },
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8311467920430005,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -106992.0,
+          "opponent_reward": 108286.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.9659883340355009,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "sealed-screen-v17-283802",
+          "opponent": "lonespear-v17-774b260",
+          "seed": 283802,
+          "time_utc": "2026-08-20T21:31:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -106992.0,
+          "opponent_reward": 108286.0,
+          "precursor": {
+            "economic_reached": 0,
+            "firings": 0,
+            "phase": "idle"
+          },
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8215918149799109,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -106992.0,
+          "opponent_reward": 108286.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.8375772738363594,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "delta": {
+          "margin": 0.0,
+          "reward": 0.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "sealed-screen-v17-283802",
+          "opponent": "lonespear-v17-774b260",
+          "seed": 283802,
+          "time_utc": "2026-08-20T21:31:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "no primary KPI improvement beyond deterministic noise width",
+      "precursor did not fire and reach its economic action in closed loop"
+    ],
+    "runtime": {
+      "candidate_seconds": 7.10431750304997,
+      "champion_seconds": 7.249245824990794,
+      "passed": true,
+      "primary_kpi_beyond_noise": {
+        "margin": false,
+        "rank": false,
+        "reward": false
+      },
+      "ratio": 0.9800078069581799,
+      "threshold": 2.0
+    },
+    "summary": {
+      "contract_violations": 0,
+      "economic_reached": 0,
+      "invalid_actions": 0,
+      "lower_tail_margin_delta": 0.0,
+      "lower_tail_reward_delta": 0.0,
+      "matches": 4,
+      "mean_margin_delta": 0.0,
+      "mean_rank_improvement": 0.0,
+      "mean_reward_delta": 0.0,
+      "precursor_firings": 0,
+      "worst_margin_delta": 0.0,
+      "worst_reward_delta": 0.0
+    }
+  },
+  "submission_contract": "PASS",
+  "targeted_trace": {
+    "actual_intervention": true,
+    "both_seats": true,
+    "identity_seed_invariant": true,
+    "precursor_economic_reached": true,
+    "rows": [
+      {
+        "action": [
+          "BUILD_PASTURE"
+        ],
+        "economic_reached": 1,
+        "firings": 1,
+        "identity_seed_invariant": true,
+        "phase": "economic_reached",
+        "seat": 0
+      },
+      {
+        "action": [
+          "BUILD_PASTURE"
+        ],
+        "economic_reached": 1,
+        "firings": 1,
+        "identity_seed_invariant": true,
+        "phase": "economic_reached",
+        "seat": 1
+      }
+    ]
+  }
+}

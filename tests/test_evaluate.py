@@ -23,6 +23,7 @@ from scripts.measure_public_closed_loop_holdout import validate_manifest as vali
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
 from scripts.measure_feed_economic_sealed_panel import gate as feed_sealed_gate, panel_checks
+from scripts.measure_sequence_precursor_sealed_panel import gate as precursor_sealed_gate
 from scripts.measure_winner_sequence_support import measure as measure_winner_sequence_support
 
 
@@ -85,6 +86,33 @@ class EvaluationTest(unittest.TestCase):
             window, {"rank": 0, "reward": 0, "margin": 0}, 2.0)
         self.assertFalse(passed)
         self.assertIn("candidate produced no live intervention", reasons)
+        self.assertFalse(any(runtime["primary_kpi_beyond_noise"].values()))
+
+    def test_sequence_precursor_sealed_panel_holds_out_every_split_dimension(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/sequence_precursor_sealed_panel.json").read_text()
+        )
+        checks = panel_checks(manifest)
+        self.assertTrue(all(checks.values()), checks)
+        self.assertGreaterEqual(len(manifest["panels"]["screen"]), 2)
+        self.assertEqual("NOT_PERFORMED", manifest["kaggle_submission"])
+
+    def test_sequence_precursor_sealed_gate_requires_live_economic_firing(self):
+        run = {"rank": 1, "states": 720, "statuses": ["DONE", "DONE"],
+               "invalid_actions": 0, "contract_violations": 0, "stderr": "", "seconds": 1.0}
+        candidate = {**run, "precursor": {"firings": 0, "economic_reached": 0}}
+        window = {"summary": {
+            "mean_rank_improvement": 0, "mean_reward_delta": 0,
+            "lower_tail_reward_delta": 0, "worst_reward_delta": 0,
+            "mean_margin_delta": 0, "lower_tail_margin_delta": 0,
+            "worst_margin_delta": 0, "precursor_firings": 0,
+            "economic_reached": 0, "invalid_actions": 0, "contract_violations": 0,
+        }, "raw_rows": [{"identity": {"episode_id": "screen"},
+                           "champion": run, "candidate": candidate}]}
+        passed, reasons, runtime = precursor_sealed_gate(
+            window, {"rank": 0, "reward": 0, "margin": 0}, 2.0)
+        self.assertFalse(passed)
+        self.assertIn("precursor did not fire and reach its economic action in closed loop", reasons)
         self.assertFalse(any(runtime["primary_kpi_beyond_noise"].values()))
 
     def test_feed_economic_decision_is_independent_public_state_and_fires_both_seats(self):
