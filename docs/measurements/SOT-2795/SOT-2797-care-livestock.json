@@ -1,0 +1,585 @@
+{
+  "axis": "bounded CARE-centered cow/sheep unit economics",
+  "capital_cost_included": true,
+  "confirm": {
+    "candidate": {
+      "episodes": [
+        {
+          "animal": "COW",
+          "capital_cost": 480,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 98,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "MILK",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 157,
+          "product_revenue": 735,
+          "seat": 0,
+          "seed": 279711
+        },
+        {
+          "animal": "COW",
+          "capital_cost": 480,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 98,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "MILK",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 157,
+          "product_revenue": 735,
+          "seat": 1,
+          "seed": 279711
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 360,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 66,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "WOOL",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 102,
+          "product_revenue": 528,
+          "seat": 0,
+          "seed": 279712
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 360,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 66,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "WOOL",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 102,
+          "product_revenue": 528,
+          "seat": 1,
+          "seed": 279712
+        }
+      ],
+      "summary": {
+        "capital_cost": 1680,
+        "care_firings": 4,
+        "episodes": 4,
+        "feed_orders": 4,
+        "lower_tail_margin": 102,
+        "mean_margin": 129.5,
+        "mean_rank": 1.0,
+        "product_sales": 4,
+        "worst_margin": 102
+      }
+    },
+    "champion": {
+      "episodes": [
+        {
+          "animal": "COW",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 0,
+          "seed": 279711
+        },
+        {
+          "animal": "COW",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 1,
+          "seed": 279711
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 0,
+          "seed": 279712
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 1,
+          "seed": 279712
+        }
+      ],
+      "summary": {
+        "capital_cost": 0,
+        "care_firings": 0,
+        "episodes": 4,
+        "feed_orders": 0,
+        "lower_tail_margin": 0,
+        "mean_margin": 0.0,
+        "mean_rank": 2.0,
+        "product_sales": 0,
+        "worst_margin": 0
+      }
+    },
+    "passed": true
+  },
+  "decision": "promoted",
+  "issue": "SOT-2797",
+  "kaggle_submission": "NOT_PERFORMED",
+  "runtime_seconds": 0.0006229300051927567,
+  "same_seed_both_seats": true,
+  "screen": {
+    "candidate": {
+      "episodes": [
+        {
+          "animal": "COW",
+          "capital_cost": 500,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 108,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "MILK",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 247,
+          "product_revenue": 855,
+          "seat": 0,
+          "seed": 279701
+        },
+        {
+          "animal": "COW",
+          "capital_cost": 500,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 108,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "MILK",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 247,
+          "product_revenue": 855,
+          "seat": 1,
+          "seed": 279701
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 420,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 80,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "WOOL",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 140,
+          "product_revenue": 640,
+          "seat": 0,
+          "seed": 279702
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 420,
+          "care_action": [
+            "CARE"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 80,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "SELL",
+              "WOOL",
+              1
+            ],
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "BUY_PRODUCT",
+              "FEED",
+              2
+            ],
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 140,
+          "product_revenue": 640,
+          "seat": 1,
+          "seed": 279702
+        }
+      ],
+      "summary": {
+        "capital_cost": 1840,
+        "care_firings": 4,
+        "episodes": 4,
+        "feed_orders": 4,
+        "lower_tail_margin": 140,
+        "mean_margin": 193.5,
+        "mean_rank": 1.0,
+        "product_sales": 4,
+        "worst_margin": 140
+      }
+    },
+    "champion": {
+      "episodes": [
+        {
+          "animal": "COW",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 0,
+          "seed": 279701
+        },
+        {
+          "animal": "COW",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 1,
+          "seed": 279701
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 0,
+          "seed": 279702
+        },
+        {
+          "animal": "SHEEP",
+          "capital_cost": 0,
+          "care_action": [
+            "PASS"
+          ],
+          "contract_violations": 0,
+          "feed_cost": 0,
+          "invalid_actions": 0,
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              2
+            ],
+            [
+              "HIRE"
+            ]
+          ],
+          "net_margin": 0,
+          "product_revenue": 0,
+          "seat": 1,
+          "seed": 279702
+        }
+      ],
+      "summary": {
+        "capital_cost": 0,
+        "care_firings": 0,
+        "episodes": 4,
+        "feed_orders": 0,
+        "lower_tail_margin": 0,
+        "mean_margin": 0.0,
+        "mean_rank": 2.0,
+        "product_sales": 0,
+        "worst_margin": 0
+      }
+    },
+    "passed": true
+  },
+  "source": {
+    "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+    "license": "MIT",
+    "portability": "stdlib public-state unit economics; no route trace, replay bytes, GPU weights, or external runtime",
+    "url": "https://github.com/lonespear/kaggriculture"
+  }
+}

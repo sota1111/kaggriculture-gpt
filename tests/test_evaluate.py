@@ -11,6 +11,7 @@ from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, meas
 from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.measure_fertilizer_coverage import classify_bottleneck
+from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +19,33 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_care_livestock_is_independent_bounded_and_fires_both_seats(self):
+        fixture = json.loads((ROOT / "tests/fixtures/care_livestock.json").read_text())
+        policy = load_care_policy(ROOT / "main.py")
+        episodes = evaluate_care(policy, fixture["screen"], True)
+        self.assertEqual({0, 1}, {row["seat"] for row in episodes})
+        self.assertTrue(all(row["care_action"] == ["CARE"] for row in episodes))
+        self.assertTrue(all(any(order[0] == "BUY_ANIMAL" for order in row["market"])
+                            for row in episodes))
+        self.assertTrue(all(any(order[:2] == ["BUY_PRODUCT", "FEED"] for order in row["market"])
+                            for row in episodes))
+        self.assertTrue(all(any(order[0] == "SELL" and order[1] in {"MILK", "WOOL"}
+                            for order in row["market"]) for row in episodes))
+        self.assertTrue(all(row["net_margin"] > 0 for row in episodes))
+        self.assertFalse(policy.LONG_HORIZON_MIXED_FARM_ROUTE)
+        self.assertEqual("MIT", policy.PUBLIC_EXECUTION_SOURCES["care_livestock"]["license"])
+
+    def test_care_livestock_rejects_unprofitable_or_runway_breaching_buy(self):
+        policy = load_care_policy(ROOT / "main.py")
+        obs = {"player": 0, "day": 25, "total_days": 30,
+               "farms": [{"money": 550, "farmer": [0, 0], "hands": [], "tiles": [[None]]}],
+               "private": {"animals": {}, "shed": {}, "seeds": {"WHEAT": 0}, "inventories": [{}]},
+               "market": {"prices": {"WHEAT": 25, "FEED": 20, "MILK": 30}},
+               "animals": {"COW": {"price": 500, "care_interval_days": 2,
+                                     "product_per_care": 1, "feed_per_care": 1}},
+               "capabilities": ["BUY_ANIMAL", "BUY_PRODUCT"]}
+        self.assertFalse(any(order[0] == "BUY_ANIMAL" for order in policy.agent(obs)["market"]))
+
     def test_agent_is_last_callable_for_kaggle_file_loader(self):
         namespace = runpy.run_path(str(ROOT / "main.py"))
         callables = [name for name, value in namespace.items() if callable(value)]
