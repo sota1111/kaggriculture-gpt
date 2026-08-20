@@ -16,6 +16,7 @@ OPPONENT_AWARE_POLICY = True
 LONG_HORIZON_MIXED_FARM_ROUTE = False
 PUBLIC_SCHEDULER_COMPONENT = True
 PROJECTED_MARKET_EXECUTION = False
+FERTILIZER_COVERAGE = True
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -42,6 +43,7 @@ PUBLIC_EXECUTION_SOURCES = {
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
 PROJECTED_MARKET_FIRES = 0
+FERTILIZER_COVERAGE_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -127,39 +129,50 @@ def _next_position(position, action):
     return x + dx, y + dy
 
 
-def _task_priority(tile, day, crop_specs=None):
+def _task_priority(tile, day, crop_specs=None, fertilizer_available=0):
     if isinstance(tile, dict) and tile.get("kind") == "PLANT":
         crop = tile.get("crop", "WHEAT")
         maturity = int((crop_specs or {}).get(crop, {}).get("maturity_days", 2))
         if int(tile.get("yield_units", 0)) > 0 or day - int(tile.get("planted_day", day)) >= maturity:
             return 0
-        if not tile.get("watered_today", False):
+        if (FERTILIZER_COVERAGE and fertilizer_available > 0 and crop == "STRAWBERRY" and
+                int(tile.get("fertilized_until_day", -1)) < day):
             return 1
+        if not tile.get("watered_today", False):
+            return 2
         return None
     if isinstance(tile, dict) and tile.get("kind") == "WEED":
-        return 2
-    if tile is None:
         return 3
+    if tile is None:
+        return 4
     return None
 
 
-def _action_at(tile, day, available_seeds, crop, crop_specs):
-    priority = _task_priority(tile, day, crop_specs)
+def _action_at(tile, day, available_seeds, crop, crop_specs, fertilizer_available=0):
+    global FERTILIZER_COVERAGE_FIRES
+    priority = _task_priority(tile, day, crop_specs, fertilizer_available)
     if priority == 0:
-        return ["HARVEST"], available_seeds
+        return ["HARVEST"], available_seeds, fertilizer_available
     if priority == 1:
-        return ["WATER"], available_seeds
+        FERTILIZER_COVERAGE_FIRES += 1
+        return ["FERTILIZE"], available_seeds, fertilizer_available - 1
     if priority == 2:
-        return ["DIG"], available_seeds
-    if priority == 3 and available_seeds > 0:
-        return ["PLANT", crop], available_seeds - 1
-    return ["PASS"], available_seeds
+        return ["WATER"], available_seeds, fertilizer_available
+    if priority == 3:
+        return ["DIG"], available_seeds, fertilizer_available
+    if priority == 4 and available_seeds > 0:
+        return ["PLANT", crop], available_seeds - 1, fertilizer_available
+    return ["PASS"], available_seeds, fertilizer_available
 
 
-def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
+def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fertilizer_by_worker=()):
     global PUBLIC_SCHEDULER_FIRES
     tiles = me["tiles"]
     workers = [me["farmer"]] + list(me.get("hands", []))
+    fertilizer_by_worker = tuple(max(0, int(value)) for value in fertilizer_by_worker)
+    if len(fertilizer_by_worker) < len(workers):
+        fertilizer_by_worker += (0,) * (len(workers) - len(fertilizer_by_worker))
+    fertilizer_remaining = list(fertilizer_by_worker)
     standing_actions = {}
     standing_positions = set()
     if PUBLIC_SCHEDULER_COMPONENT:
@@ -167,16 +180,17 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
         # Public lonespear v13 insight: consume zero-travel work before global
         # matching so a priority handicap cannot pull a worker off its tile.
         for worker_index, (x, y) in enumerate(workers):
-            priority = _task_priority(tiles[y][x], day, crop_specs)
+            priority = _task_priority(tiles[y][x], day, crop_specs, fertilizer_remaining[worker_index])
             if priority is None or (x, y) in standing_positions:
                 continue
-            action, seeds = _action_at(tiles[y][x], day, seeds, crop, crop_specs)
+            action, seeds, fertilizer_remaining[worker_index] = _action_at(
+                tiles[y][x], day, seeds, crop, crop_specs, fertilizer_remaining[worker_index])
             standing_actions[worker_index] = action
             standing_positions.add((x, y))
     candidates = []
     for y, row in enumerate(tiles):
         for x, tile in enumerate(row):
-            priority = _task_priority(tile, day, crop_specs)
+            priority = _task_priority(tile, day, crop_specs, sum(fertilizer_remaining))
             if priority is not None and (x, y) not in standing_positions:
                 if priority == 0:
                     distance_to_deadline = 1
@@ -203,6 +217,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
         occupied = set(occupied_next)
         for task_index, (priority, deadline, ty, tx) in enumerate(candidates):
             if used_mask & (1 << task_index):
+                continue
+            if priority == 1 and fertilizer_by_worker[worker_index] <= 0:
                 continue
             distance = abs(tx - px) + abs(ty - py)
             action = _move((px, py), (tx, ty)) if distance else ["PASS"]
@@ -242,7 +258,8 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12):
         px, py = position
         _, _, ty, tx = candidates[choice]
         if [px, py] == [tx, ty]:
-            action, seeds = _action_at(tiles[ty][tx], day, seeds, crop, crop_specs)
+            action, seeds, fertilizer_remaining[worker_index] = _action_at(
+                tiles[ty][tx], day, seeds, crop, crop_specs, fertilizer_remaining[worker_index])
         else:
             action = _move(position, (tx, ty))
         actions.append(action)
@@ -466,7 +483,13 @@ def agent(obs):
         crop = mixed_route["crop"]
     prices = obs.get("market", {}).get("prices", {})
     seeds = int(seed_inventory.get(crop, 0))
-    actions = _plan_workers(me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)), int(obs.get("turns_per_day", 12)))
+    fertilizer_by_worker = [
+        max(0, int(inventory.get("FERTILIZER", 0))) if isinstance(inventory, dict) else 0
+        for inventory in private.get("inventories", [])
+    ]
+    actions = _plan_workers(
+        me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)),
+        int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
     stored_inventory = private.get("shed", {})
     if PROJECTED_MARKET_EXECUTION:
         PROJECTED_MARKET_FIRES += 1
@@ -530,4 +553,5 @@ def component_firing_counts():
     return {
         "public_scheduler": PUBLIC_SCHEDULER_FIRES,
         "projected_market": PROJECTED_MARKET_FIRES,
+        "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
     }

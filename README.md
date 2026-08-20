@@ -80,3 +80,20 @@ python3 scripts/measure_adaptive_route_repair.py \
 
 The candidate is kept in the measurement harness only unless both screen and
 independent confirm meet the strict rank/margin/tail promotion gate.
+
+## Fertilizer coverage ablation
+
+`scripts/measure_fertilizer_coverage.py` first compares recurring strawberry
+fertilizer demand with available stock and emitted `FERTILIZE` actions. It only
+tests bounded buying when supply is short; an action-bound trace instead tests
+the independent assignment/coverage candidate. Run the same-seed, both-seat
+screen and independent confirm with:
+
+```bash
+python3 scripts/measure_fertilizer_coverage.py \
+  --output docs/measurements/SOT-2781/SOT-2784-fertilizer-coverage.json
+```
+
+The report records coverage, `FERTILIZE`/`COLLECT_FERTILIZER`/stock/buy counts,
+rank and reward tails, runtime ratio, contract validity, and confirms that no
+Kaggle submission was performed.
