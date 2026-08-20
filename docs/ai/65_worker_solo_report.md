@@ -1,33 +1,34 @@
-# Solo Worker Report — SOT-2832
+# Solo Worker Report — SOT-2831
 
 ## Summary
 
-Implemented a deterministic decision-family attribution harness for the pinned 4,320-row winner-only teacher corpus. The screen selected `economic`; the entity/episode/seed/seat/time-separated confirm panel independently agreed. Land and labor remain CLOSED. Runtime policy and Kaggle submission artifact are unchanged.
+Aggregated completed children SOT-2832/SOT-2833/SOT-2834. The leak-free attribution selected `economic`, but the isolated feed-economic candidate failed both live closed-loop screens with zero interventions and zero KPI improvement. The candidate remains disabled and no Kaggle submission was made.
 
 ## Changed Files
 
-- `scripts/measure_decision_family_divergence.py` — leak-free first-action family measurement and screen→confirm gate.
-- `docs/measurements/SOT-2832/SOT-2832-decision-family-divergence.json` — reproducible aggregate evidence and provenance hashes.
-- `tests/test_evaluate.py` — family mapping, artifact boundary, and first-action tests.
-- `README.md`, `docs/ai/experiment_ledger.jsonl`, `docs/ai/linear/SOT-2832.md` — reproduction and outcome records.
+- `docs/ai/experiment_ledger.jsonl` — cycle 4 parent aggregation and strict no-submit decision.
+- `docs/ai/linear/SOT-2831.md` — child results, artifact state, submission decision, and acceptance tracking.
+- `docs/ai/65_worker_solo_report.md`, `docs/ai/70_final_report.md` — final lifecycle reports.
 
 ## Verification
 
-- Deterministic artifact rerun: PASS, byte-identical SHA-256.
-- Python compile: PASS.
-- Unit tests: 87/87 PASS.
-- Submission contract/build: PASS; generated archive was restored and its committed SHA-256 is unchanged.
-- `main.py` and `submission.tar.gz`: unchanged from branch base.
+- All three children: Done; PRs #54–#56 merged.
+- Python compile and unit suite: PASS.
+- Submission contract/build: PASS.
+- Ledger JSONL parse and diff whitespace: PASS.
+- `main.py` SHA-256: `632b2b27a5f1253339058f78690f1915f38e91264cffb90e6c2506d25b8774c2`.
+- `submission.tar.gz` SHA-256: `916608500cb297dc1058fdbf95a9f48be57db9c94c5aca30f5605ccc705b48b9`.
 - npm lint/typecheck/test and e2e: N/A (Python-only repository; no package.json or browser suite).
-- Kaggle submission: NOT PERFORMED.
+- Kaggle submission: NOT PERFORMED; strict improvement gate failed and daily budget was 5/5.
 
 ## Acceptance Criteria
 
-- [x] Family frequency, reward-attribution proxy, and divergence recorded reproducibly.
-- [x] Screen/confirm isolated by entity, episode, seed, seat, and time.
-- [x] Land/labor CLOSED families excluded; economic selected with screen/confirm evidence.
-- [x] Runtime candidate and Kaggle submission unchanged.
-- [x] Experiment ledger updated.
+- [x] Improvement axis and rationale recorded.
+- [x] All children completed and results aggregated.
+- [x] Candidate/evaluation evidence and effective flags recorded.
+- [x] No-promotion/no-submission decision recorded.
+- [x] Rejection backed by isolated firing evidence and same-seed/both-seat direct A/B.
+- [x] Linear completion and handoff reports posted.
 
 ## Linear Report: POSTED
 
