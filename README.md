@@ -61,3 +61,22 @@ The raw archives are audit artifacts, not candidate features. The evaluator only
 projects identity and chronological public metadata; private observations and
 future steps are excluded. The older public-source corpus remains an explicitly
 separate fallback and is never presented as authenticated live-ladder evidence.
+
+## Adaptive route-repair ablation
+
+`scripts/measure_adaptive_route_repair.py` evaluates a public-state-only route
+expert classifier and bounded suffix repair against the authenticated replay
+manifest's seeds in both runtime seats. The mechanism is distilled from
+`Seyamalam/Kaggriculture@8b8c421eb10634c756583ce10c75189f50c83a72`
+(`agents/candidate_v8_market_order.py`, MIT, SHA-256
+`10ce90c25f040e0286b340b212a595117435a609744bd0ad02f2ee0a51c420d4`).
+Embedded action traces, fitted prototypes/weights, replay identities,
+credentials, and private replay data are excluded. Run:
+
+```bash
+python3 scripts/measure_adaptive_route_repair.py \
+  --output docs/measurements/SOT-2781/SOT-2783-adaptive-route-repair.json
+```
+
+The candidate is kept in the measurement harness only unless both screen and
+independent confirm meet the strict rank/margin/tail promotion gate.

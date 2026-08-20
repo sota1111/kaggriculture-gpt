@@ -1,0 +1,162 @@
+{
+  "ablation_flag": "ADAPTIVE_CLOSED_LOOP_ROUTE_REPAIR",
+  "authenticated_corpus": {
+    "anchor_checks": {
+      "archives_hash_and_identity": true,
+      "authenticated_acquisition": true,
+      "both_seats_per_window": true,
+      "confirm_after_screen": true,
+      "entity_holdout": true,
+      "fallback_boundary_explicit": true,
+      "identity_complete": true,
+      "manifest_digest": true,
+      "no_kaggle_submission": true,
+      "public_projection_only": true,
+      "schema_supported": true,
+      "screen_confirm_identity_holdout": true,
+      "seed_holdout": true,
+      "unique_episode_identity": true,
+      "windows_nonempty": true
+    },
+    "manifest_sha256": "25fda50946f41f29c75449da0e8b78c9134ce1bb652e0383f43f7ecf27281b03"
+  },
+  "axis": "public-state adaptive closed-loop route repair",
+  "confirm": null,
+  "decision": "rejected_candidate_reverted",
+  "interventions": {
+    "confirm": [
+      {
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              4
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "expert_selection_delta": 1,
+        "seat": 0,
+        "seed": 1995388078,
+        "suffix_repair_delta": 1
+      },
+      {
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              4
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "expert_selection_delta": 1,
+        "seat": 1,
+        "seed": 1995388078,
+        "suffix_repair_delta": 1
+      }
+    ],
+    "screen": [
+      {
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              4
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "expert_selection_delta": 1,
+        "seat": 0,
+        "seed": 2119479489,
+        "suffix_repair_delta": 1
+      },
+      {
+        "action": {
+          "farmer": [
+            "SOUTH"
+          ],
+          "hands": [
+            [
+              "SOUTH"
+            ]
+          ],
+          "market": [
+            [
+              "BUY_SEED",
+              "WHEAT",
+              4
+            ],
+            [
+              "HIRE"
+            ]
+          ]
+        },
+        "expert_selection_delta": 1,
+        "seat": 1,
+        "seed": 2119479489,
+        "suffix_repair_delta": 1
+      }
+    ]
+  },
+  "issue": "SOT-2783",
+  "kaggle_submission": "NOT_PERFORMED",
+  "reasons": [
+    "no strict rank, margin, or tail improvement"
+  ],
+  "runtime_ratio": 1.3233591525466004,
+  "screen": {
+    "contract_violations": 0,
+    "episodes": 4,
+    "invalid_actions": 0,
+    "lower_tail_reward_delta": -4,
+    "mean_candidate_rank": 2.0,
+    "mean_reward_delta": -4.0,
+    "worst_reward_delta": -4
+  },
+  "source": {
+    "artifact_sha256": "10ce90c25f040e0286b340b212a595117435a609744bd0ad02f2ee0a51c420d4",
+    "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "license": "MIT",
+    "path": "agents/candidate_v8_market_order.py",
+    "url": "https://github.com/Seyamalam/Kaggriculture"
+  },
+  "source_difference": {
+    "excluded": "embedded action traces, fitted prototypes/weights, replay identities, credentials, private replay data",
+    "retained": "public-state route expert classification and bounded deviation repair"
+  }
+}
