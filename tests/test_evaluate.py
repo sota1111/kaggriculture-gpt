@@ -7,6 +7,7 @@ from unittest import mock
 from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_cv_holdouts
 from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
+from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,14 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_demand_premium_gate_requires_strict_improvement(self):
+        summary = {"lower_tail_margin": 1, "worst_margin": 1,
+                   "mean_margin": 1, "mean_rank": 1}
+        report = {window: {"summary": dict(summary)} for window in ("screen", "confirm")}
+        passed, reasons = demand_premium_gate(report, json.loads(json.dumps(report)))
+        self.assertFalse(passed)
+        self.assertIn("no strict rank, margin, or tail improvement", reasons)
+
     def test_public_opponent_manifest_is_pinned_and_maps_to_cv_entities(self):
         manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
         artifacts = {row["id"]: row for row in manifest["artifacts"]}
