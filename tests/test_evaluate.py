@@ -21,6 +21,7 @@ from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
 from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
+from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +29,29 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_feed_economic_decision_is_independent_public_state_and_fires_both_seats(self):
+        agent = load_agent(ROOT / "main.py")
+        trace = feed_economic_trace(ROOT / "main.py")
+        self.assertFalse(agent.FEED_ECONOMIC_DECISION)
+        self.assertTrue(trace["both_seats"])
+        self.assertTrue(trace["actual_intervention"])
+        self.assertTrue(all(row["identity_seed_invariant"] for row in trace["rows"]))
+        self.assertGreaterEqual(trace["firings"], 2)
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["feed_economic"]["license"])
+
+    def test_feed_economic_decision_respects_cash_runway_and_current_herd(self):
+        agent = load_agent(ROOT / "main.py")
+        agent.FEED_ECONOMIC_DECISION = True
+        obs = {"player": 0, "day": 8, "total_days": 30,
+               "farms": [{"money": 250, "daily_operating_cost": 100}],
+               "private": {"animals": {"COW": 2}, "shed": {}, "inventories": []},
+               "market": {"prices": {"WHEAT": 25}}, "capabilities": ["BUY_PRODUCT"]}
+        self.assertEqual([], agent._feed_economic_order(obs))
+        obs["farms"][0]["money"] = 1000
+        self.assertEqual([["BUY_PRODUCT", "WHEAT", 4]], agent._feed_economic_order(obs))
+        obs["private"]["animals"] = {}
+        self.assertEqual([], agent._feed_economic_order(obs))
+
     def test_decision_family_attribution_keeps_feed_land_and_labor_distinct(self):
         self.assertEqual("feed", decision_family(["FEED"]))
         self.assertEqual("feed", decision_family(["BUY_PRODUCT", "FEED", 2]))
