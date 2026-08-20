@@ -26,6 +26,7 @@ CASH_RUNWAY_ACREAGE_EXPANSION = False
 PRODUCTIVE_ACTION_CAPACITY = False
 PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR = False
 COMPACT_REPLAY_POLICY = False
+SEQUENCE_PRECURSOR_POLICY = False
 HISTORY_LIMIT = 48
 
 # Deterministically distilled from the SOT-2824 screen split only.  These
@@ -105,6 +106,11 @@ PUBLIC_EXECUTION_SOURCES = {
         "artifact_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
         "boundary": "first three public unlocked shops only; no route trace, identity, episode, submission, seed, or private state",
     },
+    "sequence_precursor": {
+        "evidence": "docs/measurements/SOT-2835/SOT-2836-winner-sequence-support.json",
+        "sources": ("lonespear", "COK-ZhangZiliang", "Seyamalam"),
+        "boundary": "bounded early pasture task/location sequence from current public farm state; no action trace, identity, seed, private inventory, or weights",
+    },
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
@@ -122,6 +128,8 @@ PUBLIC_SHOP_PREFIX_ROUTE_FIRES = {
     "early_milk_support": 0, "default": 0,
 }
 COMPACT_REPLAY_POLICY_FIRES = {"land": 0, "labor": 0}
+SEQUENCE_PRECURSOR_POLICY_FIRES = 0
+SEQUENCE_PRECURSOR_ECONOMIC_REACHED = 0
 
 _MILK_SUPPORT_SHOPS = {"PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"}
 _SHOP_PREFIX_ROUTES = {
@@ -138,6 +146,79 @@ DEFAULT_CROPS = {
 
 _PUBLIC_HISTORY = []
 _LAST_STEP = None
+_SEQUENCE_PRECURSOR_STATE = {
+    "phase": "idle", "started_step": None, "fired": False,
+    "public_inventory": (),
+}
+
+
+def _sequence_precursor_actions(obs, actions):
+    """Distill the SOT-2836 early-pasture precursor into a bounded policy.
+
+    The state machine is deliberately narrower than an economic threshold: it
+    first recognizes the public task state (one existing pasture, no visible
+    animals), then chooses a public empty location adjacent to that pasture,
+    approaches it, and finally emits one BUILD_PASTURE action.  It expires
+    after a short public-clock window and never inspects private inventory.
+    """
+    global SEQUENCE_PRECURSOR_POLICY_FIRES, SEQUENCE_PRECURSOR_ECONOMIC_REACHED
+    if not SEQUENCE_PRECURSOR_POLICY:
+        return actions
+    step = int(obs.get("step", int(obs.get("day", 0)) * int(obs.get("turns_per_day", 24))
+                              + int(obs.get("hour", 0))))
+    me = obs["farms"][int(obs["player"])]
+    tiles = me.get("tiles", [])
+    workers = [me.get("farmer", [0, 0]), *me.get("hands", [])]
+    pastures, visible_animals = [], 0
+    for y, row in enumerate(tiles):
+        for x, tile in enumerate(row):
+            if isinstance(tile, dict) and tile.get("kind") == "PASTURE":
+                pastures.append((x, y))
+            if isinstance(tile, dict) and tile.get("kind") in {"ANIMAL", "COW", "SHEEP", "CHICKEN"}:
+                visible_animals += 1
+
+    state = _SEQUENCE_PRECURSOR_STATE
+    if state["phase"] == "idle":
+        # SOT-2836 reproduced this task boundary in both panels.  Worker/cash
+        # bands were contextual, so neither is fitted as a trigger.
+        if step <= int(obs.get("turns_per_day", 24)) and len(pastures) == 1 and visible_animals == 0:
+            public_inventory = tuple(sorted(
+                (str(item), max(0, int(amount)))
+                for item, amount in obs.get("market", {}).get("inventory", {}).items()
+            ))
+            state.update({"phase": "approach", "started_step": step, "fired": False,
+                          "public_inventory": public_inventory})
+        else:
+            return actions
+    if state["fired"] or step - int(state["started_step"]) > 8:
+        state["phase"] = "expired"
+        return actions
+
+    px, py = pastures[0]
+    adjacent = sorted(
+        (x, y) for x, y in ((px - 1, py), (px + 1, py), (px, py - 1), (px, py + 1))
+        if 0 <= y < len(tiles) and 0 <= x < len(tiles[y]) and tiles[y][x] is None
+    )
+    if not adjacent:
+        state["phase"] = "expired"
+        return actions
+    proposals = []
+    for worker_index, position in enumerate(workers):
+        for target in adjacent:
+            distance = abs(int(position[0]) - target[0]) + abs(int(position[1]) - target[1])
+            proposals.append((distance, target[1], target[0], worker_index, target))
+    _, _, _, worker_index, target = min(proposals)
+    amended = list(actions)
+    position = tuple(workers[worker_index])
+    if position == target:
+        amended[worker_index] = ["BUILD_PASTURE"]
+        state.update({"phase": "economic_reached", "fired": True})
+        SEQUENCE_PRECURSOR_POLICY_FIRES += 1
+        SEQUENCE_PRECURSOR_ECONOMIC_REACHED += 1
+    else:
+        amended[worker_index] = _move(position, target)
+        state["phase"] = "approach"
+    return amended
 
 
 def _public_shop_prefix_route(obs, record=False):
@@ -164,6 +245,10 @@ def _update_public_history(obs):
     step = int(obs.get("step", int(obs.get("day", 0)) * int(obs.get("turns_per_day", 24)) + int(obs.get("hour", 0))))
     if _LAST_STEP is None or step <= _LAST_STEP:
         _PUBLIC_HISTORY.clear()
+        _SEQUENCE_PRECURSOR_STATE.update({
+            "phase": "idle", "started_step": None, "fired": False,
+            "public_inventory": (),
+        })
     me = obs["farms"][int(obs["player"])]
     plants = [tile for row in me.get("tiles", []) for tile in row
               if isinstance(tile, dict) and tile.get("kind") == "PLANT"]
@@ -963,6 +1048,7 @@ def _policy_action(obs):
     actions = _plan_workers(
         me, day, planting_seeds, crop, crop_specs, int(obs.get("hour", 0)),
         int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
+    actions = _sequence_precursor_actions(obs, actions)
     actions, overflow_orders = _protect_shed_capacity(obs, actions, crop_specs)
     stored_inventory = private.get("shed", {})
     if PROJECTED_MARKET_EXECUTION:
@@ -1070,6 +1156,11 @@ def component_firing_counts():
         "productive_action_capacity": PRODUCTIVE_ACTION_CAPACITY_FIRES,
         "public_shop_prefix_routes": dict(PUBLIC_SHOP_PREFIX_ROUTE_FIRES),
         "compact_replay_policy": dict(COMPACT_REPLAY_POLICY_FIRES),
+        "sequence_precursor_policy": {
+            "firings": SEQUENCE_PRECURSOR_POLICY_FIRES,
+            "economic_reached": SEQUENCE_PRECURSOR_ECONOMIC_REACHED,
+            "phase": _SEQUENCE_PRECURSOR_STATE["phase"],
+        },
     }
 
 

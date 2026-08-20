@@ -990,6 +990,45 @@ class EvaluationTest(unittest.TestCase):
         self.assertEqual(before + 1, agent.component_firing_counts()["public_scheduler"])
         self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["scheduler"]["license"])
 
+    def test_sequence_precursor_policy_is_independent_bounded_and_auditable(self):
+        agent = load_agent(ROOT / "main.py")
+        self.assertFalse(agent.SEQUENCE_PRECURSOR_POLICY)
+        tiles = [["LOCKED" for _ in range(3)] for _ in range(3)]
+        tiles[1][1] = {"kind": "PASTURE"}
+        tiles[1][2] = None
+        farm = {"money": 750, "farmer": [2, 1], "hands": [], "tiles": tiles}
+        obs = {"player": 0, "step": 1, "day": 0, "hour": 1, "turns_per_day": 24,
+               "total_days": 30, "farms": [farm],
+               "private": {"shed": {"SECRET": 99}, "seeds": {}, "inventories": [{}]},
+               "market": {"prices": {}, "inventory": {"WHEAT": 17}},
+               "town": {"unlocked_shops": []}}
+        baseline = agent.agent(obs)
+        self.assertNotEqual(["BUILD_PASTURE"], baseline["farmer"])
+
+        candidate = load_agent(ROOT / "main.py")
+        candidate.SEQUENCE_PRECURSOR_POLICY = True
+        action = candidate.agent(obs)
+        evidence = candidate.component_firing_counts()["sequence_precursor_policy"]
+        self.assertEqual(["BUILD_PASTURE"], action["farmer"])
+        self.assertEqual({"firings": 1, "economic_reached": 1, "phase": "economic_reached"}, evidence)
+        self.assertEqual((("WHEAT", 17),), candidate._SEQUENCE_PRECURSOR_STATE["public_inventory"])
+        self.assertIn("no action trace", candidate.PUBLIC_EXECUTION_SOURCES["sequence_precursor"]["boundary"])
+
+    def test_sequence_precursor_policy_expires_without_relaxing_economic_thresholds(self):
+        agent = load_agent(ROOT / "main.py")
+        agent.SEQUENCE_PRECURSOR_POLICY = True
+        tiles = [["LOCKED", "LOCKED"], ["LOCKED", {"kind": "PASTURE"}]]
+        obs = {"player": 0, "step": 30, "day": 1, "hour": 6, "turns_per_day": 24,
+               "farms": [{"money": 50000, "farmer": [0, 0], "hands": [], "tiles": tiles}],
+               "private": {"shed": {}, "seeds": {}, "inventories": [{}]},
+               "market": {"prices": {}, "inventory": {}}, "town": {"unlocked_shops": []}}
+        action = agent.agent(obs)
+        self.assertNotEqual(["BUILD_PASTURE"], action["farmer"])
+        self.assertFalse(agent.FEED_ECONOMIC_DECISION)
+        self.assertFalse(agent.LONG_HORIZON_MIXED_FARM_ROUTE)
+        self.assertFalse(agent.CASH_RUNWAY_ACREAGE_EXPANSION)
+        self.assertFalse(agent.PRODUCTIVE_ACTION_CAPACITY)
+
     def test_multi_stop_bundle_is_independent_bounded_and_fires(self):
         agent = load_agent(ROOT / "main.py")
         agent.PUBLIC_SCHEDULER_COMPONENT = True

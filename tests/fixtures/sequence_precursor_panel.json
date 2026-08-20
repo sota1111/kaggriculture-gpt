@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source_manifest": "tests/fixtures/public_closed_loop_holdout.json",
+  "screen_opponents": ["cok-v7-58c91c3", "lonespear-v17-774b260"],
+  "confirm_opponents": ["lonespear-v18-774b260", "lonespear-v23-774b260"],
+  "screen_seeds": [282001, 282002],
+  "confirm_seeds": [282011, 282012],
+  "seats": [0, 1],
+  "gate": {
+    "strict_improvement": true,
+    "nonnegative_tail_and_worst": true,
+    "require_component_firing": true,
+    "require_precursor_economic_reach": true,
+    "max_runtime_ratio": 2.0
+  },
+  "kaggle_submission": "NOT_PERFORMED"
+}
