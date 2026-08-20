@@ -12,4 +12,6 @@ The untouched sealed panel ran four same-seed/both-seat real Kaggriculture match
 
 All SOT-2825 criteria are satisfied. The evidence-backed reward regression justifies rejection; independent confirm was skipped according to the screen→confirm contract, and no Kaggle submission was performed.
 
+## Linear Report: POSTED
+
 ## Acceptance: PASS
