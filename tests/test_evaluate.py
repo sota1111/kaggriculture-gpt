@@ -26,6 +26,7 @@ from scripts.measure_feed_economic_decision import targeted_trace as feed_econom
 from scripts.measure_feed_economic_sealed_panel import gate as feed_sealed_gate, panel_checks
 from scripts.measure_sequence_precursor_sealed_panel import gate as precursor_sealed_gate
 from scripts.measure_winner_sequence_support import measure as measure_winner_sequence_support
+from scripts.measure_sequence_planner import measure as measure_sequence_planner, planner_observation
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,6 +34,34 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_receding_horizon_planner_ablation_fires_both_seats_and_changes_sequence(self):
+        fixture = json.loads((ROOT / "tests/fixtures/sequence_planner_panel.json").read_text())
+        report = measure_sequence_planner(ROOT / "main.py", fixture)
+        self.assertTrue(report["passed"], report)
+        for panel in ("screen", "confirm"):
+            self.assertTrue(report[panel]["both_seats"])
+            self.assertGreaterEqual(report[panel]["intervention_steps"], 4)
+            self.assertGreaterEqual(report[panel]["multi_step_firings"], 2)
+            self.assertEqual(0, report[panel]["invalid_actions"])
+            self.assertEqual(0, report[panel]["contract_violations"])
+        self.assertEqual("NOT_PERFORMED", report["kaggle_submission"])
+
+    def test_receding_horizon_planner_hard_constraints_and_tie_break_are_deterministic(self):
+        agent = load_agent(ROOT / "main.py")
+        obs = planner_observation(0, 24)
+        baseline = [["PASS"], ["PASS"]]
+        first = agent._sequence_planner_actions(
+            json.loads(json.dumps(obs)), baseline, "WHEAT", agent._crop_specs(obs))
+        second = agent._sequence_planner_actions(
+            json.loads(json.dumps(obs)), baseline, "WHEAT", agent._crop_specs(obs))
+        self.assertEqual(first, second)
+        constrained = json.loads(json.dumps(obs))
+        constrained["private"]["seeds"]["WHEAT"] = 0
+        constrained["total_days"] = constrained["day"]
+        actions = agent._sequence_planner_actions(
+            constrained, baseline, "WHEAT", agent._crop_specs(constrained))
+        self.assertNotIn("PLANT", [action[0] for action in actions])
+
     def test_multi_step_oracle_is_isolated_deterministic_and_measures_all_capacities(self):
         fixture = json.loads((ROOT / "tests/fixtures/multi_step_transition_oracle.json").read_text())
         first = measure_transition_oracle(ROOT / "main.py", fixture)

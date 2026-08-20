@@ -1,0 +1,11 @@
+{
+  "screen": [
+    {"identity":{"episode":"screen-a","seed":284401,"seat":0,"opponent":"cok-v7"},"observations":[]},
+    {"identity":{"episode":"screen-b","seed":284401,"seat":1,"opponent":"cok-v7"},"observations":[]}
+  ],
+  "confirm": [
+    {"identity":{"episode":"confirm-a","seed":284411,"seat":0,"opponent":"lonespear-v18"},"observations":[]},
+    {"identity":{"episode":"confirm-b","seed":284411,"seat":1,"opponent":"lonespear-v23"},"observations":[]}
+  ],
+  "kaggle_submission":"NOT_PERFORMED"
+}
