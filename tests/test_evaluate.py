@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_cv_holdouts
+from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_authenticated_replay_cv, validate_cv_holdouts
 from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
@@ -15,6 +15,42 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_authenticated_replay_manifest_is_hash_pinned_and_leak_free(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/authenticated_replay_manifest.json").read_text()
+        )
+        result = validate_authenticated_replay_cv(
+            manifest, ROOT / "docs/measurements/SOT-2781/replays"
+        )
+        self.assertTrue(result["passed"], result)
+        self.assertTrue(all(result["checks"].values()), result["checks"])
+        self.assertEqual("NOT_PERFORMED", result["kaggle_submission"])
+        self.assertEqual({0, 1}, {row["seat"] for row in result["panels"]["screen"]})
+        self.assertEqual({0, 1}, {row["seat"] for row in result["panels"]["confirm"]})
+        self.assertLess(
+            max(row["time_utc"] for row in result["panels"]["screen"]),
+            min(row["time_utc"] for row in result["panels"]["confirm"]),
+        )
+        self.assertNotEqual(
+            {row["entity_id"] for row in result["panels"]["screen"]},
+            {row["entity_id"] for row in result["panels"]["confirm"]},
+        )
+        boundary = result["information_boundary"]["candidate_inputs"]
+        self.assertIn("private and future fields excluded", boundary)
+        self.assertIn("fallback-public-artifacts", result["fallback_boundary"])
+
+    def test_authenticated_replay_manifest_rejects_hash_and_temporal_drift(self):
+        manifest = json.loads(
+            (ROOT / "tests/fixtures/authenticated_replay_manifest.json").read_text()
+        )
+        manifest["entries"][0]["time_utc"] = "2099-01-01T00:00:00Z"
+        result = validate_authenticated_replay_cv(
+            manifest, ROOT / "docs/measurements/SOT-2781/replays"
+        )
+        self.assertFalse(result["passed"])
+        self.assertFalse(result["checks"]["manifest_digest"])
+        self.assertFalse(result["checks"]["confirm_after_screen"])
+
     def test_demand_premium_gate_requires_strict_improvement(self):
         summary = {"lower_tail_margin": 1, "worst_margin": 1,
                    "mean_margin": 1, "mean_rank": 1}

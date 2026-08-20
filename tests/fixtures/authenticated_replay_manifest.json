@@ -1,0 +1,94 @@
+{
+  "schema_version": 2,
+  "captured_at_utc": "2026-08-20T13:47:00Z",
+  "competition": "kaggriculture",
+  "leaderboard_anchor": {
+    "rank": 1,
+    "team_id": 16644287,
+    "team_name": "Ryo Hasegawa",
+    "submission_id": 55614463,
+    "public_score": 3157.7,
+    "submission_time_utc": "2026-08-19T04:08:02.207Z"
+  },
+  "acquisition": {
+    "status": "authenticated-kaggle-api",
+    "path": "KaggleApi.competition_team_submissions / competition_list_episodes / competition_episode_replay",
+    "fallback_boundary": "These authenticated, hash-pinned replay archives replace the public-source fallback only for provenance and leak-free replay evidence. The older tests/fixtures/replay_corpus_manifest.json remains explicitly fallback-public-artifacts and is not relabeled or mixed into this corpus."
+  },
+  "observation_policy": {
+    "candidate_inputs": "public observations at or before the current step; private and future fields excluded",
+    "raw_archive_boundary": "Archives preserve Kaggle's signed replay response for audit. Validation reads identity, terminal public metadata, and chronological steps only; private fields and future steps are never candidate inputs."
+  },
+  "entries": [
+    {
+      "key": "submission:55614463:episode:94636230:seat:0",
+      "window": "screen",
+      "entity_id": "opponent-team:16677252",
+      "entity_name": "Ryo Hasegawa",
+      "opponent_team_id": 16677252,
+      "opponent_name": "カワシギ",
+      "submission_id": 55614463,
+      "episode_id": 94636230,
+      "recorded_seat": 0,
+      "seed": 2119479489,
+      "time_utc": "2026-08-19T20:01:41.193Z",
+      "steps": 720,
+      "archive": "episode-94636230-replay.json.gz",
+      "replay_sha256": "a4704481c0b967186aac58c2b352ebd7ab0c5faf61cb65f09969a797d1831898",
+      "archive_sha256": "fa85a73a536b95422b0ae72fa59db96f558677a6eb70ee94d1f68d8a0a181624"
+    },
+    {
+      "key": "submission:55614463:episode:94794856:seat:1",
+      "window": "screen",
+      "entity_id": "opponent-team:16711376",
+      "entity_name": "Ryo Hasegawa",
+      "opponent_team_id": 16711376,
+      "opponent_name": "Arman Tuganbaev",
+      "submission_id": 55614463,
+      "episode_id": 94794856,
+      "recorded_seat": 1,
+      "seed": 540132878,
+      "time_utc": "2026-08-20T01:49:59.384Z",
+      "steps": 720,
+      "archive": "episode-94794856-replay.json.gz",
+      "replay_sha256": "b7232d9054a726f004aba065ea56dd8d9f8f8d39096602f63d8d4e280b240e30",
+      "archive_sha256": "f6470fb87c28072b72d4402b4dee287ff690962cdc419752110cfd2a585eeae3"
+    },
+    {
+      "key": "submission:55614463:episode:95164609:seat:0",
+      "window": "confirm",
+      "entity_id": "opponent-team:16623716",
+      "entity_name": "Ryo Hasegawa",
+      "opponent_team_id": 16623716,
+      "opponent_name": "tetsuya",
+      "submission_id": 55614463,
+      "episode_id": 95164609,
+      "recorded_seat": 0,
+      "seed": 1995388078,
+      "time_utc": "2026-08-20T12:38:16.712Z",
+      "steps": 720,
+      "archive": "episode-95164609-replay.json.gz",
+      "replay_sha256": "0bb8398fe29494acb9f731d67defffe6719bca9206ac0068bf97c513a1cf2e07",
+      "archive_sha256": "43e77aa6c9ff1866816fc0368e13b9de20ee409364b308523c014787cbbeb59f"
+    },
+    {
+      "key": "submission:55614463:episode:95164612:seat:1",
+      "window": "confirm",
+      "entity_id": "opponent-team:16623716",
+      "entity_name": "Ryo Hasegawa",
+      "opponent_team_id": 16623716,
+      "opponent_name": "tetsuya",
+      "submission_id": 55614463,
+      "episode_id": 95164612,
+      "recorded_seat": 1,
+      "seed": 972759269,
+      "time_utc": "2026-08-20T12:38:16.749Z",
+      "steps": 720,
+      "archive": "episode-95164612-replay.json.gz",
+      "replay_sha256": "d0e8a31ea20559377b98d3a0221766d8aa667df5a7cb3bdbdb06b36ee815e180",
+      "archive_sha256": "6d0ca5dd0ad9302496bc71911b744d4a3ced6aa1586999b67f55f0d066545fb7"
+    }
+  ],
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "25fda50946f41f29c75449da0e8b78c9134ce1bb652e0383f43f7ecf27281b03"
+}
