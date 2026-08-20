@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "id": "cok-v7-58c91c3",
+      "lineage": "COK-ZhangZiliang/Kaggriculture",
+      "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+      "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+      "path": "main.py",
+      "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+      "license": "Apache-2.0",
+      "redistribution": "fetch-only"
+    },
+    {
+      "id": "lonespear-v17-774b260",
+      "lineage": "lonespear/kaggriculture",
+      "source_url": "https://github.com/lonespear/kaggriculture",
+      "commit": "774b26093ccf4246525517d48420349b841b6e50",
+      "path": "main_v17.py",
+      "sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+      "license": "MIT",
+      "redistribution": "fetch-only"
+    },
+    {
+      "id": "lonespear-v18-774b260",
+      "lineage": "lonespear/kaggriculture",
+      "source_url": "https://github.com/lonespear/kaggriculture",
+      "commit": "774b26093ccf4246525517d48420349b841b6e50",
+      "path": "main_v18.py",
+      "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+      "license": "MIT",
+      "redistribution": "fetch-only"
+    },
+    {
+      "id": "lonespear-v23-774b260",
+      "lineage": "lonespear/kaggriculture",
+      "source_url": "https://github.com/lonespear/kaggriculture",
+      "commit": "774b26093ccf4246525517d48420349b841b6e50",
+      "path": "main_v23.py",
+      "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+      "license": "MIT",
+      "redistribution": "fetch-only"
+    }
+  ]
+}
