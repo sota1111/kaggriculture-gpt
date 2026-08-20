@@ -1,16 +1,11 @@
-# Final Report — SOT-2832
+# Final Report — SOT-2831
 
-## Outcome
+Cycle 4 is complete. Economic-family attribution succeeded, but the derived feed-wheat runway decision did not fire in either live closed-loop screen and produced no rank, reward, margin, or tail improvement. The candidate is rejected with direct A/B and isolated intervention evidence; production defaults remain disabled.
 
-The pinned winner teacher and current champion were re-anchored at decision-family granularity. `economic` ranked first on both screen and confirm. The artifact records frequency, a clearly labeled non-causal reward-contribution proxy, fireability, split identities, and all provenance hashes. Runtime code and the submission artifact were not changed, and no Kaggle submission was made.
-
-## Quality Gates
-
-- Deterministic rerun: PASS
-- Python compile: PASS
-- Unit tests: 87/87 PASS
-- Submission contract/build: PASS
-- Diff and acceptance review: PASS
-- npm/e2e: N/A (not present)
+All child issues are Done and PRs #54–#56 are merged. The parent did not submit: no candidate passed the leak-free promotion gate, confirm was not consumed after screen failure, and the daily submission budget was already exhausted. The next cycle should re-anchor why targeted feed-economic actions do not become reachable in live trajectories before selecting a different non-closed decision family.
 
 ## Acceptance: PASS
+
+## Linear Report: POSTED
+
+## Next Action: READY_FOR_REVIEW
