@@ -23,6 +23,7 @@ CARE_LIVESTOCK_COMPONENT = True
 SHED_OVERFLOW_PROTECTION = True
 CASH_RUNWAY_ACREAGE_EXPANSION = False
 PRODUCTIVE_ACTION_CAPACITY = False
+PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR = False
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -80,6 +81,13 @@ PUBLIC_EXECUTION_SOURCES = {
         "license": "MIT",
         "boundary": "public worker positions and crop-service backlog only; no fixed route, replay trace, private inventory, or weights",
     },
+    "shop_prefix_route_selector": {
+        "url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "license": "Apache-2.0",
+        "artifact_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+        "boundary": "first three public unlocked shops only; no route trace, identity, episode, submission, seed, or private state",
+    },
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
@@ -91,6 +99,19 @@ CARE_LIVESTOCK_FIRES = 0
 SHED_OVERFLOW_FIRES = 0
 CASH_RUNWAY_ACREAGE_FIRES = 0
 PRODUCTIVE_ACTION_CAPACITY_FIRES = 0
+PUBLIC_SHOP_PREFIX_ROUTE_FIRES = {
+    "yarn_first": 0, "yarn_second": 0, "yarn_third": 0,
+    "early_milk_support": 0, "default": 0,
+}
+
+_MILK_SUPPORT_SHOPS = {"PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"}
+_SHOP_PREFIX_ROUTES = {
+    "yarn_first": {"cow_target": 6, "sheep_target": 12, "crop": "WHEAT"},
+    "yarn_second": {"cow_target": 6, "sheep_target": 12, "crop": "WHEAT"},
+    "yarn_third": {"cow_target": 6, "sheep_target": 8, "crop": "WHEAT"},
+    "early_milk_support": {"cow_target": 10, "sheep_target": 4, "crop": "STRAWBERRY"},
+    "default": {"cow_target": 8, "sheep_target": 6, "crop": "STRAWBERRY"},
+}
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -98,6 +119,24 @@ DEFAULT_CROPS = {
 
 _PUBLIC_HISTORY = []
 _LAST_STEP = None
+
+
+def _public_shop_prefix_route(obs, record=False):
+    """Select a production route from the first three public shops only."""
+    shops = list(obs.get("town", {}).get("unlocked_shops", ()) or ())[:3]
+    if shops[:1] == ["YARN_STORE"]:
+        label = "yarn_first"
+    elif "YARN_STORE" in shops[:2]:
+        label = "yarn_second"
+    elif "YARN_STORE" in shops:
+        label = "yarn_third"
+    elif _MILK_SUPPORT_SHOPS.intersection(shops):
+        label = "early_milk_support"
+    else:
+        label = "default"
+    if record:
+        PUBLIC_SHOP_PREFIX_ROUTE_FIRES[label] += 1
+    return label, dict(_SHOP_PREFIX_ROUTES[label])
 
 
 def _update_public_history(obs):
@@ -642,7 +681,7 @@ def _runway_expansion_plan(obs, crop_spec, crop, harvests_left):
             "serviceable_hands": serviceable_hands}
 
 
-def _care_livestock_orders(obs):
+def _care_livestock_orders(obs, route=None):
     """Buy bounded cow/sheep capacity only when remaining CARE cycles repay it."""
     global CARE_LIVESTOCK_FIRES
     if not CARE_LIVESTOCK_COMPONENT:
@@ -663,6 +702,15 @@ def _care_livestock_orders(obs):
     orders = []
     committed = 0
     candidates = []
+    targets = {"COW": 2, "SHEEP": 2}
+    if route:
+        raw_total = max(1, route["cow_target"] + route["sheep_target"])
+        # Preserve the champion's bounded herd constraint while following the
+        # selected route's public cow/sheep ratio.
+        targets = {
+            "COW": max(1, min(2, round(4 * route["cow_target"] / raw_total))),
+            "SHEEP": max(1, min(2, round(4 * route["sheep_target"] / raw_total))),
+        }
     for animal, product in (("COW", "MILK"), ("SHEEP", "WOOL")):
         spec = animal_specs.get(animal, {})
         capital = max(0, int(spec.get("price", 0)))
@@ -673,11 +721,12 @@ def _care_livestock_orders(obs):
         feed_price = max(0, int(prices.get("FEED", spec.get("feed_price", 0))))
         product_price = max(0, int(prices.get(product, spec.get("product_price", 0))))
         net = cycles * (units * product_price - feed_per_cycle * feed_price) - capital
-        candidates.append((net, animal, capital, cycles))
-    for net, animal, capital, cycles in sorted(candidates, reverse=True):
+        deficit = max(0, targets[animal] - max(0, int(herd.get(animal, 0))))
+        candidates.append((deficit > 0, net, animal, capital, cycles))
+    for wanted, net, animal, capital, cycles in sorted(candidates, reverse=True):
         owned = max(0, int(herd.get(animal, 0)))
         runway = max(MIN_CASH_RESERVE * 2, int(me.get("daily_operating_cost", 0)) * 3)
-        if owned < 2 and cycles >= 2 and net > 0 and money - committed - capital >= runway:
+        if wanted and owned < targets[animal] and cycles >= 2 and net > 0 and money - committed - capital >= runway:
             orders.append(["BUY_ANIMAL", animal, 1])
             committed += capital
             CARE_LIVESTOCK_FIRES += 1
@@ -782,6 +831,13 @@ def _policy_action(obs):
     money = int(me["money"])
     seed_inventory = private.get("seeds", {})
     crop, crop_specs = _choose_crop({**obs, "total_days": total_days}, seed_inventory, history)
+    public_route = None
+    if PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR:
+        _, public_route = _public_shop_prefix_route(obs, record=True)
+        route_crop = public_route["crop"]
+        if route_crop in crop_specs and _remaining_harvests(
+                crop_specs[route_crop], day, total_days) > 0:
+            crop = route_crop
     mixed_route = None
     if LONG_HORIZON_MIXED_FARM_ROUTE:
         mixed_route = _mixed_farm_route({**obs, "total_days": total_days}, crop_specs, seed_inventory)
@@ -847,7 +903,8 @@ def _policy_action(obs):
     if mixed_route:
         market.extend(mixed_route["market"])
 
-    market.extend(_care_livestock_orders({**obs, "total_days": total_days}))
+    market.extend(_care_livestock_orders(
+        {**obs, "total_days": total_days}, public_route))
 
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
     expansion = _runway_expansion_plan(
@@ -902,6 +959,7 @@ def component_firing_counts():
         "shed_overflow": SHED_OVERFLOW_FIRES,
         "cash_runway_acreage": CASH_RUNWAY_ACREAGE_FIRES,
         "productive_action_capacity": PRODUCTIVE_ACTION_CAPACITY_FIRES,
+        "public_shop_prefix_routes": dict(PUBLIC_SHOP_PREFIX_ROUTE_FIRES),
     }
 
 

@@ -1,0 +1,208 @@
+{
+  "axis": "COK V7-derived public first-three-shop-prefix production route selector",
+  "branch_trace": [
+    {
+      "expected": "yarn_first",
+      "observed": "yarn_first",
+      "private_identity_seed_invariant": true,
+      "route": {
+        "cow_target": 6,
+        "crop": "WHEAT",
+        "sheep_target": 12
+      },
+      "shops": [
+        "YARN_STORE",
+        "CAFE",
+        "BAKERY"
+      ]
+    },
+    {
+      "expected": "yarn_second",
+      "observed": "yarn_second",
+      "private_identity_seed_invariant": true,
+      "route": {
+        "cow_target": 6,
+        "crop": "WHEAT",
+        "sheep_target": 12
+      },
+      "shops": [
+        "CAFE",
+        "YARN_STORE",
+        "BAKERY"
+      ]
+    },
+    {
+      "expected": "yarn_third",
+      "observed": "yarn_third",
+      "private_identity_seed_invariant": true,
+      "route": {
+        "cow_target": 6,
+        "crop": "WHEAT",
+        "sheep_target": 8
+      },
+      "shops": [
+        "CAFE",
+        "BAKERY",
+        "YARN_STORE"
+      ]
+    },
+    {
+      "expected": "early_milk_support",
+      "observed": "early_milk_support",
+      "private_identity_seed_invariant": true,
+      "route": {
+        "cow_target": 10,
+        "crop": "STRAWBERRY",
+        "sheep_target": 4
+      },
+      "shops": [
+        "CAFE",
+        "PIZZA_SHOP",
+        "BAKERY"
+      ]
+    },
+    {
+      "expected": "default",
+      "observed": "default",
+      "private_identity_seed_invariant": true,
+      "route": {
+        "cow_target": 8,
+        "crop": "STRAWBERRY",
+        "sheep_target": 6
+      },
+      "shops": [
+        "CAFE",
+        "BAKERY",
+        "JUICE_SHOP"
+      ]
+    }
+  ],
+  "confirm": {
+    "reason": "screen promotion gate failed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "feature_boundary": "first three public unlocked shops; no identity/episode/submission/seed/private input",
+  "issue": "SOT-2821",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": false,
+  "screen": {
+    "matches": [
+      {
+        "candidate_margin": 0.0,
+        "candidate_rank": 1,
+        "candidate_reward": 1294.0,
+        "champion_reward": 1294.0,
+        "identity": {
+          "candidate_seat": 0,
+          "seed": 282101,
+          "window": "screen"
+        },
+        "invalid_actions": 0,
+        "selector_firings": {
+          "default": 719,
+          "early_milk_support": 0,
+          "yarn_first": 0,
+          "yarn_second": 0,
+          "yarn_third": 0
+        },
+        "states": 720,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "stderr": ""
+      },
+      {
+        "candidate_margin": 0.0,
+        "candidate_rank": 1,
+        "candidate_reward": 1294.0,
+        "champion_reward": 1294.0,
+        "identity": {
+          "candidate_seat": 1,
+          "seed": 282101,
+          "window": "screen"
+        },
+        "invalid_actions": 0,
+        "selector_firings": {
+          "default": 719,
+          "early_milk_support": 0,
+          "yarn_first": 0,
+          "yarn_second": 0,
+          "yarn_third": 0
+        },
+        "states": 720,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "stderr": ""
+      },
+      {
+        "candidate_margin": 0.0,
+        "candidate_rank": 1,
+        "candidate_reward": 1294.0,
+        "champion_reward": 1294.0,
+        "identity": {
+          "candidate_seat": 0,
+          "seed": 282102,
+          "window": "screen"
+        },
+        "invalid_actions": 0,
+        "selector_firings": {
+          "default": 144,
+          "early_milk_support": 575,
+          "yarn_first": 0,
+          "yarn_second": 0,
+          "yarn_third": 0
+        },
+        "states": 720,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "stderr": ""
+      },
+      {
+        "candidate_margin": 0.0,
+        "candidate_rank": 1,
+        "candidate_reward": 1294.0,
+        "champion_reward": 1294.0,
+        "identity": {
+          "candidate_seat": 1,
+          "seed": 282102,
+          "window": "screen"
+        },
+        "invalid_actions": 0,
+        "selector_firings": {
+          "default": 144,
+          "early_milk_support": 575,
+          "yarn_first": 0,
+          "yarn_second": 0,
+          "yarn_third": 0
+        },
+        "states": 720,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "stderr": ""
+      }
+    ],
+    "summary": {
+      "losses": 0,
+      "lower_tail_margin": 0.0,
+      "matches": 4,
+      "mean_margin": 0.0,
+      "ties": 4,
+      "wins": 0,
+      "worst_margin": 0.0
+    }
+  },
+  "source": {
+    "artifact_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+    "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+    "license": "Apache-2.0",
+    "url": "https://github.com/COK-ZhangZiliang/Kaggriculture"
+  }
+}
