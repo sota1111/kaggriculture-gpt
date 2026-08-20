@@ -21,6 +21,7 @@ FERTILIZER_COVERAGE = True
 STAGGERED_STRAWBERRY_RENEWAL = True
 CARE_LIVESTOCK_COMPONENT = True
 SHED_OVERFLOW_PROTECTION = True
+CASH_RUNWAY_ACREAGE_EXPANSION = False
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -65,6 +66,13 @@ PUBLIC_EXECUTION_SOURCES = {
         "license": "MIT",
         "boundary": "capacity/clock/own-inventory logistics only; no projected market or terminal recovery",
     },
+    "runway_acreage": {
+        "url": "https://github.com/Seyamalam/Kaggriculture",
+        "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+        "license": "MIT",
+        "artifact_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639",
+        "boundary": "public cash/runway staging only; no fixed quadrant, crop block, hand route, replay trace, or weights",
+    },
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
@@ -74,6 +82,7 @@ FERTILIZER_COVERAGE_FIRES = 0
 STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
 CARE_LIVESTOCK_FIRES = 0
 SHED_OVERFLOW_FIRES = 0
+CASH_RUNWAY_ACREAGE_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -531,6 +540,50 @@ def _hand_target(me, harvests_left):
     return max(MIN_HAND_TARGET, min(MAX_HAND_TARGET, capacity_target))
 
 
+def _runway_expansion_plan(obs, crop_spec, crop, harvests_left):
+    """Permit one public-state capacity step after operating reserves are funded."""
+    global CASH_RUNWAY_ACREAGE_FIRES
+    if not CASH_RUNWAY_ACREAGE_EXPANSION or harvests_left <= 0:
+        return {"reserve": MIN_CASH_RESERVE, "land": [], "extra_seeds": 0,
+                "serviceable_hands": None}
+    me = obs["farms"][int(obs["player"])]
+    private = obs.get("private", {})
+    money = max(0, int(me.get("money", 0)))
+    hands = list(me.get("hands", []))
+    workers = 1 + len(hands)
+    seed_price = max(1, int(crop_spec.get("seed_price", 0)))
+    seed_reserve = workers * SEED_RESERVE_PER_WORKER * seed_price
+    herd = sum(max(0, int(value)) for value in private.get("animals", {}).values())
+    feed_price = max(0, int(obs.get("market", {}).get("prices", {}).get("FEED", 0)))
+    feed_reserve = herd * max(1, int(obs.get("feed_reserve_days", 2))) * feed_price
+    care_reserve = max(0, int(me.get("daily_operating_cost", 0))) * min(3, harvests_left)
+    reserve = max(MIN_CASH_RESERVE, seed_reserve + feed_reserve + care_reserve)
+    usable = sum(tile != "LOCKED" for row in me.get("tiles", []) for tile in row)
+    serviceable_hands = max(0, min(MAX_HAND_TARGET, ceil(usable / 6) - 1))
+    orders = []
+    capabilities = set(obs.get("capabilities", ()))
+    unlocked = list(me.get("unlocked_quadrants", ["NW"]))
+    land_costs = obs.get("land_costs", ())
+    if isinstance(land_costs, (list, tuple)) and len(land_costs) > len(unlocked) - 1:
+        land_cost = max(0, int(land_costs[len(unlocked) - 1]))
+    else:
+        land_cost = 1000 * (2 ** max(0, len(unlocked) - 1))
+    remaining_days = max(0, int(obs.get("total_days", 30)) - int(obs.get("day", 0)))
+    maturity = max(1, int(crop_spec.get("maturity_days", 2)))
+    # One order per observation makes expansion incremental and auditable.
+    if ("BUY_LAND" in capabilities and len(unlocked) < 4
+            and remaining_days > maturity * 2 and workers >= serviceable_hands
+            and money - land_cost >= reserve):
+        orders.append(["BUY_LAND"])
+        money -= land_cost
+        CASH_RUNWAY_ACREAGE_FIRES += 1
+    extra_seeds = int(money - seed_price >= reserve and usable > workers * SEED_RESERVE_PER_WORKER)
+    if extra_seeds:
+        CASH_RUNWAY_ACREAGE_FIRES += 1
+    return {"reserve": reserve, "land": orders, "extra_seeds": extra_seeds,
+            "serviceable_hands": serviceable_hands}
+
+
 def _care_livestock_orders(obs):
     """Buy bounded cow/sheep capacity only when remaining CARE cycles repay it."""
     global CARE_LIVESTOCK_FIRES
@@ -656,7 +709,7 @@ def _choose_crop(obs, seeds, history=()):
 
 
 def _policy_action(obs):
-    global PROJECTED_MARKET_FIRES, CARE_LIVESTOCK_FIRES
+    global PROJECTED_MARKET_FIRES, CARE_LIVESTOCK_FIRES, CASH_RUNWAY_ACREAGE_FIRES
     history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
     me = obs["farms"][int(obs["player"])]
     private = obs["private"]
@@ -734,11 +787,15 @@ def _policy_action(obs):
     market.extend(_care_livestock_orders({**obs, "total_days": total_days}))
 
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
+    expansion = _runway_expansion_plan(
+        {**obs, "total_days": total_days}, crop_specs[crop], crop, harvests_left)
+    market.extend(expansion["land"])
     advance_reserve = 1 if pressure["labor"] + pressure["field_demand"] >= 0.75 else 0
-    desired_seeds = worker_count * SEED_RESERVE_PER_WORKER + advance_reserve if harvests_left else 0
+    desired_seeds = (worker_count * SEED_RESERVE_PER_WORKER + advance_reserve
+                     + expansion["extra_seeds"] if harvests_left else 0)
     buy_count = max(0, desired_seeds - seeds)
     seed_price = int(crop_specs[crop]["seed_price"])
-    affordable = max(0, (money - MIN_CASH_RESERVE) // max(1, seed_price))
+    affordable = max(0, (money - expansion["reserve"]) // max(1, seed_price))
     # When the shared crop stock is already depleted, preserve cash and avoid
     # joining a crowded buy queue; one reserve unit still keeps planting live.
     if pressure["inventory"] >= 0.6:
@@ -752,11 +809,14 @@ def _policy_action(obs):
     future_sale = max(_future_prices(crop_specs[crop], day, int(prices.get(crop, crop_specs[crop]["fallback_price"]))))
     expected_crop_margin = future_sale * float(crop_specs[crop]["expected_yield"]) - seed_price
     hand_target = _hand_target(me, harvests_left)
+    if expansion["serviceable_hands"] is not None:
+        hand_target = min(hand_target, expansion["serviceable_hands"])
     if len(hands) < hand_target:
         cost = _hire_cost(hires_today)
         opportunity = expected_crop_margin * harvests_left * (1 + pressure["field_demand"])
-        if money - cost >= MIN_CASH_RESERVE and opportunity > cost:
+        if money - cost >= expansion["reserve"] and opportunity > cost:
             market.append(["HIRE"])
+            CASH_RUNWAY_ACREAGE_FIRES += 1
 
     return {
         "farmer": actions[0],
@@ -774,6 +834,7 @@ def component_firing_counts():
         "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
         "care_livestock": CARE_LIVESTOCK_FIRES,
         "shed_overflow": SHED_OVERFLOW_FIRES,
+        "cash_runway_acreage": CASH_RUNWAY_ACREAGE_FIRES,
     }
 
 
