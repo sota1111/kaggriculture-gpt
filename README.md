@@ -38,6 +38,18 @@ python3 scripts/measure_shed_overflow.py \
 
 ## Reproducible offline evaluation
 
+The public-state productive-action capacity oracle measures executable work,
+standing-on-work, mandatory travel, route-repair assignments, capacity
+shortfall/utilization, and productive density without private or future fields.
+Its entity/seed/time-separated screen and confirm panels cover both seats:
+
+```bash
+python3 scripts/measure_public_action_capacity_oracle.py
+```
+
+The JSON output pins the default-off champion and source/fixture/policy
+provenance. This measurement does not submit to Kaggle.
+
 Run a candidate through the fixed-seed screen and confirm gates:
 
 ```bash

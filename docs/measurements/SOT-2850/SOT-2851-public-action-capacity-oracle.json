@@ -1,0 +1,567 @@
+{
+  "axis": "public-state productive-action capacity oracle",
+  "confirm": {
+    "both_seats": [
+      0,
+      1
+    ],
+    "episodes": [
+      {
+        "identity": {
+          "entity": "lonespear-v18",
+          "episode": "confirm-a",
+          "seat": 0,
+          "seed": 285111,
+          "time": 11
+        },
+        "totals": {
+          "capacity_shortfall": 0,
+          "executable_productive_tasks": 4,
+          "immediate_productive_actions": 2,
+          "mandatory_travel_steps": 3,
+          "productive_tasks": 4,
+          "route_repair_assignments": 2,
+          "standing_on_work": 2
+        },
+        "turns": [
+          {
+            "assignments": [
+              {
+                "distance": 2,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    0,
+                    0
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 1,
+                "task": {
+                  "action": "HARVEST",
+                  "position": [
+                    2,
+                    0
+                  ]
+                },
+                "worker": 1
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 2,
+            "immediate_productive_actions": 0,
+            "mandatory_travel_steps": 3,
+            "productive_density": 0.0,
+            "productive_task_counts": {
+              "CARE": 0,
+              "FERTILIZE": 0,
+              "HARVEST": 1,
+              "WATER": 1
+            },
+            "productive_tasks": 2,
+            "route_repair_assignments": 2,
+            "standing_on_work": 0,
+            "step": 72,
+            "worker_capacity": 2
+          },
+          {
+            "assignments": [
+              {
+                "distance": 0,
+                "task": {
+                  "action": "FERTILIZE",
+                  "position": [
+                    0,
+                    0
+                  ]
+                },
+                "worker": 1
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "CARE",
+                  "position": [
+                    1,
+                    1
+                  ]
+                },
+                "worker": 0
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 2,
+            "immediate_productive_actions": 2,
+            "mandatory_travel_steps": 0,
+            "productive_density": 1.0,
+            "productive_task_counts": {
+              "CARE": 1,
+              "FERTILIZE": 1,
+              "HARVEST": 0,
+              "WATER": 0
+            },
+            "productive_tasks": 2,
+            "route_repair_assignments": 0,
+            "standing_on_work": 2,
+            "step": 73,
+            "worker_capacity": 2
+          }
+        ]
+      },
+      {
+        "identity": {
+          "entity": "lonespear-v23",
+          "episode": "confirm-b",
+          "seat": 1,
+          "seed": 285112,
+          "time": 12
+        },
+        "totals": {
+          "capacity_shortfall": 0,
+          "executable_productive_tasks": 6,
+          "immediate_productive_actions": 6,
+          "mandatory_travel_steps": 0,
+          "productive_tasks": 6,
+          "route_repair_assignments": 0,
+          "standing_on_work": 6
+        },
+        "turns": [
+          {
+            "assignments": [
+              {
+                "distance": 0,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    0,
+                    0
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "HARVEST",
+                  "position": [
+                    1,
+                    0
+                  ]
+                },
+                "worker": 1
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "CARE",
+                  "position": [
+                    2,
+                    0
+                  ]
+                },
+                "worker": 2
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 3,
+            "immediate_productive_actions": 3,
+            "mandatory_travel_steps": 0,
+            "productive_density": 1.0,
+            "productive_task_counts": {
+              "CARE": 1,
+              "FERTILIZE": 0,
+              "HARVEST": 1,
+              "WATER": 1
+            },
+            "productive_tasks": 3,
+            "route_repair_assignments": 0,
+            "standing_on_work": 3,
+            "step": 96,
+            "worker_capacity": 3
+          },
+          {
+            "assignments": [
+              {
+                "distance": 0,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    1,
+                    0
+                  ]
+                },
+                "worker": 2
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "HARVEST",
+                  "position": [
+                    0,
+                    1
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "CARE",
+                  "position": [
+                    2,
+                    1
+                  ]
+                },
+                "worker": 1
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 3,
+            "immediate_productive_actions": 3,
+            "mandatory_travel_steps": 0,
+            "productive_density": 1.0,
+            "productive_task_counts": {
+              "CARE": 1,
+              "FERTILIZE": 0,
+              "HARVEST": 1,
+              "WATER": 1
+            },
+            "productive_tasks": 3,
+            "route_repair_assignments": 0,
+            "standing_on_work": 3,
+            "step": 97,
+            "worker_capacity": 3
+          }
+        ]
+      }
+    ],
+    "passed": true,
+    "totals": {
+      "capacity_shortfall": 0,
+      "executable_productive_tasks": 10,
+      "immediate_productive_actions": 8,
+      "mandatory_travel_steps": 3,
+      "productive_tasks": 10,
+      "route_repair_assignments": 2,
+      "standing_on_work": 8
+    }
+  },
+  "deterministic_report_sha256": "554b909532f216a0748549c5765ef0f358c6ac114c6719a8adb3c7d59602ffdf",
+  "information_boundary": "current public clock, worker positions, and visible tile state only",
+  "issue": "SOT-2851",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": {
+    "baseline": "RECEDING_HORIZON_SEQUENCE_PLANNER=false champion",
+    "fixture_sha256": "c5e8a7932d92cf9e2032564c6d218b0996a38a2062c905972027cda13e5ddb8e",
+    "policy_sha256": "f9efa95b34efeeabcd0ab0bd1650b08d074ee14fedddcbe5e8262bea54c40865",
+    "same_seed_baseline": [
+      285101,
+      285102,
+      285111,
+      285112
+    ],
+    "source": {
+      "claim": "40.7% productive-action density and public action-budget measurement inspired the measurement axis; no source actions or schedules are embedded",
+      "commit": "774b26093ccf4246525517d48420349b841b6e50",
+      "license": "MIT",
+      "repository": "https://github.com/lonespear/kaggriculture"
+    }
+  },
+  "rejection_rule": "rejected requires a direct A/B or an observed live firing; this measurement-only oracle is promoted, otherwise inconclusive",
+  "result": "promoted",
+  "same_seed_baseline_results": {
+    "configuration": "RECEDING_HORIZON_SEQUENCE_PLANNER=false",
+    "confirm": {
+      "capacity_shortfall": 0,
+      "executable_productive_tasks": 10,
+      "immediate_productive_actions": 8,
+      "mandatory_travel_steps": 3,
+      "productive_tasks": 10,
+      "route_repair_assignments": 2,
+      "standing_on_work": 8
+    },
+    "screen": {
+      "capacity_shortfall": 1,
+      "executable_productive_tasks": 10,
+      "immediate_productive_actions": 7,
+      "mandatory_travel_steps": 5,
+      "productive_tasks": 11,
+      "route_repair_assignments": 3,
+      "standing_on_work": 7
+    }
+  },
+  "screen": {
+    "both_seats": [
+      0,
+      1
+    ],
+    "episodes": [
+      {
+        "identity": {
+          "entity": "cok-v7",
+          "episode": "screen-a",
+          "seat": 0,
+          "seed": 285101,
+          "time": 1
+        },
+        "totals": {
+          "capacity_shortfall": 1,
+          "executable_productive_tasks": 4,
+          "immediate_productive_actions": 1,
+          "mandatory_travel_steps": 5,
+          "productive_tasks": 5,
+          "route_repair_assignments": 3,
+          "standing_on_work": 1
+        },
+        "turns": [
+          {
+            "assignments": [
+              {
+                "distance": 2,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    0,
+                    0
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 1,
+                "task": {
+                  "action": "HARVEST",
+                  "position": [
+                    2,
+                    0
+                  ]
+                },
+                "worker": 1
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 2,
+            "immediate_productive_actions": 0,
+            "mandatory_travel_steps": 3,
+            "productive_density": 0.0,
+            "productive_task_counts": {
+              "CARE": 0,
+              "FERTILIZE": 0,
+              "HARVEST": 1,
+              "WATER": 1
+            },
+            "productive_tasks": 2,
+            "route_repair_assignments": 2,
+            "standing_on_work": 0,
+            "step": 24,
+            "worker_capacity": 2
+          },
+          {
+            "assignments": [
+              {
+                "distance": 0,
+                "task": {
+                  "action": "FERTILIZE",
+                  "position": [
+                    0,
+                    0
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 2,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    2,
+                    0
+                  ]
+                },
+                "worker": 1
+              }
+            ],
+            "capacity_shortfall": 1,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 2,
+            "immediate_productive_actions": 1,
+            "mandatory_travel_steps": 2,
+            "productive_density": 0.5,
+            "productive_task_counts": {
+              "CARE": 1,
+              "FERTILIZE": 1,
+              "HARVEST": 0,
+              "WATER": 1
+            },
+            "productive_tasks": 3,
+            "route_repair_assignments": 1,
+            "standing_on_work": 1,
+            "step": 25,
+            "worker_capacity": 2
+          }
+        ]
+      },
+      {
+        "identity": {
+          "entity": "cok-v7-seat1",
+          "episode": "screen-b",
+          "seat": 1,
+          "seed": 285102,
+          "time": 2
+        },
+        "totals": {
+          "capacity_shortfall": 0,
+          "executable_productive_tasks": 6,
+          "immediate_productive_actions": 6,
+          "mandatory_travel_steps": 0,
+          "productive_tasks": 6,
+          "route_repair_assignments": 0,
+          "standing_on_work": 6
+        },
+        "turns": [
+          {
+            "assignments": [
+              {
+                "distance": 0,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    1,
+                    0
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "HARVEST",
+                  "position": [
+                    0,
+                    1
+                  ]
+                },
+                "worker": 1
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "CARE",
+                  "position": [
+                    2,
+                    1
+                  ]
+                },
+                "worker": 2
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 3,
+            "immediate_productive_actions": 3,
+            "mandatory_travel_steps": 0,
+            "productive_density": 1.0,
+            "productive_task_counts": {
+              "CARE": 1,
+              "FERTILIZE": 0,
+              "HARVEST": 1,
+              "WATER": 1
+            },
+            "productive_tasks": 3,
+            "route_repair_assignments": 0,
+            "standing_on_work": 3,
+            "step": 48,
+            "worker_capacity": 3
+          },
+          {
+            "assignments": [
+              {
+                "distance": 0,
+                "task": {
+                  "action": "WATER",
+                  "position": [
+                    0,
+                    0
+                  ]
+                },
+                "worker": 0
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "HARVEST",
+                  "position": [
+                    2,
+                    0
+                  ]
+                },
+                "worker": 1
+              },
+              {
+                "distance": 0,
+                "task": {
+                  "action": "CARE",
+                  "position": [
+                    1,
+                    1
+                  ]
+                },
+                "worker": 2
+              }
+            ],
+            "capacity_shortfall": 0,
+            "capacity_utilization": 1.0,
+            "executable_productive_tasks": 3,
+            "immediate_productive_actions": 3,
+            "mandatory_travel_steps": 0,
+            "productive_density": 1.0,
+            "productive_task_counts": {
+              "CARE": 1,
+              "FERTILIZE": 0,
+              "HARVEST": 1,
+              "WATER": 1
+            },
+            "productive_tasks": 3,
+            "route_repair_assignments": 0,
+            "standing_on_work": 3,
+            "step": 49,
+            "worker_capacity": 3
+          }
+        ]
+      }
+    ],
+    "passed": true,
+    "totals": {
+      "capacity_shortfall": 1,
+      "executable_productive_tasks": 10,
+      "immediate_productive_actions": 7,
+      "mandatory_travel_steps": 5,
+      "productive_tasks": 11,
+      "route_repair_assignments": 3,
+      "standing_on_work": 7
+    }
+  },
+  "split": {
+    "checks": {
+      "both_seats": true,
+      "entity_holdout": true,
+      "episode_holdout": true,
+      "multi_turn": true,
+      "panels_nonempty": true,
+      "public_state_only": true,
+      "required_fields": true,
+      "seed_holdout": true,
+      "temporal_order": true,
+      "time_holdout": true
+    },
+    "passed": true
+  }
+}

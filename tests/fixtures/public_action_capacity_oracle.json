@@ -1,0 +1,29 @@
+{
+  "source": {
+    "repository": "https://github.com/lonespear/kaggriculture",
+    "commit": "774b26093ccf4246525517d48420349b841b6e50",
+    "license": "MIT",
+    "claim": "40.7% productive-action density and public action-budget measurement inspired the measurement axis; no source actions or schedules are embedded"
+  },
+  "screen": [
+    {"entity":"cok-v7","episode":"screen-a","seed":285101,"time":1,"seat":0,"observations":[
+      {"step":24,"farmer":[1,1],"hands":[[2,1]],"tiles":[[{"kind":"PLANT","watered_today":false,"yield_units":0},null,{"kind":"PLANT","watered_today":true,"yield_units":2}],[null,null,null]]},
+      {"step":25,"farmer":[0,0],"hands":[[1,1]],"tiles":[[{"kind":"PLANT","watered_today":true,"fertilizer_due":true,"yield_units":0},null,{"kind":"PLANT","watered_today":false,"yield_units":0}],[null,{"kind":"ANIMAL","care_due":true},null]]}
+    ]},
+    {"entity":"cok-v7-seat1","episode":"screen-b","seed":285102,"time":2,"seat":1,"observations":[
+      {"step":48,"farmer":[1,0],"hands":[[0,1],[2,1]],"tiles":[[null,{"kind":"PLANT","watered_today":false,"yield_units":0},null],[{"kind":"PLANT","watered_today":true,"yield_units":3},null,{"kind":"ANIMAL","care_due":true}]]},
+      {"step":49,"farmer":[0,0],"hands":[[2,0],[1,1]],"tiles":[[{"kind":"PLANT","watered_today":false,"yield_units":0},null,{"kind":"PLANT","watered_today":true,"yield_units":1}],[null,{"kind":"ANIMAL","care_due":true},null]]}
+    ]}
+  ],
+  "confirm": [
+    {"entity":"lonespear-v18","episode":"confirm-a","seed":285111,"time":11,"seat":0,"observations":[
+      {"step":72,"farmer":[1,1],"hands":[[2,1]],"tiles":[[{"kind":"PLANT","watered_today":false,"yield_units":0},null,{"kind":"PLANT","watered_today":true,"yield_units":2}],[null,null,null]]},
+      {"step":73,"farmer":[1,1],"hands":[[0,0]],"tiles":[[{"kind":"PLANT","watered_today":true,"fertilizer_due":true,"yield_units":0},null,null],[null,{"kind":"ANIMAL","care_due":true},null]]}
+    ]},
+    {"entity":"lonespear-v23","episode":"confirm-b","seed":285112,"time":12,"seat":1,"observations":[
+      {"step":96,"farmer":[0,0],"hands":[[1,0],[2,0]],"tiles":[[{"kind":"PLANT","watered_today":false,"yield_units":0},{"kind":"PLANT","watered_today":true,"yield_units":2},{"kind":"ANIMAL","care_due":true}],[null,null,null]]},
+      {"step":97,"farmer":[0,1],"hands":[[2,1],[1,0]],"tiles":[[null,{"kind":"PLANT","watered_today":false,"yield_units":0},null],[{"kind":"PLANT","watered_today":true,"yield_units":4},null,{"kind":"ANIMAL","care_due":true}]]}
+    ]}
+  ],
+  "kaggle_submission": "NOT_PERFORMED"
+}
