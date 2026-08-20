@@ -23,6 +23,16 @@
     "scale_change": "v4 keeps the runtime-shaped oracle and adds independent domain-randomized screen/confirm suites with tail and worst-case promotion gates",
     "lb_divergence_signal": "candidate offline assets rise while leaderboard_proxy or contract validity falls"
   },
+  "leak_free_cv": {
+    "screen": [
+      {"opponent": "frozen-baseline-v1", "seed": 275801, "time_index": 1},
+      {"opponent": "scarcity-policy-v1", "seed": 275802, "time_index": 2}
+    ],
+    "confirm": [
+      {"opponent": "robust-policy-v1", "seed": 275811, "time_index": 11},
+      {"opponent": "routing-policy-v1", "seed": 275812, "time_index": 12}
+    ]
+  },
   "competitive_oracle": {
     "contract": {
       "source": "Kaggle kaggriculture environment README/json, package version 0.1.0",
