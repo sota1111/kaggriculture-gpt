@@ -504,6 +504,34 @@ class EvaluationTest(unittest.TestCase):
         self.assertLessEqual(len(result["market"]), 10)
         self.assertNotIn("UNKNOWN", [action[1] for action in result["market"] if len(action) > 1])
 
+    def test_late_capital_latch_is_public_one_shot_and_suppresses_investment(self):
+        from scripts.measure_late_capital_latch import _load, _wrapper
+
+        with tempfile.TemporaryDirectory() as directory:
+            wrapper = Path(directory) / "latch.py"
+            _wrapper(wrapper, ROOT / "main.py", True)
+            candidate = _load(wrapper)
+            farms = [
+                {"money": 9000, "farmer": [0, 0], "hands": [], "hires_today": 0, "tiles": [[None]]},
+                {"money": 1000, "farmer": [0, 0], "hands": [], "hires_today": 0, "tiles": [[None]]},
+            ]
+            obs = {
+                "player": 0, "step": 577, "day": 24, "hour": 1,
+                "turns_per_day": 24, "total_days": 30, "episode_steps": 720,
+                "farms": farms,
+                "private": {"shed": {}, "seeds": {"WHEAT": 0}, "inventories": [{}]},
+                "market": {"inventory": {"WHEAT": 10000}, "prices": {"WHEAT": 25}},
+            }
+            first = candidate.agent(obs)
+            self.assertFalse(any(order[0] in {"BUY_SEED", "HIRE"} for order in first["market"]))
+            self.assertTrue(candidate.LATCH[0]["latched"])
+            # Once decided, later rival cash changes cannot relatch or inspect private state.
+            obs["step"], obs["farms"][1]["money"] = 578, 20000
+            candidate.agent(obs)
+            self.assertTrue(candidate.LATCH[0]["latched"])
+            self.assertEqual({"latched", "eligible", "step", "remaining_turns", "cash_margin",
+                              "rival_recoverable_cap", "reserve"}, set(candidate.LATCH[0]))
+
     def test_cash_reserve_and_market_order_cap_are_preserved(self):
         agent = load_agent(ROOT / "main.py")
         crops = {f"CROP{i}": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3,
