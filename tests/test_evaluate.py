@@ -8,6 +8,7 @@ from scripts.evaluate import bounded_rollout, compare, compare_distribution, eva
 from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
+from scripts.measure_fertilizer_coverage import classify_bottleneck
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +16,37 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_fertilizer_trace_distinguishes_action_from_supply_bottleneck(self):
+        action_bound = classify_bottleneck({"fertilizer_demand": 132, "stock_available": 132,
+                                            "fertilize_actions": 0,
+                                            "collect_fertilizer_actions": 0})
+        self.assertEqual("action-bound", action_bound["verdict"])
+        self.assertEqual(132, action_bound["missing_actions"])
+        supply_bound = classify_bottleneck({"fertilizer_demand": 132, "stock_available": 40,
+                                            "fertilize_actions": 40,
+                                            "collect_fertilizer_actions": 0})
+        self.assertEqual("supply-bound", supply_bound["verdict"])
+        self.assertEqual(92, supply_bound["missing_supply"])
+
+    def test_fertilizer_coverage_uses_stock_without_market_buy(self):
+        agent = load_agent(ROOT / "main.py")
+        plant = {"kind": "PLANT", "crop": "STRAWBERRY", "planted_day": 1,
+                 "watered_today": False, "yield_units": 0, "fertilized_until_day": -1}
+        obs = {
+            "player": 0, "step": 48, "day": 2, "hour": 0, "turns_per_day": 24,
+            "total_days": 30,
+            "farms": [{"money": 1000, "farmer": [0, 0], "hands": [], "tiles": [[plant]]}],
+            "private": {"seeds": {"STRAWBERRY": 0}, "shed": {},
+                        "inventories": [{"FERTILIZER": 1}]},
+            "crops": {"STRAWBERRY": {"seed_price": 25, "maturity_days": 3,
+                        "expected_yield": 3, "fallback_price": 50}},
+            "market": {"prices": {"STRAWBERRY": 50}, "inventory": {"STRAWBERRY": 10000}},
+        }
+        result = agent.agent(obs)
+        self.assertEqual(["FERTILIZE"], result["farmer"])
+        self.assertFalse(any(order[:2] == ["BUY_PRODUCT", "FERTILIZER"]
+                             for order in result["market"]))
+
     def test_authenticated_replay_manifest_is_hash_pinned_and_leak_free(self):
         manifest = json.loads(
             (ROOT / "tests/fixtures/authenticated_replay_manifest.json").read_text()
