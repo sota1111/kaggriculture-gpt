@@ -36,7 +36,7 @@ Ported COK V7's first-three-public-shop selector as a portable, Apache-attribute
 - The selector was not promoted because the strict screen produced ties rather than improvement.
 - Independent confirm was intentionally skipped by the predeclared screen gate.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 
 ## Acceptance: PASS
 
