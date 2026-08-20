@@ -1,42 +1,41 @@
-# Solo Worker Report
+# Solo Worker Report — SOT-2811
 
 ## Summary
 
-Evaluated a public-observation productive-action capacity controller against the champion. The independent candidate fired 5,760 times, but reduced WATER/HARVEST/FERTILIZE actions and regressed screen and confirm tails, so the strict gate rejected it. The runtime flag remains disabled; evidence, tests, source boundary, and the rejected-axis ledger entry are retained.
+再開runで SOT-2812〜SOT-2814 の完了結果を集約した。評価再アンカーは成立したが、cash-runway acreage と productive-action capacity は発火記録付きA/Bでともに退行し、production flagは無効のまま。改善ゲート不通過のためKaggle提出を見送った。
 
 ## Changed Files
 
-- `main.py` — dormant independent capacity flag, public throughput/backlog estimator, and source boundary; default remains false.
-- `scripts/measure_productive_action_capacity.py` — same-seed/both-seat screen and independent confirm ablation.
-- `tests/test_evaluate.py` — public/private boundary, disabled-default, schema, and rejection-gate coverage.
-- `docs/measurements/SOT-2811/SOT-2814-productive-action-capacity.json` — complete A/B evidence.
-- `docs/ai/experiment_ledger.jsonl` — rejected-axis result.
-- `docs/ai/linear/SOT-2814.md` — local lifecycle record.
+- `docs/ai/experiment_ledger.jsonl` — 子結果、effective config、artifact fingerprint、no-submit判断
+- `docs/ai/linear/SOT-2811.md` — resume集約と次サイクル申し送り
+- `docs/ai/65_worker_solo_report.md` — 本solo runの最終報告
+- `docs/ai/70_final_report.md` — acceptance結果
 
 ## Verification
 
 - Python compile: PASS
 - Unit tests: 70/70 PASS
-- Submission contract/archive: PASS
-- Component firing: 5,760
-- Runtime ratio: 1.029; invalid actions 0; contract violations 0
-- Screen lower-tail/worst margin: 213 → 80 (regression)
-- Confirm lower-tail/worst margin: -1338 → -1471 (regression)
-- WATER/HARVEST/FERTILIZE: 8,272 → 8,128 (rejected)
-- npm lint/typecheck/test/e2e: N/A (no package manifest; offline Python agent)
-- Kaggle submission: NOT PERFORMED
+- Post-repair attribution rerun: PASS
+- Runway/capacity ablation decisions and deterministic metrics: REJECTED / reproduced
+- Submission contract, gzip single member, archive content: PASS
+- Effective flags: runway acreage=false; productive-action capacity=false
+- Kaggle submission: NOT PERFORMED（leak-free CV improvement gate failed）
 
 ## Acceptance Criteria
 
-- [x] Capacity uses public clock, worker positions, and crop-service backlog only; private-only mutation test passes.
-- [x] Independent flag ablation records firing in same-seed/both-seat screen and independent confirm.
-- [x] Rank, tail, runtime, invalid actions, and submission contract were checked; regressions were not hidden.
-- [x] Non-promoted runtime remains disabled and the generated archive was restored to the champion artifact.
-- [x] Evidence was appended to the experiment ledger; no Kaggle submission was performed.
+- [x] 改善方針と選定理由を記録
+- [x] 全子IssueがDone
+- [x] candidate/championと検証結果を台帳へ対応付け
+- [x] 親resumeで全子完了を確認し、非昇格・提出見送りを記録
+- [x] rejected軸にsame-seed A/Bと発火証拠あり
+- [x] `## 申し送り` とCompletion ReportをLinearへ投稿
 
 ## Risks
 
-- This capacity formulation is closed unless new evidence changes its throughput estimator or promotion case.
+- Authenticated current-leader replay remains unavailable; the cash-flow attribution discloses its fallback corpus.
+- The two rejected formulas must not be retried without new evidence.
+
+## Linear Report: POSTED
 
 ## Acceptance: PASS
 
