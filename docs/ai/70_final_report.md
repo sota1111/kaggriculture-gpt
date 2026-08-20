@@ -8,6 +8,6 @@ violations; runtime ratio was 0.951. Confirm was correctly skipped and
 
 ## Acceptance: PASS
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 
 ## Next Action: READY_FOR_REVIEW

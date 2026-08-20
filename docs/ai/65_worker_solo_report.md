@@ -36,7 +36,7 @@ tie, so confirm was correctly skipped and the runtime flag remains off.
 
 The selector fired but did not alter terminal behavior on the screen panel.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 
 ## Acceptance: PASS
 
