@@ -20,6 +20,7 @@ from scripts.measure_care_livestock import evaluate as evaluate_care, load_polic
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
 from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
+from scripts.measure_public_action_capacity_oracle import measure as measure_public_capacity, validate_fixture as validate_capacity_fixture
 from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
@@ -35,6 +36,35 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_public_action_capacity_oracle_is_leak_free_deterministic_and_both_seat(self):
+        fixture = json.loads((ROOT / "tests/fixtures/public_action_capacity_oracle.json").read_text())
+        first = measure_public_capacity(ROOT / "main.py", fixture)
+        second = measure_public_capacity(ROOT / "main.py", fixture)
+        self.assertEqual(first, second)
+        self.assertTrue(first["passed"], first)
+        self.assertTrue(all(first["split"]["checks"].values()))
+        self.assertEqual("RECEDING_HORIZON_SEQUENCE_PLANNER=false",
+                         first["same_seed_baseline_results"]["configuration"])
+        for window in ("screen", "confirm"):
+            self.assertEqual([0, 1], first[window]["both_seats"])
+            self.assertGreater(first[window]["totals"]["productive_tasks"], 0)
+            self.assertGreater(first[window]["totals"]["mandatory_travel_steps"], 0)
+            self.assertGreater(first[window]["totals"]["route_repair_assignments"], 0)
+            for episode in first[window]["episodes"]:
+                for turn in episode["turns"]:
+                    self.assertIn("capacity_utilization", turn)
+                    self.assertIn("productive_density", turn)
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+
+    def test_public_action_capacity_oracle_fails_closed_on_leakage(self):
+        fixture = json.loads((ROOT / "tests/fixtures/public_action_capacity_oracle.json").read_text())
+        fixture["screen"][0]["observations"][0]["private"] = {"seeds": {"WHEAT": 99}}
+        self.assertFalse(validate_capacity_fixture(fixture)["passed"])
+        report = measure_public_capacity(ROOT / "main.py", fixture)
+        self.assertFalse(report["passed"])
+        self.assertTrue(report["confirm"]["skipped"])
+        self.assertEqual("inconclusive", report["result"])
+
     def test_sequence_planner_sealed_gate_requires_rank_and_live_multistep_firing(self):
         run = {"rank": 1, "states": 720, "statuses": ["DONE", "DONE"],
                "invalid_actions": 0, "contract_violations": 0, "stderr": "", "seconds": 1.0,
