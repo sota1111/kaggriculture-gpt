@@ -11,6 +11,8 @@ from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, meas
 from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.build_replay_teacher_dataset import public_projection, validate_manifest as validate_teacher_manifest
+from scripts.distill_compact_replay_policy import distill as distill_compact_policy
+from scripts.measure_compact_replay_policy import targeted_trace as compact_targeted_trace
 from scripts.measure_fertilizer_coverage import classify_bottleneck
 from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
@@ -24,6 +26,36 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_compact_replay_policy_constants_reproduce_from_screen_only(self):
+        recorded = json.loads((ROOT / "docs/measurements/SOT-2823/"
+                               "SOT-2826-compact-replay-distillation.json").read_text())
+        agent = load_agent(ROOT / "main.py")
+        self.assertEqual("screen", recorded["fit_split"])
+        self.assertEqual(0, recorded["confirm_rows_used_for_tuning"])
+        self.assertEqual(
+            tuple(recorded["constants"]["hands_per_unlocked_quadrant"]),
+            agent.COMPACT_REPLAY_POLICY_CONSTANTS["hands_per_unlocked_quadrant"],
+        )
+        self.assertEqual(
+            tuple(tuple(row) for row in recorded["constants"]["land_milestones"]),
+            agent.COMPACT_REPLAY_POLICY_CONSTANTS["land_milestones"],
+        )
+        dataset = ROOT / ".ai-jobs/sot2826-teacher.jsonl"
+        if not dataset.exists():
+            return
+        report = distill_compact_policy(dataset)
+        self.assertEqual(recorded, json.loads(json.dumps(report)))
+
+    def test_compact_replay_policy_is_independent_and_all_branches_fire(self):
+        agent = load_agent(ROOT / "main.py")
+        self.assertFalse(agent.COMPACT_REPLAY_POLICY)
+        self.assertFalse(agent.CASH_RUNWAY_ACREAGE_EXPANSION)
+        self.assertFalse(agent.PRODUCTIVE_ACTION_CAPACITY)
+        trace = compact_targeted_trace(ROOT / "main.py")
+        self.assertTrue(trace["all_branches_fired"])
+        self.assertGreater(trace["firings"]["land"], 0)
+        self.assertGreater(trace["firings"]["labor"], 0)
+
     def test_replay_teacher_manifest_is_current_top_hash_pinned_and_isolated(self):
         manifest = json.loads(
             (ROOT / "tests/fixtures/replay_teacher_manifest.json").read_text()

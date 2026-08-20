@@ -1,0 +1,346 @@
+{
+  "axis": "screen-distilled state-conditioned production cadence",
+  "candidate_artifact": {
+    "path": "main.py",
+    "sha256": "de8d7728b5d93f8b4bbdd36cc5e63566fb20398d3ba20a6b7f4743b515d132b0"
+  },
+  "confirm": {
+    "reason": "child contract: screen-only tuning and gate",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "effective_config": {
+    "COMPACT_REPLAY_POLICY": false
+  },
+  "issue": "SOT-2826",
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_checks": {
+    "artifacts_unique": true,
+    "auditable_licenses": true,
+    "closed_loop_evidence_boundary": true,
+    "confirm_after_screen": true,
+    "entity_holdout": true,
+    "environment_pinned": true,
+    "fetch_only": true,
+    "immutable_full_digests": true,
+    "manifest_digest": true,
+    "no_kaggle_submission": true,
+    "no_sensitive_or_replay_payload_fields": true,
+    "panel_artifacts_exist": true,
+    "panels_nonempty": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "source_commit_hash_license_present": true,
+    "time_holdout": true,
+    "times_parseable": true,
+    "unique_panel_identity": true
+  },
+  "passed": false,
+  "runtime_candidate_retained": false,
+  "screen": {
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "compact_firings": {
+            "labor": 396,
+            "land": 2
+          },
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -37461.0,
+          "opponent_reward": 37561.0,
+          "rank": 2,
+          "reward": 100.0,
+          "seconds": 2.1274563770275563,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": -14240.0,
+          "reward": -1194.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -23221.0,
+          "opponent_reward": 24515.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7948833419941366,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "opponent": "cok-v7-58c91c3",
+          "seed": 282001,
+          "time_utc": "2026-08-20T17:00:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "compact_firings": {
+            "labor": 396,
+            "land": 2
+          },
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -37154.0,
+          "opponent_reward": 37254.0,
+          "rank": 2,
+          "reward": 100.0,
+          "seconds": 2.116850323975086,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": -13933.0,
+          "reward": -1194.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -23221.0,
+          "opponent_reward": 24515.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.807807801058516,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "opponent": "cok-v7-58c91c3",
+          "seed": 282001,
+          "time_utc": "2026-08-20T17:00:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "compact_firings": {
+            "labor": 396,
+            "land": 2
+          },
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -124003.0,
+          "opponent_reward": 124103.0,
+          "rank": 2,
+          "reward": 100.0,
+          "seconds": 2.0875347477849573,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": -1489.0,
+          "reward": -1194.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -122514.0,
+          "opponent_reward": 123808.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.9546627579256892,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "opponent": "lonespear-v17-774b260",
+          "seed": 282002,
+          "time_utc": "2026-08-20T17:01:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "compact_firings": {
+            "labor": 396,
+            "land": 2
+          },
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -128953.0,
+          "opponent_reward": 129053.0,
+          "rank": 2,
+          "reward": 100.0,
+          "seconds": 1.9775769282132387,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "candidate_delta": {
+          "margin": -4684.0,
+          "reward": -1194.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "invalid_actions": 0,
+          "margin": -124269.0,
+          "opponent_reward": 125563.0,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7954416868742555,
+          "selector_firings": {
+            "default": 0,
+            "early_milk_support": 0,
+            "yarn_first": 0,
+            "yarn_second": 0,
+            "yarn_third": 0
+          },
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": ""
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "opponent": "lonespear-v17-774b260",
+          "seed": 282002,
+          "time_utc": "2026-08-20T17:01:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "lower_tail_margin_delta regressed",
+      "worst_margin_delta regressed",
+      "no strict margin, tail, or worst improvement"
+    ],
+    "summary": {
+      "candidate_mean_rank": 2.0,
+      "candidate_wins": 0,
+      "lower_tail_margin_delta": -14240.0,
+      "matches": 4,
+      "mean_margin_delta": -8586.5,
+      "mean_reward_delta": -1194.0,
+      "worst_margin_delta": -14240.0
+    }
+  },
+  "submission_contract": "PASS",
+  "targeted_trace": {
+    "all_branches_fired": true,
+    "firings": {
+      "labor": 2,
+      "land": 2
+    },
+    "rows": [
+      {
+        "decision": {
+          "branch": "land_1_target_1",
+          "hand_target": 4,
+          "land": []
+        },
+        "state": [
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "decision": {
+          "branch": "land_1_target_2",
+          "hand_target": 4,
+          "land": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "state": [
+          5,
+          2,
+          1,
+          4
+        ]
+      },
+      {
+        "decision": {
+          "branch": "land_2_target_3",
+          "hand_target": 8,
+          "land": [
+            [
+              "BUY_LAND"
+            ]
+          ]
+        },
+        "state": [
+          8,
+          8,
+          2,
+          8
+        ]
+      },
+      {
+        "decision": {
+          "branch": "land_3_target_3",
+          "hand_target": 12,
+          "land": []
+        },
+        "state": [
+          9,
+          0,
+          3,
+          11
+        ]
+      }
+    ]
+  },
+  "teacher_dataset_sha256": "c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f"
+}
