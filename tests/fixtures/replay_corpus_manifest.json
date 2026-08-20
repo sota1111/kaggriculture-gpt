@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "capture_cutoff_utc": "2026-08-20T12:55:31Z",
+  "engine_version": "local-compact-simulator-v1; kaggle-environments contract checked separately",
+  "source_benchmark": {
+    "repository": "https://github.com/Seyamalam/Kaggriculture",
+    "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "path": "scripts/leaderboard_benchmark.py"
+  },
+  "acquisition": {
+    "status": "fallback-public-artifacts",
+    "reason": "No authenticated Kaggle replay cache or credentials were available in this run.",
+    "disclosure": "No current-top replay bytes were acquired or committed. The frozen, hash-pinned public source agents are a fallback stress corpus, not live-ladder evidence."
+  },
+  "entries": [
+    {
+      "key": "fallback:cok-v7-58c91c3:screen:277001:0",
+      "window": "screen",
+      "entity_id": "cok-v7-58c91c3",
+      "seed": 277001,
+      "time_index": 1,
+      "submission_id": null,
+      "episode_id": null,
+      "recorded_seat": 0,
+      "replay_sha256": null,
+      "artifact_id": "cok-v7-58c91c3",
+      "source_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794"
+    },
+    {
+      "key": "fallback:lonespear-v17-774b260:screen:277002:1",
+      "window": "screen",
+      "entity_id": "lonespear-v17-774b260",
+      "seed": 277002,
+      "time_index": 2,
+      "submission_id": null,
+      "episode_id": null,
+      "recorded_seat": 1,
+      "replay_sha256": null,
+      "artifact_id": "lonespear-v17-774b260",
+      "source_sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b"
+    },
+    {
+      "key": "fallback:lonespear-v18-774b260:confirm:277011:0",
+      "window": "confirm",
+      "entity_id": "lonespear-v18-774b260",
+      "seed": 277011,
+      "time_index": 11,
+      "submission_id": null,
+      "episode_id": null,
+      "recorded_seat": 0,
+      "replay_sha256": null,
+      "artifact_id": "lonespear-v18-774b260",
+      "source_sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0"
+    },
+    {
+      "key": "fallback:lonespear-v23-774b260:confirm:277012:1",
+      "window": "confirm",
+      "entity_id": "lonespear-v23-774b260",
+      "seed": 277012,
+      "time_index": 12,
+      "submission_id": null,
+      "episode_id": null,
+      "recorded_seat": 1,
+      "replay_sha256": null,
+      "artifact_id": "lonespear-v23-774b260",
+      "source_sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee"
+    }
+  ],
+  "manifest_sha256": "d9a267679d565862ed3f117e75dbc5bd6b4f11c6d12405249b693eb2465a0e58"
+}

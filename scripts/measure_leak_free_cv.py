@@ -25,6 +25,51 @@ def raw_url(artifact: dict[str, Any]) -> str:
     return f"https://raw.githubusercontent.com/{owner_repo}/{artifact['commit']}/{artifact['path']}"
 
 
+def canonical_sha256(value: Any) -> str:
+    """Digest JSON independently of whitespace or object key order."""
+    payload = json.dumps(value, sort_keys=True, separators=(",", ":"),
+                         ensure_ascii=False).encode()
+    return hashlib.sha256(payload).hexdigest()
+
+
+def validate_corpus_manifest(corpus: dict[str, Any], fixture: dict[str, Any],
+                             artifacts: dict[str, dict[str, Any]]) -> dict[str, bool]:
+    """Fail closed on provenance drift, ambiguous identities, or panel leakage."""
+    unsigned = {key: value for key, value in corpus.items() if key != "manifest_sha256"}
+    entries = corpus.get("entries", [])
+    expected = {
+        (window, row["opponent"], row["seed"], row["time_index"])
+        for window in ("screen", "confirm")
+        for row in fixture["leak_free_cv"][window]
+    }
+    actual = {
+        (row.get("window"), row.get("entity_id"), row.get("seed"), row.get("time_index"))
+        for row in entries
+    }
+    keys = [row.get("key") for row in entries]
+    fallback = corpus.get("acquisition", {}).get("status") == "fallback-public-artifacts"
+    identity_complete = all(
+        row.get("recorded_seat") in (0, 1)
+        and ((row.get("submission_id") is not None and row.get("episode_id") is not None)
+             or (fallback and row.get("artifact_id") in artifacts
+                 and row.get("source_sha256") == artifacts[row["artifact_id"]]["sha256"]))
+        for row in entries
+    )
+    return {
+        "schema_supported": corpus.get("schema_version") == 1,
+        "capture_cutoff_present": bool(corpus.get("capture_cutoff_utc")),
+        "engine_version_present": bool(corpus.get("engine_version")),
+        "manifest_digest": corpus.get("manifest_sha256") == canonical_sha256(unsigned),
+        "unique_trace_identity": len(keys) == len(set(keys)) and all(keys),
+        "submission_episode_seat_or_disclosed_fallback": identity_complete,
+        "panel_entities_exact": actual == expected,
+        "authenticated_replay_not_claimed": not fallback or all(
+            row.get("submission_id") is None and row.get("episode_id") is None
+            and row.get("replay_sha256") is None for row in entries
+        ),
+    }
+
+
 def fetch_artifacts(manifest: dict[str, Any], destination: Path) -> dict[str, Path]:
     paths = {}
     for artifact in manifest["artifacts"]:
@@ -51,7 +96,8 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def measure(candidate_path: Path, fixture: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
+def measure(candidate_path: Path, fixture: dict[str, Any], manifest: dict[str, Any],
+            corpus: dict[str, Any] | None = None) -> dict[str, Any]:
     isolation = validate_cv_holdouts(fixture["leak_free_cv"])
     artifacts = {row["id"]: row for row in manifest["artifacts"]}
     configured = {row["opponent"] for window in ("screen", "confirm")
@@ -66,8 +112,11 @@ def measure(candidate_path: Path, fixture: dict[str, Any], manifest: dict[str, A
         "fetch_only_no_vendored_agent": all(row.get("redistribution") == "fetch-only"
                                              for row in artifacts.values()),
     }
-    if not isolation["passed"] or not all(manifest_checks.values()):
-        return {"passed": False, "isolation": isolation, "manifest_checks": manifest_checks}
+    corpus_checks = validate_corpus_manifest(corpus, fixture, artifacts) if corpus else {}
+    if (not isolation["passed"] or not all(manifest_checks.values())
+            or (corpus_checks and not all(corpus_checks.values()))):
+        return {"passed": False, "isolation": isolation, "manifest_checks": manifest_checks,
+                "corpus_checks": corpus_checks}
 
     candidate = load_agent(candidate_path)
     with tempfile.TemporaryDirectory(prefix="sot2770-opponents-") as directory:
@@ -104,6 +153,8 @@ def measure(candidate_path: Path, fixture: dict[str, Any], manifest: dict[str, A
             "candidate": str(candidate_path),
             "isolation": isolation,
             "manifest_checks": manifest_checks,
+            "corpus_checks": corpus_checks,
+            "corpus_manifest": corpus,
             "artifacts": manifest["artifacts"],
             "screen": panels["screen"],
             "confirm": panels["confirm"],
@@ -131,10 +182,13 @@ def main() -> int:
     parser.add_argument("--candidate", type=Path, default=Path("main.py"))
     parser.add_argument("--fixture", type=Path, default=Path("tests/fixtures/evaluation.json"))
     parser.add_argument("--manifest", type=Path, default=Path("tests/fixtures/public_opponents.json"))
+    parser.add_argument("--corpus-manifest", type=Path,
+                        default=Path("tests/fixtures/replay_corpus_manifest.json"))
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = measure(args.candidate, json.loads(args.fixture.read_text()),
-                     json.loads(args.manifest.read_text()))
+                     json.loads(args.manifest.read_text()),
+                     json.loads(args.corpus_manifest.read_text()))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(f"public opponent leak-free CV: {'PASS' if result['passed'] else 'FAIL'} ({args.output})")
