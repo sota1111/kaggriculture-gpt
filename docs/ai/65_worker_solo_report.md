@@ -1,43 +1,40 @@
-# Solo Worker Report — SOT-2758
+# Solo Worker Report — SOT-2770
 
 ## Summary
 
-- Added mechanically validated opponent/seed/episode isolation across strictly ordered screen and confirm windows.
-- Added deterministic champion/candidate paired A/B evaluation on identical seeds in both seat assignments.
-- Added mean, lower-tail, worst, and relative-rank evidence plus terminal-bank-reward and leak checks.
-- Recorded a promoted measurement and experiment-ledger entry. No Kaggle submission was made.
+- Classified the issue as IMPLEMENT and judged decomposition unnecessary.
+- Added a fetch-only public-opponent manifest pinned by repository, commit, path, SHA-256, and license.
+- Added a reproducible leak-free CV measurement that verifies artifact hashes, executes fixed screen and independent confirm panels in both seats, and reports opponent-level rank, margin, tail, and local↔public gap diagnostics.
+- Recorded the promoted oracle re-anchor in the experiment ledger; no candidate policy was promoted and no Kaggle submission was made.
 
 ## Changed Files
 
-- `scripts/evaluate.py` — holdout validation and paired two-seat A/B evaluator.
-- `tests/fixtures/evaluation.json` — disjoint screen/confirm entity manifest.
-- `tests/test_evaluate.py` — isolation, leak rejection, paired-seat, determinism, and summary coverage.
-- `docs/measurements/SOT-2756/SOT-2758-leak-free-cv.json` — reproducible evidence.
-- `docs/ai/experiment_ledger.jsonl` — promoted-axis record.
+- `scripts/measure_leak_free_cv.py` — pinned artifact retrieval, hash validation, screen/confirm execution, and diagnostics.
+- `tests/fixtures/public_opponents.json` — four audited public agents from two source lineages.
+- `tests/fixtures/evaluation.json` — entity/seed/time-isolated public-opponent panels.
+- `tests/test_evaluate.py` — manifest and measurement coverage.
+- `docs/measurements/SOT-2769/SOT-2770-public-opponent-cv.json` — reproducible evidence.
+- `docs/ai/experiment_ledger.jsonl` — re-anchor outcome and evidence boundary.
+- `docs/ai/linear/SOT-2770.md` — local lifecycle record.
 
 ## Verification
 
-- `python3 -m compileall -q main.py scripts tests`: PASS.
-- `python3 -m unittest tests.test_evaluate`: PASS (40 tests).
-- Full evaluation: PROMOTE; screen and confirm leak-free CV gates PASS.
-- Screen reward delta mean/lower-tail/worst: +1808.5/+1758/+1758; candidate rank 1.0.
-- Confirm reward delta mean/lower-tail/worst: +1866/+1820/+1820; candidate rank 1.0.
-- `python3 scripts/validate_submission.py main.py`: PASS.
-- npm lint/typecheck/test/e2e: N/A (no `package.json` or e2e harness).
-- Kaggle submission: not executed.
-
-## Acceptance Criteria
-
-- [x] entity × temporal holdout is mechanically isolated.
-- [x] same-seed champion/candidate direct A/B is reproducible across both seats.
-- [x] leak/contract checks and screen→confirm pass.
-- [x] evidence is recorded in the measurement and experiment ledger.
+- `python3 -m py_compile main.py scripts/*.py tests/*.py` — PASS.
+- `python3 -m unittest discover -s tests` — PASS, 42 tests.
+- `python3 scripts/measure_leak_free_cv.py --output docs/measurements/SOT-2769/SOT-2770-public-opponent-cv.json` — PASS.
+- Manifest/source/hash/license, entity/seed/episode/time isolation, both seats, and no private/future-price leakage — PASS.
+- Screen mean/lower-tail/worst margin: `+1409/-333/-333`; independent confirm: `-1046.5/-1895/-1895`; confirm-minus-screen mean shift: `-2455.5`.
+- `python3 scripts/validate_submission.py main.py` — PASS.
+- `bash scripts/build_submission.sh`, `gzip -t`, exact archive-member check — PASS.
+- npm lint/typecheck/test/e2e — N/A; this repository has no `package.json` and is Python-only.
+- `git diff --check` and scoped diff review — PASS.
+- Kaggle submission — NOT PERFORMED, as required.
 
 ## Risks
 
-- The local simulator remains a contract-shaped proxy rather than a Kaggle submission result; no submission was permitted or performed.
+- The compact local simulator does not reproduce every animal/build mechanic or live matchmaking; leaderboard rank remains authoritative. The large negative confirm shift is therefore a drift signal, not an absolute LB prediction.
+- Public sources may move, but retrieval is pinned to immutable commits and refuses any SHA-256 mismatch.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS
-
 ## Next Action: READY_FOR_REVIEW

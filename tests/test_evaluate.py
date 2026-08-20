@@ -6,6 +6,7 @@ from unittest import mock
 
 from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_cv_holdouts
 from scripts import evaluate as evaluator
+from scripts.measure_leak_free_cv import fetch_artifacts, measure, raw_url
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +14,34 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_public_opponent_manifest_is_pinned_and_maps_to_cv_entities(self):
+        manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
+        artifacts = {row["id"]: row for row in manifest["artifacts"]}
+        entities = {row["opponent"] for window in ("screen", "confirm")
+                    for row in FIXTURE["leak_free_cv"][window]}
+        self.assertLessEqual(entities, set(artifacts))
+        self.assertGreaterEqual(len({row["lineage"] for row in artifacts.values()}), 2)
+        self.assertTrue(all(len(row["commit"]) == 40 and len(row["sha256"]) == 64
+                            for row in artifacts.values()))
+        self.assertTrue(all(raw_url(row).startswith("https://raw.githubusercontent.com/")
+                            for row in artifacts.values()))
+
+    def test_public_opponent_measurement_reports_opponent_rank_margin_tail(self):
+        manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
+        with mock.patch("scripts.measure_leak_free_cv.fetch_artifacts") as fetch:
+            fetch.return_value = {
+                row["id"]: ROOT / "tests/fixtures/champion_sot_2263.py"
+                for row in manifest["artifacts"]
+            }
+            result = measure(ROOT / "main.py", FIXTURE, manifest)
+        self.assertTrue(result["passed"], result)
+        self.assertEqual("NOT_PERFORMED", result["kaggle_submission"])
+        for window in ("screen", "confirm"):
+            self.assertEqual(4, result[window]["summary"]["episodes"])
+            self.assertIn("mean_rank", result[window]["summary"])
+            self.assertIn("mean_margin", result[window]["summary"])
+            self.assertIn("lower_tail_margin", result[window]["summary"])
+
     def test_cv_holdouts_isolate_entity_seed_episode_and_time(self):
         result = validate_cv_holdouts(FIXTURE["leak_free_cv"])
         self.assertTrue(result["passed"], result)

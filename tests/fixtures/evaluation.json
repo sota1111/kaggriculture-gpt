@@ -25,12 +25,12 @@
   },
   "leak_free_cv": {
     "screen": [
-      {"opponent": "frozen-baseline-v1", "seed": 275801, "time_index": 1},
-      {"opponent": "scarcity-policy-v1", "seed": 275802, "time_index": 2}
+      {"opponent": "cok-v7-58c91c3", "seed": 277001, "time_index": 1},
+      {"opponent": "lonespear-v17-774b260", "seed": 277002, "time_index": 2}
     ],
     "confirm": [
-      {"opponent": "robust-policy-v1", "seed": 275811, "time_index": 11},
-      {"opponent": "routing-policy-v1", "seed": 275812, "time_index": 12}
+      {"opponent": "lonespear-v18-774b260", "seed": 277011, "time_index": 11},
+      {"opponent": "lonespear-v23-774b260", "seed": 277012, "time_index": 12}
     ]
   },
   "competitive_oracle": {
