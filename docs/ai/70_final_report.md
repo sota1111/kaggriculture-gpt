@@ -1,18 +1,7 @@
-# Final Report — SOT-2842
+# Final Report — SOT-2853
 
-## Summary
+The sealed capacity-aware dispatcher panel is complete. Direct same-seed/both-seat evidence supports a rejected decision: primary rank/margin improved and travel decreased, but productive density regressed and repair work increased. Confirm was correctly skipped, the dispatcher remains default-OFF, all 107 tests and submission compatibility checks pass, PR #69 is merged, and no Kaggle submission occurred.
 
-Cycle 6 evaluated a portable public-state receding-horizon sequence planner after building a leak-free multi-step oracle. The sealed closed-loop screen rejected the runtime candidate, so the champion configuration was restored and no Kaggle submission was made.
+## Acceptance: PASS
 
-## Verification
-
-- All children SOT-2843/SOT-2844/SOT-2845: Done
-- Python compile: PASS
-- Unit tests: 102/102 PASS
-- Submission contract and exec compatibility: PASS
-- Candidate direct A/B: 801 live planner firings; rank/reward uplift 0; lower-tail/worst margin -138
-- Effective runtime flag: `RECEDING_HORIZON_SEQUENCE_PLANNER=false`
-
-## Acceptance
-
-All cycle acceptance criteria are met through the child results, parent aggregation record, strict no-submit decision, and Linear handoff/completion reports.
+## Next Action: READY_FOR_REVIEW
