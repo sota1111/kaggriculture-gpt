@@ -18,6 +18,7 @@ PUBLIC_SCHEDULER_COMPONENT = True
 MULTI_STOP_TASK_BUNDLING = True
 PROJECTED_MARKET_EXECUTION = False
 FERTILIZER_COVERAGE = True
+STAGGERED_STRAWBERRY_RENEWAL = True
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -40,6 +41,11 @@ PUBLIC_EXECUTION_SOURCES = {
         "commit": "774b26093ccf4246525517d48420349b841b6e50",
         "license": "MIT",
     },
+    "strawberry_renewal": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "license": "MIT",
+    },
     "market": {
         "url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
         "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
@@ -51,6 +57,7 @@ PUBLIC_SCHEDULER_FIRES = 0
 MULTI_STOP_TASK_BUNDLE_FIRES = 0
 PROJECTED_MARKET_FIRES = 0
 FERTILIZER_COVERAGE_FIRES = 0
+STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -350,6 +357,50 @@ def _remaining_harvests(spec, day, total_days):
     return max(0, (total_days - day - 1) // maturity)
 
 
+def _staggered_strawberry_seed_budget(obs, spec, available_seeds, fertilizer_available):
+    """Bound one day's strawberry cohort using only public lifecycle state.
+
+    Strawberry is an ongoing crop in the competition runtime.  A full block
+    planted on one day therefore reaches ``max_lifespan_step`` together.  Keep
+    at most one maturity-window slice in today's cohort, while allowing extra
+    replacements for plants that are already inside their last maturity
+    window.  Labor and fertilizer stock bound the replacement acreage so the
+    policy cannot create work that the remaining horizon cannot service.
+    """
+    global STAGGERED_STRAWBERRY_RENEWAL_FIRES
+    if not STAGGERED_STRAWBERRY_RENEWAL:
+        return max(0, int(available_seeds))
+    day = max(0, int(obs.get("day", 0)))
+    total_days = max(day + 1, int(obs.get("total_days", 30)))
+    maturity = max(1, int(spec.get("first_yield_day", spec.get("maturity_days", 3))))
+    if day + maturity >= total_days:
+        STAGGERED_STRAWBERRY_RENEWAL_FIRES += 1
+        return 0
+    step = int(obs.get("step", day * int(obs.get("turns_per_day", 24))))
+    me = obs["farms"][int(obs["player"])]
+    plants = [tile for row in me.get("tiles", []) for tile in row
+              if isinstance(tile, dict) and tile.get("kind") == "PLANT"
+              and tile.get("crop") == "STRAWBERRY"]
+    planted_today = sum(int(tile.get("planted_day", -1)) == day for tile in plants)
+    expiring = sum(
+        step < int(tile.get("max_lifespan_step", step + maturity + 1))
+        <= step + maturity * int(obs.get("turns_per_day", 24))
+        for tile in plants
+    )
+    workers = 1 + len(me.get("hands", []))
+    # A maturity-length rotation avoids a one-wave cohort.  Fertilizer is a
+    # hard coverage cap when present; without public stock, labor remains the
+    # conservative capacity bound.
+    service_capacity = workers
+    if fertilizer_available > 0:
+        service_capacity = min(service_capacity, max(1, fertilizer_available // maturity))
+    cohort_target = max(1, ceil(max(1, len(plants) + expiring) / maturity))
+    budget = max(0, min(service_capacity, cohort_target + expiring) - planted_today)
+    budget = min(max(0, int(available_seeds)), budget)
+    STAGGERED_STRAWBERRY_RENEWAL_FIRES += 1
+    return budget
+
+
 def _mixed_farm_route(obs, specs, seeds):
     """Build a bounded long-horizon route from public state only.
 
@@ -509,8 +560,13 @@ def agent(obs):
         max(0, int(inventory.get("FERTILIZER", 0))) if isinstance(inventory, dict) else 0
         for inventory in private.get("inventories", [])
     ]
+    planting_seeds = seeds
+    if crop == "STRAWBERRY":
+        planting_seeds = _staggered_strawberry_seed_budget(
+            {**obs, "total_days": total_days}, crop_specs[crop], seeds,
+            sum(fertilizer_by_worker))
     actions = _plan_workers(
-        me, day, seeds, crop, crop_specs, int(obs.get("hour", 0)),
+        me, day, planting_seeds, crop, crop_specs, int(obs.get("hour", 0)),
         int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
     stored_inventory = private.get("shed", {})
     if PROJECTED_MARKET_EXECUTION:
@@ -577,4 +633,5 @@ def component_firing_counts():
         "multi_stop_task_bundling": MULTI_STOP_TASK_BUNDLE_FIRES,
         "projected_market": PROJECTED_MARKET_FIRES,
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
+        "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
     }

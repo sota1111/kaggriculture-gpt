@@ -62,6 +62,37 @@ class EvaluationTest(unittest.TestCase):
         self.assertFalse(any(order[:2] == ["BUY_PRODUCT", "FERTILIZER"]
                              for order in result["market"]))
 
+    def test_strawberry_renewal_staggers_cohort_and_respects_horizon_capacity(self):
+        agent = load_agent(ROOT / "main.py")
+        plants = [
+            {"kind": "PLANT", "crop": "STRAWBERRY", "planted_day": planted,
+             "max_lifespan_step": lifespan, "yield_units": 0}
+            for planted, lifespan in ((18, 610), (19, 700), (20, 720), (20, 730))
+        ]
+        obs = {"player": 0, "step": 600, "day": 25, "total_days": 30,
+               "turns_per_day": 24,
+               "farms": [{"farmer": [0, 0], "hands": [[1, 0], [2, 0]],
+                           "tiles": [plants + [None]]}]}
+        spec = {"first_yield_day": 2, "maturity_days": 3}
+        before = agent.component_firing_counts()["staggered_strawberry_renewal"]
+        # The imminent expiry opens a bounded three-worker replacement slice,
+        # rather than allowing all eight seeds to recreate a single wave.
+        self.assertEqual(3, agent._staggered_strawberry_seed_budget(obs, spec, 8, 9))
+        self.assertEqual(before + 1,
+                         agent.component_firing_counts()["staggered_strawberry_renewal"])
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["strawberry_renewal"]["license"])
+        obs["day"] = 28
+        obs["step"] = 672
+        self.assertEqual(0, agent._staggered_strawberry_seed_budget(obs, spec, 8, 9))
+
+    def test_strawberry_renewal_flag_is_independent(self):
+        agent = load_agent(ROOT / "main.py")
+        agent.STAGGERED_STRAWBERRY_RENEWAL = False
+        obs = {"player": 0, "day": 29, "total_days": 30,
+               "farms": [{"farmer": [0, 0], "hands": [], "tiles": [[None]]}]}
+        self.assertEqual(7, agent._staggered_strawberry_seed_budget(
+            obs, {"maturity_days": 3}, 7, 0))
+
     def test_authenticated_replay_manifest_is_hash_pinned_and_leak_free(self):
         manifest = json.loads(
             (ROOT / "tests/fixtures/authenticated_replay_manifest.json").read_text()

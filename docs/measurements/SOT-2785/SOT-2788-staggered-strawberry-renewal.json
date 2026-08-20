@@ -1,0 +1,1434 @@
+{
+  "ablation_flag": "STAGGERED_STRAWBERRY_RENEWAL",
+  "axis": "staggered strawberry renewal",
+  "baseline": {
+    "artifacts": [
+      {
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "id": "cok-v7-58c91c3",
+        "license": "Apache-2.0",
+        "lineage": "COK-ZhangZiliang/Kaggriculture",
+        "path": "main.py",
+        "redistribution": "fetch-only",
+        "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+        "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture"
+      },
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v17-774b260",
+        "license": "MIT",
+        "lineage": "lonespear/kaggriculture",
+        "path": "main_v17.py",
+        "redistribution": "fetch-only",
+        "sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v18-774b260",
+        "license": "MIT",
+        "lineage": "lonespear/kaggriculture",
+        "path": "main_v18.py",
+        "redistribution": "fetch-only",
+        "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v23-774b260",
+        "license": "MIT",
+        "lineage": "lonespear/kaggriculture",
+        "path": "main_v23.py",
+        "redistribution": "fetch-only",
+        "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      }
+    ],
+    "candidate": "/tmp/sot2788-renewal-ma047ehh/renewal-0.py",
+    "component_firings": {
+      "fertilizer_coverage": 0,
+      "multi_stop_task_bundling": 0,
+      "projected_market": 0,
+      "public_scheduler": 0,
+      "staggered_strawberry_renewal": 0
+    },
+    "confirm": {
+      "by_opponent": {
+        "lonespear-v18-774b260": {
+          "episodes": 2,
+          "lower_tail_margin": 169,
+          "mean_margin": 169.0,
+          "mean_rank": 1.0,
+          "wins_or_ties": 2,
+          "worst_margin": 169
+        },
+        "lonespear-v23-774b260": {
+          "episodes": 2,
+          "lower_tail_margin": -1382,
+          "mean_margin": -1382.0,
+          "mean_rank": 2.0,
+          "wins_or_ties": 0,
+          "worst_margin": -1382
+        }
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v18-774b260|0|277011|11",
+          "margin": 169,
+          "opponent": "lonespear-v18-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 99,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2261,
+            "leaderboard_proxy": -2254530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 0,
+          "seed": 277011,
+          "time_index": 11
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v18-774b260|1|277011|11",
+          "margin": 169,
+          "opponent": "lonespear-v18-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 99,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2261,
+            "leaderboard_proxy": -2254530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 1,
+          "seed": 277011,
+          "time_index": 11
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 2,
+          "episode_id": "lonespear-v23-774b260|0|277012|12",
+          "margin": -1382,
+          "opponent": "lonespear-v23-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 136,
+            "contract_violations": 0,
+            "cultivated": 93,
+            "final_assets": 8021,
+            "harvested": 81,
+            "invalid_actions": 2150,
+            "leaderboard_proxy": -2141979,
+            "profit": 5021,
+            "reward": 8021
+          },
+          "seat": 0,
+          "seed": 277012,
+          "time_index": 12
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 2,
+          "episode_id": "lonespear-v23-774b260|1|277012|12",
+          "margin": -1382,
+          "opponent": "lonespear-v23-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 136,
+            "contract_violations": 0,
+            "cultivated": 93,
+            "final_assets": 8021,
+            "harvested": 81,
+            "invalid_actions": 2150,
+            "leaderboard_proxy": -2141979,
+            "profit": 5021,
+            "reward": 8021
+          },
+          "seat": 1,
+          "seed": 277012,
+          "time_index": 12
+        }
+      ],
+      "summary": {
+        "episodes": 4,
+        "lower_tail_margin": -1382,
+        "mean_margin": -606.5,
+        "mean_rank": 1.5,
+        "wins_or_ties": 2,
+        "worst_margin": -1382
+      }
+    },
+    "corpus_checks": {
+      "authenticated_replay_not_claimed": true,
+      "capture_cutoff_present": true,
+      "engine_version_present": true,
+      "manifest_digest": true,
+      "panel_entities_exact": true,
+      "schema_supported": true,
+      "submission_episode_seat_or_disclosed_fallback": true,
+      "unique_trace_identity": true
+    },
+    "corpus_manifest": {
+      "acquisition": {
+        "disclosure": "No current-top replay bytes were acquired or committed. The frozen, hash-pinned public source agents are a fallback stress corpus, not live-ladder evidence.",
+        "reason": "No authenticated Kaggle replay cache or credentials were available in this run.",
+        "status": "fallback-public-artifacts"
+      },
+      "capture_cutoff_utc": "2026-08-20T12:55:31Z",
+      "engine_version": "local-compact-simulator-v1; kaggle-environments contract checked separately",
+      "entries": [
+        {
+          "artifact_id": "cok-v7-58c91c3",
+          "entity_id": "cok-v7-58c91c3",
+          "episode_id": null,
+          "key": "fallback:cok-v7-58c91c3:screen:277001:0",
+          "recorded_seat": 0,
+          "replay_sha256": null,
+          "seed": 277001,
+          "source_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+          "submission_id": null,
+          "time_index": 1,
+          "window": "screen"
+        },
+        {
+          "artifact_id": "lonespear-v17-774b260",
+          "entity_id": "lonespear-v17-774b260",
+          "episode_id": null,
+          "key": "fallback:lonespear-v17-774b260:screen:277002:1",
+          "recorded_seat": 1,
+          "replay_sha256": null,
+          "seed": 277002,
+          "source_sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+          "submission_id": null,
+          "time_index": 2,
+          "window": "screen"
+        },
+        {
+          "artifact_id": "lonespear-v18-774b260",
+          "entity_id": "lonespear-v18-774b260",
+          "episode_id": null,
+          "key": "fallback:lonespear-v18-774b260:confirm:277011:0",
+          "recorded_seat": 0,
+          "replay_sha256": null,
+          "seed": 277011,
+          "source_sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+          "submission_id": null,
+          "time_index": 11,
+          "window": "confirm"
+        },
+        {
+          "artifact_id": "lonespear-v23-774b260",
+          "entity_id": "lonespear-v23-774b260",
+          "episode_id": null,
+          "key": "fallback:lonespear-v23-774b260:confirm:277012:1",
+          "recorded_seat": 1,
+          "replay_sha256": null,
+          "seed": 277012,
+          "source_sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+          "submission_id": null,
+          "time_index": 12,
+          "window": "confirm"
+        }
+      ],
+      "manifest_sha256": "d9a267679d565862ed3f117e75dbc5bd6b4f11c6d12405249b693eb2465a0e58",
+      "schema_version": 1,
+      "source_benchmark": {
+        "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+        "path": "scripts/leaderboard_benchmark.py",
+        "repository": "https://github.com/Seyamalam/Kaggriculture"
+      }
+    },
+    "isolation": {
+      "checks": {
+        "both_seats": true,
+        "no_episode_overlap": true,
+        "no_future_price_reference": true,
+        "no_private_information": true,
+        "opponent_holdout": true,
+        "required_fields": true,
+        "seed_holdout": true,
+        "temporal_order": true,
+        "windows_nonempty": true
+      },
+      "episode_ids": {
+        "confirm": [
+          "lonespear-v18-774b260|0|277011|11",
+          "lonespear-v18-774b260|1|277011|11",
+          "lonespear-v23-774b260|0|277012|12",
+          "lonespear-v23-774b260|1|277012|12"
+        ],
+        "screen": [
+          "cok-v7-58c91c3|0|277001|1",
+          "cok-v7-58c91c3|1|277001|1",
+          "lonespear-v17-774b260|0|277002|2",
+          "lonespear-v17-774b260|1|277002|2"
+        ]
+      },
+      "passed": true
+    },
+    "kaggle_submission": "NOT_PERFORMED",
+    "lifecycle": {
+      "days": [
+        {
+          "acreage_before_renewal": 12,
+          "cash": 0,
+          "day": 18,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 120,
+          "harvest": 0,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 0,
+          "day": 19,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 108,
+          "harvest": 0,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 600,
+          "day": 20,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 96,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 1200,
+          "day": 21,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 84,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 1800,
+          "day": 22,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 72,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 2400,
+          "day": 23,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 60,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 3000,
+          "day": 24,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 48,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 3600,
+          "day": 25,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 36,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 0,
+          "cash": 3800,
+          "day": 26,
+          "expired": 12,
+          "fertilizer_actions": 4,
+          "fertilizer_stock": 32,
+          "harvest": 4,
+          "planted": 4,
+          "productive_acreage": 4
+        },
+        {
+          "acreage_before_renewal": 4,
+          "cash": 4000,
+          "day": 27,
+          "expired": 0,
+          "fertilizer_actions": 4,
+          "fertilizer_stock": 28,
+          "harvest": 4,
+          "planted": 0,
+          "productive_acreage": 4
+        },
+        {
+          "acreage_before_renewal": 4,
+          "cash": 4200,
+          "day": 28,
+          "expired": 0,
+          "fertilizer_actions": 4,
+          "fertilizer_stock": 24,
+          "harvest": 4,
+          "planted": 0,
+          "productive_acreage": 4
+        },
+        {
+          "acreage_before_renewal": 4,
+          "cash": 4400,
+          "day": 29,
+          "expired": 0,
+          "fertilizer_actions": 4,
+          "fertilizer_stock": 20,
+          "harvest": 4,
+          "planted": 0,
+          "productive_acreage": 4
+        }
+      ],
+      "late": {
+        "acreage": 16,
+        "cash": 4400,
+        "fertilizer_actions": 112,
+        "harvest": 16
+      }
+    },
+    "local_public_gap": {
+      "interpretation": "confirm-minus-screen proxy; public leaderboard remains authoritative",
+      "mean_margin_shift": -2510.5,
+      "rank_shift": 0.5,
+      "tail_shift": -1551
+    },
+    "manifest_checks": {
+      "all_entities_pinned": true,
+      "fetch_only_no_vendored_agent": true,
+      "source_commit_hash_license_present": true,
+      "two_public_lineages": true
+    },
+    "passed": true,
+    "route_firings": 0,
+    "screen": {
+      "by_opponent": {
+        "cok-v7-58c91c3": {
+          "episodes": 2,
+          "lower_tail_margin": 3639,
+          "mean_margin": 3639.0,
+          "mean_rank": 1.0,
+          "wins_or_ties": 2,
+          "worst_margin": 3639
+        },
+        "lonespear-v17-774b260": {
+          "episodes": 2,
+          "lower_tail_margin": 169,
+          "mean_margin": 169.0,
+          "mean_rank": 1.0,
+          "wins_or_ties": 2,
+          "worst_margin": 169
+        }
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "cok-v7-58c91c3|0|277001|1",
+          "margin": 3639,
+          "opponent": "cok-v7-58c91c3",
+          "opponent_metrics": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 0,
+            "final_assets": 3000,
+            "harvested": 0,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 3000,
+            "profit": 0,
+            "reward": 3000
+          },
+          "seat": 0,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "cok-v7-58c91c3|1|277001|1",
+          "margin": 3639,
+          "opponent": "cok-v7-58c91c3",
+          "opponent_metrics": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 0,
+            "final_assets": 3000,
+            "harvested": 0,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 3000,
+            "profit": 0,
+            "reward": 3000
+          },
+          "seat": 1,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v17-774b260|0|277002|2",
+          "margin": 169,
+          "opponent": "lonespear-v17-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 97,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2259,
+            "leaderboard_proxy": -2252530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 0,
+          "seed": 277002,
+          "time_index": 2
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v17-774b260|1|277002|2",
+          "margin": 169,
+          "opponent": "lonespear-v17-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 97,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2259,
+            "leaderboard_proxy": -2252530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 1,
+          "seed": 277002,
+          "time_index": 2
+        }
+      ],
+      "summary": {
+        "episodes": 4,
+        "lower_tail_margin": 169,
+        "mean_margin": 1904.0,
+        "mean_rank": 1.0,
+        "wins_or_ties": 4,
+        "worst_margin": 169
+      }
+    }
+  },
+  "candidate": {
+    "artifacts": [
+      {
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "id": "cok-v7-58c91c3",
+        "license": "Apache-2.0",
+        "lineage": "COK-ZhangZiliang/Kaggriculture",
+        "path": "main.py",
+        "redistribution": "fetch-only",
+        "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+        "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture"
+      },
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v17-774b260",
+        "license": "MIT",
+        "lineage": "lonespear/kaggriculture",
+        "path": "main_v17.py",
+        "redistribution": "fetch-only",
+        "sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v18-774b260",
+        "license": "MIT",
+        "lineage": "lonespear/kaggriculture",
+        "path": "main_v18.py",
+        "redistribution": "fetch-only",
+        "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v23-774b260",
+        "license": "MIT",
+        "lineage": "lonespear/kaggriculture",
+        "path": "main_v23.py",
+        "redistribution": "fetch-only",
+        "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      }
+    ],
+    "candidate": "/tmp/sot2788-renewal-ma047ehh/renewal-1.py",
+    "component_firings": {
+      "fertilizer_coverage": 0,
+      "multi_stop_task_bundling": 0,
+      "projected_market": 0,
+      "public_scheduler": 0,
+      "staggered_strawberry_renewal": 3
+    },
+    "confirm": {
+      "by_opponent": {
+        "lonespear-v18-774b260": {
+          "episodes": 2,
+          "lower_tail_margin": 169,
+          "mean_margin": 169.0,
+          "mean_rank": 1.0,
+          "wins_or_ties": 2,
+          "worst_margin": 169
+        },
+        "lonespear-v23-774b260": {
+          "episodes": 2,
+          "lower_tail_margin": -1382,
+          "mean_margin": -1382.0,
+          "mean_rank": 2.0,
+          "wins_or_ties": 0,
+          "worst_margin": -1382
+        }
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v18-774b260|0|277011|11",
+          "margin": 169,
+          "opponent": "lonespear-v18-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 99,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2261,
+            "leaderboard_proxy": -2254530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 0,
+          "seed": 277011,
+          "time_index": 11
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v18-774b260|1|277011|11",
+          "margin": 169,
+          "opponent": "lonespear-v18-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 99,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2261,
+            "leaderboard_proxy": -2254530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 1,
+          "seed": 277011,
+          "time_index": 11
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 2,
+          "episode_id": "lonespear-v23-774b260|0|277012|12",
+          "margin": -1382,
+          "opponent": "lonespear-v23-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 136,
+            "contract_violations": 0,
+            "cultivated": 93,
+            "final_assets": 8021,
+            "harvested": 81,
+            "invalid_actions": 2150,
+            "leaderboard_proxy": -2141979,
+            "profit": 5021,
+            "reward": 8021
+          },
+          "seat": 0,
+          "seed": 277012,
+          "time_index": 12
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 2,
+          "episode_id": "lonespear-v23-774b260|1|277012|12",
+          "margin": -1382,
+          "opponent": "lonespear-v23-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 136,
+            "contract_violations": 0,
+            "cultivated": 93,
+            "final_assets": 8021,
+            "harvested": 81,
+            "invalid_actions": 2150,
+            "leaderboard_proxy": -2141979,
+            "profit": 5021,
+            "reward": 8021
+          },
+          "seat": 1,
+          "seed": 277012,
+          "time_index": 12
+        }
+      ],
+      "summary": {
+        "episodes": 4,
+        "lower_tail_margin": -1382,
+        "mean_margin": -606.5,
+        "mean_rank": 1.5,
+        "wins_or_ties": 2,
+        "worst_margin": -1382
+      }
+    },
+    "corpus_checks": {
+      "authenticated_replay_not_claimed": true,
+      "capture_cutoff_present": true,
+      "engine_version_present": true,
+      "manifest_digest": true,
+      "panel_entities_exact": true,
+      "schema_supported": true,
+      "submission_episode_seat_or_disclosed_fallback": true,
+      "unique_trace_identity": true
+    },
+    "corpus_manifest": {
+      "acquisition": {
+        "disclosure": "No current-top replay bytes were acquired or committed. The frozen, hash-pinned public source agents are a fallback stress corpus, not live-ladder evidence.",
+        "reason": "No authenticated Kaggle replay cache or credentials were available in this run.",
+        "status": "fallback-public-artifacts"
+      },
+      "capture_cutoff_utc": "2026-08-20T12:55:31Z",
+      "engine_version": "local-compact-simulator-v1; kaggle-environments contract checked separately",
+      "entries": [
+        {
+          "artifact_id": "cok-v7-58c91c3",
+          "entity_id": "cok-v7-58c91c3",
+          "episode_id": null,
+          "key": "fallback:cok-v7-58c91c3:screen:277001:0",
+          "recorded_seat": 0,
+          "replay_sha256": null,
+          "seed": 277001,
+          "source_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+          "submission_id": null,
+          "time_index": 1,
+          "window": "screen"
+        },
+        {
+          "artifact_id": "lonespear-v17-774b260",
+          "entity_id": "lonespear-v17-774b260",
+          "episode_id": null,
+          "key": "fallback:lonespear-v17-774b260:screen:277002:1",
+          "recorded_seat": 1,
+          "replay_sha256": null,
+          "seed": 277002,
+          "source_sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+          "submission_id": null,
+          "time_index": 2,
+          "window": "screen"
+        },
+        {
+          "artifact_id": "lonespear-v18-774b260",
+          "entity_id": "lonespear-v18-774b260",
+          "episode_id": null,
+          "key": "fallback:lonespear-v18-774b260:confirm:277011:0",
+          "recorded_seat": 0,
+          "replay_sha256": null,
+          "seed": 277011,
+          "source_sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+          "submission_id": null,
+          "time_index": 11,
+          "window": "confirm"
+        },
+        {
+          "artifact_id": "lonespear-v23-774b260",
+          "entity_id": "lonespear-v23-774b260",
+          "episode_id": null,
+          "key": "fallback:lonespear-v23-774b260:confirm:277012:1",
+          "recorded_seat": 1,
+          "replay_sha256": null,
+          "seed": 277012,
+          "source_sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+          "submission_id": null,
+          "time_index": 12,
+          "window": "confirm"
+        }
+      ],
+      "manifest_sha256": "d9a267679d565862ed3f117e75dbc5bd6b4f11c6d12405249b693eb2465a0e58",
+      "schema_version": 1,
+      "source_benchmark": {
+        "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+        "path": "scripts/leaderboard_benchmark.py",
+        "repository": "https://github.com/Seyamalam/Kaggriculture"
+      }
+    },
+    "isolation": {
+      "checks": {
+        "both_seats": true,
+        "no_episode_overlap": true,
+        "no_future_price_reference": true,
+        "no_private_information": true,
+        "opponent_holdout": true,
+        "required_fields": true,
+        "seed_holdout": true,
+        "temporal_order": true,
+        "windows_nonempty": true
+      },
+      "episode_ids": {
+        "confirm": [
+          "lonespear-v18-774b260|0|277011|11",
+          "lonespear-v18-774b260|1|277011|11",
+          "lonespear-v23-774b260|0|277012|12",
+          "lonespear-v23-774b260|1|277012|12"
+        ],
+        "screen": [
+          "cok-v7-58c91c3|0|277001|1",
+          "cok-v7-58c91c3|1|277001|1",
+          "lonespear-v17-774b260|0|277002|2",
+          "lonespear-v17-774b260|1|277002|2"
+        ]
+      },
+      "passed": true
+    },
+    "kaggle_submission": "NOT_PERFORMED",
+    "lifecycle": {
+      "days": [
+        {
+          "acreage_before_renewal": 12,
+          "cash": 0,
+          "day": 18,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 120,
+          "harvest": 0,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 0,
+          "day": 19,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 108,
+          "harvest": 0,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 600,
+          "day": 20,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 96,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 1200,
+          "day": 21,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 84,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 1800,
+          "day": 22,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 72,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 2400,
+          "day": 23,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 60,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 3000,
+          "day": 24,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 48,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 12,
+          "cash": 3600,
+          "day": 25,
+          "expired": 0,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 36,
+          "harvest": 12,
+          "planted": 0,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 8,
+          "cash": 4200,
+          "day": 26,
+          "expired": 4,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 24,
+          "harvest": 12,
+          "planted": 4,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 8,
+          "cash": 4800,
+          "day": 27,
+          "expired": 4,
+          "fertilizer_actions": 12,
+          "fertilizer_stock": 12,
+          "harvest": 12,
+          "planted": 4,
+          "productive_acreage": 12
+        },
+        {
+          "acreage_before_renewal": 8,
+          "cash": 5200,
+          "day": 28,
+          "expired": 4,
+          "fertilizer_actions": 8,
+          "fertilizer_stock": 4,
+          "harvest": 8,
+          "planted": 0,
+          "productive_acreage": 8
+        },
+        {
+          "acreage_before_renewal": 8,
+          "cash": 5600,
+          "day": 29,
+          "expired": 0,
+          "fertilizer_actions": 4,
+          "fertilizer_stock": 0,
+          "harvest": 8,
+          "planted": 0,
+          "productive_acreage": 8
+        }
+      ],
+      "late": {
+        "acreage": 40,
+        "cash": 5600,
+        "fertilizer_actions": 132,
+        "harvest": 40
+      }
+    },
+    "local_public_gap": {
+      "interpretation": "confirm-minus-screen proxy; public leaderboard remains authoritative",
+      "mean_margin_shift": -2510.5,
+      "rank_shift": 0.5,
+      "tail_shift": -1551
+    },
+    "manifest_checks": {
+      "all_entities_pinned": true,
+      "fetch_only_no_vendored_agent": true,
+      "source_commit_hash_license_present": true,
+      "two_public_lineages": true
+    },
+    "passed": true,
+    "route_firings": 0,
+    "screen": {
+      "by_opponent": {
+        "cok-v7-58c91c3": {
+          "episodes": 2,
+          "lower_tail_margin": 3639,
+          "mean_margin": 3639.0,
+          "mean_rank": 1.0,
+          "wins_or_ties": 2,
+          "worst_margin": 3639
+        },
+        "lonespear-v17-774b260": {
+          "episodes": 2,
+          "lower_tail_margin": 169,
+          "mean_margin": 169.0,
+          "mean_rank": 1.0,
+          "wins_or_ties": 2,
+          "worst_margin": 169
+        }
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "cok-v7-58c91c3|0|277001|1",
+          "margin": 3639,
+          "opponent": "cok-v7-58c91c3",
+          "opponent_metrics": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 0,
+            "final_assets": 3000,
+            "harvested": 0,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 3000,
+            "profit": 0,
+            "reward": 3000
+          },
+          "seat": 0,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "cok-v7-58c91c3|1|277001|1",
+          "margin": 3639,
+          "opponent": "cok-v7-58c91c3",
+          "opponent_metrics": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 0,
+            "final_assets": 3000,
+            "harvested": 0,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 3000,
+            "profit": 0,
+            "reward": 3000
+          },
+          "seat": 1,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v17-774b260|0|277002|2",
+          "margin": 169,
+          "opponent": "lonespear-v17-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 97,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2259,
+            "leaderboard_proxy": -2252530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 0,
+          "seed": 277002,
+          "time_index": 2
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "episode_id": "lonespear-v17-774b260|1|277002|2",
+          "margin": 169,
+          "opponent": "lonespear-v17-774b260",
+          "opponent_metrics": {
+            "assignment_conflicts": 97,
+            "contract_violations": 0,
+            "cultivated": 75,
+            "final_assets": 6470,
+            "harvested": 65,
+            "invalid_actions": 2259,
+            "leaderboard_proxy": -2252530,
+            "profit": 3470,
+            "reward": 6470
+          },
+          "seat": 1,
+          "seed": 277002,
+          "time_index": 2
+        }
+      ],
+      "summary": {
+        "episodes": 4,
+        "lower_tail_margin": 169,
+        "mean_margin": 1904.0,
+        "mean_rank": 1.0,
+        "wins_or_ties": 4,
+        "worst_margin": 169
+      }
+    }
+  },
+  "fresh_cohort_anchor": "SOT-2786 authenticated post-submission screen/confirm attribution",
+  "fresh_same_seed_both_seat_ab": {
+    "confirm": {
+      "checks": {
+        "both_seats": true,
+        "deterministic_episode_ids": true,
+        "paired_non_regression": true,
+        "same_seed_direct_ab": true,
+        "terminal_bank_reward": true
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "champion_rank": 1,
+          "episode_id": "team:16666018|0|638123783|100",
+          "opponent": "team:16666018",
+          "reward_delta": 0,
+          "seat": 0,
+          "seed": 638123783,
+          "time_index": 100
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "champion_rank": 1,
+          "episode_id": "team:16666018|1|638123783|100",
+          "opponent": "team:16666018",
+          "reward_delta": 0,
+          "seat": 1,
+          "seed": 638123783,
+          "time_index": 100
+        }
+      ],
+      "summary": {
+        "candidate_wins_or_ties": 2,
+        "episode_count": 2,
+        "lower_tail_reward_delta": 0.0,
+        "mean_candidate_rank": 1.0,
+        "mean_reward_delta": 0.0,
+        "worst_reward_delta": 0.0
+      }
+    },
+    "screen": {
+      "checks": {
+        "both_seats": true,
+        "deterministic_episode_ids": true,
+        "paired_non_regression": true,
+        "same_seed_direct_ab": true,
+        "terminal_bank_reward": true
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "champion_rank": 1,
+          "episode_id": "team:16631609|0|510962258|0",
+          "opponent": "team:16631609",
+          "reward_delta": 0,
+          "seat": 0,
+          "seed": 510962258,
+          "time_index": 0
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "final_assets": 6639,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6639,
+            "profit": 3639,
+            "reward": 6639
+          },
+          "champion_rank": 1,
+          "episode_id": "team:16631609|1|510962258|0",
+          "opponent": "team:16631609",
+          "reward_delta": 0,
+          "seat": 1,
+          "seed": 510962258,
+          "time_index": 0
+        }
+      ],
+      "summary": {
+        "candidate_wins_or_ties": 2,
+        "episode_count": 2,
+        "lower_tail_reward_delta": 0.0,
+        "mean_candidate_rank": 1.0,
+        "mean_reward_delta": 0.0,
+        "worst_reward_delta": 0.0
+      }
+    }
+  },
+  "gate_reasons": [],
+  "information_boundary": "public clock, planted_day, max_lifespan_step, workers, and fertilizer stock",
+  "issue": "SOT-2788",
+  "kaggle_submission": "NOT_PERFORMED",
+  "result": "promoted",
+  "runtime_ratio": 1.002794762293332,
+  "source": {
+    "commit": "774b26093ccf4246525517d48420349b841b6e50",
+    "license": "MIT",
+    "url": "https://github.com/lonespear/kaggriculture"
+  }
+}
