@@ -7,6 +7,7 @@ from unittest import mock
 from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_authenticated_replay_cv, validate_cv_holdouts
 from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
+from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.measure_fertilizer_coverage import classify_bottleneck
 
@@ -16,6 +17,20 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_fresh_live_lb_reanchor_is_deterministic_and_leak_free(self):
+        manifest = json.loads((ROOT / "tests/fixtures/live_lb_reanchor_manifest.json").read_text())
+        replay_dir = ROOT / "docs/measurements/SOT-2785/replays"
+        first = measure_live_lb_reanchor(manifest, replay_dir)
+        self.assertEqual(first, measure_live_lb_reanchor(manifest, replay_dir))
+        self.assertEqual("promoted", first["result"])
+        self.assertTrue(all(first["checks"].values()))
+        self.assertEqual({0, 1}, {first["screen"][side]["seat"] for side in ("candidate", "opponent")})
+        self.assertEqual({0, 1}, {first["confirm"][side]["seat"] for side in ("candidate", "opponent")})
+        self.assertTrue(first["transfer"]["candidate_stalled_both_windows"])
+        self.assertEqual(0, first["screen"]["candidate"]["productive_actions"])
+        self.assertEqual(0, first["confirm"]["candidate"]["fertilizer_component_firings"])
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+
     def test_fertilizer_trace_distinguishes_action_from_supply_bottleneck(self):
         action_bound = classify_bottleneck({"fertilizer_demand": 132, "stock_available": 132,
                                             "fertilize_actions": 0,
