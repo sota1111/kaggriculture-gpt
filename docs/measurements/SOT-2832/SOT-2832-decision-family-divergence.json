@@ -1,0 +1,256 @@
+{
+  "artifact_policy": "aggregate measurement and source only; replay bytes, credentials, dataset, and external weights remain local",
+  "checks": {
+    "authenticated_current_top": true,
+    "champion_worker_projection_bounded": true,
+    "confirm_after_screen": true,
+    "cutoff_present": true,
+    "dataset_sha256": true,
+    "entity_holdout": true,
+    "episode_holdout": true,
+    "manifest_digest": true,
+    "multiple_submissions": true,
+    "multiple_top_teams": true,
+    "no_child_submission": true,
+    "no_replay_bytes_or_weights": true,
+    "panels_nonempty": true,
+    "policy_runtime_unchanged": true,
+    "private_future_not_in_features": true,
+    "public_current_state_only": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "time_holdout": true,
+    "winner_identity_complete": true
+  },
+  "confirm": {
+    "screen_selection_stable": true,
+    "selected_family": "economic",
+    "skipped": false
+  },
+  "decision": "selected",
+  "issue": "SOT-2832",
+  "kaggle_submission": "NOT_PERFORMED",
+  "panels": {
+    "confirm": {
+      "families": {
+        "economic": {
+          "champion_firings": 382,
+          "closed": false,
+          "divergence_rate": 1.0,
+          "divergences": 382,
+          "frequency_share": 0.546495,
+          "opportunities": 382,
+          "public_state_fireable": true,
+          "reward_contribution": 151046.266764,
+          "reward_contribution_share": 0.545632,
+          "selection_score": 0.29818516,
+          "teacher_firings": 382
+        },
+        "feed": {
+          "champion_firings": 193,
+          "closed": false,
+          "divergence_rate": 1.0,
+          "divergences": 193,
+          "frequency_share": 0.276109,
+          "opportunities": 193,
+          "public_state_fireable": true,
+          "reward_contribution": 76207.650236,
+          "reward_contribution_share": 0.275289,
+          "selection_score": 0.076009771,
+          "teacher_firings": 193
+        },
+        "labor": {
+          "champion_firings": 67,
+          "closed": true,
+          "divergence_rate": 1.0,
+          "divergences": 75,
+          "frequency_share": 0.107296,
+          "opportunities": 75,
+          "public_state_fireable": true,
+          "reward_contribution": 30255.549344,
+          "reward_contribution_share": 0.109294,
+          "selection_score": 0.011726809,
+          "teacher_firings": 75
+        },
+        "land": {
+          "champion_firings": 1,
+          "closed": true,
+          "divergence_rate": 1.0,
+          "divergences": 1,
+          "frequency_share": 0.001431,
+          "opportunities": 1,
+          "public_state_fireable": true,
+          "reward_contribution": 342.258427,
+          "reward_contribution_share": 0.001236,
+          "selection_score": 1.769e-06,
+          "teacher_firings": 1
+        },
+        "market": {
+          "champion_firings": 618,
+          "closed": false,
+          "divergence_rate": 0.072072,
+          "divergences": 48,
+          "frequency_share": 0.06867,
+          "opportunities": 666,
+          "public_state_fireable": true,
+          "reward_contribution": 18976.275229,
+          "reward_contribution_share": 0.068549,
+          "selection_score": 0.00470726,
+          "teacher_firings": 666
+        },
+        "task": {
+          "champion_firings": 3253,
+          "closed": false,
+          "divergence_rate": 0.0,
+          "frequency_share": 0.0,
+          "opportunities": 3657,
+          "public_state_fireable": true,
+          "reward_contribution": 0,
+          "reward_contribution_share": 0.0,
+          "selection_score": 0.0,
+          "teacher_firings": 3398
+        }
+      },
+      "rows": 2160
+    },
+    "screen": {
+      "families": {
+        "economic": {
+          "champion_firings": 594,
+          "closed": false,
+          "divergence_rate": 1.0,
+          "divergences": 596,
+          "frequency_share": 0.516912,
+          "opportunities": 596,
+          "public_state_fireable": true,
+          "reward_contribution": 154979.155923,
+          "reward_contribution_share": 0.518088,
+          "selection_score": 0.267805904,
+          "teacher_firings": 596
+        },
+        "feed": {
+          "champion_firings": 320,
+          "closed": false,
+          "divergence_rate": 1.0,
+          "divergences": 325,
+          "frequency_share": 0.281873,
+          "opportunities": 325,
+          "public_state_fireable": true,
+          "reward_contribution": 84400.22534,
+          "reward_contribution_share": 0.282146,
+          "selection_score": 0.079529339,
+          "teacher_firings": 325
+        },
+        "labor": {
+          "champion_firings": 106,
+          "closed": true,
+          "divergence_rate": 1.0,
+          "divergences": 120,
+          "frequency_share": 0.104076,
+          "opportunities": 120,
+          "public_state_fireable": true,
+          "reward_contribution": 31036.860766,
+          "reward_contribution_share": 0.103755,
+          "selection_score": 0.010798405,
+          "teacher_firings": 120
+        },
+        "land": {
+          "champion_firings": 3,
+          "closed": true,
+          "divergence_rate": 1.0,
+          "divergences": 3,
+          "frequency_share": 0.002602,
+          "opportunities": 3,
+          "public_state_fireable": true,
+          "reward_contribution": 775.940122,
+          "reward_contribution_share": 0.002594,
+          "selection_score": 6.75e-06,
+          "teacher_firings": 3
+        },
+        "market": {
+          "champion_firings": 760,
+          "closed": false,
+          "divergence_rate": 0.125721,
+          "divergences": 109,
+          "frequency_share": 0.094536,
+          "opportunities": 867,
+          "public_state_fireable": true,
+          "reward_contribution": 27944.817849,
+          "reward_contribution_share": 0.093418,
+          "selection_score": 0.008831364,
+          "teacher_firings": 867
+        },
+        "task": {
+          "champion_firings": 2917,
+          "closed": false,
+          "divergence_rate": 0.0,
+          "frequency_share": 0.0,
+          "opportunities": 3303,
+          "public_state_fireable": true,
+          "reward_contribution": 0,
+          "reward_contribution_share": 0.0,
+          "selection_score": 0.0,
+          "teacher_firings": 3037
+        }
+      },
+      "rows": 2160
+    }
+  },
+  "passed": true,
+  "provenance": {
+    "champion_sha256": "de8d7728b5d93f8b4bbdd36cc5e63566fb20398d3ba20a6b7f4743b515d132b0",
+    "measurement_input_sha256": "11e0b1391cee6a21eb935911ffdbafcdd1d71651c4112ab94a6a39fa1629945d",
+    "teacher_dataset_sha256": "c2807cd6f38f5a69201939f973114310e89a64dd000e34fce9bf372ba068348f",
+    "teacher_manifest_sha256": "e9a52712c5329625178668e4c1f828052b2299926c205729d66aa1ef3573ac8b"
+  },
+  "reward_contribution_definition": "winner terminal reward allocated pro rata across that episode's divergent first-action families; attribution proxy, not causal uplift",
+  "runtime_candidate_changed": false,
+  "selected_family": "economic",
+  "selection_rule": "highest screen frequency_share \u00d7 reward_contribution_share among public-state-fireable, non-CLOSED families; confirm is reporting-only",
+  "split": {
+    "confirm_entities": [
+      16644287
+    ],
+    "confirm_episodes": [
+      95265096,
+      95329038,
+      95381518
+    ],
+    "confirm_seats": [
+      0,
+      1
+    ],
+    "confirm_seeds": [
+      285297507,
+      316581082,
+      812665366
+    ],
+    "confirm_times": [
+      "2026-08-20T15:34:49.205Z",
+      "2026-08-20T17:26:49.065Z",
+      "2026-08-20T18:59:20.381Z"
+    ],
+    "screen_entities": [
+      16714457
+    ],
+    "screen_episodes": [
+      95118941,
+      95118993,
+      95217131
+    ],
+    "screen_seats": [
+      0,
+      1
+    ],
+    "screen_seeds": [
+      880394922,
+      1138501176,
+      1559568124
+    ],
+    "screen_times": [
+      "2026-08-20T11:18:14.496Z",
+      "2026-08-20T11:18:14.570Z",
+      "2026-08-20T14:10:46.271Z"
+    ]
+  }
+}

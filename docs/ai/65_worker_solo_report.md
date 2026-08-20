@@ -1,44 +1,33 @@
-# Solo Worker Report — SOT-2823
+# Solo Worker Report — SOT-2832
 
 ## Summary
 
-The resumed cycle-3 parent aggregated all three completed children and rejected the distilled compact runtime policy with direct A/B and firing evidence. The executable champion remains unchanged, so no Kaggle submission was made.
+Implemented a deterministic decision-family attribution harness for the pinned 4,320-row winner-only teacher corpus. The screen selected `economic`; the entity/episode/seed/seat/time-separated confirm panel independently agreed. Land and labor remain CLOSED. Runtime policy and Kaggle submission artifact are unchanged.
 
-## Task Check
+## Changed Files
 
-- Classification: PLAN / Kaggle improvement-cycle parent
-- Actionable: yes; this was the automatic parent resume for aggregation and submission judgment.
-- 分解判断: already completed; SOT-2824, SOT-2826, and SOT-2825 were reused rather than recreated.
-- Latest parent comments were re-read before the aggregation decision; no human override, `cycle=stop`, or `submit=hold` directive was present.
-
-## Child Aggregation
-
-- SOT-2824: Done; promoted the deterministic, leak-free current-top winner-only teacher dataset.
-- SOT-2826: Done; distilled and tested the compact land/labor policy, then rejected it at screen.
-- SOT-2825: Done; reproduced the rejection on untouched sealed identities with same-seed/both-seat direct A/B.
-
-## Submission Decision
-
-- Candidate/champion mapping: `COMPACT_REPLAY_POLICY=true` candidate versus the existing `false` champion.
-- Candidate intervention: land 2 and labor 396 firings in every sealed match.
-- Result: rank tied; margin mean/lower-tail/worst deltas +6299/+912/+912; own reward delta -1194 in all four matches.
-- Decision: strict reward non-regression failed; candidate rejected and flag remains false.
-- Artifact: no executable change and no new champion fingerprint.
-- Kaggle submission: NOT PERFORMED; no promotion and daily budget already consumed 5/5.
+- `scripts/measure_decision_family_divergence.py` — leak-free first-action family measurement and screen→confirm gate.
+- `docs/measurements/SOT-2832/SOT-2832-decision-family-divergence.json` — reproducible aggregate evidence and provenance hashes.
+- `tests/test_evaluate.py` — family mapping, artifact boundary, and first-action tests.
+- `README.md`, `docs/ai/experiment_ledger.jsonl`, `docs/ai/linear/SOT-2832.md` — reproduction and outcome records.
 
 ## Verification
 
+- Deterministic artifact rerun: PASS, byte-identical SHA-256.
 - Python compile: PASS.
-- Unit tests: 84/84 PASS.
-- Fresh sealed deterministic rerun: PASS; result reproduced excluding runtime timing.
-- Submission contract and single-`main.py` archive: PASS.
-- Diff review and merge-conflict gate: PASS.
-- npm lint/typecheck/e2e: N/A; Python-only repository with no package.json or browser surface.
+- Unit tests: 87/87 PASS.
+- Submission contract/build: PASS; generated archive was restored and its committed SHA-256 is unchanged.
+- `main.py` and `submission.tar.gz`: unchanged from branch base.
+- npm lint/typecheck/test and e2e: N/A (Python-only repository; no package.json or browser suite).
+- Kaggle submission: NOT PERFORMED.
 
-## GitHub
+## Acceptance Criteria
 
-- Branch: `feat/sot-2823-cycle-3-results`
-- Parent aggregation PR: https://github.com/sota1111/kaggriculture-gpt/pull/53
+- [x] Family frequency, reward-attribution proxy, and divergence recorded reproducibly.
+- [x] Screen/confirm isolated by entity, episode, seed, seat, and time.
+- [x] Land/labor CLOSED families excluded; economic selected with screen/confirm evidence.
+- [x] Runtime candidate and Kaggle submission unchanged.
+- [x] Experiment ledger updated.
 
 ## Linear Report: POSTED
 

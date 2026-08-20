@@ -20,6 +20,7 @@ from scripts.measure_post_repair_cash_flow import measure as measure_post_repair
 from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
 from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
+from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,36 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_decision_family_attribution_keeps_feed_land_and_labor_distinct(self):
+        self.assertEqual("feed", decision_family(["FEED"]))
+        self.assertEqual("feed", decision_family(["BUY_PRODUCT", "FEED", 2]))
+        self.assertEqual("economic", decision_family(["BUY_ANIMAL", "COW", 1]))
+        self.assertEqual("market", decision_family(["SELL", "MILK", 1]))
+        self.assertEqual("land", decision_family(["BUY_LAND"]))
+        self.assertEqual("labor", decision_family(["HIRE"]))
+
+    def test_decision_family_measurement_is_leak_free_and_selects_screen_only(self):
+        report = json.loads((ROOT / "docs/measurements/SOT-2832/"
+                             "SOT-2832-decision-family-divergence.json").read_text())
+        self.assertTrue(report["passed"])
+        self.assertEqual("economic", report["selected_family"])
+        self.assertTrue(report["confirm"]["screen_selection_stable"])
+        self.assertFalse(report["runtime_candidate_changed"])
+        self.assertEqual("NOT_PERFORMED", report["kaggle_submission"])
+        self.assertTrue(report["checks"]["private_future_not_in_features"])
+        self.assertTrue(set(report["split"]["screen_entities"]).isdisjoint(
+            report["split"]["confirm_entities"]))
+        self.assertTrue(report["panels"]["screen"]["families"]["land"]["closed"])
+        self.assertTrue(report["panels"]["screen"]["families"]["labor"]["closed"])
+
+    def test_first_actions_uses_only_first_action_per_channel(self):
+        actions = first_actions({"farmer": ["CARE", 1],
+                                 "hands": [["FEED", 1], ["WATER", 2]],
+                                 "market": [["BUY_PRODUCT", "FEED", 2], ["HIRE"]]})
+        self.assertEqual(["CARE", 1], actions["farmer"])
+        self.assertEqual(["FEED", 1], actions["hands"])
+        self.assertEqual(["BUY_PRODUCT", "FEED", 2], actions["market"])
+
     def test_compact_sealed_gate_uses_only_untouched_confirm_identities(self):
         manifest = json.loads(
             (ROOT / "tests/fixtures/public_closed_loop_holdout.json").read_text()
