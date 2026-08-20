@@ -388,6 +388,31 @@ class EvaluationTest(unittest.TestCase):
                         for (x, y), action in zip(((0, 0), (2, 0)), actions)]
         self.assertEqual(len(destinations), len(set(destinations)))
 
+    def test_public_scheduler_standing_work_fires_before_global_matching(self):
+        agent = load_agent(ROOT / "main.py")
+        agent.PUBLIC_SCHEDULER_COMPONENT = True
+        tiles = [[None, {"kind": "WEED"}], ["LOCKED", "LOCKED"]]
+        obs = {"player": 0, "day": 1, "hour": 2,
+               "farms": [{"money": 100, "farmer": [0, 0], "hands": [[1, 0]], "tiles": tiles}],
+               "private": {"shed": {}, "seeds": {"WHEAT": 1}, "inventories": [{}, {}]}}
+        before = agent.component_firing_counts()["public_scheduler"]
+        result = agent.agent(obs)
+        self.assertEqual(["DIG"], result["hands"][0])
+        self.assertEqual(before + 1, agent.component_firing_counts()["public_scheduler"])
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["scheduler"]["license"])
+
+    def test_projected_market_clips_and_orders_same_turn_drop_sales(self):
+        agent = load_agent(ROOT / "main.py")
+        private = {"shed": {"WHEAT": 1}, "inventories": [{"WHEAT": 2, "CORN": 3}]}
+        self.assertEqual({"WHEAT": 3, "CORN": 3},
+                         agent._projected_shed_inventory(private, [["DROP"]]))
+        obs = {"player": 0,
+               "farms": [{}, {"tiles": [[{"kind": "PLANT", "crop": "CORN", "yield_units": 4}]]}],
+               "market": {"inventory": {"CORN": 120, "WHEAT": 90},
+                          "inventory_anchor": {"CORN": 100, "WHEAT": 100}}}
+        ordered = sorted(("WHEAT", "CORN"), key=lambda crop: agent._sale_priority(obs, crop))
+        self.assertEqual(["CORN", "WHEAT"], ordered)
+
     def test_movement_stays_within_board_at_boundary(self):
         agent = load_agent(ROOT / "main.py")
         tiles = [["LOCKED" for _ in range(3)] for _ in range(3)]

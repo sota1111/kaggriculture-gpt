@@ -118,6 +118,10 @@ def measure(candidate_path: Path, fixture: dict[str, Any], manifest: dict[str, A
                 if callable(getattr(candidate, "route_firing_count", None))
                 else getattr(candidate, "MIXED_FARM_ROUTE_FIRES", 0)
             ),
+            "component_firings": (
+                candidate.component_firing_counts()
+                if callable(getattr(candidate, "component_firing_counts", None)) else {}
+            ),
             "kaggle_submission": "NOT_PERFORMED",
         }
 
