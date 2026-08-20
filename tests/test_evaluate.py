@@ -6,7 +6,7 @@ from unittest import mock
 
 from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_cv_holdouts
 from scripts import evaluate as evaluator
-from scripts.measure_leak_free_cv import fetch_artifacts, measure, raw_url
+from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,12 +28,13 @@ class EvaluationTest(unittest.TestCase):
 
     def test_public_opponent_measurement_reports_opponent_rank_margin_tail(self):
         manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
+        corpus = json.loads((ROOT / "tests/fixtures/replay_corpus_manifest.json").read_text())
         with mock.patch("scripts.measure_leak_free_cv.fetch_artifacts") as fetch:
             fetch.return_value = {
                 row["id"]: ROOT / "tests/fixtures/champion_sot_2263.py"
                 for row in manifest["artifacts"]
             }
-            result = measure(ROOT / "main.py", FIXTURE, manifest)
+            result = measure(ROOT / "main.py", FIXTURE, manifest, corpus)
         self.assertTrue(result["passed"], result)
         self.assertEqual("NOT_PERFORMED", result["kaggle_submission"])
         for window in ("screen", "confirm"):
@@ -41,6 +42,30 @@ class EvaluationTest(unittest.TestCase):
             self.assertIn("mean_rank", result[window]["summary"])
             self.assertIn("mean_margin", result[window]["summary"])
             self.assertIn("lower_tail_margin", result[window]["summary"])
+        self.assertTrue(all(result["corpus_checks"].values()), result["corpus_checks"])
+        self.assertEqual("fallback-public-artifacts",
+                         result["corpus_manifest"]["acquisition"]["status"])
+
+    def test_replay_corpus_manifest_digest_identity_and_fallback_are_auditable(self):
+        manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
+        artifacts = {row["id"]: row for row in manifest["artifacts"]}
+        corpus = json.loads((ROOT / "tests/fixtures/replay_corpus_manifest.json").read_text())
+        checks = validate_corpus_manifest(corpus, FIXTURE, artifacts)
+        self.assertTrue(all(checks.values()), checks)
+        unsigned = {key: value for key, value in corpus.items() if key != "manifest_sha256"}
+        self.assertEqual(corpus["manifest_sha256"], canonical_sha256(unsigned))
+        self.assertEqual({0, 1}, {row["recorded_seat"] for row in corpus["entries"]})
+        self.assertTrue(all(row["submission_id"] is None and row["episode_id"] is None
+                            and row["replay_sha256"] is None for row in corpus["entries"]))
+
+    def test_replay_corpus_manifest_rejects_digest_and_identity_drift(self):
+        manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
+        artifacts = {row["id"]: row for row in manifest["artifacts"]}
+        corpus = json.loads((ROOT / "tests/fixtures/replay_corpus_manifest.json").read_text())
+        corpus["entries"][0]["episode_id"] = 999
+        checks = validate_corpus_manifest(corpus, FIXTURE, artifacts)
+        self.assertFalse(checks["manifest_digest"])
+        self.assertFalse(checks["authenticated_replay_not_claimed"])
 
     def test_cv_holdouts_isolate_entity_seed_episode_and_time(self):
         result = validate_cv_holdouts(FIXTURE["leak_free_cv"])
