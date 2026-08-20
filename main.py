@@ -22,6 +22,7 @@ STAGGERED_STRAWBERRY_RENEWAL = True
 CARE_LIVESTOCK_COMPONENT = True
 SHED_OVERFLOW_PROTECTION = True
 CASH_RUNWAY_ACREAGE_EXPANSION = False
+PRODUCTIVE_ACTION_CAPACITY = False
 HISTORY_LIMIT = 48
 
 # Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
@@ -73,6 +74,12 @@ PUBLIC_EXECUTION_SOURCES = {
         "artifact_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639",
         "boundary": "public cash/runway staging only; no fixed quadrant, crop block, hand route, replay trace, or weights",
     },
+    "productive_action_capacity": {
+        "url": "https://github.com/lonespear/kaggriculture",
+        "commit": "774b26055e22f0e809464f1d8bf65d6e8172af0e",
+        "license": "MIT",
+        "boundary": "public worker positions and crop-service backlog only; no fixed route, replay trace, private inventory, or weights",
+    },
 }
 MIXED_FARM_ROUTE_FIRES = 0
 PUBLIC_SCHEDULER_FIRES = 0
@@ -83,6 +90,7 @@ STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
 CARE_LIVESTOCK_FIRES = 0
 SHED_OVERFLOW_FIRES = 0
 CASH_RUNWAY_ACREAGE_FIRES = 0
+PRODUCTIVE_ACTION_CAPACITY_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -103,15 +111,65 @@ def _update_public_history(obs):
               if isinstance(tile, dict) and tile.get("kind") == "PLANT"]
     weeds = sum(isinstance(tile, dict) and tile.get("kind") == "WEED"
                 for row in me.get("tiles", []) for tile in row)
+    workers = [me.get("farmer", [0, 0]), *me.get("hands", [])]
+    backlog = {"water": 0, "harvest": 0, "fertilize": 0}
+    day = int(obs.get("day", 0))
+    specs = _crop_specs(obs)
+    for tile in plants:
+        crop = tile.get("crop", "WHEAT")
+        maturity = int(specs.get(crop, DEFAULT_CROPS["WHEAT"]).get("maturity_days", 2))
+        if int(tile.get("yield_units", 0)) > 0 or day - int(tile.get("planted_day", day)) >= maturity:
+            backlog["harvest"] += 1
+        elif crop == "STRAWBERRY" and int(tile.get("fertilized_until_day", day)) < day:
+            backlog["fertilize"] += 1
+        elif not tile.get("watered_today", False):
+            backlog["water"] += 1
     _PUBLIC_HISTORY.append({
         "step": step,
         "prices": {str(crop): int(price) for crop, price in obs.get("market", {}).get("prices", {}).items()},
         "yields": {str(tile.get("crop", "WHEAT")): int(tile.get("yield_units", 0)) for tile in plants},
         "weeds": weeds,
+        "workers": tuple(tuple(int(value) for value in worker[:2]) for worker in workers),
+        "backlog": backlog,
+        "acreage": len(plants),
     })
     del _PUBLIC_HISTORY[:-HISTORY_LIMIT]
     _LAST_STEP = step
     return tuple(_PUBLIC_HISTORY)
+
+
+def _productive_capacity_limit(obs, history):
+    """Estimate maintainable acreage from public service throughput/backlog.
+
+    Completed WATER/HARVEST/FERTILIZE demand is inferred conservatively from
+    decreases between consecutive public tile snapshots. Worker displacement
+    supplies the travel cost. The result only caps new planting/expansion; the
+    existing scheduler continues to select and execute every worker action.
+    """
+    global PRODUCTIVE_ACTION_CAPACITY_FIRES
+    me = obs["farms"][int(obs["player"])]
+    workers = max(1, 1 + len(me.get("hands", [])))
+    rows = list(history)[-min(HISTORY_LIMIT, int(obs.get("turns_per_day", 24))):]
+    completed = 0
+    distance = 0
+    for before, after in zip(rows, rows[1:]):
+        completed += sum(max(0, int(before["backlog"][name]) - int(after["backlog"][name]))
+                         for name in ("water", "harvest", "fertilize"))
+        distance += sum(abs(ax - bx) + abs(ay - by)
+                        for (bx, by), (ax, ay) in zip(before["workers"], after["workers"]))
+    current = rows[-1] if rows else {"backlog": {}, "acreage": 0}
+    backlog = sum(int(current["backlog"].get(name, 0))
+                  for name in ("water", "harvest", "fertilize"))
+    # Before enough transitions exist, worker count provides a conservative
+    # three-tile warm-up. Afterwards observed completions raise that ceiling,
+    # while travel and outstanding service work consume capacity.
+    warmup = workers * 3
+    observed = workers + completed * 2 - distance // max(1, workers)
+    limit = max(workers, min(warmup + completed, max(warmup, observed) - backlog // 2))
+    PRODUCTIVE_ACTION_CAPACITY_FIRES += 1
+    return {"acreage_limit": limit, "completed_service": completed,
+            "travel_distance": distance, "backlog": backlog,
+            "observed_acreage": int(current.get("acreage", 0))}
 
 
 def _uncertainty_scenarios(crop, spec, history):
@@ -739,6 +797,11 @@ def _policy_action(obs):
         planting_seeds = _staggered_strawberry_seed_budget(
             {**obs, "total_days": total_days}, crop_specs[crop], seeds,
             sum(fertilizer_by_worker))
+    capacity = None
+    if PRODUCTIVE_ACTION_CAPACITY:
+        capacity = _productive_capacity_limit({**obs, "total_days": total_days}, history)
+        planting_seeds = min(planting_seeds, max(
+            0, capacity["acreage_limit"] - capacity["observed_acreage"]))
     actions = _plan_workers(
         me, day, planting_seeds, crop, crop_specs, int(obs.get("hour", 0)),
         int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
@@ -789,6 +852,9 @@ def _policy_action(obs):
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
     expansion = _runway_expansion_plan(
         {**obs, "total_days": total_days}, crop_specs[crop], crop, harvests_left)
+    if capacity is not None and capacity["observed_acreage"] >= capacity["acreage_limit"]:
+        expansion["land"] = []
+        expansion["extra_seeds"] = 0
     market.extend(expansion["land"])
     advance_reserve = 1 if pressure["labor"] + pressure["field_demand"] >= 0.75 else 0
     desired_seeds = (worker_count * SEED_RESERVE_PER_WORKER + advance_reserve
@@ -835,6 +901,7 @@ def component_firing_counts():
         "care_livestock": CARE_LIVESTOCK_FIRES,
         "shed_overflow": SHED_OVERFLOW_FIRES,
         "cash_runway_acreage": CASH_RUNWAY_ACREAGE_FIRES,
+        "productive_action_capacity": PRODUCTIVE_ACTION_CAPACITY_FIRES,
     }
 
 
