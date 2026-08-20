@@ -10,6 +10,7 @@ from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
 from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
+from scripts.measure_multi_step_transition_oracle import measure as measure_transition_oracle, validate_split
 from scripts.build_replay_teacher_dataset import public_projection, validate_manifest as validate_teacher_manifest
 from scripts.distill_compact_replay_policy import distill as distill_compact_policy
 from scripts.measure_compact_replay_policy import targeted_trace as compact_targeted_trace
@@ -32,6 +33,30 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_multi_step_oracle_is_isolated_deterministic_and_measures_all_capacities(self):
+        fixture = json.loads((ROOT / "tests/fixtures/multi_step_transition_oracle.json").read_text())
+        first = measure_transition_oracle(ROOT / "main.py", fixture)
+        second = measure_transition_oracle(ROOT / "main.py", fixture)
+        self.assertEqual(first, second)
+        self.assertTrue(first["passed"], first)
+        self.assertEqual([0, 1], sorted(first["screen"]["both_seat_evidence"]))
+        self.assertEqual([0, 1], sorted(first["confirm"]["both_seat_evidence"]))
+        for window in ("screen", "confirm"):
+            self.assertEqual({"labor", "travel", "cash", "seed", "shed", "action"},
+                             set(first[window]["capacity_violations"]))
+            self.assertEqual({"task", "locations", "inventory"},
+                             set(first[window]["transition_counts"]))
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+
+    def test_multi_step_oracle_rejects_private_future_trace_and_skips_confirm(self):
+        fixture = json.loads((ROOT / "tests/fixtures/multi_step_transition_oracle.json").read_text())
+        fixture["screen"][0]["future"] = {"winner_action": ["BUILD_PASTURE"]}
+        split = validate_split(fixture)
+        self.assertFalse(split["passed"])
+        self.assertFalse(split["checks"]["winner_trace_is_provenance_only"])
+        report = measure_transition_oracle(ROOT / "main.py", fixture)
+        self.assertTrue(report["confirm"]["skipped"])
+
     def test_winner_sequence_support_manifest_and_measurement_are_leak_free(self):
         manifest = json.loads(
             (ROOT / "tests/fixtures/winner_sequence_support_manifest.json").read_text()

@@ -1,0 +1,23 @@
+{
+  "screen": [
+    {"opponent":"cok-v7","episode":"screen-a","seed":284301,"time":1,"seat":0,"winner_trace_sha256":"86844008d644ce94f1cc733796a8af13b1bd0ab1d6784724676685d857c030cc","states":[
+      {"step":24,"workers":2,"cash":900,"price":25,"seeds":{"WHEAT":2},"shed":{"WHEAT":0},"tiles":[[null,null],[null,null]]},
+      {"step":25,"workers":2,"cash":890,"price":25,"seeds":{"WHEAT":1},"shed":{"WHEAT":0},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]},
+      {"step":26,"workers":2,"cash":890,"price":26,"seeds":{"WHEAT":1},"shed":{"WHEAT":1},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]}]},
+    {"opponent":"cok-v7","episode":"screen-b","seed":284302,"time":2,"seat":1,"winner_trace_sha256":"070af4ef7a017eb1bc1fc36a236ea5205bd4d54158a91d86942cc669d4170219","states":[
+      {"step":48,"workers":3,"cash":1200,"price":24,"seeds":{"WHEAT":3},"shed":{"WHEAT":1},"tiles":[[null,null],[null,null]]},
+      {"step":49,"workers":3,"cash":1190,"price":25,"seeds":{"WHEAT":2},"shed":{"WHEAT":1},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]},
+      {"step":50,"workers":3,"cash":1215,"price":26,"seeds":{"WHEAT":2},"shed":{"WHEAT":0},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]}]}
+  ],
+  "confirm": [
+    {"opponent":"lonespear-v18","episode":"confirm-a","seed":284311,"time":11,"seat":0,"winner_trace_sha256":"047220d510f674a90ab6e81277d3e6ae0b108ee96c2d3a873eb0f359b58a9926","states":[
+      {"step":72,"workers":2,"cash":800,"price":23,"seeds":{"WHEAT":2},"shed":{"WHEAT":0},"tiles":[[null,null],[null,null]]},
+      {"step":73,"workers":2,"cash":790,"price":24,"seeds":{"WHEAT":1},"shed":{"WHEAT":0},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]},
+      {"step":74,"workers":2,"cash":814,"price":25,"seeds":{"WHEAT":1},"shed":{"WHEAT":1},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]}]},
+    {"opponent":"lonespear-v23","episode":"confirm-b","seed":284312,"time":12,"seat":1,"winner_trace_sha256":"8309e426059056a62bd06640869724624cd7cde697cf0708e192ce5805fc1e7d","states":[
+      {"step":96,"workers":3,"cash":1300,"price":25,"seeds":{"WHEAT":3},"shed":{"WHEAT":2},"tiles":[[null,null],[null,null]]},
+      {"step":97,"workers":3,"cash":1290,"price":26,"seeds":{"WHEAT":2},"shed":{"WHEAT":2},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]},
+      {"step":98,"workers":3,"cash":1342,"price":27,"seeds":{"WHEAT":2},"shed":{"WHEAT":0},"tiles":[[{"kind":"PLANT","crop":"WHEAT"},null],[null,null]]}]}
+  ],
+  "kaggle_submission":"NOT_PERFORMED"
+}

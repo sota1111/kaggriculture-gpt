@@ -1,0 +1,775 @@
+{
+  "confirm": {
+    "both_seat_evidence": [
+      0,
+      1
+    ],
+    "capacity_violations": {
+      "action": 0,
+      "cash": 0,
+      "labor": 0,
+      "seed": 0,
+      "shed": 0,
+      "travel": 0
+    },
+    "episodes": [
+      {
+        "capacity_violations": {
+          "action": 0,
+          "cash": 0,
+          "labor": 0,
+          "seed": 0,
+          "shed": 0,
+          "travel": 0
+        },
+        "identity": {
+          "episode": "confirm-a",
+          "opponent": "lonespear-v18",
+          "seat": 0,
+          "seed": 284311,
+          "time": 11
+        },
+        "steps": [
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  2
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 12,
+              "cash": 800,
+              "labor": 2,
+              "seed": 4,
+              "shed": 0,
+              "travel": 2
+            },
+            "capacity_usage": {
+              "action": 4,
+              "cash": 20,
+              "labor": 2,
+              "seed": 2,
+              "shed": 0,
+              "travel": 0
+            },
+            "step": 72,
+            "transitions": {
+              "inventory": false,
+              "locations": false,
+              "task": false
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PASS"
+                ]
+              ],
+              "market": [
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  3
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 12,
+              "cash": 790,
+              "labor": 2,
+              "seed": 4,
+              "shed": 0,
+              "travel": 2
+            },
+            "capacity_usage": {
+              "action": 4,
+              "cash": 30,
+              "labor": 1,
+              "seed": 1,
+              "shed": 0,
+              "travel": 0
+            },
+            "step": 73,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "WATER"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "SELL",
+                  "WHEAT",
+                  1
+                ],
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  3
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 12,
+              "cash": 814,
+              "labor": 2,
+              "seed": 4,
+              "shed": 1,
+              "travel": 2
+            },
+            "capacity_usage": {
+              "action": 5,
+              "cash": 30,
+              "labor": 2,
+              "seed": 1,
+              "shed": 1,
+              "travel": 0
+            },
+            "step": 74,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          }
+        ],
+        "transition_counts": {
+          "inventory": 2,
+          "locations": 2,
+          "task": 2
+        },
+        "winner_trace_sha256": "047220d510f674a90ab6e81277d3e6ae0b108ee96c2d3a873eb0f359b58a9926"
+      },
+      {
+        "capacity_violations": {
+          "action": 0,
+          "cash": 0,
+          "labor": 0,
+          "seed": 0,
+          "shed": 0,
+          "travel": 0
+        },
+        "identity": {
+          "episode": "confirm-b",
+          "opponent": "lonespear-v23",
+          "seat": 1,
+          "seed": 284312,
+          "time": 12
+        },
+        "steps": [
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ],
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "SELL",
+                  "WHEAT",
+                  2
+                ],
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  3
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 13,
+              "cash": 1300,
+              "labor": 3,
+              "seed": 6,
+              "shed": 2,
+              "travel": 3
+            },
+            "capacity_usage": {
+              "action": 6,
+              "cash": 30,
+              "labor": 3,
+              "seed": 3,
+              "shed": 2,
+              "travel": 0
+            },
+            "step": 96,
+            "transitions": {
+              "inventory": false,
+              "locations": false,
+              "task": false
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ],
+                [
+                  "PASS"
+                ]
+              ],
+              "market": [
+                [
+                  "SELL",
+                  "WHEAT",
+                  2
+                ],
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  4
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 13,
+              "cash": 1290,
+              "labor": 3,
+              "seed": 6,
+              "shed": 2,
+              "travel": 3
+            },
+            "capacity_usage": {
+              "action": 6,
+              "cash": 40,
+              "labor": 2,
+              "seed": 2,
+              "shed": 2,
+              "travel": 0
+            },
+            "step": 97,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "WATER"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ],
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  4
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 13,
+              "cash": 1342,
+              "labor": 3,
+              "seed": 6,
+              "shed": 0,
+              "travel": 3
+            },
+            "capacity_usage": {
+              "action": 5,
+              "cash": 40,
+              "labor": 3,
+              "seed": 2,
+              "shed": 0,
+              "travel": 0
+            },
+            "step": 98,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          }
+        ],
+        "transition_counts": {
+          "inventory": 2,
+          "locations": 2,
+          "task": 2
+        },
+        "winner_trace_sha256": "8309e426059056a62bd06640869724624cd7cde697cf0708e192ce5805fc1e7d"
+      }
+    ],
+    "passed": true,
+    "transition_counts": {
+      "inventory": 4,
+      "locations": 4,
+      "task": 4
+    }
+  },
+  "deterministic_report_sha256": "fc8182b54bf7bfb776d6154465b06eb250f27b7f0a418f7e077889ce8539c4f8",
+  "issue": "SOT-2843",
+  "kaggle_submission": "NOT_PERFORMED",
+  "oracle_input_contract": "policy receives generated current runtime observation only; winner trace contributes immutable SHA-256 provenance only",
+  "passed": true,
+  "provenance": {
+    "fixture_sha256": "371c8e8c9749a91068bfcdd1f5fd4b18e3dfee6609364d2f59bcc1ff62e52a9c",
+    "policy_sha256": "764283cca5b62ae1d307c311b8187493cde2acb8e0f2a6efec5a3f6ad6acb1ee",
+    "winner_trace_hashes": [
+      "047220d510f674a90ab6e81277d3e6ae0b108ee96c2d3a873eb0f359b58a9926",
+      "070af4ef7a017eb1bc1fc36a236ea5205bd4d54158a91d86942cc669d4170219",
+      "8309e426059056a62bd06640869724624cd7cde697cf0708e192ce5805fc1e7d",
+      "86844008d644ce94f1cc733796a8af13b1bd0ab1d6784724676685d857c030cc"
+    ]
+  },
+  "screen": {
+    "both_seat_evidence": [
+      0,
+      1
+    ],
+    "capacity_violations": {
+      "action": 0,
+      "cash": 0,
+      "labor": 0,
+      "seed": 0,
+      "shed": 0,
+      "travel": 0
+    },
+    "episodes": [
+      {
+        "capacity_violations": {
+          "action": 0,
+          "cash": 0,
+          "labor": 0,
+          "seed": 0,
+          "shed": 0,
+          "travel": 0
+        },
+        "identity": {
+          "episode": "screen-a",
+          "opponent": "cok-v7",
+          "seat": 0,
+          "seed": 284301,
+          "time": 1
+        },
+        "steps": [
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  2
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 12,
+              "cash": 900,
+              "labor": 2,
+              "seed": 4,
+              "shed": 0,
+              "travel": 2
+            },
+            "capacity_usage": {
+              "action": 4,
+              "cash": 20,
+              "labor": 2,
+              "seed": 2,
+              "shed": 0,
+              "travel": 0
+            },
+            "step": 24,
+            "transitions": {
+              "inventory": false,
+              "locations": false,
+              "task": false
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PASS"
+                ]
+              ],
+              "market": [
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  3
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 12,
+              "cash": 890,
+              "labor": 2,
+              "seed": 4,
+              "shed": 0,
+              "travel": 2
+            },
+            "capacity_usage": {
+              "action": 4,
+              "cash": 30,
+              "labor": 1,
+              "seed": 1,
+              "shed": 0,
+              "travel": 0
+            },
+            "step": 25,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "WATER"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "SELL",
+                  "WHEAT",
+                  1
+                ],
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  3
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 12,
+              "cash": 890,
+              "labor": 2,
+              "seed": 4,
+              "shed": 1,
+              "travel": 2
+            },
+            "capacity_usage": {
+              "action": 5,
+              "cash": 30,
+              "labor": 2,
+              "seed": 1,
+              "shed": 1,
+              "travel": 0
+            },
+            "step": 26,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          }
+        ],
+        "transition_counts": {
+          "inventory": 2,
+          "locations": 2,
+          "task": 2
+        },
+        "winner_trace_sha256": "86844008d644ce94f1cc733796a8af13b1bd0ab1d6784724676685d857c030cc"
+      },
+      {
+        "capacity_violations": {
+          "action": 0,
+          "cash": 0,
+          "labor": 0,
+          "seed": 0,
+          "shed": 0,
+          "travel": 0
+        },
+        "identity": {
+          "episode": "screen-b",
+          "opponent": "cok-v7",
+          "seat": 1,
+          "seed": 284302,
+          "time": 2
+        },
+        "steps": [
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ],
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "SELL",
+                  "WHEAT",
+                  1
+                ],
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  3
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 13,
+              "cash": 1200,
+              "labor": 3,
+              "seed": 6,
+              "shed": 1,
+              "travel": 3
+            },
+            "capacity_usage": {
+              "action": 6,
+              "cash": 30,
+              "labor": 3,
+              "seed": 3,
+              "shed": 1,
+              "travel": 0
+            },
+            "step": 48,
+            "transitions": {
+              "inventory": false,
+              "locations": false,
+              "task": false
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "PLANT",
+                "WHEAT"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ],
+                [
+                  "PASS"
+                ]
+              ],
+              "market": [
+                [
+                  "SELL",
+                  "WHEAT",
+                  1
+                ],
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  4
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 13,
+              "cash": 1190,
+              "labor": 3,
+              "seed": 6,
+              "shed": 1,
+              "travel": 3
+            },
+            "capacity_usage": {
+              "action": 6,
+              "cash": 40,
+              "labor": 2,
+              "seed": 2,
+              "shed": 1,
+              "travel": 0
+            },
+            "step": 49,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          },
+          {
+            "action": {
+              "farmer": [
+                "WATER"
+              ],
+              "hands": [
+                [
+                  "PLANT",
+                  "WHEAT"
+                ],
+                [
+                  "PLANT",
+                  "WHEAT"
+                ]
+              ],
+              "market": [
+                [
+                  "BUY_SEED",
+                  "WHEAT",
+                  4
+                ],
+                [
+                  "HIRE"
+                ]
+              ]
+            },
+            "capacity_limits": {
+              "action": 13,
+              "cash": 1215,
+              "labor": 3,
+              "seed": 6,
+              "shed": 0,
+              "travel": 3
+            },
+            "capacity_usage": {
+              "action": 5,
+              "cash": 40,
+              "labor": 3,
+              "seed": 2,
+              "shed": 0,
+              "travel": 0
+            },
+            "step": 50,
+            "transitions": {
+              "inventory": true,
+              "locations": true,
+              "task": true
+            }
+          }
+        ],
+        "transition_counts": {
+          "inventory": 2,
+          "locations": 2,
+          "task": 2
+        },
+        "winner_trace_sha256": "070af4ef7a017eb1bc1fc36a236ea5205bd4d54158a91d86942cc669d4170219"
+      }
+    ],
+    "passed": true,
+    "transition_counts": {
+      "inventory": 4,
+      "locations": 4,
+      "task": 4
+    }
+  },
+  "split": {
+    "checks": {
+      "both_seats": true,
+      "episode_holdout": true,
+      "multi_step": true,
+      "opponent_holdout": true,
+      "panels_nonempty": true,
+      "required_fields": true,
+      "seed_holdout": true,
+      "temporal_order": true,
+      "time_holdout": true,
+      "winner_trace_hashes": true,
+      "winner_trace_is_provenance_only": true
+    },
+    "passed": true
+  }
+}
