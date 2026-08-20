@@ -92,6 +92,25 @@ python3 scripts/build_replay_teacher_dataset.py \
 If authenticated acquisition is unavailable, do not describe fallback public
 artifacts as current-top data; retain their hash/license-pinned fallback label.
 
+### Decision-family divergence anchor
+
+The SOT-2832 measurement compares the winner teacher's first emitted action in
+each farmer/hand/market channel with the current champion's public-state
+projection. It records frequency, divergence, reward-attribution proxy, and
+fireability separately for screen and confirm, while excluding the CLOSED
+land/labor compact-policy families from selection:
+
+```bash
+python3 scripts/measure_decision_family_divergence.py \
+  --dataset .ai-jobs/sot-2832-teacher.jsonl \
+  --replay-dir .ai-jobs/sot-2832-replays
+```
+
+The screen selected the economic family and the untouched confirm panel agreed.
+The committed artifact contains only aggregate evidence and hashes; replay
+bytes, the 4,320-row teacher dataset, credentials, and external weights remain
+local. This measurement does not change `main.py` or submit to Kaggle.
+
 ## Adaptive route-repair ablation
 
 `scripts/measure_adaptive_route_repair.py` evaluates a public-state-only route

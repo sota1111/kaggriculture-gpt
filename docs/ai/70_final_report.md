@@ -1,24 +1,16 @@
-# Final Report — SOT-2823
+# Final Report — SOT-2832
 
 ## Outcome
 
-All children are Done and merged. The compact replay policy was rejected by the strict sealed closed-loop gate, remains disabled, and produced no new champion artifact. No Kaggle submission was performed.
-
-## Acceptance Criteria
-
-- [x] Improvement direction and selection rationale were recorded with external sources during initial decomposition.
-- [x] SOT-2824, SOT-2826, and SOT-2825 are all terminal Done.
-- [x] Candidate/champion mapping and verification evidence are recorded in the experiment ledger and measurement artifacts.
-- [x] Parent resume confirmed all children and explicitly recorded non-promotion/no new artifact.
-- [x] Rejection has same-seed/both-seat direct A/B and component firing evidence.
-- [x] A separate `## 申し送り` Linear comment is required and will be posted in final reporting.
+The pinned winner teacher and current champion were re-anchored at decision-family granularity. `economic` ranked first on both screen and confirm. The artifact records frequency, a clearly labeled non-causal reward-contribution proxy, fireability, split identities, and all provenance hashes. Runtime code and the submission artifact were not changed, and no Kaggle submission was made.
 
 ## Quality Gates
 
+- Deterministic rerun: PASS
 - Python compile: PASS
-- Unit tests: 84/84 PASS
-- Fresh deterministic sealed rerun: PASS
-- Submission contract and archive content: PASS
-- npm gates: N/A (no package.json)
+- Unit tests: 87/87 PASS
+- Submission contract/build: PASS
+- Diff and acceptance review: PASS
+- npm/e2e: N/A (not present)
 
 ## Acceptance: PASS
