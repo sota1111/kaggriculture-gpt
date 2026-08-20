@@ -32,8 +32,8 @@ Aggregated completed children SOT-2851/SOT-2852/SOT-2853. The measurement oracle
 
 The disabled candidate remains an auditable ablation. A future cycle should use a new upstream useful-work-per-repair assignment objective and must not retry this rejected axis without new evidence.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 
 ## Acceptance: PASS
 
-## Next Action: NEEDS_DEBUG
+## Next Action: READY_FOR_REVIEW
