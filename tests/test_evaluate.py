@@ -518,6 +518,23 @@ class EvaluationTest(unittest.TestCase):
         self.assertEqual(before + 1, agent.component_firing_counts()["public_scheduler"])
         self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["scheduler"]["license"])
 
+    def test_multi_stop_bundle_is_independent_bounded_and_fires(self):
+        agent = load_agent(ROOT / "main.py")
+        agent.PUBLIC_SCHEDULER_COMPONENT = True
+        agent.MULTI_STOP_TASK_BUNDLING = True
+        tiles = [[None for _ in range(4)] for _ in range(4)]
+        tiles[0][0] = tiles[3][3] = "LOCKED"
+        me = {"farmer": [0, 0], "hands": [[3, 3]], "tiles": tiles}
+        before = agent.component_firing_counts()["multi_stop_task_bundling"]
+        actions = agent._plan_workers(me, 0, 8, "WHEAT", agent.DEFAULT_CROPS)
+        self.assertEqual(2, len(actions))
+        self.assertEqual(before + 1, agent.component_firing_counts()["multi_stop_task_bundling"])
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["task_bundling"]["license"])
+
+        agent.MULTI_STOP_TASK_BUNDLING = False
+        agent._plan_workers(me, 0, 8, "WHEAT", agent.DEFAULT_CROPS)
+        self.assertEqual(before + 1, agent.component_firing_counts()["multi_stop_task_bundling"])
+
     def test_projected_market_clips_and_orders_same_turn_drop_sales(self):
         agent = load_agent(ROOT / "main.py")
         private = {"shed": {"WHEAT": 1}, "inventories": [{"WHEAT": 2, "CORN": 3}]}
