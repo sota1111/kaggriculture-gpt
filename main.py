@@ -13,7 +13,19 @@ SELL_STRATEGY = "PRICE_AWARE"
 ECONOMY_STRATEGY = "FINITE_HORIZON"
 ROBUST_ONLINE_PLANNER = True
 OPPONENT_AWARE_POLICY = True
+LONG_HORIZON_MIXED_FARM_ROUTE = False
 HISTORY_LIMIT = 48
+
+# Logic-distilled from COK-ZhangZiliang/Kaggriculture@58c91c3 (Apache-2.0).
+# The source agent uses a fixed action trace; this implementation retains only
+# its portable, observation-driven economic route and no trace or weights.
+MIXED_FARM_ROUTE_SOURCE = {
+    "url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+    "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+    "license": "Apache-2.0",
+    "artifact_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+}
+MIXED_FARM_ROUTE_FIRES = 0
 
 DEFAULT_CROPS = {
     "WHEAT": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3, "fallback_price": 15},
@@ -229,6 +241,56 @@ def _remaining_harvests(spec, day, total_days):
     return max(0, (total_days - day - 1) // maturity)
 
 
+def _mixed_farm_route(obs, specs, seeds):
+    """Build a bounded long-horizon route from public state only.
+
+    Wheat is the opening crop and feed reserve, melon gets one bounded capital
+    window, and strawberry is preferred only when recurring harvests remain.
+    Land, hand, and herd orders are gated by explicit runtime capabilities so
+    compact/offline contracts never receive speculative actions.
+    """
+    global MIXED_FARM_ROUTE_FIRES
+    MIXED_FARM_ROUTE_FIRES += 1
+    day = max(0, int(obs.get("day", 0)))
+    total_days = max(1, int(obs.get("total_days", 30)))
+    progress = min(1.0, day / total_days)
+    prices = obs.get("market", {}).get("prices", {})
+    available = set(specs) & (set(prices) | set(seeds))
+    realizable = {
+        crop for crop in available
+        if _remaining_harvests(specs[crop], day, total_days) > 0
+    }
+    crop = "WHEAT" if "WHEAT" in realizable else None
+    if progress >= 0.42 and "STRAWBERRY" in realizable:
+        crop = "STRAWBERRY"
+    elif 0.20 <= progress < 0.52 and "MELON" in realizable:
+        crop = "MELON"
+    if crop is None and realizable:
+        crop = max(realizable, key=lambda item: (
+            _remaining_harvests(specs[item], day, total_days)
+            * (int(prices.get(item, specs[item]["fallback_price"]))
+               * float(specs[item]["expected_yield"]) - int(specs[item]["seed_price"])),
+            item,
+        ))
+    crop = crop or "WHEAT"
+
+    capabilities = set(obs.get("capabilities", ()))
+    money = int(obs["farms"][int(obs["player"])].get("money", 0))
+    orders = []
+    if "BUY_LAND" in capabilities and progress < 0.35 and money >= 1800:
+        orders.append(["BUY_LAND"])
+    animals = obs.get("animals", {})
+    if "BUY_ANIMAL" in capabilities and 0.28 <= progress < 0.72:
+        herd = sum(int(value) for value in obs.get("private", {}).get("animals", {}).values())
+        for animal in ("CHICKEN", "COW", "SHEEP"):
+            spec = animals.get(animal, {})
+            cost = int(spec.get("price", 0))
+            if herd < 3 and cost > 0 and money - cost >= 600:
+                orders.append(["BUY_ANIMAL", animal, 1])
+                break
+    return {"crop": crop, "feed_reserve": 3 if animals else 0, "market": orders}
+
+
 def _hand_target(me, harvests_left):
     """Scale labor to observed cultivable capacity without hiring for a spent season."""
     if harvests_left <= 0:
@@ -327,6 +389,10 @@ def agent(obs):
     money = int(me["money"])
     seed_inventory = private.get("seeds", {})
     crop, crop_specs = _choose_crop({**obs, "total_days": total_days}, seed_inventory, history)
+    mixed_route = None
+    if LONG_HORIZON_MIXED_FARM_ROUTE:
+        mixed_route = _mixed_farm_route({**obs, "total_days": total_days}, crop_specs, seed_inventory)
+        crop = mixed_route["crop"]
     prices = obs.get("market", {}).get("prices", {})
     stored_inventory = private.get("shed", {})
     pressure = _scarcity_pressure(obs, crop) if OPPONENT_AWARE_POLICY else {
@@ -339,8 +405,13 @@ def agent(obs):
         future_peak = max(_future_prices(crop_specs[stored_crop], day, price))
         final_day = day >= total_days - 1
         crowded_sale = pressure["inventory"] >= 0.25 and price >= target
-        if stored > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day or crowded_sale):
-            market.append(["SELL", stored_crop, stored])
+        reserved = mixed_route["feed_reserve"] if mixed_route and stored_crop == "WHEAT" else 0
+        sellable = max(0, stored - reserved)
+        if sellable > 0 and (SELL_STRATEGY == "IMMEDIATE" or price >= max(target, future_peak) or final_day or crowded_sale):
+            market.append(["SELL", stored_crop, sellable])
+
+    if mixed_route:
+        market.extend(mixed_route["market"])
 
     seeds = int(seed_inventory.get(crop, 0))
     harvests_left = _remaining_harvests(crop_specs[crop], day, total_days)
