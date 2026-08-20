@@ -627,6 +627,40 @@ def validate_cv_holdouts(config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def validate_authenticated_replay_cv(manifest: dict[str, Any], replay_dir: Path) -> dict[str, Any]:
+    """Validate the immutable live-replay anchor without exposing hidden inputs.
+
+    Raw replay archives are audit evidence, not candidate features.  The validator
+    delegates hash/identity checks to the fetch tool and returns only provenance,
+    split identity, seat coverage, timestamps, and terminal public rewards.
+    """
+    try:
+        from scripts.fetch_authenticated_replays import validate_manifest
+    except ModuleNotFoundError:  # Direct execution places scripts/ at sys.path[0].
+        from fetch_authenticated_replays import validate_manifest
+
+    checks = validate_manifest(manifest, replay_dir)
+    panels: dict[str, list[dict[str, Any]]] = {"screen": [], "confirm": []}
+    for row in manifest.get("entries", []):
+        panels[row["window"]].append({
+            "entity_id": row["entity_id"],
+            "submission_id": row["submission_id"],
+            "episode_id": row["episode_id"],
+            "seat": row["recorded_seat"],
+            "seed": row["seed"],
+            "time_utc": row["time_utc"],
+            "replay_sha256": row["replay_sha256"],
+        })
+    return {
+        "passed": all(checks.values()),
+        "checks": checks,
+        "panels": panels,
+        "information_boundary": manifest.get("observation_policy", {}),
+        "fallback_boundary": manifest.get("acquisition", {}).get("fallback_boundary"),
+        "kaggle_submission": manifest.get("kaggle_submission"),
+    }
+
+
 def evaluate_paired_cv(
     champion: ModuleType,
     candidate: ModuleType,

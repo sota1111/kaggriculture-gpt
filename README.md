@@ -43,3 +43,21 @@ rejected candidate must be reverted while retaining the result JSON. Promotion
 automatically runs the submission contract check and only emits
 `next_action: kaggle_validation` after it passes. Build the exact archive with
 `bash scripts/build_submission.sh` before the Kaggle validation run.
+
+## Authenticated replay anchor
+
+The current-top replay corpus is pinned by submission, episode, opponent entity,
+seat, seed, timestamp, raw replay SHA-256, and deterministic archive SHA-256 in
+`tests/fixtures/authenticated_replay_manifest.json`. Verify the committed evidence
+offline or re-fetch it through the authenticated Kaggle API:
+
+```bash
+python3 scripts/fetch_authenticated_replays.py --offline
+python3 scripts/fetch_authenticated_replays.py
+python3 scripts/measure_authenticated_replay_cv.py
+```
+
+The raw archives are audit artifacts, not candidate features. The evaluator only
+projects identity and chronological public metadata; private observations and
+future steps are excluded. The older public-source corpus remains an explicitly
+separate fallback and is never presented as authenticated live-ladder evidence.
