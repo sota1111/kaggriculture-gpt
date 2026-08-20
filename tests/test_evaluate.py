@@ -14,6 +14,7 @@ from scripts.measure_fertilizer_coverage import classify_bottleneck
 from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
 from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
+from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +22,30 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_productive_capacity_is_public_only_bounded_and_independent(self):
+        agent = load_agent(ROOT / "main.py")
+        trace = capacity_trace(agent)
+        self.assertTrue(trace["private_invariant"])
+        self.assertGreaterEqual(trace["capacity"]["acreage_limit"], 2)
+        self.assertFalse(agent.PRODUCTIVE_ACTION_CAPACITY)
+        self.assertFalse(agent.LONG_HORIZON_MIXED_FARM_ROUTE)
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["productive_action_capacity"]["license"])
+
+    def test_productive_capacity_gate_rejects_no_action_improvement(self):
+        summary = {"mean_rank": 1, "lower_tail_margin": 1, "worst_margin": 1}
+        baseline = {window: {"summary": dict(summary)} for window in ("screen", "confirm")}
+        baseline.update({"action_metrics": {"productive": 10}, "invalid_actions": 0,
+                         "contract_violations": 0})
+        candidate = json.loads(json.dumps(baseline))
+        candidate["action_metrics"]["component_firings"] = 1
+        paired = {window: {"checks": {"same_seed_direct_ab": True, "both_seats": True,
+                                      "paired_non_regression": True}}
+                  for window in ("screen", "confirm")}
+        passed, reasons = capacity_gate(
+            baseline, candidate, paired, 1.0, {"private_invariant": True})
+        self.assertFalse(passed)
+        self.assertIn("WATER/HARVEST/FERTILIZE total did not improve", reasons)
+
     def test_runway_expansion_is_independent_reserve_bounded_and_fires(self):
         agent = load_agent(ROOT / "main.py")
         rows = _targeted_trace(agent, True)
@@ -359,7 +384,10 @@ class EvaluationTest(unittest.TestCase):
             obs["market"]["prices"]["WHEAT"] = 20 + step % 3
             agent.agent(obs)
         self.assertEqual(agent.HISTORY_LIMIT, len(agent._PUBLIC_HISTORY))
-        self.assertTrue(all(set(row) == {"step", "prices", "yields", "weeds"}
+        self.assertTrue(all(set(row) == {"step", "prices", "yields", "weeds",
+                                         "workers", "backlog", "acreage"}
+                            for row in agent._PUBLIC_HISTORY))
+        self.assertTrue(all(set(row["backlog"]) == {"water", "harvest", "fertilize"}
                             for row in agent._PUBLIC_HISTORY))
 
     def test_uncertainty_set_and_cvar_proxy_react_to_observed_tail(self):
