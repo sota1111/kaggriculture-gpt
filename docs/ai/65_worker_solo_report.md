@@ -1,47 +1,44 @@
-# Solo Worker Report — SOT-2780
+# Solo Worker Report — SOT-2777
 
 ## Summary
 
-- Classified the child issue as IMPLEMENT and judged further decomposition unnecessary.
-- Evaluated a Seyamalam V21-derived, independent public-state late-capital latch against the SOT-2778 replay-identity corpus.
-- The latch made one persistent decision from observable horizon, cash margin, rival hands, and current prices; targeted screen/confirm cases suppressed additional investment in both seats.
-- Rejected the candidate because rank, margin, lower-tail, and worst-case metrics tied the champion exactly. Production `main.py` remains unchanged; only measurement, test, attribution, and ledger evidence remain.
+- Completed the resumed cycle-2 parent aggregation without recreating children.
+- Confirmed SOT-2778, SOT-2779, and SOT-2780 are Done and their PRs merged.
+- Promoted immutable replay-identity CV provenance; rejected the two runtime ports after tied same-seed/both-seat A/B with intervention evidence.
+- Submitted artifact `42c2f13d...` through the governed helper. Concurrent identical-fingerprint refs `55647222` and `55647224` both completed at public score `600.0`.
+- Persisted the aggregation via merged PR #27 and completed leaderboard results via merged PR #28.
 
 ## Changed Files
 
-- `scripts/measure_late_capital_latch.py` — isolated feature-flag ablation, one-shot latch, strict gate, attribution, and intervention evidence.
-- `tests/test_evaluate.py` — public-state, persistence, and investment-suppression coverage.
-- `docs/measurements/SOT-2777/SOT-2780-late-capital-latch.json` — same-seed/both-seat screen and independent-confirm results.
-- `docs/ai/experiment_ledger.jsonl` — rejected axis with source URL, commit, digest, outcome, and evidence.
-- `docs/ai/65_worker_solo_report.md` — lifecycle acceptance report.
+- `docs/ai/experiment_ledger.jsonl` — cycle outcome, artifact/effective-config mapping, refs, and completed score.
+- `docs/ai/linear/SOT-2777.md` — resumed aggregation and submission result.
+- Child PRs #24–#26 — replay provenance, independent ablations, tests, and measurements.
 
 ## Verification
 
 - Python compile — PASS.
-- `python3 -m unittest discover -s tests -v` — PASS, 50 tests.
-- Measurement rerun — PASS; decision, metrics, component counts, and interventions reproduced.
-- `python3 scripts/validate_submission.py main.py` — PASS.
-- `python3 scripts/validate_submission.py main.py --exec-check` — PASS.
-- npm lint/typecheck/test/e2e — N/A; Python-only repository without `package.json`.
-- `git diff --check` and scoped diff review — PASS; `main.py` has no diff.
-- Kaggle submission — NOT PERFORMED.
-- Screen baseline/candidate rank and mean/lower-tail/worst margin: `1.0 / 1904 / 169 / 169` (tie).
-- Confirm baseline/candidate: `1.5 / -606.5 / -1382 / -1382` (tie).
-- Runtime ratio: `0.776`; invalid actions and contract violations remained `0`.
+- Unit tests — PASS, 50/50.
+- Leak-free screen and independent confirm evidence — PASS.
+- Submission contract and exec compatibility — PASS.
+- gzip single-member archive and `main.py` content match — PASS.
+- Target-repo diff review and `git diff --check` — PASS.
+- GitHub CI on PRs #27 and #28 — PASS.
+- Kaggle refs `55647222` and `55647224` — COMPLETE, public score `600.0`.
 
 ## Acceptance Criteria
 
-- [x] Public-state-only, dependency-free, one-shot persistent latch was evaluated in isolation.
-- [x] Direct same-seed/both-seat A/B and targeted both-seat firing evidence are independent of terminal recovery.
-- [x] Strict promotion gate rejected the tie and left production `main.py` unchanged.
-- [x] Submission contract and exec compatibility pass.
-- [x] Ledger records source URL, commit, MIT license, source digest, result, and evidence.
-- [x] No Kaggle submission was performed.
+- [x] Improvement strategy, rationale, sources, and selected axes recorded.
+- [x] All children reached Done.
+- [x] Candidate/champion verification and effective-config fingerprint recorded.
+- [x] Parent resume confirmed child completion and submitted a new artifact fingerprint.
+- [x] Rejected axes carry direct A/B and intervention evidence.
+- [x] Separate Linear handoff and Completion Report posted.
 
 ## Risks
 
-- The fallback replay corpus never presented a two-farm late-capital intervention to the candidate, so competitive A/B tied with zero natural firings; targeted both-seat cases prove mechanism behavior but not transferable gain.
-- Do not retry this rejected axis without new late-game two-farm replay evidence.
+- Authenticated current-top replay bytes remain unavailable; the CV corpus explicitly uses hash-pinned public fallbacks.
+- The two rejected ports should not be retried without new premium-producing or natural late two-farm replay evidence.
+- Two identical Kaggle refs were created concurrently; no additional writer or submission was launched after discovery.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS
