@@ -21,6 +21,7 @@ from scripts.measure_post_repair_cash_flow import measure as measure_post_repair
 from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
 from scripts.measure_public_action_capacity_oracle import measure as measure_public_capacity, validate_fixture as validate_capacity_fixture
+from scripts.measure_capacity_dispatcher import _targeted_trace as dispatcher_trace
 from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
 from scripts.measure_decision_family_divergence import _family as decision_family, first_actions
 from scripts.measure_feed_economic_decision import targeted_trace as feed_economic_trace
@@ -1122,6 +1123,18 @@ class EvaluationTest(unittest.TestCase):
         self.assertEqual(["DIG"], result["hands"][0])
         self.assertEqual(before + 1, agent.component_firing_counts()["public_scheduler"])
         self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["scheduler"]["license"])
+
+    def test_capacity_dispatcher_is_default_off_public_closed_loop_and_auditable(self):
+        agent = load_agent(ROOT / "main.py")
+        self.assertFalse(agent.CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER)
+        agent.CAPACITY_AWARE_CLOSED_LOOP_DISPATCHER = True
+        trace = dispatcher_trace(agent)
+        self.assertEqual(1, trace["firings_delta"])
+        self.assertEqual(["HARVEST"], trace["actions"][0])
+        self.assertGreater(trace["telemetry"]["productive_assignments"], 0)
+        self.assertTrue(trace["telemetry"]["last_tier_budgets"])
+        self.assertEqual("MIT", agent.PUBLIC_EXECUTION_SOURCES["capacity_dispatcher"]["license"])
+        self.assertIn("public clock", agent.PUBLIC_EXECUTION_SOURCES["capacity_dispatcher"]["boundary"])
 
     def test_sequence_precursor_policy_is_independent_bounded_and_auditable(self):
         agent = load_agent(ROOT / "main.py")
