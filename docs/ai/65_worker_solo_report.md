@@ -1,41 +1,42 @@
-# Solo Worker Report — SOT-2811
+# Solo Worker Report — SOT-2820
 
 ## Summary
 
-再開runで SOT-2812〜SOT-2814 の完了結果を集約した。評価再アンカーは成立したが、cash-runway acreage と productive-action capacity は発火記録付きA/Bでともに退行し、production flagは無効のまま。改善ゲート不通過のためKaggle提出を見送った。
+Real Kaggriculture環境で、commit/hash/license固定した公開artifactとのslot-swapped closed-loop holdoutを実装した。8 matchは全て720 states・DONE/DONE・stderr/errorsなしで完走し、再実行もbyte-identical。championは0-8だったため評価oracleを昇格し、runtime policyは変更せずKaggle提出も行っていない。
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — 子結果、effective config、artifact fingerprint、no-submit判断
-- `docs/ai/linear/SOT-2811.md` — resume集約と次サイクル申し送り
-- `docs/ai/65_worker_solo_report.md` — 本solo runの最終報告
-- `docs/ai/70_final_report.md` — acceptance結果
+- `scripts/measure_public_closed_loop_holdout.py` — provenance検証・fetch・live league
+- `tests/fixtures/public_closed_loop_holdout.json` — immutable artifact/panel manifest
+- `tests/test_evaluate.py` — drift/leakage fail-closed tests
+- `docs/measurements/SOT-2819/SOT-2820-closed-loop-holdout.json` — per-match evidence
+- `docs/ai/experiment_ledger.jsonl` — promoted oracle entry
+- `docs/ai/linear/SOT-2820.md` — acceptance record
 
 ## Verification
 
 - Python compile: PASS
-- Unit tests: 70/70 PASS
-- Post-repair attribution rerun: PASS
-- Runway/capacity ablation decisions and deterministic metrics: REJECTED / reproduced
-- Submission contract, gzip single member, archive content: PASS
-- Effective flags: runway acreage=false; productive-action capacity=false
-- Kaggle submission: NOT PERFORMED（leak-free CV improvement gate failed）
+- Unit tests: 72/72 PASS
+- Manifest drift/leakage fail-closed tests: PASS
+- Live league: 8/8 matches, 720 states, DONE/DONE, stderr/errors empty
+- Deterministic rerun: byte-identical PASS
+- Submission contract and archive: PASS
+- npm lint/typecheck/e2e: N/A（package.json/browser surfaceなし）
+- Kaggle submission: NOT PERFORMED
 
 ## Acceptance Criteria
 
-- [x] 改善方針と選定理由を記録
-- [x] 全子IssueがDone
-- [x] candidate/championと検証結果を台帳へ対応付け
-- [x] 親resumeで全子完了を確認し、非昇格・提出見送りを記録
-- [x] rejected軸にsame-seed A/Bと発火証拠あり
-- [x] `## 申し送り` とCompletion ReportをLinearへ投稿
+- [x] hash/license/commit-pinned public artifact manifest
+- [x] entity/seed/time-isolated screen and confirm
+- [x] both-seat champion baseline and raw per-match evidence
+- [x] no replay bytes, credentials, or weights committed
+- [x] no Kaggle submission performed
 
 ## Risks
 
-- Authenticated current-leader replay remains unavailable; the cash-flow attribution discloses its fallback corpus.
-- The two rejected formulas must not be retried without new evidence.
+- Championの0-8は重大なclosed-loop transfer driftを示す。recorded-action replayをlive勝率として扱わず、本leagueを後続policyの昇格gateに使う必要がある。
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Acceptance: PASS
 

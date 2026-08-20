@@ -15,6 +15,7 @@ from scripts.measure_care_livestock import evaluate as evaluate_care, load_polic
 from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
 from scripts.measure_runway_acreage import _gate as runway_gate, _targeted_trace
 from scripts.measure_productive_action_capacity import _gate as capacity_gate, _targeted_trace as capacity_trace
+from scripts.measure_public_closed_loop_holdout import validate_manifest as validate_closed_loop_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,27 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_public_closed_loop_manifest_is_pinned_isolated_and_leak_free(self):
+        path = ROOT / "tests/fixtures/public_closed_loop_holdout.json"
+        manifest = json.loads(path.read_text())
+        checks = validate_closed_loop_manifest(manifest)
+        self.assertTrue(all(checks.values()), checks)
+        self.assertEqual("live-closed-loop", manifest["evidence_policy"]["mode"])
+        self.assertEqual("open-loop-stress-only",
+                         manifest["evidence_policy"]["recorded_action_replay"])
+        self.assertFalse(manifest["evidence_policy"]["live_win_probability_claimed"])
+
+    def test_public_closed_loop_manifest_fails_closed_on_drift_and_leakage(self):
+        path = ROOT / "tests/fixtures/public_closed_loop_holdout.json"
+        manifest = json.loads(path.read_text())
+        manifest["artifacts"][0]["sha256"] = "0" * 64
+        manifest["credentials"] = "must-never-be-committed"
+        manifest["panels"]["confirm"][0]["seed"] = manifest["panels"]["screen"][0]["seed"]
+        checks = validate_closed_loop_manifest(manifest)
+        self.assertFalse(checks["manifest_digest"])
+        self.assertFalse(checks["seed_holdout"])
+        self.assertFalse(checks["no_sensitive_or_replay_payload_fields"])
+
     def test_productive_capacity_is_public_only_bounded_and_independent(self):
         agent = load_agent(ROOT / "main.py")
         trace = capacity_trace(agent)

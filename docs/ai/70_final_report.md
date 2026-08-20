@@ -1,8 +1,8 @@
-# Final Report — SOT-2811
+# Final Report — SOT-2820
 
-All three child issues are Done and their PRs are merged. The evaluation re-anchor completed, while both external-solution ports failed the strict leak-free screen/confirm promotion gate with firing evidence. Final verification passed, both production flags remain disabled, and no Kaggle submission was made. The parent result is a verified non-promotion with no submission slot consumed.
+SOT-2820 re-anchors the oracle on live, closed-loop Kaggriculture matches against four immutable public artifacts. Screen/confirm isolation and sensitive-payload exclusions fail closed. Eight both-seat matches and a deterministic rerun passed every runtime/provenance check. The champion lost all eight matches, so the evaluation oracle is promoted without a policy change or Kaggle submission.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Acceptance: PASS
 
