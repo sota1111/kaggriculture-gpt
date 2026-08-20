@@ -1,17 +1,24 @@
-# Final Report — SOT-2825
+# Final Report — SOT-2823
 
-## Decision
+## Outcome
 
-REJECTED. The compact policy remains disabled (`COMPACT_REPLAY_POLICY=false`).
+All children are Done and merged. The compact replay policy was rejected by the strict sealed closed-loop gate, remains disabled, and produced no new champion artifact. No Kaggle submission was performed.
 
-## Evidence
+## Acceptance Criteria
 
-The untouched sealed panel ran four same-seed/both-seat real Kaggriculture matches. All reached 720 states and DONE/DONE with no stderr, invalid actions, or contract violations. Candidate mean rank stayed 2.0; margin deltas were +6299 mean and +912 lower-tail/worst, but own reward delta was -1194 in every match. Runtime ratio was 1.083 and the submission contract passed. A second run reproduced all non-timing output exactly.
+- [x] Improvement direction and selection rationale were recorded with external sources during initial decomposition.
+- [x] SOT-2824, SOT-2826, and SOT-2825 are all terminal Done.
+- [x] Candidate/champion mapping and verification evidence are recorded in the experiment ledger and measurement artifacts.
+- [x] Parent resume confirmed all children and explicitly recorded non-promotion/no new artifact.
+- [x] Rejection has same-seed/both-seat direct A/B and component firing evidence.
+- [x] A separate `## 申し送り` Linear comment is required and will be posted in final reporting.
 
-## Acceptance
+## Quality Gates
 
-All SOT-2825 criteria are satisfied. The evidence-backed reward regression justifies rejection; independent confirm was skipped according to the screen→confirm contract, and no Kaggle submission was performed.
-
-## Linear Report: POSTED
+- Python compile: PASS
+- Unit tests: 84/84 PASS
+- Fresh deterministic sealed rerun: PASS
+- Submission contract and archive content: PASS
+- npm gates: N/A (no package.json)
 
 ## Acceptance: PASS
