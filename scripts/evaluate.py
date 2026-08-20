@@ -400,7 +400,13 @@ def _apply_worker(action, position, tiles, seeds, inventory, day, crops):
     return position, seeds, 0, 0, None, 1
 
 
-def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metrics:
+def run_episode(
+    module: ModuleType,
+    fixture: dict[str, Any],
+    seed: int,
+    *,
+    daily_trace: list[dict[str, Any]] | None = None,
+) -> Metrics:
     rng = random.Random(seed)
     days = int(fixture["days"])
     turns_per_day = int(fixture.get("turns_per_day", 12))
@@ -424,6 +430,12 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
     invalid_penalty = int(fixture.get("oracle", {}).get("invalid_action_penalty", 1000))
 
     for day in range(days):
+        day_start_money = money
+        day_actions: dict[str, int] = {
+            name: 0 for name in
+            ("WATER", "HARVEST", "CARE", "FERTILIZE", "MOVE", "PLANT", "DIG", "DROP", "PASS")
+        }
+        day_cash = {"crop_sales": 0, "seed_spend": 0, "hire_spend": 0, "land_spend": 0}
         initial_hands = max(0, int(fixture.get("initial_hands", 0)))
         positions = [[0, 0]]
         while len(positions) <= initial_hands and len(positions) < max_workers:
@@ -458,6 +470,7 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                     cost = _hire_cost(hires_today)
                     if money >= cost and len(positions) < max_workers:
                         money -= cost
+                        day_cash["hire_spend"] += cost
                         hires_today += 1
                         positions.append(_spawn_hand(positions, quadrant))
                         inventories.append({})
@@ -467,10 +480,14 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                     amount = action[2]
                     crop = action[1]
                     if action[0] == "BUY_SEED" and crop in crops and money >= int(crops[crop]["seed_price"]) * amount:
-                        money -= int(crops[crop]["seed_price"]) * amount
+                        cost = int(crops[crop]["seed_price"]) * amount
+                        money -= cost
+                        day_cash["seed_spend"] += cost
                         seeds[crop] += amount
                     elif action[0] == "SELL" and crop in crops and shed[crop] >= amount:
-                        money += prices[crop] * amount
+                        revenue = prices[crop] * amount
+                        money += revenue
+                        day_cash["crop_sales"] += revenue
                         shed[crop] -= amount
                     else:
                         metrics.invalid_actions += 1
@@ -493,6 +510,10 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
                 metrics.invalid_actions += len(targets) - len(set(targets))
                 metrics.contract_violations += len(targets) - len(set(targets))
             for index, action in enumerate(worker_actions):
+                op = action[0]
+                day_actions["MOVE" if op in move_offsets else op] = day_actions.get(
+                    "MOVE" if op in move_offsets else op, 0
+                ) + 1
                 positions[index], seeds, cultivated, harvested, produced, invalid = _apply_worker(
                     action, positions[index], tiles, seeds, inventories[index], day, crops
                 )
@@ -543,6 +564,24 @@ def run_episode(module: ModuleType, fixture: dict[str, Any], seed: int) -> Metri
             if empties:
                 x, y = rng.choice(empties)
                 tiles[y][x] = {"kind": "WEED"}
+        if daily_trace is not None:
+            acreage = sum(
+                isinstance(tile, dict) and tile.get("kind") == "PLANT"
+                for row in tiles for tile in row
+            )
+            daily_trace.append({
+                "day": day,
+                "cash_start": day_start_money,
+                "cash_end": money,
+                "cash_delta": money - day_start_money,
+                "cash_sources": day_cash,
+                "actions": day_actions,
+                "productive_actions": sum(
+                    count for name, count in day_actions.items() if name not in {"PASS", "MOVE"}
+                ),
+                "acreage_end": acreage,
+                "workers_peak": len(positions),
+            })
 
     metrics.reward = money
     metrics.final_assets = money

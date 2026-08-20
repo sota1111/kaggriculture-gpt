@@ -12,6 +12,7 @@ from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.measure_fertilizer_coverage import classify_bottleneck
 from scripts.measure_care_livestock import evaluate as evaluate_care, load_policy as load_care_policy
+from scripts.measure_post_repair_cash_flow import measure as measure_post_repair_cash_flow
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,26 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_post_repair_cash_flow_is_deterministic_isolated_and_auditable(self):
+        manifest = json.loads((ROOT / "tests/fixtures/public_opponents.json").read_text())
+        corpus = json.loads((ROOT / "tests/fixtures/replay_corpus_manifest.json").read_text())
+        first = measure_post_repair_cash_flow(ROOT / "main.py", FIXTURE, manifest, corpus)
+        second = measure_post_repair_cash_flow(ROOT / "main.py", FIXTURE, manifest, corpus)
+        self.assertEqual(first, second)
+        self.assertTrue(first["passed"], first)
+        self.assertTrue(first["isolation"]["passed"])
+        self.assertTrue(all(first["corpus_checks"].values()))
+        self.assertEqual("fallback-public-artifacts", first["provenance"]["acquisition"]["status"])
+        self.assertTrue(all(row["submission_id"] is None and row["episode_id"] is None
+                            for row in first["provenance"]["entries"]))
+        for window in ("screen", "confirm"):
+            identities = [row["identity"] for row in first[window]["episodes"]]
+            self.assertEqual({0, 1}, {row["seat"] for row in identities})
+            self.assertTrue(first[window]["daily_mean"])
+        self.assertIn("acreage_expansion", first["downstream_baselines_and_thresholds"])
+        self.assertIn("productive_action_capacity", first["downstream_baselines_and_thresholds"])
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+
     def test_care_livestock_is_independent_bounded_and_fires_both_seats(self):
         fixture = json.loads((ROOT / "tests/fixtures/care_livestock.json").read_text())
         policy = load_care_policy(ROOT / "main.py")
