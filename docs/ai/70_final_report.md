@@ -1,29 +1,27 @@
-# Final Report — SOT-2905
+# Final Report — SOT-2924
 
 ## Summary
 
-The three-child external-solution transfer chain completed. The first current-public divergence was the step-0 market family; an independently reimplemented five-WHEAT product order passed disjoint same-seed/both-seat screen and confirm and is enabled in the champion. The parent submitted the rebuilt verified artifact through the guarded control-plane path as Kaggle submission `55669739`.
+The cycle-2 external-solution transfer chain reached terminal state. SOT-2925 found the first post-opening divergence in all four same-seed/both-seat episodes at step 161, but the labor-routing family overlaps prior rejected/CLOSED axes and supplied no new isolated causal mechanism. Therefore no portable family was selected; dependent SOT-2926 and SOT-2928 were canceled, the sealed confirm remained unopened, the champion stayed unchanged, and no Kaggle submission was made.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — parent aggregation, effective configuration, and submission identity
-- `docs/ai/linear/SOT-2905.md` — issue lifecycle record
+- `docs/ai/experiment_ledger.jsonl` — cycle-2 parent aggregation and no-submit decision
+- `docs/ai/linear/SOT-2924.md` — issue lifecycle and acceptance record
 - `docs/ai/70_final_report.md` — final acceptance record
 - `docs/ai/65_worker_solo_report.md` — solo report contract
-- `submission.tar.gz` — deterministic source rebuild used for submission
 
 ## Verification
 
-- Child issues SOT-2906, SOT-2907, SOT-2908: Done
-- Submission entrypoint contract: PASS
-- Python unit tests: 135/135 PASS
-- Sealed screen: mean margin +2214.25, lower-tail/worst +7, firing 4/4
-- Sealed confirm: mean/lower-tail/worst +8, firing 4/4
-- Runtime: <=1.01x; invalid actions/contract violations: 0
-- Guarded Kaggle submit: ref `55669739` COMPLETE, public score `600.0`; archive SHA-256 `cc66155ba75e67bd875864567191a9254e3a4108613899f150c1266a9cb45f9f`
+- Child issues: SOT-2925 Done; SOT-2926 and SOT-2928 Canceled after prerequisite loss
+- SOT-2925 unit tests: 138/138 PASS; PR #99 CI PASS and merged
+- Same-seed/both-seat screen: first divergence reproduced 4/4 at step 161
+- Deterministic measurement SHA-256: `d4e89a09b2143b93d6eca7d84eeafb4b0e9a00f7303dccbbb3f3bb30ff214327`
+- Runtime contract and direct exec compatibility: PASS
+- Confirm panel: `RESERVED_UNOPENED`; Kaggle submission: not performed
 
 ## Acceptance
 
-All issue criteria are satisfied. Public `600.0` is non-contradictory, but remains a sparse follow-up signal because this competition is marked `cv_representative=false`.
+All issue criteria are satisfied for a non-promotion terminal: the selected axis and rejection evidence are recorded, all children are terminal, the absence of a candidate/artifact and the no-submit decision are explicit, and no unsupported rejected/CLOSED claim was added. The existing champion remains unchanged.
 
 ## Acceptance: PASS
