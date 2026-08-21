@@ -35,6 +35,7 @@ from scripts.measure_layout_completion_oracle import measure as measure_layout_c
 from scripts.measure_layout_aware_production import targeted as layout_production_trace, gate as layout_production_gate
 from scripts.measure_layout_aware_sealed_panel import measure as measure_layout_sealed, panel_checks as layout_panel_checks
 from scripts.measure_v21_late_capital_oracle import measure as measure_v21_oracle, validate_manifest as validate_v21_manifest
+from scripts.measure_tomato_public_sealed_panel import validate_manifest as validate_tomato_sealed_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,6 +43,24 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_tomato_public_panel_is_hash_pinned_isolated_and_confirm_reserved(self):
+        manifest = json.loads((ROOT / "tests/fixtures/tomato_public_sealed_panel.json").read_text())
+        validation = validate_tomato_sealed_manifest(manifest)
+        self.assertTrue(validation["passed"], validation)
+        self.assertTrue(all(validation["checks"].values()))
+        self.assertEqual("1.32.7", manifest["engine"]["version"])
+        self.assertEqual("NOT_PERFORMED", manifest["kaggle_submission"])
+
+    def test_tomato_public_panel_fails_closed_on_leakage_or_overlap(self):
+        manifest = json.loads((ROOT / "tests/fixtures/tomato_public_sealed_panel.json").read_text())
+        manifest["panels"]["screen"][0]["private_state"] = {"money": 1}
+        self.assertFalse(validate_tomato_sealed_manifest(manifest)["passed"])
+        manifest = json.loads((ROOT / "tests/fixtures/tomato_public_sealed_panel.json").read_text())
+        manifest["panels"]["confirm"][0]["seed"] = manifest["panels"]["screen"][0]["seed"]
+        validation = validate_tomato_sealed_manifest(manifest)
+        self.assertFalse(validation["passed"])
+        self.assertFalse(validation["checks"]["seed_disjoint"])
+
     def test_v21_oracle_is_fresh_closed_loop_both_seat_and_deterministic(self):
         manifest = json.loads((ROOT / "tests/fixtures/v21_late_capital_oracle.json").read_text())
         first = measure_v21_oracle(ROOT / "main.py", FIXTURE, manifest)

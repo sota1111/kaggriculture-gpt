@@ -1,0 +1,157 @@
+{
+  "actual_engine": "1.32.7",
+  "archive_compatibility": "PASS",
+  "confirm": {
+    "consumed": false,
+    "reason": "reserved for SOT-2877"
+  },
+  "engine": {
+    "episode_steps": 720,
+    "package": "kaggle-environments",
+    "version": "1.32.7"
+  },
+  "issue": "SOT-2875",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "screen": {
+    "contract_pass": true,
+    "deterministic_reproduction": true,
+    "rows": [
+      {
+        "contract_violations": 0,
+        "identity": "screen-moon-287501",
+        "invalid_actions": 0,
+        "margin": -152642.0,
+        "opponent": "moon-v56",
+        "rank": 2,
+        "rewards": {
+          "candidate": 1294.0,
+          "opponent": 153936.0
+        },
+        "seat": 0,
+        "seed": 287501,
+        "source_hash": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "terminal_cash": 1294.0,
+        "time_utc": "2026-08-21T03:10:00Z"
+      },
+      {
+        "contract_violations": 0,
+        "identity": "screen-moon-287501",
+        "invalid_actions": 0,
+        "margin": -152642.0,
+        "opponent": "moon-v56",
+        "rank": 2,
+        "rewards": {
+          "candidate": 1294.0,
+          "opponent": 153936.0
+        },
+        "seat": 1,
+        "seed": 287501,
+        "source_hash": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "terminal_cash": 1294.0,
+        "time_utc": "2026-08-21T03:10:00Z"
+      },
+      {
+        "contract_violations": 0,
+        "identity": "screen-top-287502",
+        "invalid_actions": 0,
+        "margin": -133334.0,
+        "opponent": "public-top-control",
+        "rank": 2,
+        "rewards": {
+          "candidate": 1294.0,
+          "opponent": 134628.0
+        },
+        "seat": 0,
+        "seed": 287502,
+        "source_hash": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536",
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "terminal_cash": 1294.0,
+        "time_utc": "2026-08-21T03:11:00Z"
+      },
+      {
+        "contract_violations": 0,
+        "identity": "screen-top-287502",
+        "invalid_actions": 0,
+        "margin": -133334.0,
+        "opponent": "public-top-control",
+        "rank": 2,
+        "rewards": {
+          "candidate": 1294.0,
+          "opponent": 134628.0
+        },
+        "seat": 1,
+        "seed": 287502,
+        "source_hash": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536",
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "terminal_cash": 1294.0,
+        "time_utc": "2026-08-21T03:11:00Z"
+      }
+    ],
+    "same_seed_both_seat": true
+  },
+  "source_pins": [
+    {
+      "agent_sha256": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+      "id": "moon-v56",
+      "kaggle_ref": "prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+      "notebook_file": "kaggriculture-frontier-the-moon-counts-melons.ipynb",
+      "notebook_sha256": "97be5f16511523daec1de44bc533e385353cc4e7d2170e88a6a4f31a123c5b5f",
+      "payload_symbol": "PAYLOAD",
+      "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-moon-counts-melons"
+    },
+    {
+      "agent_sha256": "29dc772b22a394a69bf80e93e27fcd4bc2d9b68e1052e288b46958be6c9f553f",
+      "id": "soil-v19",
+      "kaggle_ref": "prvsiyan/kaggriculture-frontier-the-soil-remembers-rain",
+      "notebook_file": "kaggriculture-frontier-the-soil-remembers-rain.ipynb",
+      "notebook_sha256": "7dad10ab538436621a61c9a4b2c1e6b41c1e6b20e72f1a8fb0a1df0a9956180c",
+      "payload_symbol": "AGENT_PAYLOAD",
+      "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-soil-remembers-rain"
+    },
+    {
+      "agent_sha256": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536",
+      "id": "public-top-control",
+      "kaggle_ref": "kaitofukami/41-49-future-unseen-v19-replication-to-control",
+      "notebook_file": "41-49-future-unseen-v19-replication-to-control.ipynb",
+      "notebook_sha256": "777dc0e9b5e5aa628299946f4a30ab9f8f44ca1133059e89821a1f4a583a5925",
+      "payload_symbol": "_AGENT_B85_PARTS",
+      "url": "https://www.kaggle.com/code/kaitofukami/41-49-future-unseen-v19-replication-to-control"
+    }
+  ],
+  "submission_contract": "PASS",
+  "validation": {
+    "checks": {
+      "acquisition_time_fixed": true,
+      "both_seats_declared": true,
+      "confirm_reserved": true,
+      "engine_exact": true,
+      "episode_identity_disjoint": true,
+      "forbidden_features_fail_closed": true,
+      "no_submission": true,
+      "opponent_disjoint": true,
+      "panel_sources_match_pins": true,
+      "public_features_only": true,
+      "schema_supported": true,
+      "seed_disjoint": true,
+      "source_hash_disjoint": true,
+      "source_url_notebook_and_agent_hash_fixed": true,
+      "time_disjoint": true
+    },
+    "passed": true
+  }
+}
