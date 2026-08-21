@@ -1,6 +1,6 @@
-# Final Report — SOT-2952
+# Final Report — SOT-2948
 
-The sealed independent-direction tournament is implemented and fully verified. The licensed whole agent remains inconclusive after failing screen; the opponent-shape portfolio was rejected after its confirm lower tail regressed by 3,292 despite a small mean-margin gain. The current champion remains the hedge, public score was not used for selection, and no Kaggle submission was made.
+All four child issues are Done and merged. The sealed tournament retained the current champion: the opponent-shape portfolio was rejected on confirm-tail regression and the licensed whole-agent remained inconclusive. The due structurally independent probe was submitted through the governed helper as a hedge only; Kaggle ref 55678801 completed at public score 600.0. Effective artifact hashes and the non-promotion decision are recorded in the experiment ledger.
 
 ## Acceptance: PASS
 
