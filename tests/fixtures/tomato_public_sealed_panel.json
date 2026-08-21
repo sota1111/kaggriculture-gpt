@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "acquired_at_utc": "2026-08-21T03:08:00Z",
+  "engine": {"package": "kaggle-environments", "version": "1.32.7", "episode_steps": 720},
+  "feature_policy": {
+    "allowed": ["public_observation"],
+    "forbidden": ["private_state", "episode_identity", "future_outcome"]
+  },
+  "sources": [
+    {
+      "id": "moon-v56",
+      "kaggle_ref": "prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+      "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+      "notebook_file": "kaggriculture-frontier-the-moon-counts-melons.ipynb",
+      "notebook_sha256": "97be5f16511523daec1de44bc533e385353cc4e7d2170e88a6a4f31a123c5b5f",
+      "agent_sha256": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+      "payload_symbol": "PAYLOAD"
+    },
+    {
+      "id": "soil-v19",
+      "kaggle_ref": "prvsiyan/kaggriculture-frontier-the-soil-remembers-rain",
+      "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-soil-remembers-rain",
+      "notebook_file": "kaggriculture-frontier-the-soil-remembers-rain.ipynb",
+      "notebook_sha256": "7dad10ab538436621a61c9a4b2c1e6b41c1e6b20e72f1a8fb0a1df0a9956180c",
+      "agent_sha256": "29dc772b22a394a69bf80e93e27fcd4bc2d9b68e1052e288b46958be6c9f553f",
+      "payload_symbol": "AGENT_PAYLOAD"
+    },
+    {
+      "id": "public-top-control",
+      "kaggle_ref": "kaitofukami/41-49-future-unseen-v19-replication-to-control",
+      "url": "https://www.kaggle.com/code/kaitofukami/41-49-future-unseen-v19-replication-to-control",
+      "notebook_file": "41-49-future-unseen-v19-replication-to-control.ipynb",
+      "notebook_sha256": "777dc0e9b5e5aa628299946f4a30ab9f8f44ca1133059e89821a1f4a583a5925",
+      "agent_sha256": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536",
+      "payload_symbol": "_AGENT_B85_PARTS"
+    }
+  ],
+  "panels": {
+    "screen": [
+      {"opponent": "moon-v56", "source_hash": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179", "episode": "screen-moon-287501", "seed": 287501, "seats": [0, 1], "time_utc": "2026-08-21T03:10:00Z"},
+      {"opponent": "public-top-control", "source_hash": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536", "episode": "screen-top-287502", "seed": 287502, "seats": [0, 1], "time_utc": "2026-08-21T03:11:00Z"}
+    ],
+    "confirm": [
+      {"opponent": "soil-v19", "source_hash": "29dc772b22a394a69bf80e93e27fcd4bc2d9b68e1052e288b46958be6c9f553f", "episode": "confirm-soil-287511", "seed": 287511, "seats": [0, 1], "time_utc": "2026-08-21T03:20:00Z"}
+    ]
+  },
+  "confirm_policy": "reserved-for-SOT-2877",
+  "kaggle_submission": "NOT_PERFORMED"
+}
