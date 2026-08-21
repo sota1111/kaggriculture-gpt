@@ -279,3 +279,20 @@ python3 scripts/measure_fertilizer_constrained_production.py
 
 The committed report records the firing plan, productive completion, coverage,
 margin/tail, effective configuration, and `NOT_PERFORMED` Kaggle submission.
+
+## Licensed whole-agent hedge
+
+The exact MIT-licensed `deepeshumrao/kaggriculture-agent` submission is retained
+separately under `candidates/deepeshumrao-whole-agent/`. It is default OFF and
+does not modify or wrap the champion. Its source commit, byte hashes, license,
+and attribution are pinned alongside the artifact. Reproduce its current-public
+both-seat screen and disjoint confirm with:
+
+```bash
+python3 scripts/measure_deepeshumrao_whole_agent.py
+```
+
+The result is deliberately `inconclusive`: the candidate follows a clearly
+different action-family distribution, passes the runtime contract, but lost
+all registered screen and confirm episodes. It remains a measured hedge only;
+no public score was used and no Kaggle submission was performed.
