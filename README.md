@@ -74,6 +74,20 @@ python3 scripts/measure_private_proxy_oracle.py
 The committed measurement pins the candidate, opponents, engine, manifest, and
 seed-panel hashes. It performs no Kaggle submission.
 
+The SOT-2941 portfolio freezes that oracle plus the independent V7 hedge and
+fertilizer architecture artifacts before evaluating them. It consumes the
+pre-registered confirm identities only after a candidate passes screen, uses
+leak-free CV margin/rank/tails as primary evidence, treats public score as
+refutation-only, and retains the prior champion unless the full gate passes:
+
+```bash
+python3 scripts/measure_independent_portfolio.py
+```
+
+The V7 source remains fetch-only and cannot be promoted while its whole-agent
+redistribution license gate is unresolved. The portfolio never submits to
+Kaggle.
+
 The public-state productive-action capacity oracle measures executable work,
 standing-on-work, mandatory travel, route-repair assignments, capacity
 shortfall/utilization, and productive density without private or future fields.

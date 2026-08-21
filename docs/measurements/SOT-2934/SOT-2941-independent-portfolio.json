@@ -1,0 +1,664 @@
+{
+  "artifact_selection": {
+    "champion_retained": true,
+    "main_py_modified": false,
+    "promoted_candidate": null,
+    "submission_archive_modified": false
+  },
+  "axis": "independent private-proxy strategy portfolio",
+  "candidates": {
+    "fertilizer_architecture": {
+      "decision": "inconclusive",
+      "effective_config": {
+        "CASH_RUNWAY_ACREAGE_EXPANSION": false,
+        "FERTILIZER_CONSTRAINED_PRODUCTION": true,
+        "FERTILIZER_COVERAGE": true,
+        "LAYOUT_AWARE_PRODUCTION_ARCHITECTURE": false,
+        "PRODUCTIVE_ACTION_CAPACITY": false
+      },
+      "ephemeral_candidate_sha256": "8ea19a4c2f092436ebdde31499d00feed05f71cbe784571bd5df74ceb8689c8b",
+      "firing_evidence": {
+        "action_caps": 0,
+        "cash_caps": 0,
+        "demand_caps": 4,
+        "firings": 4,
+        "last_plan": {
+          "action_cap": 30,
+          "actions_per_acre": 7,
+          "admitted": 7,
+          "cash": 562,
+          "cash_cap": 18,
+          "cash_runway": 101,
+          "crop": "STRAWBERRY",
+          "cycles": 2,
+          "fertilizer_available": 14,
+          "fertilizer_cap": 7,
+          "hire_cost": 1,
+          "remaining_turns": 144,
+          "requested": 10,
+          "shed_cap": 8,
+          "shed_capacity": 28,
+          "shed_used": 4,
+          "terminal_liquidation_slots": 9,
+          "usable_actions": 214,
+          "workers": 2
+        },
+        "plans": 4,
+        "shed_caps": 4,
+        "supply_caps": 4
+      },
+      "portfolio": {
+        "confirm": {
+          "status": "RESERVED_UNOPENED"
+        },
+        "screen": {
+          "rows": [
+            {
+              "candidate_margin": -164392.0,
+              "candidate_rank": 2,
+              "candidate_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "champion_margin": -172955.0,
+              "champion_rank": 2,
+              "champion_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "margin_delta": 8563.0,
+              "opponent": "cok-v7",
+              "seat": 0,
+              "seed": 293801
+            },
+            {
+              "candidate_margin": -164757.0,
+              "candidate_rank": 2,
+              "candidate_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "champion_margin": -188183.0,
+              "champion_rank": 2,
+              "champion_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "margin_delta": 23426.0,
+              "opponent": "cok-v7",
+              "seat": 1,
+              "seed": 293801
+            },
+            {
+              "candidate_margin": -137689.0,
+              "candidate_rank": 2,
+              "candidate_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "champion_margin": -136563.0,
+              "champion_rank": 2,
+              "champion_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "margin_delta": -1126.0,
+              "opponent": "lonespear-v17",
+              "seat": 0,
+              "seed": 293803
+            },
+            {
+              "candidate_margin": -139140.0,
+              "candidate_rank": 2,
+              "candidate_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "champion_margin": -136696.0,
+              "champion_rank": 2,
+              "champion_statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "margin_delta": -2444.0,
+              "opponent": "lonespear-v17",
+              "seat": 1,
+              "seed": 293803
+            }
+          ],
+          "summary": {
+            "candidate_mean_rank": 2.0,
+            "episodes": 4,
+            "mean_margin_delta": 7104.75,
+            "p20_margin_delta": -2444.0,
+            "worst_margin_delta": -2444.0
+          }
+        }
+      },
+      "reason": "promotion requires positive mean and non-regressing worst-tail on both screen and confirm; rejection additionally requires real firing evidence.",
+      "upstream_direct_ablation": {
+        "protocol": "same-seed direct A/B in both runtime seats",
+        "rows": [
+          {
+            "candidate": {
+              "fertilizer_coverage": 1.0,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1925,
+              "productive_completion": 7,
+              "requested_acreage": 7,
+              "seed_spend": 175,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "champion": {
+              "fertilizer_coverage": 0.7777777777777778,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1875,
+              "productive_completion": 7,
+              "requested_acreage": 9,
+              "seed_spend": 225,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "effective_plan": {
+              "action_cap": 46,
+              "actions_per_acre": 7,
+              "admitted": 7,
+              "cash": 561,
+              "cash_cap": 18,
+              "cash_runway": 102,
+              "crop": "STRAWBERRY",
+              "cycles": 2,
+              "fertilizer_available": 14,
+              "fertilizer_cap": 7,
+              "hire_cost": 2,
+              "remaining_turns": 144,
+              "requested": 9,
+              "shed_cap": 8,
+              "shed_capacity": 28,
+              "shed_used": 4,
+              "terminal_liquidation_slots": 9,
+              "usable_actions": 322,
+              "workers": 3
+            },
+            "same_seed": true,
+            "seat": 0,
+            "seed": 294001
+          },
+          {
+            "candidate": {
+              "fertilizer_coverage": 1.0,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1925,
+              "productive_completion": 7,
+              "requested_acreage": 7,
+              "seed_spend": 175,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "champion": {
+              "fertilizer_coverage": 0.7777777777777778,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1875,
+              "productive_completion": 7,
+              "requested_acreage": 9,
+              "seed_spend": 225,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "effective_plan": {
+              "action_cap": 46,
+              "actions_per_acre": 7,
+              "admitted": 7,
+              "cash": 561,
+              "cash_cap": 18,
+              "cash_runway": 102,
+              "crop": "STRAWBERRY",
+              "cycles": 2,
+              "fertilizer_available": 14,
+              "fertilizer_cap": 7,
+              "hire_cost": 2,
+              "remaining_turns": 144,
+              "requested": 9,
+              "shed_cap": 8,
+              "shed_capacity": 28,
+              "shed_used": 4,
+              "terminal_liquidation_slots": 9,
+              "usable_actions": 322,
+              "workers": 3
+            },
+            "same_seed": true,
+            "seat": 1,
+            "seed": 294001
+          },
+          {
+            "candidate": {
+              "fertilizer_coverage": 1.0,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1925,
+              "productive_completion": 7,
+              "requested_acreage": 7,
+              "seed_spend": 175,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "champion": {
+              "fertilizer_coverage": 0.7,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1850,
+              "productive_completion": 7,
+              "requested_acreage": 10,
+              "seed_spend": 250,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "effective_plan": {
+              "action_cap": 30,
+              "actions_per_acre": 7,
+              "admitted": 7,
+              "cash": 562,
+              "cash_cap": 18,
+              "cash_runway": 101,
+              "crop": "STRAWBERRY",
+              "cycles": 2,
+              "fertilizer_available": 14,
+              "fertilizer_cap": 7,
+              "hire_cost": 1,
+              "remaining_turns": 144,
+              "requested": 10,
+              "shed_cap": 8,
+              "shed_capacity": 28,
+              "shed_used": 4,
+              "terminal_liquidation_slots": 9,
+              "usable_actions": 214,
+              "workers": 2
+            },
+            "same_seed": true,
+            "seat": 0,
+            "seed": 294002
+          },
+          {
+            "candidate": {
+              "fertilizer_coverage": 1.0,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1925,
+              "productive_completion": 7,
+              "requested_acreage": 7,
+              "seed_spend": 175,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "champion": {
+              "fertilizer_coverage": 0.7,
+              "fertilizer_firings": 14,
+              "harvest_firings": 14,
+              "invalid_actions": 0,
+              "margin": 1850,
+              "productive_completion": 7,
+              "requested_acreage": 10,
+              "seed_spend": 250,
+              "terminal_liquidation_units": 21,
+              "water_firings": 14
+            },
+            "effective_plan": {
+              "action_cap": 30,
+              "actions_per_acre": 7,
+              "admitted": 7,
+              "cash": 562,
+              "cash_cap": 18,
+              "cash_runway": 101,
+              "crop": "STRAWBERRY",
+              "cycles": 2,
+              "fertilizer_available": 14,
+              "fertilizer_cap": 7,
+              "hire_cost": 1,
+              "remaining_turns": 144,
+              "requested": 10,
+              "shed_cap": 8,
+              "shed_capacity": 28,
+              "shed_used": 4,
+              "terminal_liquidation_slots": 9,
+              "usable_actions": 214,
+              "workers": 2
+            },
+            "same_seed": true,
+            "seat": 1,
+            "seed": 294002
+          }
+        ],
+        "summary": {
+          "candidate_fertilizer_firings": 56,
+          "candidate_mean_coverage": 1.0,
+          "episodes": 4,
+          "lower_tail_margin_delta": 50,
+          "mean_margin_delta": 62.5,
+          "productive_completion_delta": 0,
+          "worst_margin_delta": 50
+        }
+      }
+    },
+    "private_proxy_oracle": {
+      "confirm": {
+        "episodes": 4,
+        "mean_margin": -134329.5,
+        "mean_rank": 2.0,
+        "p20_margin": -143569.0,
+        "rank_1_count": 0,
+        "worst_margin": -143569.0
+      },
+      "decision": "promoted",
+      "effective_config": {
+        "path": "tests/fixtures/private_proxy_oracle.json",
+        "sha256": "e057eb287f231bf68379c6f38746ce5d07875191193056099178cd525c33ff72"
+      },
+      "reason": "independent, deterministic, opponent/distribution/seed/seat/time-separated transfer oracle passed.",
+      "screen": {
+        "episodes": 4,
+        "mean_margin": -158599.25,
+        "mean_rank": 2.0,
+        "p20_margin": -188183.0,
+        "rank_1_count": 0,
+        "worst_margin": -188183.0
+      },
+      "transfer_trust": {
+        "absolute_stability": {
+          "margin": 24269.75,
+          "rank": 0.0,
+          "tail": 44614.0
+        },
+        "margin_shift": 24269.75,
+        "metric": "confirm-minus-screen stability; values nearer zero transfer more consistently",
+        "rank_shift": 0.0,
+        "tail_shift": 44614.0
+      }
+    },
+    "whole_agent_v7": {
+      "confirm": {
+        "rows": [
+          {
+            "candidate_margin": 48993.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -138467.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 187460.0,
+            "opponent": "lonespear-v18",
+            "seat": 0,
+            "seed": 293811
+          },
+          {
+            "candidate_margin": 48993.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -143569.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 192562.0,
+            "opponent": "lonespear-v18",
+            "seat": 1,
+            "seed": 293811
+          },
+          {
+            "candidate_margin": 66663.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -127641.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 194304.0,
+            "opponent": "lonespear-v23",
+            "seat": 0,
+            "seed": 293813
+          },
+          {
+            "candidate_margin": 66663.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -127641.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 194304.0,
+            "opponent": "lonespear-v23",
+            "seat": 1,
+            "seed": 293813
+          }
+        ],
+        "summary": {
+          "candidate_mean_rank": 1.0,
+          "episodes": 4,
+          "mean_margin_delta": 192157.5,
+          "p20_margin_delta": 187460.0,
+          "worst_margin_delta": 187460.0
+        }
+      },
+      "decision": "inconclusive",
+      "effective_config": {
+        "apache_license_path": "LICENSES/Apache-2.0.txt",
+        "apache_license_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "artifact": "COK-ZhangZiliang Kaggriculture V7 whole agent",
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "kaggle_submission": "NOT_PERFORMED",
+        "license_conclusion": "Apache-2.0 covers attributed route portions only; the upstream notice explicitly does not license independently written repository code.",
+        "notice_path": "THIRD_PARTY_NOTICES.md",
+        "notice_sha256": "4f80ae1fd20372e903b0eaf4c177030aecca06dcf7ff5c0c94596cdc01849f4a",
+        "path": "main.py",
+        "redistribution": "not-authorized-for-whole-agent",
+        "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+        "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+        "v7_code_commit": "77c271f"
+      },
+      "license_gate": {
+        "passed": false,
+        "reason": "upstream Apache-2.0 notice covers attributed route portions only and explicitly does not license independently written whole-agent code",
+        "whole_agent_redistribution": "NOT_AUTHORIZED"
+      },
+      "reason": "CV evidence is favorable but whole-agent redistribution is not authorized; license gate blocks promotion and is not performance evidence for rejection.",
+      "upstream_screen": {
+        "candidate": {
+          "episodes": 4,
+          "mean_margin": 25807.5,
+          "mean_rank": 1.25,
+          "p20_margin": -750.0,
+          "rank_1_count": 3,
+          "worst_margin": -750.0
+        },
+        "champion": {
+          "episodes": 4,
+          "mean_margin": -158599.25,
+          "mean_rank": 2.0,
+          "p20_margin": -188183.0,
+          "rank_1_count": 0,
+          "worst_margin": -188183.0
+        },
+        "confirm_status": "RESERVED_FOR_PARENT_PORTFOLIO_CHILD",
+        "engine": "kaggle-environments==1.32.4",
+        "mean_margin_delta": 184406.75,
+        "paired_rows": [
+          {
+            "candidate_margin": -750.0,
+            "candidate_rank": 2,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -172955.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 172205.0,
+            "opponent": "cok-v7",
+            "seat": 0,
+            "seed": 293801
+          },
+          {
+            "candidate_margin": 750.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -188183.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 188933.0,
+            "opponent": "cok-v7",
+            "seat": 1,
+            "seed": 293801
+          },
+          {
+            "candidate_margin": 49542.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -136563.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 186105.0,
+            "opponent": "lonespear-v17",
+            "seat": 0,
+            "seed": 293803
+          },
+          {
+            "candidate_margin": 53688.0,
+            "candidate_rank": 1,
+            "candidate_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "champion_margin": -136696.0,
+            "champion_rank": 2,
+            "champion_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "margin_delta": 190384.0,
+            "opponent": "lonespear-v17",
+            "seat": 1,
+            "seed": 293803
+          }
+        ],
+        "same_seed_both_seats": true,
+        "screen_only": true
+      }
+    }
+  },
+  "frozen_artifacts": {
+    "champion": {
+      "path": "main.py",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    },
+    "engine": "kaggle-environments==1.32.4",
+    "fertilizer": {
+      "path": "docs/measurements/SOT-2934/SOT-2940-fertilizer-constrained-production.json",
+      "sha256": "f5e547c3508d59d47733fcea6260ea738133b647d6460d55a8cba833b92bf8c1"
+    },
+    "manifest": {
+      "path": "tests/fixtures/private_proxy_oracle.json",
+      "sha256": "e057eb287f231bf68379c6f38746ce5d07875191193056099178cd525c33ff72"
+    },
+    "oracle": {
+      "path": "docs/measurements/SOT-2934/SOT-2938-private-proxy-oracle.json",
+      "sha256": "27d770e2b9c29a0ca8373f25abec478ee0c9f72d426d5df1d4866fbe6c17a273"
+    },
+    "v7": {
+      "path": "docs/measurements/SOT-2934/SOT-2939-v7-portable-hedge.json",
+      "sha256": "88b0bea9e2a7c27b62c1a4afcccf7019c71bd7367983d3648491b009926d6f15"
+    }
+  },
+  "issue": "SOT-2941",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "preflight_checks": {
+    "champion_hash_matches_latest_upstream": true,
+    "no_prior_submission": true,
+    "no_public_score_selection": true,
+    "split_nonoverlap_and_both_seats": true,
+    "upstream_fertilizer_screen_promoted": true,
+    "upstream_oracle_passed": true,
+    "upstream_v7_screen_complete": true
+  },
+  "protocol": {
+    "hedge_policy": "retain the old champion and do not select public-best",
+    "opening_order": "screen evaluated first; confirm opened only for screen-eligible candidates",
+    "primary_kpi": [
+      "leak-free CV margin",
+      "rank",
+      "p20/worst tail"
+    ],
+    "public_signal": "refutation-only; never used for selection"
+  },
+  "split": {
+    "checks": {
+      "artifact_provenance_complete": true,
+      "chronological_confirm": true,
+      "distribution_present": true,
+      "identity_complete": true,
+      "no_episode_overlap": true,
+      "no_lineage_overlap": true,
+      "no_seat_leakage_both_seat_pairs": true,
+      "no_seed_overlap": true,
+      "no_time_slice_overlap": true,
+      "opponents_declared": true,
+      "row_lineage_matches_artifact": true,
+      "schema_supported": true,
+      "seat_values_valid": true,
+      "windows_nonempty": true
+    },
+    "overlap": {
+      "episode": [],
+      "lineage": [],
+      "seed": [],
+      "time_slice": []
+    },
+    "passed": true
+  }
+}
