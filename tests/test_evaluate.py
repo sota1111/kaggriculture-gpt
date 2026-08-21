@@ -41,6 +41,7 @@ from scripts.measure_feed_denial_public_oracle import summarize as summarize_fee
 from scripts.measure_egg_cohort_public_screen import decision_families as egg_families, gate_and_veto as egg_gate, validate_manifest as validate_egg_manifest
 from scripts.measure_egg_cohort_sealed_panel import decide as decide_egg_sealed
 from scripts.measure_current_public_divergence import action_families, first_decision_divergence, summarize as summarize_current_public, validate_manifest as validate_current_public
+from scripts.measure_post_opening_continuation import family as continuation_family, first_divergence as continuation_divergence, summarize as summarize_continuation, validate_manifest as validate_continuation
 from scripts.measure_public_step0_wheat_sealed_panel import canonical_sha256 as public_wheat_config_sha256
 
 
@@ -49,6 +50,29 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_post_opening_manifest_is_isolated_and_confirm_sealed(self):
+        manifest = json.loads((ROOT / "tests/fixtures/post_opening_continuation.json").read_text())
+        checks = validate_continuation(manifest)
+        self.assertTrue(all(checks.values()), checks)
+        self.assertEqual("RESERVED_UNOPENED", manifest["confirm_status"])
+        self.assertEqual("NOT_PERFORMED", manifest["kaggle_submission"])
+
+    def test_post_opening_manifest_rejects_seed_reuse(self):
+        manifest = json.loads((ROOT / "tests/fixtures/post_opening_continuation.json").read_text())
+        manifest["confirm"][0]["seed"] = manifest["screen"][0]["seed"]
+        self.assertFalse(validate_continuation(manifest)["opponent_episode_seed_time_disjoint"])
+
+    def test_post_opening_family_attribution_and_both_seats(self):
+        self.assertEqual("market", continuation_family(["SELL", "MILK", 2]))
+        self.assertEqual("inventory-feasibility", continuation_family(["PICKUP", "WHEAT", 1]))
+        event = continuation_divergence({"farmer": ["EAST"]}, {"farmer": ["HARVEST"]})
+        self.assertEqual("production", event["family"])
+        rows = [{"seed": 7, "champion_seat": seat,
+                 "first_post_opening_divergence": {"family": "production", "step": 170},
+                 "first_divergence_by_family": {"production": {"step": 170}}}
+                for seat in (0, 1)]
+        self.assertTrue(summarize_continuation(rows)["same_seed_both_seats"])
+
     @staticmethod
     def _step0_market_obs(seat=0, step=0, money=500):
         farms = [{"money": money, "farmer": [0, 0], "hands": [], "tiles": [[None]]},

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-21T14:58:00Z",
+  "engine": "kaggle-environments==1.32.4",
+  "anchor_step": 161,
+  "telemetry_fields": ["step", "seat", "public_action", "status", "reward"],
+  "forbidden_fields": ["private", "future", "future_prices", "opponent_private", "replay_bytes"],
+  "sources": [
+    {"id":"kaito-v27","url":"https://www.kaggle.com/code/kaitofukami/25-27-strict-future-v27-midgame-meta-reset","kernel_id":129916747,"version":"public snapshot acquired 2026-08-21 14:58 UTC","notebook_sha256":"cc61bb10378c555e2cb3090bde2dd8ee442c34d9a8ee98b7ab918dd3acb3db8d","agent_sha256":"f48c21166eac68d1b05a401f04f94a2eb6154e65415af64893672365ff33c7b8","agent_encoding":"base85+zlib","agent_variable":"_AGENT_B85_PARTS","local_filename":"kaito-v27.ipynb","screen_executable":true,"license":"not declared; fetch-only measurement"},
+    {"id":"salem-3094","url":"https://www.kaggle.com/code/salemali7/3094-score-kaggriculture","kernel_id":130232707,"version":"public snapshot acquired 2026-08-21","notebook_sha256":"aa536d91a6b8155d54ea94d7a2f4216993316e0ffab8b17ea4d81d029db0498f","agent_sha256":"d39dba50793d9777c990347443bf0c481c78adaea86055f6f6b0600dcfcd9f2e","agent_encoding":"base64","agent_variable":"AGENT_B64","local_filename":"salem-3094.ipynb","screen_executable":true,"license":"not declared; fetch-only measurement"},
+    {"id":"adaptive","url":"https://www.kaggle.com/code/tetsutani/adaptive-farming-strategy-for-kaggriculture","kernel_id":129434690,"version":"public snapshot acquired 2026-08-21","notebook_sha256":"ba18ed4f6077168a52850c31ad1a677b07bc6d1df1a942a40b52a113b2c0c1df","local_filename":"adaptive.ipynb","license":"not declared; confirm provenance only"}
+  ],
+  "screen": [
+    {"opponent":"kaito-v27","episode":"screen-kaito-292501","seed":292501,"time_index":1,"seats":[0,1]},
+    {"opponent":"salem-3094","episode":"screen-salem-292502","seed":292502,"time_index":2,"seats":[0,1]}
+  ],
+  "confirm": [
+    {"opponent":"adaptive-route-a","episode":"confirm-adaptive-292511","seed":292511,"time_index":11,"seats":[0,1]},
+    {"opponent":"adaptive-route-b","episode":"confirm-adaptive-292512","seed":292512,"time_index":12,"seats":[0,1]}
+  ],
+  "confirm_status": "RESERVED_UNOPENED",
+  "kaggle_submission": "NOT_PERFORMED"
+}
