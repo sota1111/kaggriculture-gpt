@@ -1,0 +1,436 @@
+{
+  "actual_engine": "1.32.4",
+  "artifacts": {
+    "disabled": {
+      "bytes": 90148,
+      "enabled": false,
+      "path": "/tmp/sot2944-9zse5lk8/disabled.py",
+      "sha256": "01eebcb9de2136f7a11812944481454433eba7a1bccafe91b12ad3ff4979bd3f"
+    },
+    "enabled": {
+      "bytes": 90147,
+      "enabled": true,
+      "path": "/tmp/sot2944-9zse5lk8/enabled.py",
+      "sha256": "e6bf25dc0dcc4c7ea422013c3631e9e6cc96933325bd59ed872efa97081e4ada"
+    },
+    "policy_sha256": "5aad1cdc595e8c64c8944fe1509342966cdd08dadd9787724809fb3236fa7fc2"
+  },
+  "champion_hedge": {
+    "modified": false,
+    "path": "main.py"
+  },
+  "checks": {
+    "boundary_excludes_sensitive_inputs": true,
+    "chronological_confirm": true,
+    "clean_room_required": true,
+    "confirm_reserved": true,
+    "default_off": true,
+    "engine_pinned": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "screen_confirm_identity_disjoint": true,
+    "source_hash_license_boundary_complete": true
+  },
+  "confirm": {
+    "outcomes": null,
+    "status": "RESERVED_UNOPENED_FOR_SOT-2947"
+  },
+  "decision": "retain-default-off-for-parent-portfolio",
+  "issue": "SOT-2944",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_selection": false,
+  "runtime_contract": "PASS",
+  "screen": {
+    "actual_firing": true,
+    "baseline": {
+      "rows": [
+        {
+          "action_families": {
+            "labor-routing": 281,
+            "market": 243,
+            "production": 2846
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-cok",
+          "invalid_or_contract_violations": 0,
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -149259.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 150558.0,
+          "premium_sales": 0,
+          "reward": 1299.0,
+          "runtime_seconds": 2.2740404249634594,
+          "seat": 0,
+          "seed": 294401,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32"
+        },
+        {
+          "action_families": {
+            "labor-routing": 297,
+            "market": 251,
+            "production": 2830
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-cok",
+          "invalid_or_contract_violations": 0,
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -171384.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 172683.0,
+          "premium_sales": 0,
+          "reward": 1299.0,
+          "runtime_seconds": 2.3225744338706136,
+          "seat": 1,
+          "seed": 294401,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32"
+        },
+        {
+          "action_families": {
+            "labor-routing": 290,
+            "market": 239,
+            "production": 2837
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-v17",
+          "invalid_or_contract_violations": 0,
+          "lineage": "lonespear/V17",
+          "margin": -134168.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 135469.0,
+          "premium_sales": 0,
+          "reward": 1301.0,
+          "runtime_seconds": 2.0665109250694513,
+          "seat": 0,
+          "seed": 294403,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34"
+        },
+        {
+          "action_families": {
+            "labor-routing": 281,
+            "market": 256,
+            "production": 2846
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-v17",
+          "invalid_or_contract_violations": 0,
+          "lineage": "lonespear/V17",
+          "margin": -132206.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 133507.0,
+          "premium_sales": 0,
+          "reward": 1301.0,
+          "runtime_seconds": 1.8816882048267871,
+          "seat": 1,
+          "seed": 294403,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34"
+        }
+      ],
+      "summary": {
+        "episodes": 4,
+        "invalid_or_contract_violations": 0,
+        "mean_margin": -146754.25,
+        "mean_rank": 2.0,
+        "p20_margin": -171384.0,
+        "runtime_seconds": 8.544813988730311,
+        "worst_margin": -171384.0
+      }
+    },
+    "both_seats": true,
+    "candidate": {
+      "rows": [
+        {
+          "action_families": {
+            "labor-routing": 281,
+            "market": 243,
+            "production": 2846
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-cok",
+          "invalid_or_contract_violations": 0,
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -149259.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 150558.0,
+          "premium_sales": 0,
+          "reward": 1299.0,
+          "runtime_seconds": 2.2866406589746475,
+          "seat": 0,
+          "seed": 294401,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32"
+        },
+        {
+          "action_families": {
+            "labor-routing": 297,
+            "market": 251,
+            "production": 2830
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-cok",
+          "invalid_or_contract_violations": 0,
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -171384.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 172683.0,
+          "premium_sales": 0,
+          "reward": 1299.0,
+          "runtime_seconds": 2.3731145202182233,
+          "seat": 1,
+          "seed": 294401,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32"
+        },
+        {
+          "action_families": {
+            "labor-routing": 290,
+            "market": 239,
+            "production": 2837
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-v17",
+          "invalid_or_contract_violations": 0,
+          "lineage": "lonespear/V17",
+          "margin": -134168.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 135469.0,
+          "premium_sales": 0,
+          "reward": 1301.0,
+          "runtime_seconds": 1.932583702960983,
+          "seat": 0,
+          "seed": 294403,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34"
+        },
+        {
+          "action_families": {
+            "labor-routing": 281,
+            "market": 256,
+            "production": 2846
+          },
+          "animal_orders": 0,
+          "candidate_rank": 2,
+          "episode": "v16-screen-v17",
+          "invalid_or_contract_violations": 0,
+          "lineage": "lonespear/V17",
+          "margin": -132206.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 133507.0,
+          "premium_sales": 0,
+          "reward": 1301.0,
+          "runtime_seconds": 1.8636454038787633,
+          "seat": 1,
+          "seed": 294403,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34"
+        }
+      ],
+      "summary": {
+        "episodes": 4,
+        "invalid_or_contract_violations": 0,
+        "mean_margin": -146754.25,
+        "mean_rank": 2.0,
+        "p20_margin": -171384.0,
+        "runtime_seconds": 8.455984286032617,
+        "worst_margin": -171384.0
+      }
+    },
+    "decision_family_divergence": [
+      {
+        "animal_order_delta": 0,
+        "margin_delta": 0.0,
+        "premium_sale_delta": 0,
+        "reward_delta": 0.0,
+        "seat": 0,
+        "seed": 294401
+      },
+      {
+        "animal_order_delta": 0,
+        "margin_delta": 0.0,
+        "premium_sale_delta": 0,
+        "reward_delta": 0.0,
+        "seat": 1,
+        "seed": 294401
+      },
+      {
+        "animal_order_delta": 0,
+        "margin_delta": 0.0,
+        "premium_sale_delta": 0,
+        "reward_delta": 0.0,
+        "seat": 0,
+        "seed": 294403
+      },
+      {
+        "animal_order_delta": 0,
+        "margin_delta": 0.0,
+        "premium_sale_delta": 0,
+        "reward_delta": 0.0,
+        "seat": 1,
+        "seed": 294403
+      }
+    ],
+    "targeted_interventions": [
+      {
+        "after": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "SELL",
+              "WOOL",
+              3
+            ],
+            [
+              "SELL",
+              "MILK",
+              3
+            ]
+          ]
+        },
+        "before": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ],
+            [
+              "SELL",
+              "MILK",
+              3
+            ],
+            [
+              "SELL",
+              "WOOL",
+              3
+            ]
+          ]
+        },
+        "changed": true,
+        "same_order_count": true,
+        "same_sell_multiset": true,
+        "seat": 0
+      },
+      {
+        "after": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "SHEEP",
+              1
+            ],
+            [
+              "SELL",
+              "WOOL",
+              3
+            ],
+            [
+              "SELL",
+              "MILK",
+              3
+            ]
+          ]
+        },
+        "before": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": [
+            [
+              "BUY_ANIMAL",
+              "COW",
+              1
+            ],
+            [
+              "SELL",
+              "MILK",
+              3
+            ],
+            [
+              "SELL",
+              "WOOL",
+              3
+            ]
+          ]
+        },
+        "changed": true,
+        "same_order_count": true,
+        "same_sell_multiset": true,
+        "seat": 1
+      }
+    ]
+  },
+  "source": {
+    "boundary": "public herd milestones and current-observation inventory-feasible ordering of existing premium SELL slots; excluded: route trace compressed action table identity opponent_private future replay_bytes weights",
+    "default_enabled": false,
+    "implementation": "clean-room from public prose only",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 130530296,
+    "license": "not declared in downloaded notebook metadata or notebook body",
+    "notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+    "published_agent_sha256": "8315d985716c625c31be795e51912276bdbd6cdcb37b2a02a8a1db49e5cd9154",
+    "redistribution": "not-authorized; source notebook and executable are fetch-only and are not packaged",
+    "snapshot_acquired_utc": "2026-08-21T19:33:00Z",
+    "source_url": "https://www.kaggle.com/code/boatlee/v16-rc5-high-score-8c-4s-premium-market-lead"
+  }
+}
