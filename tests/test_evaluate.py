@@ -1501,6 +1501,20 @@ class EvaluationTest(unittest.TestCase):
                 decision = agent.component_firing_counts()["v21_late_capital_latch"]["decisions"][0]
                 self.assertEqual(expected, decision["latched"])
 
+    def test_v21_sealed_panel_is_fresh_multi_archetype_and_confirm_is_untouched(self):
+        from scripts.measure_public_closed_loop_holdout import canonical_sha256, validate_manifest
+        path = ROOT / "tests/fixtures/v21_late_capital_sealed_panel.json"
+        manifest = json.loads(path.read_text())
+        unsigned = {key: value for key, value in manifest.items() if key != "manifest_sha256"}
+        self.assertEqual(manifest["manifest_sha256"], canonical_sha256(unsigned))
+        self.assertTrue(all(validate_manifest(manifest).values()))
+        self.assertTrue(set(row["opponent"] for row in manifest["panels"]["screen"]).isdisjoint(
+            manifest["oracle_screen_opponents"]))
+        self.assertTrue(set(row["episode_id"] for row in manifest["panels"]["screen"]).isdisjoint(
+            row["episode_id"] for row in manifest["panels"]["confirm"]))
+        self.assertTrue(all(len({row["opponent"] for row in manifest["panels"][window]}) >= 2
+                            for window in ("screen", "confirm")))
+
     def test_cash_reserve_and_market_order_cap_are_preserved(self):
         agent = load_agent(ROOT / "main.py")
         crops = {f"CROP{i}": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3,
