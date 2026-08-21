@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "acquired_at_utc": "2026-08-21T05:00:00Z",
+  "engine": {"package": "kaggle-environments", "version": "1.32.7", "episode_steps": 720},
+  "feature_policy": {
+    "allowed": ["public_observation", "current_action"],
+    "forbidden": ["private_state", "future_outcome", "episode_identity", "seed_as_policy_input"]
+  },
+  "source": {
+    "id": "moon-v56",
+    "version": 56,
+    "kaggle_ref": "prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+    "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+    "notebook_file": "kaggriculture-frontier-the-moon-counts-melons.ipynb",
+    "notebook_sha256": "97be5f16511523daec1de44bc533e385353cc4e7d2170e88a6a4f31a123c5b5f",
+    "agent_sha256": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+    "payload_symbol": "PAYLOAD",
+    "license": "not-declared-in-downloaded-notebook-metadata"
+  },
+  "screen": [
+    {"entity": "moon-v56-screen-a", "episode": "egg-screen-288601", "seed": 288601, "time_utc": "2026-08-21T05:01:00Z", "seats": [0, 1]},
+    {"entity": "moon-v56-screen-b", "episode": "egg-screen-288602", "seed": 288602, "time_utc": "2026-08-21T05:02:00Z", "seats": [0, 1]}
+  ],
+  "confirm": [
+    {"entity": "soil-v19-confirm", "episode": "egg-confirm-288611", "seed": 288611, "time_utc": "2026-08-21T05:11:00Z", "seats": [0, 1]}
+  ],
+  "confirm_status": "RESERVED_UNOPENED",
+  "kaggle_submission": "NOT_PERFORMED"
+}
