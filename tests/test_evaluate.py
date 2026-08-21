@@ -40,6 +40,7 @@ from scripts.measure_tomato_scarcity_sealed_panel import canonical_sha256 as tom
 from scripts.measure_feed_denial_public_oracle import summarize as summarize_feed_denial, validate as validate_feed_denial, wheat as feed_wheat_order
 from scripts.measure_egg_cohort_public_screen import decision_families as egg_families, gate_and_veto as egg_gate, validate_manifest as validate_egg_manifest
 from scripts.measure_egg_cohort_sealed_panel import decide as decide_egg_sealed
+from scripts.measure_current_public_divergence import action_families, first_decision_divergence, summarize as summarize_current_public, validate_manifest as validate_current_public
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,6 +48,31 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_current_public_manifest_is_leak_free_and_confirm_reserved(self):
+        manifest = json.loads((ROOT / "tests/fixtures/current_public_divergence.json").read_text())
+        self.assertTrue(all(validate_current_public(manifest).values()))
+        self.assertEqual("RESERVED_UNOPENED", manifest["confirm_status"])
+        self.assertEqual("NOT_PERFORMED", manifest["kaggle_submission"])
+
+    def test_current_public_family_telemetry_identifies_first_firing(self):
+        self.assertEqual({"market": 1, "route": 1, "livestock": 1}, dict(action_families({
+            "farmer": ["BUY_ANIMAL", "COW", 1], "hands": [["NORTH"]],
+            "market": [["BUY_PRODUCT", "WHEAT", 5]],
+        })))
+        divergence = first_decision_divergence(
+            {"market": [["BUY_SEED", "WHEAT", 2], ["HIRE"]]},
+            {"market": [["BUY_PRODUCT", "WHEAT", 5], ["HIRE"]]})
+        self.assertEqual({"action_index": 0, "family": "market",
+                          "champion_action": ["BUY_SEED", "WHEAT", 2],
+                          "opponent_action": ["BUY_PRODUCT", "WHEAT", 5]}, divergence)
+        rows = [{"seed": 1, "champion_seat": seat, "first_divergence_by_family": {
+            "market": {"step": 0}, "crop": {"step": 9}},
+            "first_decision_divergence": {"family": "market"}} for seat in (0, 1)]
+        summary = summarize_current_public(rows)
+        self.assertTrue(summary["same_seed_both_seats"])
+        self.assertEqual("market", summary["first_fired_divergence_family"])
+        self.assertIn("labor", summary["unfired_families"])
+
     def test_egg_sealed_panel_preserves_holdout_without_a_candidate(self):
         manifest = json.loads((ROOT / "tests/fixtures/egg_cohort_public_screen.json").read_text())
         port = json.loads((ROOT / "docs/measurements/SOT-2885/SOT-2888-egg-cohort-port-decision.json").read_text())

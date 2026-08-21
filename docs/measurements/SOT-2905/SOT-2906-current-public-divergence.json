@@ -1,0 +1,496 @@
+{
+  "actual_engine": "1.32.4",
+  "checks": {
+    "confirm_reserved_unopened": true,
+    "engine_pinned": true,
+    "entity_episode_seed_time_disjoint": true,
+    "kaggle_submission_forbidden": true,
+    "private_future_replay_excluded": true,
+    "provenance_complete": true,
+    "public_action_telemetry_only": true,
+    "same_seed_both_seats_declared": true,
+    "schema_supported": true,
+    "screen_has_two_public_lineages": true,
+    "source_hashes_match": true
+  },
+  "confirm": {
+    "cohort": [
+      {
+        "episode": "confirm-salem-290611",
+        "opponent": "salemali7-3094",
+        "seats": [
+          0,
+          1
+        ],
+        "seed": 290611,
+        "time_index": 11
+      },
+      {
+        "episode": "confirm-adaptive-290612",
+        "opponent": "tetsutani-adaptive",
+        "seats": [
+          0,
+          1
+        ],
+        "seed": 290612,
+        "time_index": 12
+      }
+    ],
+    "outcomes": null,
+    "status": "RESERVED_UNOPENED"
+  },
+  "information_boundary": {
+    "committed": [
+      "step",
+      "seat",
+      "public_action",
+      "status",
+      "reward"
+    ],
+    "excluded": [
+      "private",
+      "future_prices",
+      "future_outcome",
+      "replay",
+      "episode_id"
+    ]
+  },
+  "issue": "SOT-2906",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": [
+    {
+      "artifacts": {
+        "c94_sha256": "7b0e5a7b9d18dc583f5789e50a54dca43561f6d08c1c616b4219bf50bcb8311f",
+        "c95_sha256": "489f5d197527f107027626cce79d850fd2ca90edd43d94384b849b6511e27bdb"
+      },
+      "id": "rayk-c94-c95",
+      "kernel_id": 129396610,
+      "license": "not declared; fetch-only measurement",
+      "lineage": "Rayk C94/C95",
+      "notebook_sha256": "a7447511510ed22b73f2315246b6bf4de66f219ffe3ba692a377f3fb47931331",
+      "url": "https://www.kaggle.com/code/raykkretzschmar/kaggriculture-findings-from-zero-to-top-meta",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "artifacts": {
+        "main_sha256": "f029fa0cb66a9eb509afbe44e3f59b800332d0419db91607183410e4089c4d19"
+      },
+      "id": "boatlee-v16-rc5",
+      "kernel_id": 130530296,
+      "license": "not declared; fetch-only measurement",
+      "lineage": "Boatlee V16-RC5",
+      "notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+      "url": "https://www.kaggle.com/code/boatlee/v16-rc5-high-score-8c-4s-premium-market-lead",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "id": "salemali7-3094",
+      "kernel_id": 130232707,
+      "license": "not declared; provenance-only confirm",
+      "lineage": "3094-score",
+      "notebook_sha256": "aa536d91a6b8155d54ea94d7a2f4216993316e0ffab8b17ea4d81d029db0498f",
+      "url": "https://www.kaggle.com/code/salemali7/3094-score-kaggriculture",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "id": "tetsutani-adaptive",
+      "kernel_id": 129434690,
+      "license": "not declared; provenance-only confirm",
+      "lineage": "Adaptive public notebook",
+      "notebook_sha256": "ba18ed4f6077168a52850c31ad1a677b07bc6d1df1a942a40b52a113b2c0c1df",
+      "url": "https://www.kaggle.com/code/tetsutani/adaptive-farming-strategy-for-kaggriculture",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "id": "official-baseline",
+      "kernel_id": 129194650,
+      "license": "not declared; provenance-only baseline",
+      "lineage": "Official getting-started baseline",
+      "notebook_sha256": "adcdc666cfc6761ecfd8521da265bfee12c6d98943c6489456bd3c113a78f8a9",
+      "url": "https://www.kaggle.com/code/bovard/kaggriculture-getting-started",
+      "version": "current public snapshot acquired 2026-08-21"
+    }
+  ],
+  "runtime_contract": "PASS",
+  "screen": {
+    "rows": [
+      {
+        "champion_seat": 0,
+        "entity": "rayk-c95",
+        "episode": "screen-rayk-290601",
+        "family_action_counts": {
+          "champion": {
+            "crop": 2710,
+            "labor": 112,
+            "market": 132,
+            "route": 280,
+            "task": 137
+          },
+          "opponent": {
+            "crop": 1668,
+            "labor": 266,
+            "land": 2,
+            "livestock": 1054,
+            "market": 417,
+            "route": 2879,
+            "task": 1128
+          }
+        },
+        "first_decision_divergence": {
+          "action_index": 1,
+          "champion_action": [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          "family": "market",
+          "opponent_action": [
+            "BUY_PRODUCT",
+            "WHEAT",
+            5
+          ],
+          "step": 0
+        },
+        "first_divergence_by_family": {
+          "crop": {
+            "champion_count": 1,
+            "opponent_count": 0,
+            "step": 1
+          },
+          "labor": {
+            "champion_count": 1,
+            "opponent_count": 4,
+            "step": 0
+          },
+          "land": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 160
+          },
+          "livestock": {
+            "champion_count": 0,
+            "opponent_count": 2,
+            "step": 0
+          },
+          "market": {
+            "champion_count": 1,
+            "opponent_count": 3,
+            "step": 0
+          },
+          "route": {
+            "champion_count": 1,
+            "opponent_count": 2,
+            "step": 1
+          },
+          "task": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 1
+          }
+        },
+        "seed": 290601,
+        "terminal": {
+          "rewards": [
+            1294.0,
+            180863.0
+          ],
+          "statuses": [
+            "DONE",
+            "DONE"
+          ]
+        },
+        "time_index": 1
+      },
+      {
+        "champion_seat": 1,
+        "entity": "rayk-c95",
+        "episode": "screen-rayk-290601",
+        "family_action_counts": {
+          "champion": {
+            "crop": 2699,
+            "labor": 112,
+            "market": 141,
+            "route": 291,
+            "task": 137
+          },
+          "opponent": {
+            "crop": 1668,
+            "labor": 266,
+            "land": 2,
+            "livestock": 1054,
+            "market": 417,
+            "route": 2879,
+            "task": 1128
+          }
+        },
+        "first_decision_divergence": {
+          "action_index": 1,
+          "champion_action": [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          "family": "market",
+          "opponent_action": [
+            "BUY_PRODUCT",
+            "WHEAT",
+            5
+          ],
+          "step": 0
+        },
+        "first_divergence_by_family": {
+          "crop": {
+            "champion_count": 1,
+            "opponent_count": 0,
+            "step": 1
+          },
+          "labor": {
+            "champion_count": 1,
+            "opponent_count": 4,
+            "step": 0
+          },
+          "land": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 160
+          },
+          "livestock": {
+            "champion_count": 0,
+            "opponent_count": 2,
+            "step": 0
+          },
+          "market": {
+            "champion_count": 1,
+            "opponent_count": 3,
+            "step": 0
+          },
+          "route": {
+            "champion_count": 1,
+            "opponent_count": 2,
+            "step": 1
+          },
+          "task": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 1
+          }
+        },
+        "seed": 290601,
+        "terminal": {
+          "rewards": [
+            179397.0,
+            1294.0
+          ],
+          "statuses": [
+            "DONE",
+            "DONE"
+          ]
+        },
+        "time_index": 1
+      },
+      {
+        "champion_seat": 0,
+        "entity": "boatlee-v16-rc5",
+        "episode": "screen-boatlee-290602",
+        "family_action_counts": {
+          "champion": {
+            "crop": 2709,
+            "labor": 112,
+            "market": 141,
+            "route": 280,
+            "task": 138
+          },
+          "opponent": {
+            "crop": 1671,
+            "labor": 264,
+            "land": 2,
+            "livestock": 1719,
+            "market": 353,
+            "route": 2855,
+            "task": 433
+          }
+        },
+        "first_decision_divergence": {
+          "action_index": 1,
+          "champion_action": [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          "family": "market",
+          "opponent_action": [
+            "BUY_PRODUCT",
+            "WHEAT",
+            14
+          ],
+          "step": 0
+        },
+        "first_divergence_by_family": {
+          "crop": {
+            "champion_count": 1,
+            "opponent_count": 0,
+            "step": 1
+          },
+          "labor": {
+            "champion_count": 1,
+            "opponent_count": 5,
+            "step": 0
+          },
+          "land": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 160
+          },
+          "livestock": {
+            "champion_count": 0,
+            "opponent_count": 2,
+            "step": 0
+          },
+          "market": {
+            "champion_count": 1,
+            "opponent_count": 3,
+            "step": 0
+          },
+          "route": {
+            "champion_count": 1,
+            "opponent_count": 2,
+            "step": 1
+          },
+          "task": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 1
+          }
+        },
+        "seed": 290602,
+        "terminal": {
+          "rewards": [
+            1294.0,
+            190657.0
+          ],
+          "statuses": [
+            "DONE",
+            "DONE"
+          ]
+        },
+        "time_index": 2
+      },
+      {
+        "champion_seat": 1,
+        "entity": "boatlee-v16-rc5",
+        "episode": "screen-boatlee-290602",
+        "family_action_counts": {
+          "champion": {
+            "crop": 2709,
+            "labor": 112,
+            "market": 141,
+            "route": 280,
+            "task": 138
+          },
+          "opponent": {
+            "crop": 1671,
+            "labor": 264,
+            "land": 2,
+            "livestock": 1720,
+            "market": 353,
+            "route": 2855,
+            "task": 432
+          }
+        },
+        "first_decision_divergence": {
+          "action_index": 1,
+          "champion_action": [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          "family": "market",
+          "opponent_action": [
+            "BUY_PRODUCT",
+            "WHEAT",
+            14
+          ],
+          "step": 0
+        },
+        "first_divergence_by_family": {
+          "crop": {
+            "champion_count": 1,
+            "opponent_count": 0,
+            "step": 1
+          },
+          "labor": {
+            "champion_count": 1,
+            "opponent_count": 5,
+            "step": 0
+          },
+          "land": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 160
+          },
+          "livestock": {
+            "champion_count": 0,
+            "opponent_count": 2,
+            "step": 0
+          },
+          "market": {
+            "champion_count": 1,
+            "opponent_count": 3,
+            "step": 0
+          },
+          "route": {
+            "champion_count": 1,
+            "opponent_count": 2,
+            "step": 1
+          },
+          "task": {
+            "champion_count": 0,
+            "opponent_count": 1,
+            "step": 1
+          }
+        },
+        "seed": 290602,
+        "terminal": {
+          "rewards": [
+            181689.0,
+            1294.0
+          ],
+          "statuses": [
+            "DONE",
+            "DONE"
+          ]
+        },
+        "time_index": 2
+      }
+    ],
+    "summary": {
+      "episodes": 4,
+      "family_divergence_firings": {
+        "crop": 4,
+        "labor": 4,
+        "land": 4,
+        "livestock": 4,
+        "market": 4,
+        "route": 4,
+        "task": 4
+      },
+      "family_earliest_steps": {
+        "crop": 1,
+        "labor": 0,
+        "land": 160,
+        "livestock": 0,
+        "market": 0,
+        "route": 1,
+        "task": 1
+      },
+      "first_decision_family_firings": {
+        "market": 4
+      },
+      "first_fired_divergence_family": "market",
+      "result": "identified",
+      "same_seed_both_seats": true,
+      "unfired_families": []
+    }
+  }
+}
