@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.4",
+  "opponent_manifest": "tests/fixtures/market_shift_oracle.json",
+  "foundations": {
+    "champion": "main.py",
+    "field_scheduler": "candidates/diversified-scheduler/policy.py",
+    "contract_farmer": "candidates/deepeshumrao-whole-agent/agent.py"
+  },
+  "selector": "candidates/opponent-shape-portfolio/agent.py",
+  "screen": [
+    {"opponent":"cok-v7","lineage":"COK-ZhangZiliang/V7","episode":"shape-screen-cok","seed":295001,"seat":0,"time_index":1},
+    {"opponent":"cok-v7","lineage":"COK-ZhangZiliang/V7","episode":"shape-screen-cok","seed":295001,"seat":1,"time_index":1},
+    {"opponent":"lonespear-v17","lineage":"lonespear/V17","episode":"shape-screen-v17","seed":295003,"seat":0,"time_index":3},
+    {"opponent":"lonespear-v17","lineage":"lonespear/V17","episode":"shape-screen-v17","seed":295003,"seat":1,"time_index":3}
+  ],
+  "confirm": [
+    {"opponent":"lonespear-v18","lineage":"lonespear/V18","episode":"shape-confirm-v18","seed":295011,"seat":0,"time_index":11},
+    {"opponent":"lonespear-v18","lineage":"lonespear/V18","episode":"shape-confirm-v18","seed":295011,"seat":1,"time_index":11},
+    {"opponent":"lonespear-v23","lineage":"lonespear/V23","episode":"shape-confirm-v23","seed":295013,"seat":0,"time_index":13},
+    {"opponent":"lonespear-v23","lineage":"lonespear/V23","episode":"shape-confirm-v23","seed":295013,"seat":1,"time_index":13}
+  ],
+  "kaggle_submission": "NOT_PERFORMED"
+}
