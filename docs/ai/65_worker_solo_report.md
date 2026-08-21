@@ -1,23 +1,42 @@
-# Solo Worker Report — SOT-2924
+# Solo Worker Report — SOT-2938
 
 ## Summary
 
-Aggregated the terminal child results for cycle 2. The only evaluated transfer axis was rejected with direct same-seed/both-seat firing evidence because its first divergence overlaps existing CLOSED routing/planner families. No portable family, candidate, artifact, configuration change, or Kaggle submission resulted; the existing champion remains unchanged.
+Implemented a fresh closed-loop private-proxy oracle for the current champion. The oracle enforces opponent-lineage, episode, seed, and chronological time-slice separation between screen and confirm, pairs every identity across both seats, aggregates margin/rank/p20/worst by distribution, and reports confirm-minus-screen transfer stability. Candidate, opponent, engine, seed panel, and manifest hashes are pinned. Open-loop replay is labelled separately and excluded from transfer-trust.
+
+## Changed Files
+
+- `scripts/measure_private_proxy_oracle.py` — validation, engine execution, aggregation, provenance, and transfer-trust report.
+- `tests/fixtures/private_proxy_oracle.json` — four pinned opponent lineages and disjoint both-seat screen/confirm identities.
+- `tests/test_evaluate.py` — overlap rejection, both-seat coverage, and deterministic distribution aggregation tests.
+- `docs/measurements/SOT-2934/SOT-2938-private-proxy-oracle.json` — measured champion artifact.
+- `docs/ai/experiment_ledger.jsonl` — promoted oracle-axis result.
+- `README.md` — reproduction and evidence-boundary documentation.
+- `docs/ai/linear/SOT-2938.md` — issue-local lifecycle note.
 
 ## Commands Run
 
-- `python3 -m unittest discover -s tests -v` — PASS
-- `python3 scripts/validate_submission.py main.py` — PASS
-- `python3 -m json.tool docs/measurements/SOT-2924/SOT-2925-post-opening-continuation.json` — PASS
-- `gh pr view 99 ...` — MERGED; CI submission and security checks PASS
+- `python3 -m compileall -q main.py scripts` — PASS.
+- `python3 -m unittest discover -s tests -v` — PASS, 141/141.
+- `bash scripts/build_submission.sh` and archive entry check — PASS.
+- `.venv/bin/python scripts/measure_private_proxy_oracle.py` twice — PASS; byte-identical SHA-256 `27d770e2b9c29a0ca8373f25abec478ee0c9f72d426d5df1d4866fbe6c17a273`.
+- `git diff --check` — PASS.
+- npm lint/typecheck/test/e2e — N/A; repository has no package manifest. Python compile/unit, submission contract, and real Kaggle-engine closed-loop runs are the repository-equivalent gates.
+
+## Acceptance Criteria
+
+- [x] entity/opponent lineage, episode, seed, and time-slice overlap are zero; seat leakage is controlled with complete same-identity both-seat pairs.
+- [x] both-seat closed-loop margin, rank, p20/worst tail, distribution aggregates, and transfer-trust are output.
+- [x] candidate/opponent/engine/seed-panel/manifest provenance and hashes are recorded; open-loop and closed-loop metrics are separate; screen/confirm policy is explicit.
+- [x] repository-equivalent compile, 141 tests, submission contract, real-engine run, deterministic rerun, and diff checks pass.
+- [x] `kaggle_submission` is `NOT_PERFORMED`.
 
 ## Risks
 
-- `cv_representative=false`; fixed-opponent local evaluation is not a reliable private-field oracle.
-- Cycle 2 produced no candidate, so no public signal was consumed and no effective configuration changed.
-- The next cycle should move to evaluation-system redesign or a structurally independent hedge instead of retrying the rejected continuation family without new evidence.
+- The champion ranked second in all eight proxy episodes. This is evidence about the current proxy baseline, not a policy regression introduced by this evaluation-only change.
+- `cv_representative=false` remains: transfer stability is a private proxy and does not claim live leaderboard calibration.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 
 ## Acceptance: PASS
 

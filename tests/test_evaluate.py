@@ -8,6 +8,7 @@ from unittest import mock
 from scripts.evaluate import bounded_rollout, compare, compare_distribution, evaluate, evaluate_opponent_policy, evaluate_paired_cv, evaluate_scenarios, load_agent, run_competitive_market, run_episode, validate_authenticated_replay_cv, validate_cv_holdouts
 from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
+from scripts.measure_private_proxy_oracle import aggregate as aggregate_private_proxy, validate_split as validate_private_proxy_split
 from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.measure_multi_step_transition_oracle import measure as measure_transition_oracle, validate_split
@@ -1853,6 +1854,36 @@ class EvaluationTest(unittest.TestCase):
             self.assertIsInstance(report["competitive_oracle"]["confirm"]["scenarios"], list)
         else:
             self.assertTrue(report["competitive_oracle"]["confirm"]["skipped"])
+
+
+class PrivateProxyOracleTest(unittest.TestCase):
+    def setUp(self):
+        self.manifest = json.loads((ROOT / "tests/fixtures/private_proxy_oracle.json").read_text())
+
+    def test_private_proxy_split_has_zero_overlap_and_both_seat_pairs(self):
+        result = validate_private_proxy_split(self.manifest)
+        self.assertTrue(result["passed"], result)
+        self.assertTrue(all(not values for values in result["overlap"].values()))
+        self.assertTrue(result["checks"]["no_seat_leakage_both_seat_pairs"])
+
+    def test_private_proxy_split_fails_on_seed_overlap(self):
+        mutated = json.loads(json.dumps(self.manifest))
+        mutated["panels"]["confirm"][0]["seed"] = mutated["panels"]["screen"][0]["seed"]
+        result = validate_private_proxy_split(mutated)
+        self.assertFalse(result["passed"])
+        self.assertFalse(result["checks"]["no_seed_overlap"])
+
+    def test_private_proxy_summary_is_deterministic_and_distributional(self):
+        rows = [
+            {"margin": 5, "candidate_rank": 1, "distribution": "a"},
+            {"margin": -2, "candidate_rank": 2, "distribution": "a"},
+            {"margin": 1, "candidate_rank": 1, "distribution": "b"},
+        ]
+        first = aggregate_private_proxy(rows)
+        second = aggregate_private_proxy(json.loads(json.dumps(rows)))
+        self.assertEqual(first, second)
+        self.assertEqual(-2, first["overall"]["p20_margin"])
+        self.assertEqual({"a", "b"}, set(first["by_distribution"]))
 
 
 if __name__ == "__main__":
