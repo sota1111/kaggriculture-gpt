@@ -34,6 +34,7 @@ from scripts.measure_sequence_planner_sealed_panel import gate as sequence_plann
 from scripts.measure_layout_completion_oracle import measure as measure_layout_completion, validate_fixture as validate_layout_fixture
 from scripts.measure_layout_aware_production import targeted as layout_production_trace, gate as layout_production_gate
 from scripts.measure_layout_aware_sealed_panel import measure as measure_layout_sealed, panel_checks as layout_panel_checks
+from scripts.measure_v21_late_capital_oracle import measure as measure_v21_oracle, validate_manifest as validate_v21_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,6 +42,25 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_v21_oracle_is_fresh_closed_loop_both_seat_and_deterministic(self):
+        manifest = json.loads((ROOT / "tests/fixtures/v21_late_capital_oracle.json").read_text())
+        first = measure_v21_oracle(ROOT / "main.py", FIXTURE, manifest)
+        second = measure_v21_oracle(ROOT / "main.py", FIXTURE, manifest)
+        self.assertEqual(first, second)
+        self.assertTrue(first["passed"], first)
+        self.assertTrue(all(first["validation"]["checks"].values()))
+        self.assertEqual([0, 1], first["screen"]["both_seats"])
+        self.assertEqual([0, 1], first["confirm"]["both_seats"])
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+
+    def test_v21_oracle_fails_closed_and_does_not_consume_confirm(self):
+        manifest = json.loads((ROOT / "tests/fixtures/v21_late_capital_oracle.json").read_text())
+        manifest["panels"]["screen"][0]["private"] = {"money": 1}
+        self.assertFalse(validate_v21_manifest(manifest)["passed"])
+        report = measure_v21_oracle(ROOT / "main.py", FIXTURE, manifest)
+        self.assertFalse(report["passed"])
+        self.assertTrue(report["confirm"]["skipped"])
+
     def test_layout_aware_sealed_panel_is_fresh_isolated_and_reproducible(self):
         manifest = json.loads((ROOT / "tests/fixtures/layout_aware_sealed_panel.json").read_text())
         oracle = json.loads((ROOT / "docs/measurements/SOT-2858/SOT-2861-layout-completion-oracle.json").read_text())
