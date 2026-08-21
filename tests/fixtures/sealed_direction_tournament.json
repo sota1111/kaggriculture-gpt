@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "issue": "SOT-2952",
+  "confirm_status_at_registration": "RESERVED_UNOPENED",
+  "opening_order": "validate all frozen screen evidence, screen each direction independently, then inspect only eligible confirm evidence",
+  "primary_kpi": ["leak_free_cv_rank", "same_seed_margin_delta", "pessimistic_tail"],
+  "public_signal_policy": "contradiction-only; public score is never used to rank candidates",
+  "candidate_hashes": {
+    "champion": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f",
+    "licensed_whole_agent": "bad9dd849ee6b828183ee938d2a5732835715a23fcb25082269ba95c54808cf6",
+    "opponent_shape_portfolio": "58dbbbc0ea0517621d891ad70c62fef1b33189ddafa23e1abe098c29f4ee7580"
+  },
+  "measurement_hashes": {
+    "oracle": "95bcbac5834040a661b2fa882e2fe746ddd91e3424ce8b286c4331cdb6aab2f7",
+    "licensed_whole_agent": "7a7fbc66d0a840a01aae918f12494168170d98eb7cab049e1858679d18aafa40",
+    "opponent_shape_portfolio": "9ffe36f856387030d5f55e1f422e648b8c478124cf8c8ce0eb83463aeb6e0ce6"
+  },
+  "upstream_commits": {
+    "oracle": "913bb32831a7a4485d8e9a21538e2e078ad21560",
+    "licensed_whole_agent": "057a85037dc534dac1b8d490a0d6927edf1f0dba",
+    "opponent_shape_portfolio": "7e1e94e99ca059aef4a53ab2a40f644b6720a37b"
+  },
+  "screen_gate": {
+    "require_runtime_contract": "PASS",
+    "require_real_firing": true,
+    "require_mean_margin_delta_gte": 0,
+    "require_worst_margin_delta_gte": 0
+  },
+  "confirm_gate": {
+    "open_only_after_screen_pass": true,
+    "require_mean_margin_delta_gte": 0,
+    "require_p20_margin_delta_gte": 0,
+    "require_rank_non_regression": true
+  },
+  "hedge_policy": "retain current champion; no candidate becomes champion from a public jump",
+  "kaggle_submission": "NOT_PERFORMED"
+}
