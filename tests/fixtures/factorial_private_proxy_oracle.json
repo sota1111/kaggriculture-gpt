@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.4",
+  "confirm_status": "RESERVED_UNOPENED",
+  "factors": ["market", "opponent", "seat", "time"],
+  "artifacts": [
+    {"id":"cok-v7","lineage":"COK-ZhangZiliang/V7","source_url":"https://github.com/COK-ZhangZiliang/Kaggriculture","commit":"58c91c390f1cf8b3cace8c078c00b938bae398ff","path":"main.py","sha256":"7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794","license":"Apache-2.0","redistribution":"fetch-only"},
+    {"id":"lonespear-v17","lineage":"lonespear/V17","source_url":"https://github.com/lonespear/kaggriculture","commit":"774b26093ccf4246525517d48420349b841b6e50","path":"main_v17.py","sha256":"14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b","license":"MIT","redistribution":"fetch-only"},
+    {"id":"lonespear-v18","lineage":"lonespear/V18","source_url":"https://github.com/lonespear/kaggriculture","commit":"774b26093ccf4246525517d48420349b841b6e50","path":"main_v18.py","sha256":"eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0","license":"MIT","redistribution":"fetch-only"},
+    {"id":"lonespear-v23","lineage":"lonespear/V23","source_url":"https://github.com/lonespear/kaggriculture","commit":"774b26093ccf4246525517d48420349b841b6e50","path":"main_v23.py","sha256":"c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee","license":"MIT","redistribution":"fetch-only"}
+  ],
+  "market_levels": {
+    "screen": {
+      "low": {"WHEAT":{"base":20,"I0":28,"T":18,"below_func":"linear","below_target":2.2,"above_func":"sqrt","above_target":0.55}},
+      "high": {"MILK":{"base":92,"I0":12,"T":28,"below_func":"sqrt","below_target":1.8,"above_func":"linear","above_target":0.35}}
+    },
+    "confirm": {
+      "low": {"WHEAT":{"base":18,"I0":55,"T":35,"below_func":"sqrt","below_target":1.4,"above_func":"log","above_target":0.5}},
+      "high": {"MILK":{"base":108,"I0":6,"T":16,"below_func":"sq","below_target":2.5,"above_func":"sqrt","above_target":0.45}}
+    }
+  },
+  "opponent_levels": {
+    "screen": {"low":"cok-v7", "high":"lonespear-v17"},
+    "confirm": {"low":"lonespear-v18", "high":"lonespear-v23"}
+  },
+  "time_levels": {
+    "screen": {"low":{"slice":"2026-W31","index":1}, "high":{"slice":"2026-W33","index":3}},
+    "confirm": {"low":{"slice":"2026-W35","index":11}, "high":{"slice":"2026-W37","index":13}}
+  },
+  "seed_bases": {"screen": 294900, "confirm": 294950}
+}
