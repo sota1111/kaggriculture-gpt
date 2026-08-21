@@ -1,9 +1,8 @@
-# Final Report — SOT-2906
+# Final Report — SOT-2908
 
-The current-public divergence screen is complete and verified. In both seats against Rayk C95 and
-Boatlee V16-RC5, the first emitted divergent family was market at step 0: the champion bought two WHEAT
-seeds while the public policies first bought five or fourteen WHEAT products. Provenance and source
-hashes are fixed, all 132 tests pass, two screen reruns are byte-identical, the confirm cohort remains
-unopened, and no Kaggle submission was made.
+The sealed both-seat decision is promoted. Screen and confirm both passed the strict margin-tail,
+runtime, firing, and contract gates; 135 tests pass; the promoted archive is compatible; and no
+Kaggle submission was performed. `cv_representative=false` and the screen productive-action delta
+remain explicitly disclosed.
 
 ## Acceptance: PASS

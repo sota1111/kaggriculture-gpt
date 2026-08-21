@@ -1,0 +1,470 @@
+{
+  "archive_compatibility": "PASS",
+  "archive_sha256": "63ce5c64a4e2a7b9d206b2aa423a575873dba112f078fc3f640fb3b0d1749c5c",
+  "artifact_change": "flag promoted to default-on",
+  "axis": "current-public step-0 WHEAT market lead sealed both-seat promotion panel",
+  "candidate_artifact": {
+    "configured_sha256": "04f70a1db9fee5449110e55f24f0a914a686efda9b9b1c6f8b4b017b61579f81",
+    "effective_config": {
+      "PUBLIC_STEP0_WHEAT_MARKET_LEAD": true
+    },
+    "path": "main.py",
+    "retained": true,
+    "source_sha256": "f6eefce1625dbbaa9137b6588cb22843915d8fbbbcda019870c0345c349adef9"
+  },
+  "confirm": {
+    "passed": true,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -187830.0,
+          "opponent_reward": 189129.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1299.0,
+          "seconds": 2.1123450649902225,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1299.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -187838.0,
+          "opponent_reward": 189132.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.100584068102762,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "entity": "salemali7-3094",
+          "episode": "confirm-salem-290611",
+          "seed": 290611,
+          "time_index": 11,
+          "window": "confirm"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -183404.0,
+          "opponent_reward": 184703.0,
+          "productive_completion": 2704,
+          "rank": 2,
+          "reward": 1299.0,
+          "seconds": 2.0870536509901285,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1299.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -183412.0,
+          "opponent_reward": 184706.0,
+          "productive_completion": 2704,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.068189663114026,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "entity": "salemali7-3094",
+          "episode": "confirm-salem-290611",
+          "seed": 290611,
+          "time_index": 11,
+          "window": "confirm"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -183889.0,
+          "opponent_reward": 185188.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1299.0,
+          "seconds": 2.1536910608410835,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1299.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -183897.0,
+          "opponent_reward": 185191.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.1817067831289023,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "entity": "tetsutani-adaptive",
+          "episode": "confirm-adaptive-290612",
+          "seed": 290612,
+          "time_index": 12,
+          "window": "confirm"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -184726.0,
+          "opponent_reward": 186025.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1299.0,
+          "seconds": 2.155634757131338,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1299.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -184734.0,
+          "opponent_reward": 186028.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.194286156911403,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "entity": "tetsutani-adaptive",
+          "episode": "confirm-adaptive-290612",
+          "seed": 290612,
+          "time_index": 12,
+          "window": "confirm"
+        }
+      }
+    ],
+    "reasons": [],
+    "runtime": {
+      "candidate_seconds": 8.508724533952773,
+      "champion_seconds": 8.544766671257094,
+      "passed": true,
+      "ratio": 0.9957819635466981,
+      "threshold": 2.0
+    },
+    "summary": {
+      "candidate_firings": 4,
+      "champion_firings": 0,
+      "lower_tail_margin_delta": 8.0,
+      "matches": 4,
+      "mean_margin_delta": 8.0,
+      "mean_rank_improvement": 0.0,
+      "productive_completion_delta": 0,
+      "terminal_cash_delta": 5.0,
+      "worst_margin_delta": 8.0
+    }
+  },
+  "cv_representative": false,
+  "cycle": 1,
+  "decision": "promoted",
+  "effective_config": {
+    "PUBLIC_STEP0_WHEAT_MARKET_LEAD": true
+  },
+  "effective_config_fingerprint": "19975ef95f643f29bd646e8055f2e0527a02811158dcfe556375e6b0f35b387d",
+  "exec_compatibility": "PASS",
+  "issue": "SOT-2908",
+  "kaggle_submission": "NOT_PERFORMED",
+  "panel_checks": {
+    "confirm_reserved_unopened": true,
+    "engine_pinned": true,
+    "entity_episode_seed_time_disjoint": true,
+    "kaggle_submission_forbidden": true,
+    "private_future_replay_excluded": true,
+    "provenance_complete": true,
+    "public_action_telemetry_only": true,
+    "same_seed_both_seats_declared": true,
+    "schema_supported": true,
+    "screen_has_two_public_lineages": true,
+    "source_hashes_match": true
+  },
+  "passed": true,
+  "public_consistency_gate": "screen strict rank-or-mean-margin uplift with nonnegative lower-tail and worst margin",
+  "screen": {
+    "deterministic_reproduction": true,
+    "passed": true,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -179562.0,
+          "opponent_reward": 180860.0,
+          "productive_completion": 2710,
+          "rank": 2,
+          "reward": 1298.0,
+          "seconds": 2.079674771055579,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1298.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -179569.0,
+          "opponent_reward": 180863.0,
+          "productive_completion": 2710,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.0500158150680363,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "entity": "rayk-c95",
+          "episode": "screen-rayk-290601",
+          "seed": 290601,
+          "time_index": 1,
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -178096.0,
+          "opponent_reward": 179394.0,
+          "productive_completion": 2699,
+          "rank": 2,
+          "reward": 1298.0,
+          "seconds": 2.0617647818289697,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1298.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -178103.0,
+          "opponent_reward": 179397.0,
+          "productive_completion": 2699,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.019994813017547,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "entity": "rayk-c95",
+          "episode": "screen-rayk-290601",
+          "seed": 290601,
+          "time_index": 1,
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -183779.0,
+          "opponent_reward": 185081.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1302.0,
+          "seconds": 2.0681600980460644,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1302.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -189363.0,
+          "opponent_reward": 190657.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.0676489069592208,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "entity": "boatlee-v16-rc5",
+          "episode": "screen-boatlee-290602",
+          "seed": 290602,
+          "time_index": 2,
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "firings": 1,
+          "invalid_actions": 0,
+          "margin": -177136.0,
+          "opponent_reward": 178438.0,
+          "productive_completion": 2683,
+          "rank": 2,
+          "reward": 1302.0,
+          "seconds": 2.063064191956073,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1302.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "firings": 0,
+          "invalid_actions": 0,
+          "margin": -180395.0,
+          "opponent_reward": 181689.0,
+          "productive_completion": 2709,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.072962067089975,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "entity": "boatlee-v16-rc5",
+          "episode": "screen-boatlee-290602",
+          "seed": 290602,
+          "time_index": 2,
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [],
+    "runtime": {
+      "candidate_seconds": 8.272663842886686,
+      "champion_seconds": 8.210621602134779,
+      "passed": true,
+      "ratio": 1.0075563390639968,
+      "threshold": 2.0
+    },
+    "summary": {
+      "candidate_firings": 4,
+      "champion_firings": 0,
+      "lower_tail_margin_delta": 7.0,
+      "matches": 4,
+      "mean_margin_delta": 2214.25,
+      "mean_rank_improvement": 0.0,
+      "productive_completion_delta": -26,
+      "terminal_cash_delta": 6.0,
+      "worst_margin_delta": 7.0
+    }
+  },
+  "separation": {
+    "confirm_identity_sha256": "fd036c2c348be470b01e2eb2e7df3107eedf82fca9136b5ca0f9a05dc0439538",
+    "entity_episode_seed_time_disjoint": true,
+    "same_seed_both_seats": true,
+    "screen_identity_sha256": "696f6a38cabeda20352df63f6912825869fc650127d48e00a0c3458cafa77f73"
+  },
+  "source_agent_sha256": {
+    "boatlee-v16-rc5": "f029fa0cb66a9eb509afbe44e3f59b800332d0419db91607183410e4089c4d19",
+    "rayk-c94": "7b0e5a7b9d18dc583f5789e50a54dca43561f6d08c1c616b4219bf50bcb8311f",
+    "rayk-c95": "489f5d197527f107027626cce79d850fd2ca90edd43d94384b849b6511e27bdb",
+    "salemali7-3094": "d39dba50793d9777c990347443bf0c481c78adaea86055f6f6b0600dcfcd9f2e",
+    "tetsutani-adaptive": "c26402b67a0d04a46348353069645b1a49c3cb3df6df69d7fa35d8adbbdbeae4"
+  }
+}

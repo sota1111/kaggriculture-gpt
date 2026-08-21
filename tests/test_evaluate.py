@@ -41,6 +41,7 @@ from scripts.measure_feed_denial_public_oracle import summarize as summarize_fee
 from scripts.measure_egg_cohort_public_screen import decision_families as egg_families, gate_and_veto as egg_gate, validate_manifest as validate_egg_manifest
 from scripts.measure_egg_cohort_sealed_panel import decide as decide_egg_sealed
 from scripts.measure_current_public_divergence import action_families, first_decision_divergence, summarize as summarize_current_public, validate_manifest as validate_current_public
+from scripts.measure_public_step0_wheat_sealed_panel import canonical_sha256 as public_wheat_config_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,13 +55,15 @@ class EvaluationTest(unittest.TestCase):
                  {"money": money, "farmer": [0, 0], "hands": [], "tiles": [[None]]}]
         return {"player": seat, "step": step, "day": 0, "hour": step,
                 "turns_per_day": 24, "farms": farms,
+                "town": {},
                 "market": {"prices": {"WHEAT": 10}}}
 
-    def test_public_step0_wheat_market_lead_is_default_off_and_exact_control(self):
+    def test_public_step0_wheat_market_lead_is_promoted_and_flag_off_is_exact_control(self):
         agent = load_agent(ROOT / "main.py")
         baseline = {"farmer": ["EAST"], "hands": [["PASS"]],
                     "market": [["BUY_SEED", "WHEAT", 2], ["HIRE"]]}
-        self.assertFalse(agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD)
+        self.assertTrue(agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD)
+        agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD = False
         self.assertIs(baseline, agent._public_step0_wheat_market_lead_action(
             self._step0_market_obs(), baseline))
         agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD = True
@@ -69,6 +72,19 @@ class EvaluationTest(unittest.TestCase):
             self.assertIs(baseline, agent._public_step0_wheat_market_lead_action(obs, baseline))
         self.assertEqual({"farmer": ["EAST"], "hands": [["PASS"]],
                           "market": [["BUY_SEED", "WHEAT", 2], ["HIRE"]]}, baseline)
+
+    def test_public_step0_wheat_sealed_decision_is_promoted_and_fingerprinted(self):
+        report = json.loads((ROOT / "docs/measurements/SOT-2905/"
+                             "SOT-2908-public-step0-wheat-sealed-panel.json").read_text())
+        self.assertTrue(report["passed"])
+        self.assertEqual("promoted", report["decision"])
+        self.assertFalse(report["cv_representative"])
+        self.assertEqual("NOT_PERFORMED", report["kaggle_submission"])
+        self.assertTrue(report["screen"]["deterministic_reproduction"])
+        self.assertTrue(report["screen"]["passed"])
+        self.assertTrue(report["confirm"]["passed"])
+        self.assertEqual(public_wheat_config_sha256(report["effective_config"]),
+                         report["effective_config_fingerprint"])
 
     def test_public_step0_wheat_market_lead_fires_both_seats_and_only_changes_market(self):
         for seat in (0, 1):

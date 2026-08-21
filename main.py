@@ -32,7 +32,7 @@ RECEDING_HORIZON_SEQUENCE_PLANNER = False
 LAYOUT_AWARE_PRODUCTION_ARCHITECTURE = False
 V21_ONE_TIME_LATE_CAPITAL_LATCH = False
 MOON_V56_TOMATO_SCARCITY_FORK = False
-PUBLIC_STEP0_WHEAT_MARKET_LEAD = False
+PUBLIC_STEP0_WHEAT_MARKET_LEAD = True
 SEQUENCE_PLANNER_HORIZON = 3
 HISTORY_LIMIT = 48
 
@@ -1636,7 +1636,8 @@ def _public_step0_wheat_market_lead_action(obs, action):
     farms = obs.get("farms", ())
     money = int(farms[player].get("money", 0)) if 0 <= player < len(farms) else 0
     price = int(obs.get("market", {}).get("prices", {}).get("WHEAT", 0))
-    if step != 0 or price <= 0 or money < 5 * price:
+    if (step != 0 or "town" not in obs or "shed_capacity" in obs
+            or price <= 0 or money < 5 * price):
         return action
     amended = {"farmer": action["farmer"], "hands": action["hands"],
                "market": list(action.get("market", ()))[:MAX_MARKET_ORDERS - 1]}

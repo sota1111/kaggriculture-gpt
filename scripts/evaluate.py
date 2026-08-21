@@ -435,7 +435,8 @@ def run_episode(
             name: 0 for name in
             ("WATER", "HARVEST", "CARE", "FERTILIZE", "MOVE", "PLANT", "DIG", "DROP", "PASS")
         }
-        day_cash = {"crop_sales": 0, "seed_spend": 0, "hire_spend": 0, "land_spend": 0}
+        day_cash = {"crop_sales": 0, "seed_spend": 0, "product_spend": 0,
+                    "hire_spend": 0, "land_spend": 0}
         initial_hands = max(0, int(fixture.get("initial_hands", 0)))
         positions = [[0, 0]]
         while len(positions) <= initial_hands and len(positions) < max_workers:
@@ -484,6 +485,13 @@ def run_episode(
                         money -= cost
                         day_cash["seed_spend"] += cost
                         seeds[crop] += amount
+                    elif (action[0] == "BUY_PRODUCT" and crop in crops
+                          and money >= prices[crop] * amount
+                          and sum(shed.values()) + amount <= int(fixture.get("shed_capacity", 100))):
+                        cost = prices[crop] * amount
+                        money -= cost
+                        day_cash["product_spend"] += cost
+                        shed[crop] += amount
                     elif action[0] == "SELL" and crop in crops and shed[crop] >= amount:
                         revenue = prices[crop] * amount
                         money += revenue
