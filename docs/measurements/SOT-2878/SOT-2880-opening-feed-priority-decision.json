@@ -1,0 +1,30 @@
+{
+  "issue": "SOT-2880",
+  "cycle": 11,
+  "axis": "Rayk C94 opening feed-purchase priority independent default-off port",
+  "decision": "inconclusive",
+  "runtime_change": "NOT_PERFORMED",
+  "reason": "The prerequisite SOT-2879 public screen observed zero feed-denial events because the champion placed no step-0 WHEAT order. The issue explicitly permits the port only after current-public firing is confirmed.",
+  "prerequisite": {
+    "issue": "SOT-2879",
+    "measurement": "docs/measurements/SOT-2878/SOT-2879-feed-denial-public-oracle.json",
+    "screen_episodes": 4,
+    "both_seats": true,
+    "candidate_step0_wheat_orders": 0,
+    "observed_denials": 0,
+    "result": "inconclusive"
+  },
+  "invariants": {
+    "main_py_unchanged": true,
+    "default_behavior_unchanged": true,
+    "purchase_quantity_unchanged": true,
+    "production_route_unchanged": true,
+    "other_actions_unchanged": true
+  },
+  "gate": {
+    "screen": "INCONCLUSIVE_NO_TRIGGER",
+    "confirm": "RESERVED_UNOPENED",
+    "rejected_or_closed": false,
+    "kaggle_submission": "NOT_PERFORMED"
+  }
+}
