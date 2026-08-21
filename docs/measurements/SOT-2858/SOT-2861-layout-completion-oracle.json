@@ -1,0 +1,514 @@
+{
+  "axis": "layout and productive-completion replay re-anchor",
+  "confirm": {
+    "both_seats": [
+      0,
+      1
+    ],
+    "episodes": [
+      {
+        "champion": {
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "layout": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 1,
+            "pasture": 1
+          },
+          "shed_distance": {
+            "maximum": 6,
+            "mean": 5.5
+          }
+        },
+        "identity": {
+          "episode": "confirm-layout-a",
+          "opponent": "lonespear-v23",
+          "seat": 0,
+          "seed": 286111,
+          "time": 11
+        },
+        "source": {
+          "commit": "774b26093ccf4246525517d48420349b841b6e50",
+          "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+          "url": "https://github.com/lonespear/kaggriculture"
+        },
+        "top": {
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 2,
+            "pasture": 1
+          },
+          "shed_distance": {
+            "maximum": 2,
+            "mean": 1.6666666666666667
+          }
+        },
+        "top_minus_champion": {
+          "crop_placements": 1,
+          "decision_families": {
+            "crop": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 0
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            }
+          },
+          "pasture_placements": 0,
+          "shed_distance_mean": -3.833333333333333
+        }
+      },
+      {
+        "champion": {
+          "decision_families": {
+            "crop": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 2,
+            "pasture": 1
+          },
+          "shed_distance": {
+            "maximum": 6,
+            "mean": 5.333333333333333
+          }
+        },
+        "identity": {
+          "episode": "confirm-layout-b",
+          "opponent": "cok-v7",
+          "seat": 1,
+          "seed": 286112,
+          "time": 12
+        },
+        "source": {
+          "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+          "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+          "url": "https://github.com/COK-ZhangZiliang/Kaggriculture"
+        },
+        "top": {
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 1,
+            "pasture": 2
+          },
+          "shed_distance": {
+            "maximum": 2,
+            "mean": 1.3333333333333333
+          }
+        },
+        "top_minus_champion": {
+          "crop_placements": -1,
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "layout": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 0
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            }
+          },
+          "pasture_placements": 1,
+          "shed_distance_mean": -4.0
+        }
+      }
+    ]
+  },
+  "deterministic_report_sha256": "0eca76b11a27f93536ba99d44f527c6277738115d72f58cc30282c05873af39d",
+  "information_boundary": "current public placement, position, demand, and completion fields only",
+  "issue": "SOT-2861",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": {
+    "fixture_sha256": "2f45137df0770f6fbb344561f3eef17def840ebc08c7226f8fdaff896aec8f7d",
+    "metric_definition": "Manhattan shed distance and demand completion from current public snapshots only",
+    "policy_sha256": "44e1b880e779fd3fe1b1a8e55941e2fd3967834c6bb1dcd795f55568b08b6b96",
+    "sources": [
+      {
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "license": "MIT",
+        "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+        "url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "license": "Apache-2.0",
+        "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+        "url": "https://github.com/COK-ZhangZiliang/Kaggriculture"
+      }
+    ]
+  },
+  "replay_bytes": "LOCAL_ONLY_NOT_COMMITTED",
+  "result": "promoted",
+  "screen": {
+    "both_seats": [
+      0,
+      1
+    ],
+    "episodes": [
+      {
+        "champion": {
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 0.5,
+              "incomplete_demand": 1,
+              "requested": 2
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 2,
+            "pasture": 1
+          },
+          "shed_distance": {
+            "maximum": 7,
+            "mean": 6.0
+          }
+        },
+        "identity": {
+          "episode": "screen-layout-a",
+          "opponent": "lonespear-v18",
+          "seat": 0,
+          "seed": 286101,
+          "time": 1
+        },
+        "source": {
+          "commit": "774b26093ccf4246525517d48420349b841b6e50",
+          "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+          "url": "https://github.com/lonespear/kaggriculture"
+        },
+        "top": {
+          "decision_families": {
+            "crop": {
+              "completed": 2,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 2
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 2,
+            "pasture": 2
+          },
+          "shed_distance": {
+            "maximum": 3,
+            "mean": 2.0
+          }
+        },
+        "top_minus_champion": {
+          "crop_placements": 0,
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 0.5,
+              "incomplete_demand": -1
+            },
+            "layout": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 0
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            }
+          },
+          "pasture_placements": 1,
+          "shed_distance_mean": -4.0
+        }
+      },
+      {
+        "champion": {
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "layout": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 1,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 1,
+            "pasture": 1
+          },
+          "shed_distance": {
+            "maximum": 6,
+            "mean": 5.5
+          }
+        },
+        "identity": {
+          "episode": "screen-layout-b",
+          "opponent": "lonespear-v17",
+          "seat": 1,
+          "seed": 286102,
+          "time": 2
+        },
+        "source": {
+          "commit": "774b26093ccf4246525517d48420349b841b6e50",
+          "sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+          "url": "https://github.com/lonespear/kaggriculture"
+        },
+        "top": {
+          "decision_families": {
+            "crop": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": 0,
+              "requested": 1
+            }
+          },
+          "placement_counts": {
+            "crop": 2,
+            "pasture": 1
+          },
+          "shed_distance": {
+            "maximum": 2,
+            "mean": 1.3333333333333333
+          }
+        },
+        "top_minus_champion": {
+          "crop_placements": 1,
+          "decision_families": {
+            "crop": {
+              "completed": 0,
+              "completion_rate": 0.0,
+              "incomplete_demand": 0
+            },
+            "layout": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "livestock": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            },
+            "movement": {
+              "completed": 1,
+              "completion_rate": 1.0,
+              "incomplete_demand": -1
+            }
+          },
+          "pasture_placements": 0,
+          "shed_distance_mean": -4.166666666666667
+        }
+      }
+    ]
+  },
+  "split": {
+    "checks": {
+      "both_seats_each_window": true,
+      "episode_holdout": true,
+      "local_only_replay_bytes": true,
+      "opponent_holdout": true,
+      "panels_nonempty": true,
+      "pinned_source_identity": true,
+      "public_fields_only": true,
+      "required_fields": true,
+      "same_seed_champion_baseline": true,
+      "seed_holdout": true,
+      "temporal_order": true,
+      "time_holdout": true
+    },
+    "passed": true
+  }
+}

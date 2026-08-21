@@ -31,6 +31,7 @@ from scripts.measure_sequence_precursor_sealed_panel import gate as precursor_se
 from scripts.measure_winner_sequence_support import measure as measure_winner_sequence_support
 from scripts.measure_sequence_planner import measure as measure_sequence_planner, planner_observation
 from scripts.measure_sequence_planner_sealed_panel import gate as sequence_planner_sealed_gate
+from scripts.measure_layout_completion_oracle import measure as measure_layout_completion, validate_fixture as validate_layout_fixture
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,30 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_layout_completion_oracle_is_isolated_and_records_family_deltas(self):
+        fixture = json.loads((ROOT / "tests/fixtures/layout_completion_oracle.json").read_text())
+        first = measure_layout_completion(ROOT / "main.py", fixture)
+        second = measure_layout_completion(ROOT / "main.py", fixture)
+        self.assertEqual(first, second)
+        self.assertTrue(first["passed"], first)
+        self.assertTrue(all(first["split"]["checks"].values()))
+        for window in ("screen", "confirm"):
+            self.assertEqual([0, 1], first[window]["both_seats"])
+            for episode in first[window]["episodes"]:
+                self.assertEqual(set(("layout", "crop", "livestock", "movement")),
+                                 set(episode["top_minus_champion"]["decision_families"]))
+                self.assertLess(episode["top_minus_champion"]["shed_distance_mean"], 0)
+        self.assertEqual("LOCAL_ONLY_NOT_COMMITTED", first["replay_bytes"])
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+
+    def test_layout_completion_oracle_fails_closed_on_private_or_future_data(self):
+        fixture = json.loads((ROOT / "tests/fixtures/layout_completion_oracle.json").read_text())
+        fixture["screen"][0]["top"]["future_actions"] = [["BUILD_PASTURE"]]
+        self.assertFalse(validate_layout_fixture(fixture)["passed"])
+        report = measure_layout_completion(ROOT / "main.py", fixture)
+        self.assertFalse(report["passed"])
+        self.assertTrue(report["confirm"]["skipped"])
+
     def test_public_action_capacity_oracle_is_leak_free_deterministic_and_both_seat(self):
         fixture = json.loads((ROOT / "tests/fixtures/public_action_capacity_oracle.json").read_text())
         first = measure_public_capacity(ROOT / "main.py", fixture)
