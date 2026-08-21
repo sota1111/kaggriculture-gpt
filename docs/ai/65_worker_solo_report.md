@@ -1,44 +1,46 @@
-# Solo Worker Report — SOT-2906
+# Solo Worker Report — SOT-2907
 
 ## Summary
 
-Implemented and ran a current-public first-action-family divergence screen. The pinned Rayk C95 and
-Boatlee V16-RC5 agents were evaluated against the current champion on two disjoint seeds with both seat
-assignments. All four runs identified `market` as the first emitted divergent family at step 0.
+Implemented the SOT-2906-fired step-0 `market` family as an independently attributable candidate.
+`PUBLIC_STEP0_WHEAT_MARKET_LEAD` defaults to `False`; when explicitly enabled, its narrow trigger
+prepends `BUY_PRODUCT WHEAT 5` without changing worker actions or the existing market plan.
 
 ## Changed Files
 
-- `scripts/measure_current_public_divergence.py` — provenance validation, leak-free screen, family telemetry.
-- `tests/fixtures/current_public_divergence.json` — pinned screen and unopened confirm manifest.
-- `tests/test_evaluate.py` — boundary, family, and first-divergence tests.
-- `docs/measurements/SOT-2905/SOT-2906-current-public-divergence.{json,md}` — evidence and reproduction.
-- `docs/ai/experiment_ledger.jsonl` — promoted evaluation-axis entry.
-- `docs/ai/linear/SOT-2906.md` — local lifecycle record.
+- `main.py` — default-off candidate, pinned provenance/boundary, and per-seat firing telemetry.
+- `tests/test_evaluate.py` — both-seat firing and exact-control invariance tests.
+- `scripts/measure_public_step0_wheat_market_lead.py` — targeted ablation and full-game exec smoke.
+- `docs/measurements/SOT-2905/SOT-2907-public-step0-wheat-market-lead.{json,md}` — evidence.
+- `docs/ai/experiment_ledger.jsonl` — inconclusive candidate entry pending sealed confirm.
+- `submission.tar.gz` — rebuilt archive matching the default-off champion.
 
 ## Verification
 
 - Python compile: PASS.
-- Unit tests: PASS, 132/132.
-- Deterministic full screen rerun: PASS; byte-identical SHA-256 `a3892562...d832d975`.
-- Runtime/action contract: PASS; 4/4 episodes ended `DONE` for both agents.
-- Submission contract for unchanged `main.py`: PASS.
+- Unit tests: PASS, 134/134.
+- Submission archive/action contract: PASS.
+- Targeted ablation: both seats fire once; flag-off/non-trigger/non-market exact invariance PASS.
+- Full-game exec smoke: candidate in both seats, 2/2 episodes `DONE/DONE`, step-0 order observed.
+- Deterministic rerun: byte-identical SHA-256 `5285e19e671412f13253565b5a288d7fa57cbd3e8e2aa9156c7d0c079d680d03`.
 - `git diff --check`: PASS.
-- npm lint/typecheck/test/e2e: N/A; this repository is Python-only and has no `package.json`.
-- Kaggle submission: NOT PERFORMED.
-- GitHub: PR #93 merged as `23c3ad7`; required checks passed.
+- npm lint/typecheck/test/e2e: N/A; Python-only repository with no `package.json`.
+- Kaggle submission: NOT PERFORMED; SOT-2908 confirm remains `RESERVED_UNOPENED`.
+- GitHub: PR #95 created; merge/check result is recorded in Linear completion reporting.
 
 ## Acceptance Criteria
 
-- [x] Public-solution and official-baseline provenance is URL/version/hash pinned.
-- [x] Same-seed/both-seat screen is reproducible.
-- [x] First fired divergence is identified and all fired/unfired families are recorded.
-- [x] Confirm cohort is reserved unopened.
+- [x] SOT-2906 prerequisite confirmed: market first at step 0 in 4/4 screen episodes.
+- [x] Portable boundary and source URL/version/hash/license status recorded.
+- [x] Candidate is independently attributable and default-off.
+- [x] Non-target behavior and exec compatibility are preserved.
 - [x] No Kaggle submission occurred.
 
 ## Risks
 
-The first divergence is observational attribution, not causal uplift. The conditional port and sealed
-promotion decision remain scoped to SOT-2907 and SOT-2908. Confirm identities were not consumed.
+This run establishes an attributable candidate, not causal uplift. The result remains inconclusive until
+SOT-2908 evaluates the still-unopened sealed both-seat panel. The source notebook has no declared license;
+therefore no source code or route was copied, only the observed five-WHEAT action was independently expressed.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS
