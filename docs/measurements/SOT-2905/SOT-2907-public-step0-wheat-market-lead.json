@@ -1,0 +1,135 @@
+{
+  "ablation": {
+    "candidate_order": [
+      "BUY_PRODUCT",
+      "WHEAT",
+      5
+    ],
+    "rows": [
+      {
+        "candidate_market": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            5
+          ],
+          [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          [
+            "HIRE"
+          ]
+        ],
+        "firing_count": 1,
+        "flag_off_exact": true,
+        "non_trigger_exact": true,
+        "seat": 0,
+        "worker_actions_exact": true
+      },
+      {
+        "candidate_market": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            5
+          ],
+          [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          [
+            "HIRE"
+          ]
+        ],
+        "firing_count": 1,
+        "flag_off_exact": true,
+        "non_trigger_exact": true,
+        "seat": 1,
+        "worker_actions_exact": true
+      }
+    ]
+  },
+  "checks": {
+    "action_contract": true,
+    "both_seats_targeted_firing": true,
+    "candidate_independent_default_off": true,
+    "confirm_reserved_unopened": true,
+    "default_off_exact_invariance": true,
+    "kaggle_submission_not_performed": true,
+    "non_market_exact_invariance": true,
+    "non_trigger_exact_invariance": true,
+    "submission_exec_contract": true
+  },
+  "confirm": "RESERVED_UNOPENED",
+  "exec_smoke": {
+    "passed": true,
+    "rows": [
+      {
+        "candidate_seat": 0,
+        "candidate_step0_market": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            5
+          ],
+          [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          [
+            "HIRE"
+          ]
+        ],
+        "statuses": [
+          "DONE",
+          "DONE"
+        ]
+      },
+      {
+        "candidate_seat": 1,
+        "candidate_step0_market": [
+          [
+            "BUY_PRODUCT",
+            "WHEAT",
+            5
+          ],
+          [
+            "BUY_SEED",
+            "WHEAT",
+            2
+          ],
+          [
+            "HIRE"
+          ]
+        ],
+        "statuses": [
+          "DONE",
+          "DONE"
+        ]
+      }
+    ]
+  },
+  "issue": "SOT-2907",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "portable_boundary": {
+    "agent_sha256": "489f5d197527f107027626cce79d850fd2ca90edd43d94384b849b6511e27bdb",
+    "boundary": "step/player, own public cash, and public WHEAT price only; inserts one five-WHEAT market order, with no source code, route, replay bytes, identity, seed, private/future state, or weights",
+    "kernel_id": 129396610,
+    "license": "not declared; behavior independently reimplemented from public action telemetry",
+    "notebook_sha256": "a7447511510ed22b73f2315246b6bf4de66f219ffe3ba692a377f3fb47931331",
+    "url": "https://www.kaggle.com/code/raykkretzschmar/kaggriculture-findings-from-zero-to-top-meta",
+    "version": "current public snapshot acquired 2026-08-21"
+  },
+  "prerequisite": {
+    "family": "market",
+    "issue": "SOT-2906",
+    "result": "identified",
+    "screen_episodes": 4,
+    "step": 0
+  }
+}

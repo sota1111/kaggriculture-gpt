@@ -32,6 +32,7 @@ RECEDING_HORIZON_SEQUENCE_PLANNER = False
 LAYOUT_AWARE_PRODUCTION_ARCHITECTURE = False
 V21_ONE_TIME_LATE_CAPITAL_LATCH = False
 MOON_V56_TOMATO_SCARCITY_FORK = False
+PUBLIC_STEP0_WHEAT_MARKET_LEAD = False
 SEQUENCE_PLANNER_HORIZON = 3
 HISTORY_LIMIT = 48
 
@@ -133,6 +134,15 @@ PUBLIC_EXECUTION_SOURCES = {
         "license": "not-declared-in-downloaded-notebook-metadata",
         "boundary": "first three public shops, public clock, own visible tiles/actions, and own inventory only; no opponent private state, replay identity, seed, future outcome, fixed full route, or submission",
     },
+    "public_step0_wheat_market_lead": {
+        "url": "https://www.kaggle.com/code/raykkretzschmar/kaggriculture-findings-from-zero-to-top-meta",
+        "kernel_id": 129396610,
+        "version": "current public snapshot acquired 2026-08-21",
+        "notebook_sha256": "a7447511510ed22b73f2315246b6bf4de66f219ffe3ba692a377f3fb47931331",
+        "agent_sha256": "489f5d197527f107027626cce79d850fd2ca90edd43d94384b849b6511e27bdb",
+        "license": "not declared; behavior independently reimplemented from public action telemetry",
+        "boundary": "step/player, own public cash, and public WHEAT price only; inserts one five-WHEAT market order, with no source code, route, replay bytes, identity, seed, private/future state, or weights",
+    },
     "sequence_precursor": {
         "evidence": "docs/measurements/SOT-2835/SOT-2836-winner-sequence-support.json",
         "sources": ("lonespear", "COK-ZhangZiliang", "Seyamalam"),
@@ -178,6 +188,7 @@ V21_LATE_CAPITAL_SUPPRESSED_ORDERS = 0
 MOON_V56_TOMATO_SCARCITY_FIRES = {
     "trigger": 0, "seed_relay": 0, "plant": 0, "harvest": 0, "terminal_sale": 0,
 }
+PUBLIC_STEP0_WHEAT_MARKET_LEAD_FIRES = {0: 0, 1: 0}
 _MOON_V56_TOMATO_STATE = {
     0: {"last_step": -1, "active": False, "seed_debt": 0, "plants": 0, "harvests": 0},
     1: {"last_step": -1, "active": False, "seed_debt": 0, "plants": 0, "harvests": 0},
@@ -1606,7 +1617,33 @@ def _policy_action(obs):
         "hands": actions[1:],
         "market": market[:MAX_MARKET_ORDERS],
     }
+    action = _public_step0_wheat_market_lead_action(obs, action)
     return _moon_v56_tomato_scarcity_action(obs, action)
+
+
+def _public_step0_wheat_market_lead_action(obs, action):
+    """Independently reproduce the observed step-0 five-WHEAT market decision.
+
+    This is deliberately a narrow action-family intervention.  It never
+    changes worker actions or existing market orders and remains exact-control
+    when disabled or outside the one public-state trigger.
+    """
+    if not PUBLIC_STEP0_WHEAT_MARKET_LEAD:
+        return action
+    step = int(obs.get("step", int(obs.get("day", 0)) * int(obs.get("turns_per_day", 24))
+                              + int(obs.get("hour", 0))))
+    player = int(obs.get("player", 0))
+    farms = obs.get("farms", ())
+    money = int(farms[player].get("money", 0)) if 0 <= player < len(farms) else 0
+    price = int(obs.get("market", {}).get("prices", {}).get("WHEAT", 0))
+    if step != 0 or price <= 0 or money < 5 * price:
+        return action
+    amended = {"farmer": action["farmer"], "hands": action["hands"],
+               "market": list(action.get("market", ()))[:MAX_MARKET_ORDERS - 1]}
+    amended["market"].insert(0, ["BUY_PRODUCT", "WHEAT", 5])
+    PUBLIC_STEP0_WHEAT_MARKET_LEAD_FIRES[player] = (
+        PUBLIC_STEP0_WHEAT_MARKET_LEAD_FIRES.get(player, 0) + 1)
+    return amended
 
 
 def component_firing_counts():
@@ -1654,6 +1691,10 @@ def component_firing_counts():
         "moon_v56_tomato_scarcity": {
             **MOON_V56_TOMATO_SCARCITY_FIRES,
             "seats": {seat: dict(row) for seat, row in _MOON_V56_TOMATO_STATE.items()},
+        },
+        "public_step0_wheat_market_lead": {
+            "firings": dict(PUBLIC_STEP0_WHEAT_MARKET_LEAD_FIRES),
+            "total": sum(PUBLIC_STEP0_WHEAT_MARKET_LEAD_FIRES.values()),
         },
     }
 
