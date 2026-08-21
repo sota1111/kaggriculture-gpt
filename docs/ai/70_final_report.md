@@ -1,7 +1,5 @@
-# Final Report — SOT-2850
+# Final Report — SOT-2885
 
-Cycle 7 completed through three child issues. The public-state action-capacity oracle was promoted as measurement infrastructure. The runtime dispatcher was rejected by a sealed same-seed/both-seat direct A/B: 2,880 firings improved rank/margin and reduced travel, but productive density fell by 0.004156 and repairs increased by 52. Confirm remained unused and the candidate remains default-OFF.
+Cycle 12 completed through SOT-2886, SOT-2888, and SOT-2887; all are Done and PRs #89–#91 are merged. The egg cohort did not fire in four current-public both-seat episodes, so no runtime candidate was created and the disjoint sealed cohort remains unopened.
 
-All 107 unit tests, Python compilation, submission validation, archive integrity, and exec compatibility pass. No promoted artifact exists and the daily budget is exhausted, so the governed Kaggle submission command was intentionally not run.
-
-Acceptance criteria are met: all children are Done, the evidence and effective configuration are recorded, the non-promotion/no-submit decision is explicit, and the rejection has direct intervention evidence.
+The result is `inconclusive`, not rejected/CLOSED. The champion remains unchanged. Parent verification detected stale packaged bytes and rebuilt `submission.tar.gz` from that same champion, restoring archive/content integrity without promoting a candidate. With neither leak-free CV improvement nor a candidate public signal, the private-anchored two-signal gate requires no submission. Quality gates and artifact contracts pass; aggregate evidence and Linear reporting are complete.
