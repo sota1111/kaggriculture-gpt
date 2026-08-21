@@ -1,0 +1,411 @@
+{
+  "artifact_selection": {
+    "champion_retained": true,
+    "champion_sha256_after": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f",
+    "champion_unchanged": true,
+    "promoted_candidate": null,
+    "submission_archive_modified": false
+  },
+  "axis": "sealed independent whole-agent private-proxy portfolio",
+  "candidates": {
+    "diversified_scheduler": {
+      "artifact": {
+        "bytes": 5817,
+        "enabled": true,
+        "path": "/tmp/sot2947-portfolio-wi4ehav8/diversified_scheduler.py",
+        "sha256": "e6a8178313bab4ef8d54c18d1a0837da3a14c3aaa96501e110250888a5a1b5e0"
+      },
+      "confirm": {
+        "status": "RESERVED_UNOPENED"
+      },
+      "decision": "inconclusive",
+      "real_firing": true,
+      "reason": "candidate did not earn sealed confirm or evidence is insufficient for rejection",
+      "screen": {
+        "rows": [
+          {
+            "candidate_margin": -303513.0,
+            "candidate_rank": 2,
+            "champion_margin": -254333.0,
+            "champion_rank": 2,
+            "episode": "screen-cok-tight",
+            "margin_delta": -49180.0,
+            "market_regime": "screen-tight-feed",
+            "opponent": "cok-v7",
+            "seat": 0,
+            "seed": 294301,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W31"
+          },
+          {
+            "candidate_margin": -303513.0,
+            "candidate_rank": 2,
+            "champion_margin": -254385.0,
+            "champion_rank": 2,
+            "episode": "screen-cok-tight",
+            "margin_delta": -49128.0,
+            "market_regime": "screen-tight-feed",
+            "opponent": "cok-v7",
+            "seat": 1,
+            "seed": 294301,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W31"
+          },
+          {
+            "candidate_margin": -165949.0,
+            "candidate_rank": 2,
+            "champion_margin": -143611.0,
+            "champion_rank": 2,
+            "episode": "screen-v17-glut",
+            "margin_delta": -22338.0,
+            "market_regime": "screen-premium-glut",
+            "opponent": "lonespear-v17",
+            "seat": 0,
+            "seed": 294303,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W33"
+          },
+          {
+            "candidate_margin": -165949.0,
+            "candidate_rank": 2,
+            "champion_margin": -143611.0,
+            "champion_rank": 2,
+            "episode": "screen-v17-glut",
+            "margin_delta": -22338.0,
+            "market_regime": "screen-premium-glut",
+            "opponent": "lonespear-v17",
+            "seat": 1,
+            "seed": 294303,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W33"
+          }
+        ],
+        "summary": {
+          "candidate_mean_rank": 2.0,
+          "champion_mean_rank": 2.0,
+          "episodes": 4,
+          "mean_margin_delta": -35746.0,
+          "p20_margin_delta": -49180.0,
+          "worst_margin_delta": -49180.0
+        }
+      },
+      "source": {
+        "boundary": "public one-unique-job-per-unit and seven-hands-per-day structural concepts; excluded source code route trace identity opponent_private future replay_bytes weights",
+        "default_enabled": false,
+        "implementation": "clean-room from public prose only",
+        "kaggle_submission": "NOT_PERFORMED",
+        "kernel_id": 129195991,
+        "license": "not declared in downloaded notebook metadata or notebook body",
+        "notebook_sha256": "e1b4928471f2eccd0a020f50f0732f74800ccbd6299adf805025e0dcee668566",
+        "redistribution": "not-authorized; downloaded notebook is not committed or packaged",
+        "snapshot_acquired_utc": "2026-08-21T19:43:00Z",
+        "source_url": "https://www.kaggle.com/code/ektarr/diversified-scheduler-baseline-kaggriculture"
+      },
+      "upstream_hash": "00b7f786d3dbaa503f9c628bafb19b3df6562a32758564a9aca92d63b5c2ba5f"
+    },
+    "strict_future": {
+      "artifact": {
+        "bytes": 89077,
+        "enabled": true,
+        "path": "/tmp/sot2947-portfolio-wi4ehav8/strict_future.py",
+        "sha256": "39593704b0872bbf047bdd88976fb461acc0e342daa1e4a000f06c6e8e76ff19"
+      },
+      "confirm": {
+        "status": "RESERVED_UNOPENED"
+      },
+      "decision": "inconclusive",
+      "real_firing": true,
+      "reason": "candidate did not earn sealed confirm or evidence is insufficient for rejection",
+      "screen": {
+        "rows": [
+          {
+            "candidate_margin": -254333.0,
+            "candidate_rank": 2,
+            "champion_margin": -254333.0,
+            "champion_rank": 2,
+            "episode": "screen-cok-tight",
+            "margin_delta": 0.0,
+            "market_regime": "screen-tight-feed",
+            "opponent": "cok-v7",
+            "seat": 0,
+            "seed": 294301,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W31"
+          },
+          {
+            "candidate_margin": -254385.0,
+            "candidate_rank": 2,
+            "champion_margin": -254385.0,
+            "champion_rank": 2,
+            "episode": "screen-cok-tight",
+            "margin_delta": 0.0,
+            "market_regime": "screen-tight-feed",
+            "opponent": "cok-v7",
+            "seat": 1,
+            "seed": 294301,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W31"
+          },
+          {
+            "candidate_margin": -143611.0,
+            "candidate_rank": 2,
+            "champion_margin": -143611.0,
+            "champion_rank": 2,
+            "episode": "screen-v17-glut",
+            "margin_delta": 0.0,
+            "market_regime": "screen-premium-glut",
+            "opponent": "lonespear-v17",
+            "seat": 0,
+            "seed": 294303,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W33"
+          },
+          {
+            "candidate_margin": -143611.0,
+            "candidate_rank": 2,
+            "champion_margin": -143611.0,
+            "champion_rank": 2,
+            "episode": "screen-v17-glut",
+            "margin_delta": 0.0,
+            "market_regime": "screen-premium-glut",
+            "opponent": "lonespear-v17",
+            "seat": 1,
+            "seed": 294303,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W33"
+          }
+        ],
+        "summary": {
+          "candidate_mean_rank": 2.0,
+          "champion_mean_rank": 2.0,
+          "episodes": 4,
+          "mean_margin_delta": 0.0,
+          "p20_margin_delta": 0.0,
+          "worst_margin_delta": 0.0
+        }
+      },
+      "source": {
+        "boundary": "sheep-first redirection within existing opening BUY_ANIMAL slots and current-public-state ordering of existing SELL slots; excluded: identity opponent_private future replay_bytes weights",
+        "default_enabled": false,
+        "implementation": "clean-room from public prose only",
+        "kaggle_submission": "NOT_PERFORMED",
+        "kernel_id": 129971739,
+        "license": "not declared in downloaded notebook metadata or notebook body",
+        "notebook_sha256": "e28aa997dc5317cad8e2a8ee5887efa7c12c40fc17e41af366f2723f29f21406",
+        "published_agent_sha256": "9bdfbafb6755067182d88ce594fd46fb1d712713ffd6931e83d5d50e84bc6fb2",
+        "redistribution": "not-authorized; source artifact is fetch-only and is not packaged",
+        "snapshot_acquired_utc": "2026-08-21T19:22:00Z",
+        "source_url": "https://www.kaggle.com/code/kaitofukami/15-16-strict-future-v25-meta-reset"
+      },
+      "upstream_hash": "ac94ffb9b2f15df33e11404c330a146efb7c9f0afa2f2340877e12fcfa066b56"
+    },
+    "v16_rc5": {
+      "artifact": {
+        "bytes": 90147,
+        "enabled": true,
+        "path": "/tmp/sot2947-portfolio-wi4ehav8/v16_rc5.py",
+        "sha256": "e6bf25dc0dcc4c7ea422013c3631e9e6cc96933325bd59ed872efa97081e4ada"
+      },
+      "confirm": {
+        "status": "RESERVED_UNOPENED"
+      },
+      "decision": "inconclusive",
+      "real_firing": true,
+      "reason": "candidate did not earn sealed confirm or evidence is insufficient for rejection",
+      "screen": {
+        "rows": [
+          {
+            "candidate_margin": -254333.0,
+            "candidate_rank": 2,
+            "champion_margin": -254333.0,
+            "champion_rank": 2,
+            "episode": "screen-cok-tight",
+            "margin_delta": 0.0,
+            "market_regime": "screen-tight-feed",
+            "opponent": "cok-v7",
+            "seat": 0,
+            "seed": 294301,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W31"
+          },
+          {
+            "candidate_margin": -254385.0,
+            "candidate_rank": 2,
+            "champion_margin": -254385.0,
+            "champion_rank": 2,
+            "episode": "screen-cok-tight",
+            "margin_delta": 0.0,
+            "market_regime": "screen-tight-feed",
+            "opponent": "cok-v7",
+            "seat": 1,
+            "seed": 294301,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W31"
+          },
+          {
+            "candidate_margin": -143611.0,
+            "candidate_rank": 2,
+            "champion_margin": -143611.0,
+            "champion_rank": 2,
+            "episode": "screen-v17-glut",
+            "margin_delta": 0.0,
+            "market_regime": "screen-premium-glut",
+            "opponent": "lonespear-v17",
+            "seat": 0,
+            "seed": 294303,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W33"
+          },
+          {
+            "candidate_margin": -143611.0,
+            "candidate_rank": 2,
+            "champion_margin": -143611.0,
+            "champion_rank": 2,
+            "episode": "screen-v17-glut",
+            "margin_delta": 0.0,
+            "market_regime": "screen-premium-glut",
+            "opponent": "lonespear-v17",
+            "seat": 1,
+            "seed": 294303,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_slice": "2026-W33"
+          }
+        ],
+        "summary": {
+          "candidate_mean_rank": 2.0,
+          "champion_mean_rank": 2.0,
+          "episodes": 4,
+          "mean_margin_delta": 0.0,
+          "p20_margin_delta": 0.0,
+          "worst_margin_delta": 0.0
+        }
+      },
+      "source": {
+        "boundary": "public herd milestones and current-observation inventory-feasible ordering of existing premium SELL slots; excluded: route trace compressed action table identity opponent_private future replay_bytes weights",
+        "default_enabled": false,
+        "implementation": "clean-room from public prose only",
+        "kaggle_submission": "NOT_PERFORMED",
+        "kernel_id": 130530296,
+        "license": "not declared in downloaded notebook metadata or notebook body",
+        "notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+        "published_agent_sha256": "8315d985716c625c31be795e51912276bdbd6cdcb37b2a02a8a1db49e5cd9154",
+        "redistribution": "not-authorized; source notebook and executable are fetch-only and are not packaged",
+        "snapshot_acquired_utc": "2026-08-21T19:33:00Z",
+        "source_url": "https://www.kaggle.com/code/boatlee/v16-rc5-high-score-8c-4s-premium-market-lead"
+      },
+      "upstream_hash": "8418cd507d26e18bbe45bd31393e2c4e6515c5335c36c891d3a3730dd8ae9a33"
+    }
+  },
+  "confirm_opened_for": [],
+  "frozen_artifacts": {
+    "champion": {
+      "path": "main.py",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    },
+    "diversified_scheduler": {
+      "path": "docs/measurements/SOT-2942/SOT-2946-diversified-scheduler.json",
+      "sha256": "00b7f786d3dbaa503f9c628bafb19b3df6562a32758564a9aca92d63b5c2ba5f"
+    },
+    "manifest": {
+      "path": "tests/fixtures/market_shift_oracle.json",
+      "sha256": "e69122a965cefa640c19acdc293eaafe0989c61c699fbc65c4a732916b54ef12"
+    },
+    "oracle": {
+      "path": "docs/measurements/SOT-2942/SOT-2943-market-shift-oracle.json",
+      "sha256": "573da6f3f27508b480d300ece3123242b5797a3dd96bce07161e290706b3b147"
+    },
+    "strict_future": {
+      "path": "docs/measurements/SOT-2942/SOT-2945-strict-future-meta-reset.json",
+      "sha256": "ac94ffb9b2f15df33e11404c330a146efb7c9f0afa2f2340877e12fcfa066b56"
+    },
+    "v16_rc5": {
+      "path": "docs/measurements/SOT-2942/SOT-2944-v16-rc5-portable.json",
+      "sha256": "8418cd507d26e18bbe45bd31393e2c4e6515c5335c36c891d3a3730dd8ae9a33"
+    }
+  },
+  "issue": "SOT-2947",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "preflight_checks": {
+    "all_upstream_passed": true,
+    "manifest_matches_oracle": true,
+    "no_prior_submission": true,
+    "oracle_candidate_hash_matches_champion": true,
+    "split_and_seal_valid": true,
+    "upstream_confirm_reserved": true,
+    "upstream_real_firing": true
+  },
+  "protocol": {
+    "hedge_policy": "old champion remains unchanged unless exactly one candidate passes both windows",
+    "opening_order": "all candidates screen first; confirm opens per candidate only after screen gate",
+    "primary_kpi": "rank or mean-margin uplift with non-regressing p20/worst tail",
+    "rejection_discipline": "requires same-identity A/B confirm regression and real-firing evidence",
+    "two_signal_gate": "private-proxy CV uplift plus public non-contradiction; no public score was available or selected on"
+  },
+  "validation": {
+    "checks": {
+      "artifact_provenance_complete": true,
+      "both_seats_per_identity": true,
+      "chronological_confirm": true,
+      "confirm_reserved": true,
+      "identity_complete": true,
+      "multiple_market_regimes": true,
+      "no_episode_overlap": true,
+      "no_lineage_overlap": true,
+      "no_market_regime_overlap": true,
+      "no_private_or_future_fields": true,
+      "no_seed_overlap": true,
+      "no_time_slice_overlap": true,
+      "official_market_params_only": true,
+      "regimes_declared": true,
+      "row_lineage_matches_artifact": true,
+      "schema_supported": true,
+      "seat_values_valid": true,
+      "windows_nonempty": true
+    },
+    "overlap": {
+      "episode": [],
+      "lineage": [],
+      "market_regime": [],
+      "seed": [],
+      "time_slice": []
+    },
+    "passed": true
+  }
+}
