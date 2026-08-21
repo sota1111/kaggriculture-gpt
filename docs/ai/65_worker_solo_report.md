@@ -1,42 +1,40 @@
-# Solo Worker Report — SOT-2938
+# Solo Worker Report — SOT-2945
 
 ## Summary
 
-Implemented a fresh closed-loop private-proxy oracle for the current champion. The oracle enforces opponent-lineage, episode, seed, and chronological time-slice separation between screen and confirm, pairs every identity across both seats, aggregates margin/rank/p20/worst by distribution, and reports confirm-minus-screen transfer stability. Candidate, opponent, engine, seed panel, and manifest hashes are pinned. Open-loop replay is labelled separately and excluded from transfer-trust.
+Implemented a deterministic, independently packaged Strict-Future meta-reset candidate. The referenced Kaggle notebook and embedded agent hashes are pinned, but because no license was declared, the committed policy is a clean-room implementation from public prose only. The repository champion and submission archive remain unchanged.
+
+The candidate is default-OFF. Its enabled artifact uses a bounded sheep-first opening redirection and reorders only existing SELL slots from current public price, inventory, and town demand. The chronological screen and reserved confirm identities are mechanically disjoint across lineage, episode, seed, seat, and time.
 
 ## Changed Files
 
-- `scripts/measure_private_proxy_oracle.py` — validation, engine execution, aggregation, provenance, and transfer-trust report.
-- `tests/fixtures/private_proxy_oracle.json` — four pinned opponent lineages and disjoint both-seat screen/confirm identities.
-- `tests/test_evaluate.py` — overlap rejection, both-seat coverage, and deterministic distribution aggregation tests.
-- `docs/measurements/SOT-2934/SOT-2938-private-proxy-oracle.json` — measured champion artifact.
-- `docs/ai/experiment_ledger.jsonl` — promoted oracle-axis result.
-- `README.md` — reproduction and evidence-boundary documentation.
-- `docs/ai/linear/SOT-2938.md` — issue-local lifecycle note.
+- `candidates/strict-future-meta-reset/` — clean-room policy, source/license boundary, and packaging notes.
+- `scripts/package_strict_future_meta_reset.py` — deterministic default-OFF/enabled artifact builder.
+- `scripts/measure_strict_future_meta_reset.py` — same-seed/both-seat chronological screen and targeted firing evidence.
+- `tests/fixtures/strict_future_meta_reset.json` — pre-registered screen/confirm identities.
+- `tests/test_strict_future_meta_reset.py` — split, default-OFF, firing, and committed-result tests.
+- `docs/measurements/SOT-2942/SOT-2945-strict-future-meta-reset.json` — measurement evidence.
+- `docs/ai/experiment_ledger.jsonl` — inconclusive axis entry.
 
-## Commands Run
+## Verification
 
-- `python3 -m compileall -q main.py scripts` — PASS.
-- `python3 -m unittest discover -s tests -v` — PASS, 141/141.
-- `bash scripts/build_submission.sh` and archive entry check — PASS.
-- `.venv/bin/python scripts/measure_private_proxy_oracle.py` twice — PASS; byte-identical SHA-256 `27d770e2b9c29a0ca8373f25abec478ee0c9f72d426d5df1d4866fbe6c17a273`.
-- `git diff --check` — PASS.
-- npm lint/typecheck/test/e2e — N/A; repository has no package manifest. Python compile/unit, submission contract, and real Kaggle-engine closed-loop runs are the repository-equivalent gates.
-
-## Acceptance Criteria
-
-- [x] entity/opponent lineage, episode, seed, and time-slice overlap are zero; seat leakage is controlled with complete same-identity both-seat pairs.
-- [x] both-seat closed-loop margin, rank, p20/worst tail, distribution aggregates, and transfer-trust are output.
-- [x] candidate/opponent/engine/seed-panel/manifest provenance and hashes are recorded; open-loop and closed-loop metrics are separate; screen/confirm policy is explicit.
-- [x] repository-equivalent compile, 141 tests, submission contract, real-engine run, deterministic rerun, and diff checks pass.
-- [x] `kaggle_submission` is `NOT_PERFORMED`.
+- 156 tests passed; 2 unrelated optional upstream-checkout tests skipped.
+- Python compilation passed.
+- Submission contract and exec compatibility passed for the enabled generated artifact.
+- `git diff --check` passed.
+- Screen: four 720-step episodes, same seeds in both seats, all `DONE/DONE`.
+- Candidate tied baseline: mean rank 2.0; mean/p20/worst margin -134584.5/-136016/-136016.
+- Natural screen decision-family delta was zero; this is recorded rather than hidden.
+- Targeted public-state interventions fired the independent gate in both seats while preserving order count and the SELL multiset.
+- Confirm outcomes remain unopened for SOT-2947; public-best was not used and no Kaggle submission occurred.
 
 ## Risks
 
-- The champion ranked second in all eight proxy episodes. This is evidence about the current proxy baseline, not a policy regression introduced by this evaluation-only change.
-- `cv_representative=false` remains: transfer stability is a private proxy and does not claim live leaderboard calibration.
+The natural screen did not exercise the reset and produced no uplift, so the axis is inconclusive and must remain default-OFF. Only the common portfolio gate may decide whether later confirm evidence warrants further consideration.
 
 ## Linear Report: PENDING
+
+Pending final lifecycle sync; this line is updated only after the completion comment succeeds.
 
 ## Acceptance: PASS
 

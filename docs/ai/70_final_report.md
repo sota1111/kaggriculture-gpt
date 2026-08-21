@@ -1,8 +1,6 @@
-# Final Report — SOT-2938
+# Final Report — SOT-2945
 
-The private-proxy oracle is implemented and accepted. It ran eight deterministic closed-loop matches across four pinned public lineages and four distribution regimes, with complete both-seat pairing and zero lineage/episode/seed/time-slice overlap between screen and confirm.
-
-Quality gates pass: Python compile, 141 unit tests, submission contract/archive check, real `kaggle-environments==1.32.4` runs, byte-identical repeat measurement, and diff review. No Kaggle submission was performed.
+SOT-2945 produced an independent default-OFF Strict-Future meta-reset candidate with a documented clean-room boundary, deterministic packaging, chronological screen/confirm isolation, both-seat firing evidence, and a committed measurement. All executable gates pass. The natural screen tied baseline and did not fire, so the experiment is honestly retained as inconclusive for the parent portfolio gate; confirm remains sealed and the champion/submission artifact are unchanged.
 
 ## Acceptance: PASS
 
