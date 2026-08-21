@@ -25,6 +25,7 @@ assignments. All four runs identified `market` as the first emitted divergent fa
 - `git diff --check`: PASS.
 - npm lint/typecheck/test/e2e: N/A; this repository is Python-only and has no `package.json`.
 - Kaggle submission: NOT PERFORMED.
+- GitHub: PR #93 merged as `23c3ad7`; required checks passed.
 
 ## Acceptance Criteria
 
@@ -39,6 +40,6 @@ assignments. All four runs identified `market` as the first emitted divergent fa
 The first divergence is observational attribution, not causal uplift. The conditional port and sealed
 promotion decision remain scoped to SOT-2907 and SOT-2908. Confirm identities were not consumed.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
