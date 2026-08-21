@@ -1,0 +1,35 @@
+{
+  "issue": "SOT-2888",
+  "cycle": 12,
+  "axis": "Moon V56 public-shop-conditioned coherent egg production cohort",
+  "decision": "inconclusive",
+  "runtime_change": "NOT_PERFORMED",
+  "reason": "The prerequisite SOT-2886 causal screen observed no live public prefix with two BAKERY/BRUNCH_SPOT shops. The fewer_than_two_egg_shops veto therefore suppressed every policy/seat cohort, leaving zero gate, production, sale, and decision-family-divergence events. The issue explicitly forbids adding runtime code without firing evidence.",
+  "prerequisite": {
+    "issue": "SOT-2886",
+    "measurement": "docs/measurements/SOT-2885/SOT-2886-egg-cohort-public-screen.json",
+    "screen_episodes": 4,
+    "same_seed_both_seat": true,
+    "egg_shop_counts": [1, 1, 0, 0],
+    "gate_firings": 0,
+    "production_actions": 0,
+    "egg_sale_quantity": 0,
+    "decision_family_divergence": {},
+    "result": "inconclusive"
+  },
+  "invariants": {
+    "main_py_unchanged": true,
+    "independent_flag_added": false,
+    "default_behavior_unchanged": true,
+    "existing_routes_unchanged": true,
+    "previously_rejected_axes_unchanged": true
+  },
+  "gate": {
+    "prerequisite_firing_support": false,
+    "candidate_ablation": "NOT_APPLICABLE_NO_CANDIDATE",
+    "rank_and_tail": "NOT_APPLICABLE_NO_CANDIDATE",
+    "confirm": "RESERVED_UNOPENED",
+    "rejected_or_closed": false,
+    "kaggle_submission": "NOT_PERFORMED"
+  }
+}
