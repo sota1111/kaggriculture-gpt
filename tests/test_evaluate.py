@@ -48,6 +48,43 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    @staticmethod
+    def _step0_market_obs(seat=0, step=0, money=500):
+        farms = [{"money": money, "farmer": [0, 0], "hands": [], "tiles": [[None]]},
+                 {"money": money, "farmer": [0, 0], "hands": [], "tiles": [[None]]}]
+        return {"player": seat, "step": step, "day": 0, "hour": step,
+                "turns_per_day": 24, "farms": farms,
+                "market": {"prices": {"WHEAT": 10}}}
+
+    def test_public_step0_wheat_market_lead_is_default_off_and_exact_control(self):
+        agent = load_agent(ROOT / "main.py")
+        baseline = {"farmer": ["EAST"], "hands": [["PASS"]],
+                    "market": [["BUY_SEED", "WHEAT", 2], ["HIRE"]]}
+        self.assertFalse(agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD)
+        self.assertIs(baseline, agent._public_step0_wheat_market_lead_action(
+            self._step0_market_obs(), baseline))
+        agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD = True
+        for obs in (self._step0_market_obs(step=1),
+                    self._step0_market_obs(money=49)):
+            self.assertIs(baseline, agent._public_step0_wheat_market_lead_action(obs, baseline))
+        self.assertEqual({"farmer": ["EAST"], "hands": [["PASS"]],
+                          "market": [["BUY_SEED", "WHEAT", 2], ["HIRE"]]}, baseline)
+
+    def test_public_step0_wheat_market_lead_fires_both_seats_and_only_changes_market(self):
+        for seat in (0, 1):
+            agent = load_agent(ROOT / "main.py")
+            agent.PUBLIC_STEP0_WHEAT_MARKET_LEAD = True
+            baseline = {"farmer": ["EAST"], "hands": [["NORTH"]],
+                        "market": [["BUY_SEED", "WHEAT", 2], ["HIRE"]]}
+            result = agent._public_step0_wheat_market_lead_action(
+                self._step0_market_obs(seat), baseline)
+            self.assertEqual(["BUY_PRODUCT", "WHEAT", 5], result["market"][0])
+            self.assertEqual(baseline["market"], result["market"][1:])
+            self.assertIs(baseline["farmer"], result["farmer"])
+            self.assertIs(baseline["hands"], result["hands"])
+            fires = agent.component_firing_counts()["public_step0_wheat_market_lead"]
+            self.assertEqual(1, fires["firings"][seat])
+
     def test_current_public_manifest_is_leak_free_and_confirm_reserved(self):
         manifest = json.loads((ROOT / "tests/fixtures/current_public_divergence.json").read_text())
         self.assertTrue(all(validate_current_public(manifest).values()))
