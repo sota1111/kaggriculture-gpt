@@ -1,0 +1,293 @@
+{
+  "axis": "fertilizer-constrained production architecture",
+  "bottleneck_attribution": {
+    "action_ablation": {
+      "collect_fertilizer_actions": 0,
+      "coverage": 0.3333333333333333,
+      "fertilize_actions": 4,
+      "fertilizer_demand": 12,
+      "missing_actions": 8,
+      "missing_supply": 0,
+      "stock_available": 12,
+      "verdict": "action-bound"
+    },
+    "firing_log": {
+      "action_caps": 0,
+      "cash_caps": 0,
+      "demand_caps": 4,
+      "firings": 4,
+      "last_plan": {
+        "action_cap": 30,
+        "actions_per_acre": 7,
+        "admitted": 7,
+        "cash": 562,
+        "cash_cap": 18,
+        "cash_runway": 101,
+        "crop": "STRAWBERRY",
+        "cycles": 2,
+        "fertilizer_available": 14,
+        "fertilizer_cap": 7,
+        "hire_cost": 1,
+        "remaining_turns": 144,
+        "requested": 10,
+        "shed_cap": 8,
+        "shed_capacity": 28,
+        "shed_used": 4,
+        "terminal_liquidation_slots": 9,
+        "usable_actions": 214,
+        "workers": 2
+      },
+      "plans": 4,
+      "shed_caps": 4,
+      "supply_caps": 4
+    },
+    "supply_ablation": {
+      "collect_fertilizer_actions": 0,
+      "coverage": 0.3333333333333333,
+      "fertilize_actions": 4,
+      "fertilizer_demand": 12,
+      "missing_actions": 0,
+      "missing_supply": 8,
+      "stock_available": 4,
+      "verdict": "supply-bound"
+    }
+  },
+  "constraints": [
+    "fertilizer supply",
+    "plant/fertilize/water/harvest action budget",
+    "seed cash runway",
+    "Fibonacci next-hire cost",
+    "shed headroom",
+    "terminal liquidation market slot"
+  ],
+  "effective_config": {
+    "CASH_RUNWAY_ACREAGE_EXPANSION": false,
+    "FERTILIZER_CONSTRAINED_PRODUCTION": false,
+    "FERTILIZER_COVERAGE": true,
+    "LAYOUT_AWARE_PRODUCTION_ARCHITECTURE": false,
+    "PRODUCTIVE_ACTION_CAPACITY": false
+  },
+  "effective_config_sha256": "2458a779d51382161ab853d246911961e8b8918a04fa89cf51cbbf77dac1a9fe",
+  "excluded_rejected_shapes": [
+    "fixed three-quadrant layout",
+    "44 strawberry acres",
+    "14 hands"
+  ],
+  "issue": "SOT-2940",
+  "kaggle_submission": "NOT_PERFORMED",
+  "result": "promoted",
+  "screen": {
+    "protocol": "same-seed direct A/B in both runtime seats",
+    "rows": [
+      {
+        "candidate": {
+          "fertilizer_coverage": 1.0,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1925,
+          "productive_completion": 7,
+          "requested_acreage": 7,
+          "seed_spend": 175,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "champion": {
+          "fertilizer_coverage": 0.7777777777777778,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1875,
+          "productive_completion": 7,
+          "requested_acreage": 9,
+          "seed_spend": 225,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "effective_plan": {
+          "action_cap": 46,
+          "actions_per_acre": 7,
+          "admitted": 7,
+          "cash": 561,
+          "cash_cap": 18,
+          "cash_runway": 102,
+          "crop": "STRAWBERRY",
+          "cycles": 2,
+          "fertilizer_available": 14,
+          "fertilizer_cap": 7,
+          "hire_cost": 2,
+          "remaining_turns": 144,
+          "requested": 9,
+          "shed_cap": 8,
+          "shed_capacity": 28,
+          "shed_used": 4,
+          "terminal_liquidation_slots": 9,
+          "usable_actions": 322,
+          "workers": 3
+        },
+        "same_seed": true,
+        "seat": 0,
+        "seed": 294001
+      },
+      {
+        "candidate": {
+          "fertilizer_coverage": 1.0,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1925,
+          "productive_completion": 7,
+          "requested_acreage": 7,
+          "seed_spend": 175,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "champion": {
+          "fertilizer_coverage": 0.7777777777777778,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1875,
+          "productive_completion": 7,
+          "requested_acreage": 9,
+          "seed_spend": 225,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "effective_plan": {
+          "action_cap": 46,
+          "actions_per_acre": 7,
+          "admitted": 7,
+          "cash": 561,
+          "cash_cap": 18,
+          "cash_runway": 102,
+          "crop": "STRAWBERRY",
+          "cycles": 2,
+          "fertilizer_available": 14,
+          "fertilizer_cap": 7,
+          "hire_cost": 2,
+          "remaining_turns": 144,
+          "requested": 9,
+          "shed_cap": 8,
+          "shed_capacity": 28,
+          "shed_used": 4,
+          "terminal_liquidation_slots": 9,
+          "usable_actions": 322,
+          "workers": 3
+        },
+        "same_seed": true,
+        "seat": 1,
+        "seed": 294001
+      },
+      {
+        "candidate": {
+          "fertilizer_coverage": 1.0,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1925,
+          "productive_completion": 7,
+          "requested_acreage": 7,
+          "seed_spend": 175,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "champion": {
+          "fertilizer_coverage": 0.7,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1850,
+          "productive_completion": 7,
+          "requested_acreage": 10,
+          "seed_spend": 250,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "effective_plan": {
+          "action_cap": 30,
+          "actions_per_acre": 7,
+          "admitted": 7,
+          "cash": 562,
+          "cash_cap": 18,
+          "cash_runway": 101,
+          "crop": "STRAWBERRY",
+          "cycles": 2,
+          "fertilizer_available": 14,
+          "fertilizer_cap": 7,
+          "hire_cost": 1,
+          "remaining_turns": 144,
+          "requested": 10,
+          "shed_cap": 8,
+          "shed_capacity": 28,
+          "shed_used": 4,
+          "terminal_liquidation_slots": 9,
+          "usable_actions": 214,
+          "workers": 2
+        },
+        "same_seed": true,
+        "seat": 0,
+        "seed": 294002
+      },
+      {
+        "candidate": {
+          "fertilizer_coverage": 1.0,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1925,
+          "productive_completion": 7,
+          "requested_acreage": 7,
+          "seed_spend": 175,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "champion": {
+          "fertilizer_coverage": 0.7,
+          "fertilizer_firings": 14,
+          "harvest_firings": 14,
+          "invalid_actions": 0,
+          "margin": 1850,
+          "productive_completion": 7,
+          "requested_acreage": 10,
+          "seed_spend": 250,
+          "terminal_liquidation_units": 21,
+          "water_firings": 14
+        },
+        "effective_plan": {
+          "action_cap": 30,
+          "actions_per_acre": 7,
+          "admitted": 7,
+          "cash": 562,
+          "cash_cap": 18,
+          "cash_runway": 101,
+          "crop": "STRAWBERRY",
+          "cycles": 2,
+          "fertilizer_available": 14,
+          "fertilizer_cap": 7,
+          "hire_cost": 1,
+          "remaining_turns": 144,
+          "requested": 10,
+          "shed_cap": 8,
+          "shed_capacity": 28,
+          "shed_used": 4,
+          "terminal_liquidation_slots": 9,
+          "usable_actions": 214,
+          "workers": 2
+        },
+        "same_seed": true,
+        "seat": 1,
+        "seed": 294002
+      }
+    ],
+    "summary": {
+      "candidate_fertilizer_firings": 56,
+      "candidate_mean_coverage": 1.0,
+      "episodes": 4,
+      "lower_tail_margin_delta": 50,
+      "mean_margin_delta": 62.5,
+      "productive_completion_delta": 0,
+      "worst_margin_delta": 50
+    }
+  }
+}

@@ -205,3 +205,17 @@ python3 scripts/measure_fertilizer_coverage.py \
 The report records coverage, `FERTILIZE`/`COLLECT_FERTILIZER`/stock/buy counts,
 rank and reward tails, runtime ratio, contract validity, and confirms that no
 Kaggle submission was performed.
+
+The independent `FERTILIZER_CONSTRAINED_PRODUCTION` candidate is default OFF.
+It works backward from the remaining worker-action budget and admits acreage
+only when plant, fertilize, water, and harvest can all complete within observed
+fertilizer supply, cash runway/next-hire cost, shed headroom, and terminal sale
+capacity. It has no fixed quadrant, acreage, hand count, or route. Reproduce the
+same-seed, both-seat architecture screen and bottleneck ablations with:
+
+```bash
+python3 scripts/measure_fertilizer_constrained_production.py
+```
+
+The committed report records the firing plan, productive completion, coverage,
+margin/tail, effective configuration, and `NOT_PERFORMED` Kaggle submission.

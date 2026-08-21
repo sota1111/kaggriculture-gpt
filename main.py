@@ -18,6 +18,7 @@ PUBLIC_SCHEDULER_COMPONENT = True
 MULTI_STOP_TASK_BUNDLING = True
 PROJECTED_MARKET_EXECUTION = False
 FERTILIZER_COVERAGE = True
+FERTILIZER_CONSTRAINED_PRODUCTION = False
 STAGGERED_STRAWBERRY_RENEWAL = True
 CARE_LIVESTOCK_COMPONENT = True
 FEED_ECONOMIC_DECISION = False
@@ -154,6 +155,11 @@ PUBLIC_SCHEDULER_FIRES = 0
 MULTI_STOP_TASK_BUNDLE_FIRES = 0
 PROJECTED_MARKET_FIRES = 0
 FERTILIZER_COVERAGE_FIRES = 0
+FERTILIZER_CONSTRAINED_PRODUCTION_FIRES = 0
+FERTILIZER_CONSTRAINED_PRODUCTION_TELEMETRY = {
+    "plans": 0, "demand_caps": 0, "supply_caps": 0, "action_caps": 0,
+    "cash_caps": 0, "shed_caps": 0, "last_plan": {},
+}
 STAGGERED_STRAWBERRY_RENEWAL_FIRES = 0
 CARE_LIVESTOCK_FIRES = 0
 FEED_ECONOMIC_FIRES = 0
@@ -1029,6 +1035,95 @@ def _staggered_strawberry_seed_budget(obs, spec, available_seeds, fertilizer_ava
     return budget
 
 
+def _fertilizer_constrained_production_plan(obs, crop, spec, requested_seeds,
+                                            fertilizer_available):
+    """Admit only acreage whose recurring crop cycle is budget-feasible.
+
+    This is deliberately independent from the rejected fixed-layout and generic
+    capacity controllers.  It works backwards from the remaining public clock:
+    every admitted ongoing crop must have worker actions for plant, fertilize,
+    water and harvest, enough observed fertilizer, cash runway after seed/hire
+    cost, and shed room or a terminal liquidation slot.  The plan contains no
+    fixed acreage, quadrant, hand count, route, replay identity, or future data.
+    """
+    global FERTILIZER_CONSTRAINED_PRODUCTION_FIRES
+    if not FERTILIZER_CONSTRAINED_PRODUCTION:
+        return None
+    player = int(obs.get("player", 0))
+    me = obs["farms"][player]
+    day = max(0, int(obs.get("day", 0)))
+    total_days = max(day + 1, int(obs.get("total_days", 30)))
+    turns_per_day = max(1, int(obs.get("turns_per_day", 24)))
+    hour = max(0, int(obs.get("hour", 0)))
+    remaining_turns = max(0, (total_days - day - 1) * turns_per_day
+                          + max(0, turns_per_day - hour))
+    workers = 1 + len(me.get("hands", ()))
+    tiles = me.get("tiles", ())
+    existing = [tile for row in tiles for tile in row
+                if isinstance(tile, dict) and tile.get("kind") == "PLANT"]
+    existing_due = sum(
+        int(int(tile.get("yield_units", 0)) > 0)
+        + int(not tile.get("watered_today", False))
+        + int(int(tile.get("fertilized_until_day", day)) < day)
+        for tile in existing
+    )
+    # Reserve one quarter of capacity for travel/collision recovery.  A new
+    # ongoing crop then consumes plant + fertilize + water + harvest for every
+    # harvest cycle that can still complete.
+    usable_actions = max(0, (workers * remaining_turns * 3) // 4 - existing_due)
+    cycles = max(1, _remaining_harvests(spec, day, total_days))
+    actions_per_acre = 1 + 3 * cycles
+    action_cap = usable_actions // actions_per_acre
+    fertilizer_cap = max(0, int(fertilizer_available)) // cycles
+
+    money = max(0, int(me.get("money", 0)))
+    seed_price = max(0, int(spec.get("seed_price", 0)))
+    hands = len(me.get("hands", ()))
+    hire_cost = _hire_cost(int(me.get("hires_today", hands))) if hands < MIN_HAND_TARGET else 0
+    runway = MIN_CASH_RESERVE + hire_cost
+    cash_cap = max(0, money - runway) // max(1, seed_price)
+
+    private = obs.get("private", {})
+    shed = private.get("shed", {})
+    used_shed = sum(max(0, int(value)) for value in shed.values()) if isinstance(shed, dict) else 0
+    shed_capacity = max(0, int(obs.get("shed_capacity", me.get("shed_capacity", 0))))
+    liquidation_slots = max(0, MAX_MARKET_ORDERS - 1)
+    yield_per_acre = max(1, int(spec.get("expected_yield", 1)))
+    if shed_capacity > 0:
+        shed_headroom = max(0, shed_capacity - used_shed)
+        # One terminal SELL can drain this crop; until then at least one harvest
+        # wave must fit in the shed.
+        shed_cap = shed_headroom // yield_per_acre if liquidation_slots else 0
+    else:
+        shed_cap = max(0, int(requested_seeds))
+
+    requested = max(0, int(requested_seeds))
+    admitted = min(requested, action_cap, cash_cap, shed_cap)
+    if crop == "STRAWBERRY":
+        admitted = min(admitted, fertilizer_cap)
+    plan = {
+        "crop": crop, "requested": requested, "admitted": admitted,
+        "workers": workers, "remaining_turns": remaining_turns,
+        "cycles": cycles, "actions_per_acre": actions_per_acre,
+        "usable_actions": usable_actions, "action_cap": action_cap,
+        "fertilizer_available": max(0, int(fertilizer_available)),
+        "fertilizer_cap": fertilizer_cap, "cash": money, "cash_runway": runway,
+        "hire_cost": hire_cost, "cash_cap": cash_cap, "shed_used": used_shed,
+        "shed_capacity": shed_capacity, "shed_cap": shed_cap,
+        "terminal_liquidation_slots": liquidation_slots,
+    }
+    FERTILIZER_CONSTRAINED_PRODUCTION_FIRES += 1
+    telemetry = FERTILIZER_CONSTRAINED_PRODUCTION_TELEMETRY
+    telemetry["plans"] += 1
+    telemetry["demand_caps"] += int(admitted < requested)
+    telemetry["supply_caps"] += int(crop == "STRAWBERRY" and fertilizer_cap < requested)
+    telemetry["action_caps"] += int(action_cap < requested)
+    telemetry["cash_caps"] += int(cash_cap < requested)
+    telemetry["shed_caps"] += int(shed_cap < requested)
+    telemetry["last_plan"] = plan
+    return plan
+
+
 def _mixed_farm_route(obs, specs, seeds):
     """Build a bounded long-horizon route from public state only.
 
@@ -1511,6 +1606,11 @@ def _policy_action(obs):
         planting_seeds = _staggered_strawberry_seed_budget(
             {**obs, "total_days": total_days}, crop_specs[crop], seeds,
             sum(fertilizer_by_worker))
+    fertilizer_plan = _fertilizer_constrained_production_plan(
+        {**obs, "total_days": total_days}, crop, crop_specs[crop], planting_seeds,
+        sum(fertilizer_by_worker))
+    if fertilizer_plan is not None:
+        planting_seeds = fertilizer_plan["admitted"]
     capacity = None
     if PRODUCTIVE_ACTION_CAPACITY:
         capacity = _productive_capacity_limit({**obs, "total_days": total_days}, history)
@@ -1604,6 +1704,11 @@ def _policy_action(obs):
         hand_target = compact["hand_target"]
     if expansion["serviceable_hands"] is not None:
         hand_target = min(hand_target, expansion["serviceable_hands"])
+    if fertilizer_plan is not None:
+        # Do not incur another Fibonacci hire unless the admitted acreage can
+        # repay it while retaining the explicit cash runway.
+        repayable_hands = max(0, ceil(fertilizer_plan["admitted"] / 3))
+        hand_target = min(hand_target, repayable_hands)
     if len(hands) < hand_target:
         cost = _hire_cost(hires_today)
         opportunity = expected_crop_margin * harvests_left * (1 + pressure["field_demand"])
@@ -1653,6 +1758,11 @@ def component_firing_counts():
         "multi_stop_task_bundling": MULTI_STOP_TASK_BUNDLE_FIRES,
         "projected_market": PROJECTED_MARKET_FIRES,
         "fertilizer_coverage": FERTILIZER_COVERAGE_FIRES,
+        "fertilizer_constrained_production": {
+            "firings": FERTILIZER_CONSTRAINED_PRODUCTION_FIRES,
+            **FERTILIZER_CONSTRAINED_PRODUCTION_TELEMETRY,
+            "last_plan": dict(FERTILIZER_CONSTRAINED_PRODUCTION_TELEMETRY["last_plan"]),
+        },
         "staggered_strawberry_renewal": STAGGERED_STRAWBERRY_RENEWAL_FIRES,
         "care_livestock": CARE_LIVESTOCK_FIRES,
         "feed_economic": FEED_ECONOMIC_FIRES,

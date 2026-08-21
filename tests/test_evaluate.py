@@ -44,6 +44,7 @@ from scripts.measure_egg_cohort_sealed_panel import decide as decide_egg_sealed
 from scripts.measure_current_public_divergence import action_families, first_decision_divergence, summarize as summarize_current_public, validate_manifest as validate_current_public
 from scripts.measure_post_opening_continuation import family as continuation_family, first_divergence as continuation_divergence, summarize as summarize_continuation, validate_manifest as validate_continuation
 from scripts.measure_public_step0_wheat_sealed_panel import canonical_sha256 as public_wheat_config_sha256
+from scripts.measure_fertilizer_constrained_production import measure as measure_fertilizer_production
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +52,24 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_fertilizer_constrained_plan_is_default_off_and_budget_feasible(self):
+        agent = load_agent(ROOT / "main.py")
+        self.assertFalse(agent.FERTILIZER_CONSTRAINED_PRODUCTION)
+        report = measure_fertilizer_production(ROOT / "main.py")
+        self.assertEqual("promoted", report["result"])
+        self.assertEqual({0, 1}, {row["seat"] for row in report["screen"]["rows"]})
+        self.assertTrue(all(row["same_seed"] for row in report["screen"]["rows"]))
+        for row in report["screen"]["rows"]:
+            plan = row["effective_plan"]
+            self.assertLessEqual(plan["admitted"], plan["action_cap"])
+            self.assertLessEqual(plan["admitted"], plan["fertilizer_cap"])
+            self.assertLessEqual(plan["admitted"], plan["cash_cap"])
+            self.assertLessEqual(plan["admitted"], plan["shed_cap"])
+        self.assertEqual("supply-bound", report["bottleneck_attribution"]["supply_ablation"]["verdict"])
+        self.assertEqual("action-bound", report["bottleneck_attribution"]["action_ablation"]["verdict"])
+        self.assertEqual("NOT_PERFORMED", report["kaggle_submission"])
+        self.assertFalse(report["effective_config"]["FERTILIZER_CONSTRAINED_PRODUCTION"])
+
     def test_post_opening_manifest_is_isolated_and_confirm_sealed(self):
         manifest = json.loads((ROOT / "tests/fixtures/post_opening_continuation.json").read_text())
         checks = validate_continuation(manifest)
