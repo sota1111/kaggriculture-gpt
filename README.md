@@ -15,6 +15,14 @@ promoted: upstream's Apache notice licenses attributed route portions only,
 not the independently written whole-agent controller. See
 `docs/measurements/SOT-2934/SOT-2939-v7-portable-hedge.json`.
 
+The V16-RC5 8C/4S premium-market direction is also packaged independently
+under `candidates/v16-rc5-portable/`. The downloaded public notebook declares
+no license, so its executable route is fetch-only; the committed candidate is
+a clean-room, default-OFF implementation of only the published herd milestones
+and inventory-feasible premium sale ordering. Its screen evidence is recorded
+at `docs/measurements/SOT-2942/SOT-2944-v16-rc5-portable.json`; confirm remains
+reserved for the common SOT-2947 portfolio gate.
+
 Submit:
 
 ```bash

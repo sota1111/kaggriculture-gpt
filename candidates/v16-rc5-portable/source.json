@@ -1,0 +1,13 @@
+{
+  "source_url": "https://www.kaggle.com/code/boatlee/v16-rc5-high-score-8c-4s-premium-market-lead",
+  "kernel_id": 130530296,
+  "snapshot_acquired_utc": "2026-08-21T19:33:00Z",
+  "notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+  "published_agent_sha256": "8315d985716c625c31be795e51912276bdbd6cdcb37b2a02a8a1db49e5cd9154",
+  "license": "not declared in downloaded notebook metadata or notebook body",
+  "redistribution": "not-authorized; source notebook and executable are fetch-only and are not packaged",
+  "implementation": "clean-room from public prose only",
+  "boundary": "public herd milestones and current-observation inventory-feasible ordering of existing premium SELL slots; excluded: route trace compressed action table identity opponent_private future replay_bytes weights",
+  "default_enabled": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}
