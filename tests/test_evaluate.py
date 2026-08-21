@@ -32,6 +32,7 @@ from scripts.measure_winner_sequence_support import measure as measure_winner_se
 from scripts.measure_sequence_planner import measure as measure_sequence_planner, planner_observation
 from scripts.measure_sequence_planner_sealed_panel import gate as sequence_planner_sealed_gate
 from scripts.measure_layout_completion_oracle import measure as measure_layout_completion, validate_fixture as validate_layout_fixture
+from scripts.measure_layout_aware_production import targeted as layout_production_trace, gate as layout_production_gate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,6 +40,23 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_layout_aware_production_fires_both_seats_and_caps_deadline_demand(self):
+        trace = layout_production_trace(ROOT / "main.py")
+        self.assertTrue(trace["both_seats"])
+        self.assertTrue(trace["fired"])
+        self.assertTrue(trace["demand_capped"])
+        self.assertTrue(trace["pasture_placed"])
+        self.assertTrue(trace["deterministic"])
+
+    def test_layout_aware_production_gate_requires_rank_or_reward_uplift(self):
+        paired = {"checks": {"same_seed_direct_ab": True, "both_seats": True},
+                  "summary": {"lower_tail_reward_delta": 0, "worst_reward_delta": 0,
+                              "mean_candidate_rank": 1, "mean_reward_delta": 0}}
+        reasons = layout_production_gate(paired, {"both_seats": True, "fired": True,
+                                                  "demand_capped": True, "pasture_placed": True,
+                                                  "deterministic": True})
+        self.assertIn("rank/reward did not improve", reasons)
+
     def test_layout_completion_oracle_is_isolated_and_records_family_deltas(self):
         fixture = json.loads((ROOT / "tests/fixtures/layout_completion_oracle.json").read_text())
         first = measure_layout_completion(ROOT / "main.py", fixture)

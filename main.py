@@ -29,6 +29,7 @@ PUBLIC_SHOP_PREFIX_ROUTE_SELECTOR = False
 COMPACT_REPLAY_POLICY = False
 SEQUENCE_PRECURSOR_POLICY = False
 RECEDING_HORIZON_SEQUENCE_PLANNER = False
+LAYOUT_AWARE_PRODUCTION_ARCHITECTURE = False
 SEQUENCE_PLANNER_HORIZON = 3
 HISTORY_LIMIT = 48
 
@@ -148,6 +149,11 @@ SEQUENCE_PRECURSOR_ECONOMIC_REACHED = 0
 SEQUENCE_PLANNER_FIRES = 0
 SEQUENCE_PLANNER_REPAIRS = 0
 SEQUENCE_PLANNER_MULTI_STEP_FIRES = 0
+LAYOUT_AWARE_PRODUCTION_FIRES = 0
+LAYOUT_AWARE_PRODUCTION_TELEMETRY = {
+    "demand_caps": 0, "shed_weighted_assignments": 0, "pasture_placements": 0,
+    "last_plan": {},
+}
 
 _MILK_SUPPORT_SHOPS = {"PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"}
 _SHOP_PREFIX_ROUTES = {
@@ -565,7 +571,8 @@ def _action_at(tile, day, available_seeds, crop, crop_specs, fertilizer_availabl
     return ["PASS"], available_seeds, fertilizer_available
 
 
-def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fertilizer_by_worker=()):
+def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12,
+                  fertilizer_by_worker=(), layout_plan=None):
     global PUBLIC_SCHEDULER_FIRES, MULTI_STOP_TASK_BUNDLE_FIRES
     global CAPACITY_DISPATCHER_FIRES
     tiles = me["tiles"]
@@ -690,11 +697,13 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
                 )
                 if assigned_same_tier >= tier_budgets.get(priority, 0):
                     continue
+            shed_distance = abs(tx - layout_plan["shed"][0]) + abs(ty - layout_plan["shed"][1]) if layout_plan else 0
+            layout_cost = shed_distance * 3 if layout_plan and priority == 4 else 0
             cost = (
                 future_cost[0] + conflict,
                 future_cost[1] + overdue,
                 future_cost[2] + priority * 100 + distance * (4 - min(priority, 3))
-                + bundled_tail_cost(task_index) + density_cost,
+                + bundled_tail_cost(task_index) + density_cost + layout_cost,
             )
             proposal = cost, (task_index,) + future_choices
             if best is None or proposal < best:
@@ -752,6 +761,83 @@ def _plan_workers(me, day, seeds, crop, crop_specs, hour=0, turns_per_day=12, fe
         else:
             reserved_moves.add(destination)
     return actions
+
+
+def _layout_aware_production_plan(obs, requested_seeds):
+    """Bound planting demand by executable service capacity and shed logistics.
+
+    The component consumes only the current public board, worker positions and
+    clock.  It is an upstream demand/layout architecture: its output caps the
+    planting demand passed to the dispatcher and supplies a shed-distance cost
+    for placement, rather than changing dispatcher priority weights.
+    """
+    global LAYOUT_AWARE_PRODUCTION_FIRES
+    if not LAYOUT_AWARE_PRODUCTION_ARCHITECTURE:
+        return None
+    me = obs["farms"][int(obs["player"])]
+    tiles = me.get("tiles", [])
+    workers = [me.get("farmer", [0, 0]), *me.get("hands", [])]
+    turns_per_day = max(1, int(obs.get("turns_per_day", 24)))
+    total_steps = max(0, int(obs.get("total_days", 30)) * turns_per_day)
+    step = int(obs.get("step", int(obs.get("day", 0)) * turns_per_day + int(obs.get("hour", 0))))
+    remaining = max(0, total_steps - step)
+    shed = tuple(int(value) for value in me.get("shed_position", [0, 0])[:2])
+    service_demand = 0
+    planted = 0
+    empty_distances = []
+    for y, row in enumerate(tiles):
+        for x, tile in enumerate(row):
+            if isinstance(tile, dict) and tile.get("kind") == "PLANT":
+                planted += 1
+                if (int(tile.get("yield_units", 0)) > 0 or not tile.get("watered_today", False)
+                        or int(tile.get("fertilized_until_day", int(obs.get("day", 0)))) < int(obs.get("day", 0))):
+                    service_demand += 1
+            elif tile is None:
+                empty_distances.append(abs(x - shed[0]) + abs(y - shed[1]))
+    # Each new crop needs planting plus at least water/harvest service.  Reserve
+    # current due work first and admit only demand executable before deadline.
+    action_capacity = max(0, len(workers) * remaining - service_demand)
+    completion_cap = min(len(empty_distances), action_capacity // 3)
+    demand = min(max(0, int(requested_seeds)), completion_cap)
+    plan = {
+        "shed": shed, "requested": max(0, int(requested_seeds)), "admitted": demand,
+        "existing_crops": planted, "service_demand": service_demand,
+        "remaining_actions": action_capacity,
+        "nearest_open_distance": min(empty_distances, default=None),
+    }
+    LAYOUT_AWARE_PRODUCTION_FIRES += 1
+    LAYOUT_AWARE_PRODUCTION_TELEMETRY["demand_caps"] += int(demand < max(0, int(requested_seeds)))
+    LAYOUT_AWARE_PRODUCTION_TELEMETRY["shed_weighted_assignments"] += int(bool(demand and empty_distances))
+    LAYOUT_AWARE_PRODUCTION_TELEMETRY["last_plan"] = dict(plan)
+    return plan
+
+
+def _layout_aware_pasture_action(obs, actions, plan):
+    """Place one publicly-demanded pasture at the nearest shed-side tile."""
+    if plan is None or not obs.get("animals"):
+        return actions
+    me = obs["farms"][int(obs["player"])]
+    tiles = me.get("tiles", [])
+    if any(isinstance(tile, dict) and tile.get("kind") == "PASTURE"
+           for row in tiles for tile in row):
+        return actions
+    shed = plan["shed"]
+    empty = sorted((abs(x - shed[0]) + abs(y - shed[1]), y, x)
+                   for y, row in enumerate(tiles) for x, tile in enumerate(row)
+                   if tile is None)
+    if not empty:
+        return actions
+    _, ty, tx = empty[0]
+    workers = [me.get("farmer", [0, 0]), *me.get("hands", [])]
+    choice = min((abs(int(pos[0]) - tx) + abs(int(pos[1]) - ty), index)
+                 for index, pos in enumerate(workers))[1]
+    amended = list(actions)
+    position = tuple(workers[choice])
+    amended[choice] = (["BUILD_PASTURE"] if position == (tx, ty)
+                       else _move(position, (tx, ty)))
+    if amended[choice][0] == "BUILD_PASTURE":
+        LAYOUT_AWARE_PRODUCTION_TELEMETRY["pasture_placements"] += 1
+    return amended
 
 
 def _projected_shed_inventory(private, actions):
@@ -1256,9 +1342,13 @@ def _policy_action(obs):
         capacity = _productive_capacity_limit({**obs, "total_days": total_days}, history)
         planting_seeds = min(planting_seeds, max(
             0, capacity["acreage_limit"] - capacity["observed_acreage"]))
+    layout_plan = _layout_aware_production_plan(obs, planting_seeds)
+    if layout_plan is not None:
+        planting_seeds = layout_plan["admitted"]
     actions = _plan_workers(
         me, day, planting_seeds, crop, crop_specs, int(obs.get("hour", 0)),
-        int(obs.get("turns_per_day", 12)), fertilizer_by_worker)
+        int(obs.get("turns_per_day", 12)), fertilizer_by_worker, layout_plan)
+    actions = _layout_aware_pasture_action(obs, actions, layout_plan)
     actions = _sequence_planner_actions(obs, actions, crop, crop_specs)
     actions = _sequence_precursor_actions(obs, actions)
     actions, overflow_orders = _protect_shed_capacity(obs, actions, crop_specs)
@@ -1384,6 +1474,11 @@ def component_firing_counts():
             "repairs": SEQUENCE_PLANNER_REPAIRS,
             "multi_step_firings": SEQUENCE_PLANNER_MULTI_STEP_FIRES,
             "horizon": SEQUENCE_PLANNER_HORIZON,
+        },
+        "layout_aware_production": {
+            "firings": LAYOUT_AWARE_PRODUCTION_FIRES,
+            **LAYOUT_AWARE_PRODUCTION_TELEMETRY,
+            "last_plan": dict(LAYOUT_AWARE_PRODUCTION_TELEMETRY["last_plan"]),
         },
     }
 

@@ -1,0 +1,419 @@
+{
+  "ablation_flag": "LAYOUT_AWARE_PRODUCTION_ARCHITECTURE",
+  "axis": "shed-centric layout-aware production architecture",
+  "confirm": {
+    "direct_ab": {
+      "checks": {
+        "both_seats": true,
+        "deterministic_episode_ids": true,
+        "paired_non_regression": true,
+        "same_seed_direct_ab": true,
+        "terminal_bank_reward": true
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v18-774b260|0|277011|11",
+          "opponent": "lonespear-v18-774b260",
+          "reward_delta": 26,
+          "seat": 0,
+          "seed": 277011,
+          "time_index": 11
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v18-774b260|1|277011|11",
+          "opponent": "lonespear-v18-774b260",
+          "reward_delta": 26,
+          "seat": 1,
+          "seed": 277011,
+          "time_index": 11
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v23-774b260|0|277012|12",
+          "opponent": "lonespear-v23-774b260",
+          "reward_delta": 26,
+          "seat": 0,
+          "seed": 277012,
+          "time_index": 12
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v23-774b260|1|277012|12",
+          "opponent": "lonespear-v23-774b260",
+          "reward_delta": 26,
+          "seat": 1,
+          "seed": 277012,
+          "time_index": 12
+        }
+      ],
+      "summary": {
+        "candidate_wins_or_ties": 4,
+        "episode_count": 4,
+        "lower_tail_reward_delta": 26.0,
+        "mean_candidate_rank": 1.0,
+        "mean_reward_delta": 26.0,
+        "worst_reward_delta": 26.0
+      }
+    },
+    "gate_reasons": []
+  },
+  "default_enabled": false,
+  "gate_reasons": [],
+  "information_boundary": "current public board, worker positions, shed position, and clock only",
+  "issue": "SOT-2860",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "result": "promoted",
+  "runtime_candidate_retained": true,
+  "screen": {
+    "direct_ab": {
+      "checks": {
+        "both_seats": true,
+        "deterministic_episode_ids": true,
+        "paired_non_regression": true,
+        "same_seed_direct_ab": true,
+        "terminal_bank_reward": true
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "cok-v7-58c91c3|0|277001|1",
+          "opponent": "cok-v7-58c91c3",
+          "reward_delta": 26,
+          "seat": 0,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "cok-v7-58c91c3|1|277001|1",
+          "opponent": "cok-v7-58c91c3",
+          "reward_delta": 26,
+          "seat": 1,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v17-774b260|0|277002|2",
+          "opponent": "lonespear-v17-774b260",
+          "reward_delta": 26,
+          "seat": 0,
+          "seed": 277002,
+          "time_index": 2
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 355,
+            "discarded_units": 0,
+            "final_assets": 6709,
+            "harvested": 332,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6709,
+            "productive_actions": 1447,
+            "profit": 3709,
+            "reward": 6709
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 2,
+          "episode_id": "lonespear-v17-774b260|1|277002|2",
+          "opponent": "lonespear-v17-774b260",
+          "reward_delta": 26,
+          "seat": 1,
+          "seed": 277002,
+          "time_index": 2
+        }
+      ],
+      "summary": {
+        "candidate_wins_or_ties": 4,
+        "episode_count": 4,
+        "lower_tail_reward_delta": 26.0,
+        "mean_candidate_rank": 1.0,
+        "mean_reward_delta": 26.0,
+        "worst_reward_delta": 26.0
+      }
+    },
+    "gate_reasons": []
+  },
+  "targeted_intervention": {
+    "both_seats": true,
+    "demand_capped": true,
+    "deterministic": true,
+    "fired": true,
+    "pasture_placed": true,
+    "rows": [
+      {
+        "action": {
+          "farmer": [
+            "BUILD_PASTURE"
+          ],
+          "hands": [
+            [
+              "PASS"
+            ]
+          ],
+          "market": []
+        },
+        "deterministic": true,
+        "seat": 0,
+        "telemetry": {
+          "demand_caps": 1,
+          "firings": 1,
+          "last_plan": {
+            "admitted": 0,
+            "existing_crops": 1,
+            "nearest_open_distance": 0,
+            "remaining_actions": 1,
+            "requested": 8,
+            "service_demand": 1,
+            "shed": [
+              0,
+              0
+            ]
+          },
+          "pasture_placements": 1,
+          "shed_weighted_assignments": 0
+        }
+      },
+      {
+        "action": {
+          "farmer": [
+            "BUILD_PASTURE"
+          ],
+          "hands": [
+            [
+              "PASS"
+            ]
+          ],
+          "market": []
+        },
+        "deterministic": true,
+        "seat": 1,
+        "telemetry": {
+          "demand_caps": 1,
+          "firings": 1,
+          "last_plan": {
+            "admitted": 0,
+            "existing_crops": 1,
+            "nearest_open_distance": 0,
+            "remaining_actions": 1,
+            "requested": 8,
+            "service_demand": 1,
+            "shed": [
+              0,
+              0
+            ]
+          },
+          "pasture_placements": 1,
+          "shed_weighted_assignments": 0
+        }
+      }
+    ]
+  }
+}
