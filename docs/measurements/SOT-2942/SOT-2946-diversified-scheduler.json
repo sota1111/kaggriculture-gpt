@@ -1,0 +1,251 @@
+{
+  "actual_engine": "1.32.4",
+  "artifacts": {
+    "candidate": {
+      "bytes": 5817,
+      "enabled": true,
+      "path": "/tmp/sot2946-sdnzq0z4/candidate.py",
+      "sha256": "e6a8178313bab4ef8d54c18d1a0837da3a14c3aaa96501e110250888a5a1b5e0"
+    },
+    "policy_sha256": "55d8ee2efa11b22de887ab8c43840ce5c964e26f6d1508a5b4dd8d97cfebfb52"
+  },
+  "champion_hedge": {
+    "modified": false,
+    "path": "main.py"
+  },
+  "checks": {
+    "clean_room_required": true,
+    "confirm_reserved": true,
+    "default_off": true,
+    "engine_pinned": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "screen_confirm_disjoint": true,
+    "source_license_hash_recorded": true
+  },
+  "confirm": {
+    "outcomes": null,
+    "status": "RESERVED_UNOPENED_FOR_SOT-2947"
+  },
+  "decision": "retain-default-off-for-parent-portfolio",
+  "issue": "SOT-2946",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_selection": false,
+  "runtime_contract": "PASS",
+  "screen": {
+    "both_seats": true,
+    "candidate": {
+      "rows": [
+        {
+          "candidate_rank": 2,
+          "collisions": 0,
+          "episode": "div-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -177984.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 180324.0,
+          "productive_actions": 409,
+          "reward": 2340.0,
+          "runtime_seconds": 3.0011129390913993,
+          "seat": 0,
+          "seed": 294601,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32",
+          "travel_actions": 106
+        },
+        {
+          "candidate_rank": 2,
+          "collisions": 0,
+          "episode": "div-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -177984.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 180324.0,
+          "productive_actions": 411,
+          "reward": 2340.0,
+          "runtime_seconds": 2.990797992097214,
+          "seat": 1,
+          "seed": 294601,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32",
+          "travel_actions": 104
+        },
+        {
+          "candidate_rank": 2,
+          "collisions": 0,
+          "episode": "div-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -129857.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 132187.0,
+          "productive_actions": 432,
+          "reward": 2330.0,
+          "runtime_seconds": 2.7925623198971152,
+          "seat": 0,
+          "seed": 294603,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34",
+          "travel_actions": 107
+        },
+        {
+          "candidate_rank": 2,
+          "collisions": 0,
+          "episode": "div-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -129857.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 132187.0,
+          "productive_actions": 432,
+          "reward": 2330.0,
+          "runtime_seconds": 2.6591194120701402,
+          "seat": 1,
+          "seed": 294603,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34",
+          "travel_actions": 107
+        }
+      ],
+      "summary": {
+        "collisions": 0,
+        "episodes": 4,
+        "mean_margin": -153920.5,
+        "mean_rank": 2.0,
+        "p20_margin": -177984.0,
+        "productive_actions": 1684,
+        "runtime_seconds": 11.443592663155869,
+        "travel_actions": 424,
+        "worst_margin": -177984.0
+      }
+    },
+    "champion": {
+      "rows": [
+        {
+          "candidate_rank": 2,
+          "collisions": 56,
+          "episode": "div-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -196259.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 197558.0,
+          "productive_actions": 2846,
+          "reward": 1299.0,
+          "runtime_seconds": 2.406464435858652,
+          "seat": 0,
+          "seed": 294601,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32",
+          "travel_actions": 280
+        },
+        {
+          "candidate_rank": 2,
+          "collisions": 56,
+          "episode": "div-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -196259.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 197558.0,
+          "productive_actions": 2846,
+          "reward": 1299.0,
+          "runtime_seconds": 2.44206344592385,
+          "seat": 1,
+          "seed": 294601,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 2,
+          "time_slice": "2026-W32",
+          "travel_actions": 280
+        },
+        {
+          "candidate_rank": 2,
+          "collisions": 56,
+          "episode": "div-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -140892.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 142193.0,
+          "productive_actions": 2846,
+          "reward": 1301.0,
+          "runtime_seconds": 1.9545660968869925,
+          "seat": 0,
+          "seed": 294603,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34",
+          "travel_actions": 280
+        },
+        {
+          "candidate_rank": 2,
+          "collisions": 56,
+          "episode": "div-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -132577.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 133878.0,
+          "productive_actions": 2846,
+          "reward": 1301.0,
+          "runtime_seconds": 1.8907948900014162,
+          "seat": 1,
+          "seed": 294603,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 4,
+          "time_slice": "2026-W34",
+          "travel_actions": 280
+        }
+      ],
+      "summary": {
+        "collisions": 224,
+        "episodes": 4,
+        "mean_margin": -166496.75,
+        "mean_rank": 2.0,
+        "p20_margin": -196259.0,
+        "productive_actions": 11384,
+        "runtime_seconds": 8.69388886867091,
+        "travel_actions": 1120,
+        "worst_margin": -196259.0
+      }
+    },
+    "same_seed": true
+  },
+  "source": {
+    "boundary": "public one-unique-job-per-unit and seven-hands-per-day structural concepts; excluded source code route trace identity opponent_private future replay_bytes weights",
+    "default_enabled": false,
+    "implementation": "clean-room from public prose only",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129195991,
+    "license": "not declared in downloaded notebook metadata or notebook body",
+    "notebook_sha256": "e1b4928471f2eccd0a020f50f0732f74800ccbd6299adf805025e0dcee668566",
+    "redistribution": "not-authorized; downloaded notebook is not committed or packaged",
+    "snapshot_acquired_utc": "2026-08-21T19:43:00Z",
+    "source_url": "https://www.kaggle.com/code/ektarr/diversified-scheduler-baseline-kaggriculture"
+  }
+}
