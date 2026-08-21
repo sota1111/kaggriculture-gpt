@@ -1,39 +1,34 @@
-# Solo Worker Report — SOT-2850
+# Solo Worker Report — SOT-2874
 
 ## Summary
 
-Aggregated completed children SOT-2851/SOT-2852/SOT-2853. The measurement oracle was promoted, but the capacity-aware runtime dispatcher was rejected by the sealed direct A/B because productive density regressed and repair work increased. Confirm remained sealed, the dispatcher stays default-OFF, no artifact was promoted, and the strict improvement gate required no Kaggle submission.
+Completed the initial decomposition run for Kaggriculture improvement cycle 10. Public Kaggle notebooks and solution repositories were reviewed, Moon V56's public-shop-gated tomato scarcity fork was selected with new relay/fire evidence, and three dependency-ordered implementation/verification children were created.
+
+## Classification
+
+- Type: PLAN
+- 分解判断: 必要
+- Parent state: In Review
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — parent aggregation and strict no-submit decision.
-- `docs/ai/linear/SOT-2850.md` — child results, submission decision, and handoff.
-- `docs/ai/65_worker_solo_report.md` — final solo lifecycle report.
+- `docs/ai/experiment_ledger.jsonl` — recorded the cycle-10 axis, source URLs, hypothesis, and `inconclusive` status.
+- `docs/ai/linear/SOT-2874.md` — recorded the child plan and dependencies.
+
+## Children
+
+- SOT-2875 — sealed CV re-anchor — Todo
+- SOT-2876 — independent tomato scarcity fork port — Todo, blocked by SOT-2875
+- SOT-2877 — sealed promotion decision — Todo, blocked by SOT-2876
 
 ## Verification
 
-- Python compileall: PASS.
-- Unit tests: 107/107 PASS.
-- Submission contract and last-callable exec compatibility: PASS.
-- Existing submission archive integrity and `main.py` equivalence: PASS.
-- Deterministic sealed evidence: PASS.
-- npm lint/typecheck/e2e: N/A (Python-only repository; no package.json/e2e configuration).
-
-## Acceptance Criteria
-
-- [x] Improvement direction and rationale recorded.
-- [x] All children reached Done and their results were aggregated.
-- [x] Candidate/evidence correspondence and effective default-OFF config recorded.
-- [x] No-submit decision explicitly recorded because no champion was promoted.
-- [x] Rejection is backed by same-seed/both-seat direct A/B and 2,880 firings.
-- [x] Handoff prepared for the parent completion comment.
-
-## Risks
-
-The disabled candidate remains an auditable ablation. A future cycle should use a new upstream useful-work-per-repair assignment objective and must not retry this rejected axis without new evidence.
-
-## Linear Report: POSTED
-
-## Acceptance: PASS
+- Public notebook acquisition/inspection: PASS
+- Experiment ledger JSONL parse: PASS (74 rows)
+- `git diff --check`: PASS
+- Branch push: `feat/sot-2874-tomato-scarcity-cycle` at `720e784`
+- Linear classification/decomposition/completion comments: POSTED
+- Kaggle submission: NOT_PERFORMED
+- PR: NOT_CREATED (required initial decomposition terminal)
 
 ## Next Action: READY_FOR_REVIEW
