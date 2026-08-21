@@ -8,6 +8,13 @@ Build and validate:
 bash scripts/build_submission.sh
 ```
 
+The public COK-ZhangZiliang V7 whole agent is tracked separately as a
+hash-pinned, fetch-only hedge descriptor under `candidates/v7-portable/`.
+Its stdlib-only contract and local screen pass, but it is not vendored or
+promoted: upstream's Apache notice licenses attributed route portions only,
+not the independently written whole-agent controller. See
+`docs/measurements/SOT-2934/SOT-2939-v7-portable-hedge.json`.
+
 Submit:
 
 ```bash

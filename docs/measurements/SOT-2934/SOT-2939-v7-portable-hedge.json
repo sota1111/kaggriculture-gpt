@@ -1,0 +1,166 @@
+{
+  "axis": "public V7 whole-agent portable hedge",
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "decision": "retain-descriptor-only-license-blocked",
+  "issue": "SOT-2939",
+  "kaggle_submission": "NOT_PERFORMED",
+  "license_gate": {
+    "passed": false,
+    "reason": "upstream Apache-2.0 notice covers attributed route portions only and explicitly does not license independently written whole-agent code",
+    "whole_agent_redistribution": "NOT_AUTHORIZED"
+  },
+  "portability": {
+    "archive_contents": [
+      "LICENSE-APACHE-2.0.txt",
+      "THIRD_PARTY_NOTICES.txt",
+      "main.py"
+    ],
+    "archive_scope": "local-evaluation-only; not committed or redistributed",
+    "contract": "PASS",
+    "generated_archive_sha256": "f794605adac90d31be2d88538684b03fc0a7ea6b53b61dafc70c423593704ed7",
+    "imports": [
+      "base64",
+      "collections",
+      "copy",
+      "json",
+      "math",
+      "zlib"
+    ],
+    "json_safe_action": true,
+    "stdlib_only": true
+  },
+  "private_proxy_screen": {
+    "candidate": {
+      "episodes": 4,
+      "mean_margin": 25807.5,
+      "mean_rank": 1.25,
+      "p20_margin": -750.0,
+      "rank_1_count": 3,
+      "worst_margin": -750.0
+    },
+    "champion": {
+      "episodes": 4,
+      "mean_margin": -158599.25,
+      "mean_rank": 2.0,
+      "p20_margin": -188183.0,
+      "rank_1_count": 0,
+      "worst_margin": -188183.0
+    },
+    "confirm_status": "RESERVED_FOR_PARENT_PORTFOLIO_CHILD",
+    "engine": "kaggle-environments==1.32.4",
+    "mean_margin_delta": 184406.75,
+    "paired_rows": [
+      {
+        "candidate_margin": -750.0,
+        "candidate_rank": 2,
+        "candidate_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "champion_margin": -172955.0,
+        "champion_rank": 2,
+        "champion_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "margin_delta": 172205.0,
+        "opponent": "cok-v7",
+        "seat": 0,
+        "seed": 293801
+      },
+      {
+        "candidate_margin": 750.0,
+        "candidate_rank": 1,
+        "candidate_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "champion_margin": -188183.0,
+        "champion_rank": 2,
+        "champion_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "margin_delta": 188933.0,
+        "opponent": "cok-v7",
+        "seat": 1,
+        "seed": 293801
+      },
+      {
+        "candidate_margin": 49542.0,
+        "candidate_rank": 1,
+        "candidate_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "champion_margin": -136563.0,
+        "champion_rank": 2,
+        "champion_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "margin_delta": 186105.0,
+        "opponent": "lonespear-v17",
+        "seat": 0,
+        "seed": 293803
+      },
+      {
+        "candidate_margin": 53688.0,
+        "candidate_rank": 1,
+        "candidate_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "champion_margin": -136696.0,
+        "champion_rank": 2,
+        "champion_statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "margin_delta": 190384.0,
+        "opponent": "lonespear-v17",
+        "seat": 1,
+        "seed": 293803
+      }
+    ],
+    "same_seed_both_seats": true,
+    "screen_only": true
+  },
+  "public_score_used_for_promotion": false,
+  "result": "inconclusive",
+  "source": {
+    "apache_license_path": "LICENSES/Apache-2.0.txt",
+    "apache_license_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "artifact": "COK-ZhangZiliang Kaggriculture V7 whole agent",
+    "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+    "kaggle_submission": "NOT_PERFORMED",
+    "license_conclusion": "Apache-2.0 covers attributed route portions only; the upstream notice explicitly does not license independently written repository code.",
+    "notice_path": "THIRD_PARTY_NOTICES.md",
+    "notice_sha256": "4f80ae1fd20372e903b0eaf4c177030aecca06dcf7ff5c0c94596cdc01849f4a",
+    "path": "main.py",
+    "redistribution": "not-authorized-for-whole-agent",
+    "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+    "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+    "v7_code_commit": "77c271f"
+  },
+  "starter_random_both_seat_smoke": {
+    "all_720_steps": true,
+    "all_done_done": true,
+    "engine": "kaggle-environments==1.32.7",
+    "episodes": 4,
+    "opponents": [
+      "starter",
+      "random"
+    ],
+    "seats": [
+      0,
+      1
+    ],
+    "seed": 293900,
+    "stderr": "none"
+  }
+}

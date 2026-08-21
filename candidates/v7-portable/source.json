@@ -1,0 +1,15 @@
+{
+  "artifact": "COK-ZhangZiliang Kaggriculture V7 whole agent",
+  "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture",
+  "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+  "v7_code_commit": "77c271f",
+  "path": "main.py",
+  "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+  "notice_path": "THIRD_PARTY_NOTICES.md",
+  "notice_sha256": "4f80ae1fd20372e903b0eaf4c177030aecca06dcf7ff5c0c94596cdc01849f4a",
+  "apache_license_path": "LICENSES/Apache-2.0.txt",
+  "apache_license_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+  "license_conclusion": "Apache-2.0 covers attributed route portions only; the upstream notice explicitly does not license independently written repository code.",
+  "redistribution": "not-authorized-for-whole-agent",
+  "kaggle_submission": "NOT_PERFORMED"
+}
