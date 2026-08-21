@@ -36,6 +36,7 @@ from scripts.measure_layout_aware_production import targeted as layout_productio
 from scripts.measure_layout_aware_sealed_panel import measure as measure_layout_sealed, panel_checks as layout_panel_checks
 from scripts.measure_v21_late_capital_oracle import measure as measure_v21_oracle, validate_manifest as validate_v21_manifest
 from scripts.measure_tomato_public_sealed_panel import validate_manifest as validate_tomato_sealed_manifest
+from scripts.measure_tomato_scarcity_sealed_panel import canonical_sha256 as tomato_config_sha256, decide as decide_tomato
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,18 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_tomato_scarcity_config_fingerprint_is_deterministic(self):
+        disabled = {"MOON_V56_TOMATO_SCARCITY_FORK": False}
+        self.assertEqual(tomato_config_sha256(disabled), tomato_config_sha256(dict(disabled)))
+        self.assertNotEqual(tomato_config_sha256(disabled),
+                            tomato_config_sha256({"MOON_V56_TOMATO_SCARCITY_FORK": True}))
+
+    def test_tomato_scarcity_decision_requires_fire_for_rejection_and_confirm_for_promotion(self):
+        self.assertEqual("inconclusive", decide_tomato(False, False, True, False))
+        self.assertEqual("rejected", decide_tomato(False, False, True, True))
+        self.assertEqual("rejected", decide_tomato(True, False, True, True))
+        self.assertEqual("promoted", decide_tomato(True, True, True, True))
+
     @staticmethod
     def _tomato_obs(seat, step, shops=("PIZZA_SHOP", "FARMERS_MARKET", "BAKERY"),
                     tomato_tile=False, tomatoes=0):
