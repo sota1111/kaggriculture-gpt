@@ -1466,6 +1466,41 @@ class EvaluationTest(unittest.TestCase):
             self.assertEqual({"latched", "eligible", "step", "remaining_turns", "cash_margin",
                               "rival_recoverable_cap", "reserve"}, set(candidate.LATCH[0]))
 
+    def test_v21_latch_is_default_off_exact_once_and_public_metadata_invariant(self):
+        agent = load_agent(ROOT / "main.py")
+        market = [["SELL", "WHEAT", 1], ["BUY_SEED", "WHEAT", 2], ["HIRE"]]
+        obs = {"player": 0, "step": 577,
+               "farms": [{"money": 6000}, {"money": 1000}],
+               "private": {"opponent": {"future_money": 999999}},
+               "episode_id": "a", "submission_id": "b", "seed": 1}
+        self.assertEqual(market, agent._v21_late_capital_orders(obs, market))
+        self.assertEqual([], agent.component_firing_counts()["v21_late_capital_latch"]["decisions"])
+
+        agent.V21_ONE_TIME_LATE_CAPITAL_LATCH = True
+        self.assertEqual([["SELL", "WHEAT", 1]], agent._v21_late_capital_orders(obs, market))
+        obs.update(step=578, episode_id="changed", submission_id="changed", seed=999)
+        obs["private"] = {"opponent": {"future_money": 0}}
+        obs["farms"][1]["money"] = 50000
+        self.assertEqual([["SELL", "WHEAT", 1]], agent._v21_late_capital_orders(obs, market))
+        telemetry = agent.component_firing_counts()["v21_late_capital_latch"]
+        self.assertEqual(1, len(telemetry["decisions"]))
+        self.assertTrue(telemetry["decisions"][0]["latched"])
+        self.assertEqual({"seat", "decision_step", "own_bank", "rival_bank", "bank_lead", "latched"},
+                         set(telemetry["decisions"][0]))
+
+    def test_v21_latch_threshold_is_inclusive_and_seat_symmetric(self):
+        for seat in (0, 1):
+            for lead, expected in ((4999, False), (5000, True)):
+                agent = load_agent(ROOT / "main.py")
+                agent.V21_ONE_TIME_LATE_CAPITAL_LATCH = True
+                own, rival = {"money": 1000 + lead}, {"money": 1000}
+                farms = [own, rival] if seat == 0 else [rival, own]
+                result = agent._v21_late_capital_orders(
+                    {"player": seat, "step": 577, "farms": farms}, [["HIRE"]])
+                self.assertEqual([] if expected else [["HIRE"]], result)
+                decision = agent.component_firing_counts()["v21_late_capital_latch"]["decisions"][0]
+                self.assertEqual(expected, decision["latched"])
+
     def test_cash_reserve_and_market_order_cap_are_preserved(self):
         agent = load_agent(ROOT / "main.py")
         crops = {f"CROP{i}": {"seed_price": 10, "maturity_days": 2, "expected_yield": 3,
