@@ -1,0 +1,216 @@
+{
+  "checks": {
+    "confirm_reserved_unopened": true,
+    "entity_seed_time_isolated": true,
+    "leak_free_features": true,
+    "official_baseline_present": true,
+    "schema_supported": true,
+    "source_hashes_match": true,
+    "submission_forbidden": true,
+    "two_current_public_lineages": true,
+    "url_hash_version_license_present": true
+  },
+  "confirm": {
+    "cohort": [
+      {
+        "opponent": "salemali7-3094",
+        "seed": 287911,
+        "time_index": 11
+      },
+      {
+        "opponent": "tetsutani-adaptive",
+        "seed": 287912,
+        "time_index": 12
+      }
+    ],
+    "outcomes": null,
+    "status": "RESERVED_UNOPENED"
+  },
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": [
+    {
+      "artifacts": {
+        "c94_sha256": "7b0e5a7b9d18dc583f5789e50a54dca43561f6d08c1c616b4219bf50bcb8311f",
+        "c95_sha256": "489f5d197527f107027626cce79d850fd2ca90edd43d94384b849b6511e27bdb"
+      },
+      "id": "rayk-c94-c95",
+      "kernel_id": 129396610,
+      "license": "not declared; fetch-only measurement",
+      "lineage": "Rayk C94/C95",
+      "notebook_sha256": "a7447511510ed22b73f2315246b6bf4de66f219ffe3ba692a377f3fb47931331",
+      "url": "https://www.kaggle.com/code/raykkretzschmar/kaggriculture-findings-from-zero-to-top-meta",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "artifacts": {
+        "main_sha256": "f029fa0cb66a9eb509afbe44e3f59b800332d0419db91607183410e4089c4d19"
+      },
+      "id": "boatlee-v16-rc5",
+      "kernel_id": 130530296,
+      "license": "not declared; fetch-only measurement",
+      "lineage": "Boatlee V16-RC5",
+      "notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+      "url": "https://www.kaggle.com/code/boatlee/v16-rc5-high-score-8c-4s-premium-market-lead",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "id": "salemali7-3094",
+      "kernel_id": 130232707,
+      "license": "not declared; provenance-only, confirm reserved",
+      "lineage": "3094-score",
+      "notebook_sha256": "aa536d91a6b8155d54ea94d7a2f4216993316e0ffab8b17ea4d81d029db0498f",
+      "url": "https://www.kaggle.com/code/salemali7/3094-score-kaggriculture",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "id": "tetsutani-adaptive",
+      "kernel_id": 129434690,
+      "license": "not declared; provenance-only, confirm reserved",
+      "lineage": "Adaptive public notebook",
+      "notebook_sha256": "ba18ed4f6077168a52850c31ad1a677b07bc6d1df1a942a40b52a113b2c0c1df",
+      "url": "https://www.kaggle.com/code/tetsutani/adaptive-farming-strategy-for-kaggriculture",
+      "version": "current public snapshot acquired 2026-08-21"
+    },
+    {
+      "id": "official-baseline",
+      "kernel_id": 129194650,
+      "license": "not declared; provenance-only baseline",
+      "lineage": "Official getting-started baseline",
+      "notebook_sha256": "adcdc666cfc6761ecfd8521da265bfee12c6d98943c6489456bd3c113a78f8a9",
+      "url": "https://www.kaggle.com/code/bovard/kaggriculture-getting-started",
+      "version": "current public snapshot acquired 2026-08-21"
+    }
+  ],
+  "screen": {
+    "episodes": [
+      {
+        "candidate_actual_purchase": 0,
+        "candidate_cash_flow": {
+          "after_step0": 2979,
+          "day2": 2786,
+          "final": 1294
+        },
+        "candidate_day2_animal_survival": 0,
+        "candidate_step0_wheat": {
+          "quantity": 0,
+          "slot": null
+        },
+        "episode_id": "rayk-c95|0|287901|1",
+        "opponent": "rayk-c95",
+        "opponent_actual_purchase": 5,
+        "opponent_cash_flow": {
+          "after_step0": 10,
+          "day2": 9,
+          "final": 174020
+        },
+        "opponent_day2_animal_survival": 5,
+        "opponent_step0_wheat": {
+          "quantity": 5,
+          "slot": 0
+        },
+        "seat": 0,
+        "seed": 287901,
+        "status": "DONE",
+        "time_index": 1
+      },
+      {
+        "candidate_actual_purchase": 0,
+        "candidate_cash_flow": {
+          "after_step0": 2979,
+          "day2": 2786,
+          "final": 1294
+        },
+        "candidate_day2_animal_survival": 0,
+        "candidate_step0_wheat": {
+          "quantity": 0,
+          "slot": null
+        },
+        "episode_id": "rayk-c95|1|287901|1",
+        "opponent": "rayk-c95",
+        "opponent_actual_purchase": 5,
+        "opponent_cash_flow": {
+          "after_step0": 10,
+          "day2": 9,
+          "final": 175175
+        },
+        "opponent_day2_animal_survival": 5,
+        "opponent_step0_wheat": {
+          "quantity": 5,
+          "slot": 0
+        },
+        "seat": 1,
+        "seed": 287901,
+        "status": "DONE",
+        "time_index": 1
+      },
+      {
+        "candidate_actual_purchase": 0,
+        "candidate_cash_flow": {
+          "after_step0": 2979,
+          "day2": 2786,
+          "final": 1294
+        },
+        "candidate_day2_animal_survival": 0,
+        "candidate_step0_wheat": {
+          "quantity": 0,
+          "slot": null
+        },
+        "episode_id": "boatlee-v16-rc5|0|287902|2",
+        "opponent": "boatlee-v16-rc5",
+        "opponent_actual_purchase": 14,
+        "opponent_cash_flow": {
+          "after_step0": 2,
+          "day2": 6,
+          "final": 164356
+        },
+        "opponent_day2_animal_survival": 5,
+        "opponent_step0_wheat": {
+          "quantity": 14,
+          "slot": 0
+        },
+        "seat": 0,
+        "seed": 287902,
+        "status": "DONE",
+        "time_index": 2
+      },
+      {
+        "candidate_actual_purchase": 0,
+        "candidate_cash_flow": {
+          "after_step0": 2979,
+          "day2": 2786,
+          "final": 1294
+        },
+        "candidate_day2_animal_survival": 0,
+        "candidate_step0_wheat": {
+          "quantity": 0,
+          "slot": null
+        },
+        "episode_id": "boatlee-v16-rc5|1|287902|2",
+        "opponent": "boatlee-v16-rc5",
+        "opponent_actual_purchase": 14,
+        "opponent_cash_flow": {
+          "after_step0": 2,
+          "day2": 6,
+          "final": 174099
+        },
+        "opponent_day2_animal_survival": 5,
+        "opponent_step0_wheat": {
+          "quantity": 14,
+          "slot": 0
+        },
+        "seat": 1,
+        "seed": 287902,
+        "status": "DONE",
+        "time_index": 2
+      }
+    ],
+    "summary": {
+      "both_seats": true,
+      "episodes": 4,
+      "feed_denial_opportunities": 4,
+      "observed_denials": 0,
+      "result": "inconclusive"
+    }
+  }
+}

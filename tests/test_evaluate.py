@@ -37,6 +37,7 @@ from scripts.measure_layout_aware_sealed_panel import measure as measure_layout_
 from scripts.measure_v21_late_capital_oracle import measure as measure_v21_oracle, validate_manifest as validate_v21_manifest
 from scripts.measure_tomato_public_sealed_panel import validate_manifest as validate_tomato_sealed_manifest
 from scripts.measure_tomato_scarcity_sealed_panel import canonical_sha256 as tomato_config_sha256, decide as decide_tomato
+from scripts.measure_feed_denial_public_oracle import summarize as summarize_feed_denial, validate as validate_feed_denial, wheat as feed_wheat_order
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,6 +45,22 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_feed_denial_manifest_is_leak_free_and_confirm_stays_reserved(self):
+        manifest = json.loads((ROOT / "tests/fixtures/feed_denial_public_oracle.json").read_text())
+        self.assertTrue(all(validate_feed_denial(manifest).values()))
+        self.assertEqual("RESERVED_UNOPENED", manifest["confirm_status"])
+        self.assertEqual("FORBIDDEN", manifest["submission"])
+
+    def test_feed_denial_summary_is_both_seat_and_inconclusive_without_firing(self):
+        rows = [{"seat": seat, "opponent_step0_wheat": {"quantity": 0},
+                 "candidate_step0_wheat": {"quantity": 5}, "candidate_actual_purchase": 5}
+                for seat in (0, 1)]
+        result = summarize_feed_denial(rows)
+        self.assertTrue(result["both_seats"])
+        self.assertEqual("inconclusive", result["result"])
+        self.assertEqual({"slot": 1, "quantity": 5}, feed_wheat_order(
+            {"market": [["HIRE"], ["BUY_PRODUCT", "WHEAT", 5]]}))
+
     def test_tomato_scarcity_config_fingerprint_is_deterministic(self):
         disabled = {"MOON_V56_TOMATO_SCARCITY_FORK": False}
         self.assertEqual(tomato_config_sha256(disabled), tomato_config_sha256(dict(disabled)))
