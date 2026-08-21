@@ -1,0 +1,295 @@
+{
+  "ablation_flag": "V21_ONE_TIME_LATE_CAPITAL_LATCH",
+  "axis": "Seyamalam V21 one-time public-bank late-capital latch",
+  "confirm": {
+    "reason": "screen promotion gate failed",
+    "skipped": true
+  },
+  "default_enabled": false,
+  "information_boundary": "step, player, and both farms' public money only",
+  "issue": "SOT-2868",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": false,
+  "rejected_axes_reenabled": [],
+  "result": "rejected",
+  "runtime_candidate_retained": false,
+  "screen": {
+    "direct_ab": {
+      "checks": {
+        "both_seats": true,
+        "deterministic_episode_ids": true,
+        "paired_non_regression": true,
+        "same_seed_direct_ab": true,
+        "terminal_bank_reward": true
+      },
+      "episodes": [
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 1,
+          "episode_id": "cok-v7-58c91c3|0|277001|1",
+          "opponent": "cok-v7-58c91c3",
+          "reward_delta": 0,
+          "seat": 0,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 1,
+          "episode_id": "cok-v7-58c91c3|1|277001|1",
+          "opponent": "cok-v7-58c91c3",
+          "reward_delta": 0,
+          "seat": 1,
+          "seed": 277001,
+          "time_index": 1
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 1,
+          "episode_id": "lonespear-v17-774b260|0|277002|2",
+          "opponent": "lonespear-v17-774b260",
+          "reward_delta": 0,
+          "seat": 0,
+          "seed": 277002,
+          "time_index": 2
+        },
+        {
+          "candidate": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "candidate_rank": 1,
+          "champion": {
+            "assignment_conflicts": 0,
+            "contract_violations": 0,
+            "cultivated": 360,
+            "discarded_units": 0,
+            "final_assets": 6683,
+            "harvested": 336,
+            "invalid_actions": 0,
+            "leaderboard_proxy": 6683,
+            "productive_actions": 1460,
+            "profit": 3683,
+            "reward": 6683
+          },
+          "champion_rank": 1,
+          "episode_id": "lonespear-v17-774b260|1|277002|2",
+          "opponent": "lonespear-v17-774b260",
+          "reward_delta": 0,
+          "seat": 1,
+          "seed": 277002,
+          "time_index": 2
+        }
+      ],
+      "summary": {
+        "candidate_wins_or_ties": 4,
+        "episode_count": 4,
+        "lower_tail_reward_delta": 0.0,
+        "mean_candidate_rank": 1.0,
+        "mean_reward_delta": 0.0,
+        "worst_reward_delta": 0.0
+      }
+    },
+    "gate_reasons": [
+      "screen primary KPI did not improve"
+    ],
+    "operational": {
+      "candidate": {
+        "contract_violations": 0,
+        "harvested": 1344,
+        "invalid_actions": 0,
+        "productive_completion": 5840,
+        "terminal_cash": 6683.0
+      },
+      "champion": {
+        "contract_violations": 0,
+        "harvested": 1344,
+        "invalid_actions": 0,
+        "productive_completion": 5840,
+        "terminal_cash": 6683.0
+      }
+    },
+    "runtime_seconds": 2.3211910428944975
+  },
+  "targeted_intervention": {
+    "both_seats": true,
+    "exact_once": true,
+    "fired_both_seats": true,
+    "metadata_invariant": true,
+    "rows": [
+      {
+        "first": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "seat": 0,
+        "second": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "telemetry": {
+          "decisions": [
+            {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 0
+            }
+          ],
+          "firings": 2,
+          "state": {
+            "0": {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 0
+            }
+          },
+          "suppressed_orders": 4
+        }
+      },
+      {
+        "first": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "seat": 1,
+        "second": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "telemetry": {
+          "decisions": [
+            {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 1
+            }
+          ],
+          "firings": 2,
+          "state": {
+            "1": {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 1
+            }
+          },
+          "suppressed_orders": 4
+        }
+      }
+    ],
+    "threshold_boundary": {
+      "lead_4999": false,
+      "lead_5000": true
+    }
+  }
+}

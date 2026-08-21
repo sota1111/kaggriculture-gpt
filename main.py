@@ -30,6 +30,7 @@ COMPACT_REPLAY_POLICY = False
 SEQUENCE_PRECURSOR_POLICY = False
 RECEDING_HORIZON_SEQUENCE_PLANNER = False
 LAYOUT_AWARE_PRODUCTION_ARCHITECTURE = False
+V21_ONE_TIME_LATE_CAPITAL_LATCH = False
 SEQUENCE_PLANNER_HORIZON = 3
 HISTORY_LIMIT = 48
 
@@ -116,6 +117,13 @@ PUBLIC_EXECUTION_SOURCES = {
         "artifact_sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
         "boundary": "first three public unlocked shops only; no route trace, identity, episode, submission, seed, or private state",
     },
+    "v21_late_capital_latch": {
+        "url": "https://github.com/Seyamalam/Kaggriculture",
+        "commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+        "license": "MIT",
+        "artifact_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639",
+        "boundary": "one decision from step/player/both public bank values; no fixed route, identity, seed, private state, or future data",
+    },
     "sequence_precursor": {
         "evidence": "docs/measurements/SOT-2835/SOT-2836-winner-sequence-support.json",
         "sources": ("lonespear", "COK-ZhangZiliang", "Seyamalam"),
@@ -154,6 +162,15 @@ LAYOUT_AWARE_PRODUCTION_TELEMETRY = {
     "demand_caps": 0, "shed_weighted_assignments": 0, "pasture_placements": 0,
     "last_plan": {},
 }
+V21_LATE_CAPITAL_LATCH_STATE = {}
+V21_LATE_CAPITAL_LATCH_DECISIONS = []
+V21_LATE_CAPITAL_LATCH_FIRES = 0
+V21_LATE_CAPITAL_SUPPRESSED_ORDERS = 0
+V21_LATE_CAPITAL_START_STEP = 577
+V21_LATE_CAPITAL_LEAD_THRESHOLD = 5000
+V21_CAPITAL_ORDER_TYPES = frozenset({
+    "BUY_SEED", "HIRE", "BUY_LAND", "BUY_ANIMAL", "BUY_PRODUCT",
+})
 
 _MILK_SUPPORT_SHOPS = {"PIZZA_SHOP", "ICE_CREAM_SHOP", "SMOOTHIE_SHOP"}
 _SHOP_PREFIX_ROUTES = {
@@ -1299,6 +1316,45 @@ def _choose_crop(obs, seeds, history=()):
     return max(known, key=daily_return), specs
 
 
+def _v21_late_capital_orders(obs, market):
+    """Latch a public bank lead once, then suppress only new capital orders."""
+    global V21_LATE_CAPITAL_LATCH_FIRES, V21_LATE_CAPITAL_SUPPRESSED_ORDERS
+    if not V21_ONE_TIME_LATE_CAPITAL_LATCH:
+        return market
+    step = max(0, int(obs.get("step", 0)))
+    player = int(obs.get("player", 0))
+    farms = obs.get("farms", ())
+    if player not in (0, 1) or len(farms) != 2:
+        return market
+    previous = V21_LATE_CAPITAL_LATCH_STATE.get(player)
+    if step == 0 or (previous is not None and step < previous["decision_step"]):
+        V21_LATE_CAPITAL_LATCH_STATE.pop(player, None)
+        previous = None
+    if previous is None and step >= V21_LATE_CAPITAL_START_STEP:
+        own_bank = max(0, int(farms[player].get("money", 0)))
+        rival_bank = max(0, int(farms[1 - player].get("money", 0)))
+        previous = {
+            "seat": player,
+            "decision_step": step,
+            "own_bank": own_bank,
+            "rival_bank": rival_bank,
+            "bank_lead": own_bank - rival_bank,
+            "latched": own_bank - rival_bank >= V21_LATE_CAPITAL_LEAD_THRESHOLD,
+        }
+        V21_LATE_CAPITAL_LATCH_STATE[player] = previous
+        V21_LATE_CAPITAL_LATCH_DECISIONS.append(dict(previous))
+    if previous is None or not previous["latched"]:
+        return market
+    filtered = [order for order in market
+                if not (isinstance(order, list) and order
+                        and order[0] in V21_CAPITAL_ORDER_TYPES)]
+    removed = len(market) - len(filtered)
+    if removed:
+        V21_LATE_CAPITAL_LATCH_FIRES += 1
+        V21_LATE_CAPITAL_SUPPRESSED_ORDERS += removed
+    return filtered
+
+
 def _policy_action(obs):
     global PROJECTED_MARKET_FIRES, CARE_LIVESTOCK_FIRES, CASH_RUNWAY_ACREAGE_FIRES
     history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
@@ -1437,6 +1493,7 @@ def _policy_action(obs):
             market.append(["HIRE"])
             CASH_RUNWAY_ACREAGE_FIRES += 1
 
+    market = _v21_late_capital_orders(obs, market)
     return {
         "farmer": actions[0],
         "hands": actions[1:],
@@ -1479,6 +1536,12 @@ def component_firing_counts():
             "firings": LAYOUT_AWARE_PRODUCTION_FIRES,
             **LAYOUT_AWARE_PRODUCTION_TELEMETRY,
             "last_plan": dict(LAYOUT_AWARE_PRODUCTION_TELEMETRY["last_plan"]),
+        },
+        "v21_late_capital_latch": {
+            "firings": V21_LATE_CAPITAL_LATCH_FIRES,
+            "suppressed_orders": V21_LATE_CAPITAL_SUPPRESSED_ORDERS,
+            "decisions": [dict(row) for row in V21_LATE_CAPITAL_LATCH_DECISIONS],
+            "state": {seat: dict(row) for seat, row in V21_LATE_CAPITAL_LATCH_STATE.items()},
         },
     }
 
