@@ -1,6 +1,6 @@
-# Final Report — SOT-2942
+# Final Report — SOT-2952
 
-All five child issues completed and their PRs merged. The new market-shift oracle exposed substantial transfer drift, while the three independent whole-agent candidates failed to earn sealed confirm. The champion and submission archive remain unchanged, so no Kaggle submission was made. Acceptance is satisfied through the explicitly recorded non-promotion outcome.
+The sealed independent-direction tournament is implemented and fully verified. The licensed whole agent remains inconclusive after failing screen; the opponent-shape portfolio was rejected after its confirm lower tail regressed by 3,292 despite a small mean-margin gain. The current champion remains the hedge, public score was not used for selection, and no Kaggle submission was made.
 
 ## Acceptance: PASS
 

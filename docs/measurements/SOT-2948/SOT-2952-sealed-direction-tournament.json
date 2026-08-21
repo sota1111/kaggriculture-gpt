@@ -1,0 +1,107 @@
+{
+  "axis": "recalibrated-oracle sealed independent-direction tournament",
+  "candidates": {
+    "licensed_whole_agent": {
+      "confirm": {
+        "status": "EXCLUDED_UNOPENED_BY_TOURNAMENT"
+      },
+      "confirm_delta_vs_champion": null,
+      "decision": "inconclusive",
+      "real_firing": true,
+      "reason": "screen failed the pessimistic tail gate; confirm remained excluded from the tournament decision",
+      "screen": {
+        "episodes": 4,
+        "mean_margin": -157593.25,
+        "mean_rank": 2.0,
+        "p20_margin": -183645.0,
+        "wins_or_ties": 0,
+        "worst_margin": -183645.0
+      },
+      "screen_delta_vs_champion": {
+        "mean_margin": -3148.5,
+        "mean_rank": 0.0,
+        "p20_margin": -4548.0,
+        "worst_margin": -4548.0
+      },
+      "screen_passed": false
+    },
+    "opponent_shape_portfolio": {
+      "confirm": {
+        "episodes": 4,
+        "mean_margin": -127402.0,
+        "mean_rank": 2.0,
+        "p20_margin": -137271.0,
+        "wins_or_ties": 0,
+        "worst_margin": -137271.0
+      },
+      "confirm_delta_vs_champion": {
+        "mean_margin": 1335.5,
+        "mean_rank": 0.0,
+        "p20_margin": -3292.0,
+        "worst_margin": -3292.0
+      },
+      "decision": "rejected",
+      "real_firing": true,
+      "reason": "same-seed/both-seat confirm regressed the pessimistic tail after real intervention",
+      "screen": {
+        "episodes": 4,
+        "mean_margin": -137588.5,
+        "mean_rank": 2.0,
+        "p20_margin": -138499.0,
+        "wins_or_ties": 0,
+        "worst_margin": -138499.0
+      },
+      "screen_delta_vs_champion": {
+        "mean_margin": 16856.25,
+        "mean_rank": 0.0,
+        "p20_margin": 40598.0,
+        "worst_margin": 40598.0
+      },
+      "screen_passed": true
+    }
+  },
+  "champion": {
+    "retained": true,
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "all_runtime_contracts_pass": true,
+    "all_upstreams_pass": true,
+    "candidate_hashes_match": true,
+    "confirm_registered_sealed": true,
+    "measurement_hashes_match": true,
+    "no_kaggle_submission": true,
+    "oracle_confirm_digest_unchanged": true,
+    "oracle_provenance_and_separation_pass": true,
+    "public_not_used_for_selection": true,
+    "schema_supported": true
+  },
+  "confirm_opened_for": [
+    "opponent_shape_portfolio"
+  ],
+  "decision": "inconclusive-retain-champion",
+  "decision_reason": "no direction passed both independent screen and pessimistic sealed-confirm gates",
+  "exec_compatible": true,
+  "factorial_oracle": {
+    "largest_transfer_drift": "market",
+    "measurement_sha256": "95bcbac5834040a661b2fa882e2fe746ddd91e3424ce8b286c4331cdb6aab2f7",
+    "runtime_contract": "PASS"
+  },
+  "issue": "SOT-2952",
+  "kaggle_submission": "NOT_PERFORMED",
+  "manifest_sha256": "e61f51cb3916f0972e9c687d0214357ca107139a8dfe70d7d760e27e9637cc85",
+  "passed": true,
+  "protocol": {
+    "current_champion_retained_as_hedge": true,
+    "opening_order": "validate all frozen screen evidence, screen each direction independently, then inspect only eligible confirm evidence",
+    "pessimistic_tail_gate": true,
+    "primary_kpi": [
+      "leak_free_cv_rank",
+      "same_seed_margin_delta",
+      "pessimistic_tail"
+    ],
+    "public_signal_policy": "contradiction-only; public score is never used to rank candidates"
+  },
+  "public_score_used_for_selection": false,
+  "runtime_contract": "PASS"
+}

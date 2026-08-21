@@ -310,3 +310,19 @@ python3 scripts/measure_opponent_shape_portfolio.py
 
 The default-OFF report records firing features, selection distribution,
 same-seed champion deltas, runtime status, and no Kaggle submission.
+
+# SOT-2952 sealed direction tournament
+
+The cycle-3 independent directions are decided by a hash-frozen, CV-first
+tournament:
+
+```bash
+python3 scripts/measure_sealed_direction_tournament.py
+```
+
+The manifest is `tests/fixtures/sealed_direction_tournament.json`; the generated
+decision and full provenance are recorded in
+`docs/measurements/SOT-2948/SOT-2952-sealed-direction-tournament.json`.
+Confirm evidence is admitted only for a direction that passes its standalone
+screen, the pessimistic tail may not regress, public score is never a selection
+signal, and the current champion remains an unchanged hedge.
