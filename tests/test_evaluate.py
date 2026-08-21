@@ -39,6 +39,7 @@ from scripts.measure_tomato_public_sealed_panel import validate_manifest as vali
 from scripts.measure_tomato_scarcity_sealed_panel import canonical_sha256 as tomato_config_sha256, decide as decide_tomato
 from scripts.measure_feed_denial_public_oracle import summarize as summarize_feed_denial, validate as validate_feed_denial, wheat as feed_wheat_order
 from scripts.measure_egg_cohort_public_screen import decision_families as egg_families, gate_and_veto as egg_gate, validate_manifest as validate_egg_manifest
+from scripts.measure_egg_cohort_sealed_panel import decide as decide_egg_sealed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +47,18 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_egg_sealed_panel_preserves_holdout_without_a_candidate(self):
+        manifest = json.loads((ROOT / "tests/fixtures/egg_cohort_public_screen.json").read_text())
+        port = json.loads((ROOT / "docs/measurements/SOT-2885/SOT-2888-egg-cohort-port-decision.json").read_text())
+        report = decide_egg_sealed(manifest, port)
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["decision"], "inconclusive")
+        self.assertFalse(report["candidate"]["available"])
+        self.assertEqual(report["confirm"]["status"], "RESERVED_UNOPENED")
+        self.assertIsNone(report["confirm"]["outcomes"])
+        self.assertFalse(report["promotion_gate"]["rejected_or_closed"])
+        self.assertEqual(report["kaggle_submission"], "NOT_PERFORMED")
+
     def test_egg_cohort_manifest_is_leak_free_and_confirm_stays_unopened(self):
         manifest = json.loads((ROOT / "tests/fixtures/egg_cohort_public_screen.json").read_text())
         self.assertTrue(all(validate_egg_manifest(manifest).values()))
