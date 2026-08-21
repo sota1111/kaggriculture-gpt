@@ -1,0 +1,468 @@
+{
+  "archive_regenerated": false,
+  "axis": "V21 late-capital latch sealed multi-archetype promotion panel",
+  "candidate_artifact": {
+    "path": "main.py",
+    "retained": false,
+    "sha256": "d6aa3510d9d782ef8fff3dfb8b88921885954df03dd94ec48c9b2ec98a761a89"
+  },
+  "confirm": {
+    "reason": "screen failed; untouched sealed confirm not consumed",
+    "skipped": true
+  },
+  "decision": "rejected",
+  "effective_config": {
+    "V21_ONE_TIME_LATE_CAPITAL_LATCH": false
+  },
+  "effective_config_fingerprint": "586fbccc494dec840f7b2fb0e79f3cc0b9ef994a566a1952c8830dc5160777bb",
+  "exec_compatibility": "PASS",
+  "issue": "SOT-2869",
+  "kaggle_submission": "NOT_PERFORMED",
+  "panel_checks": {
+    "artifacts_unique": true,
+    "auditable_licenses": true,
+    "closed_loop_evidence_boundary": true,
+    "confirm_after_screen": true,
+    "entity_holdout": true,
+    "environment_pinned": true,
+    "fetch_only": true,
+    "fresh_screen_from_sot2867": true,
+    "immutable_full_digests": true,
+    "manifest_digest": true,
+    "multi_archetype_each_window": true,
+    "no_kaggle_submission": true,
+    "no_sensitive_or_replay_payload_fields": true,
+    "panel_artifacts_exist": true,
+    "panels_nonempty": true,
+    "schema_supported": true,
+    "seed_holdout": true,
+    "source_commit_hash_license_present": true,
+    "time_holdout": true,
+    "times_parseable": true,
+    "unique_panel_identity": true
+  },
+  "passed": true,
+  "production_flag_changed": false,
+  "same_seed_both_seat": true,
+  "screen": {
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [
+              {
+                "bank_lead": -11980,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 13501,
+                "seat": 0
+              }
+            ],
+            "firings": 0,
+            "state": {
+              "0": {
+                "bank_lead": -11980,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 13501,
+                "seat": 0
+              }
+            },
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -17417.0,
+          "opponent_reward": 18711.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7396083681378514,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [],
+            "firings": 0,
+            "state": {},
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -17417.0,
+          "opponent_reward": 18711.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7497932589612901,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "fresh-screen-cok-286901",
+          "opponent": "cok-v7-58c91c3",
+          "seed": 286901,
+          "time_utc": "2026-08-21T02:30:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [
+              {
+                "bank_lead": -11994,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 13515,
+                "seat": 1
+              }
+            ],
+            "firings": 0,
+            "state": {
+              "1": {
+                "bank_lead": -11994,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 13515,
+                "seat": 1
+              }
+            },
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -17428.0,
+          "opponent_reward": 18722.0,
+          "productive_completion": 2845,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.7624972041230649,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [],
+            "firings": 0,
+            "state": {},
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -17428.0,
+          "opponent_reward": 18722.0,
+          "productive_completion": 2845,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 1.770356253022328,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "fresh-screen-cok-286901",
+          "opponent": "cok-v7-58c91c3",
+          "seed": 286901,
+          "time_utc": "2026-08-21T02:30:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [
+              {
+                "bank_lead": -54894,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 56415,
+                "seat": 0
+              }
+            ],
+            "firings": 0,
+            "state": {
+              "0": {
+                "bank_lead": -54894,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 56415,
+                "seat": 0
+              }
+            },
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -105455.0,
+          "opponent_reward": 106749.0,
+          "productive_completion": 2835,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.093637533020228,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [],
+            "firings": 0,
+            "state": {},
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -105455.0,
+          "opponent_reward": 106749.0,
+          "productive_completion": 2835,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.5698129578959197,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "fresh-screen-v23-286902",
+          "opponent": "lonespear-v23-774b260",
+          "seed": 286902,
+          "time_utc": "2026-08-21T02:31:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [
+              {
+                "bank_lead": -58621,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 60142,
+                "seat": 1
+              }
+            ],
+            "firings": 0,
+            "state": {
+              "1": {
+                "bank_lead": -58621,
+                "decision_step": 577,
+                "latched": false,
+                "own_bank": 1521,
+                "rival_bank": 60142,
+                "seat": 1
+              }
+            },
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -113076.0,
+          "opponent_reward": 114370.0,
+          "productive_completion": 2833,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.0918610128574073,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "intervention": {
+            "decisions": [],
+            "firings": 0,
+            "state": {},
+            "suppressed_orders": 0
+          },
+          "invalid_actions": 0,
+          "margin": -113076.0,
+          "opponent_reward": 114370.0,
+          "productive_completion": 2833,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.145043330034241,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "fresh-screen-v23-286902",
+          "opponent": "lonespear-v23-774b260",
+          "seed": 286902,
+          "time_utc": "2026-08-21T02:31:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "no strict rank or margin improvement"
+    ],
+    "runtime": {
+      "candidate_seconds": 7.687604118138552,
+      "champion_seconds": 8.235005799913779,
+      "passed": true,
+      "ratio": 0.9335274685804158,
+      "threshold": 2.0
+    },
+    "summary": {
+      "lower_tail_margin_delta": 0.0,
+      "matches": 4,
+      "mean_margin_delta": 0.0,
+      "mean_rank_improvement": 0.0,
+      "productive_completion_delta": 0,
+      "terminal_cash_delta": 0.0,
+      "worst_margin_delta": 0.0
+    }
+  },
+  "screen_pass_only_confirm": true,
+  "submission_contract": "PASS",
+  "targeted_intervention": {
+    "both_seats": true,
+    "exact_once": true,
+    "fired_both_seats": true,
+    "metadata_invariant": true,
+    "rows": [
+      {
+        "first": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "seat": 0,
+        "second": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "telemetry": {
+          "decisions": [
+            {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 0
+            }
+          ],
+          "firings": 2,
+          "state": {
+            "0": {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 0
+            }
+          },
+          "suppressed_orders": 4
+        }
+      },
+      {
+        "first": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "seat": 1,
+        "second": {
+          "farmer": [
+            "PASS"
+          ],
+          "hands": [],
+          "market": []
+        },
+        "telemetry": {
+          "decisions": [
+            {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 1
+            }
+          ],
+          "firings": 2,
+          "state": {
+            "1": {
+              "bank_lead": 5000,
+              "decision_step": 577,
+              "latched": true,
+              "own_bank": 6000,
+              "rival_bank": 1000,
+              "seat": 1
+            }
+          },
+          "suppressed_orders": 4
+        }
+      }
+    ],
+    "threshold_boundary": {
+      "lead_4999": false,
+      "lead_5000": true
+    }
+  },
+  "deterministic_rerun": {
+    "passed": true,
+    "comparison": "decision and all non-timing metrics identical",
+    "rerun_output": "/tmp/sot2869-rerun.json"
+  }
+}
