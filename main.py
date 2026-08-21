@@ -31,6 +31,7 @@ SEQUENCE_PRECURSOR_POLICY = False
 RECEDING_HORIZON_SEQUENCE_PLANNER = False
 LAYOUT_AWARE_PRODUCTION_ARCHITECTURE = False
 V21_ONE_TIME_LATE_CAPITAL_LATCH = False
+MOON_V56_TOMATO_SCARCITY_FORK = False
 SEQUENCE_PLANNER_HORIZON = 3
 HISTORY_LIMIT = 48
 
@@ -124,6 +125,14 @@ PUBLIC_EXECUTION_SOURCES = {
         "artifact_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639",
         "boundary": "one decision from step/player/both public bank values; no fixed route, identity, seed, private state, or future data",
     },
+    "moon_v56_tomato_scarcity": {
+        "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+        "notebook_version": 56,
+        "notebook_sha256": "97be5f16511523daec1de44bc533e385353cc4e7d2170e88a6a4f31a123c5b5f",
+        "agent_sha256": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+        "license": "not-declared-in-downloaded-notebook-metadata",
+        "boundary": "first three public shops, public clock, own visible tiles/actions, and own inventory only; no opponent private state, replay identity, seed, future outcome, fixed full route, or submission",
+    },
     "sequence_precursor": {
         "evidence": "docs/measurements/SOT-2835/SOT-2836-winner-sequence-support.json",
         "sources": ("lonespear", "COK-ZhangZiliang", "Seyamalam"),
@@ -166,6 +175,19 @@ V21_LATE_CAPITAL_LATCH_STATE = {}
 V21_LATE_CAPITAL_LATCH_DECISIONS = []
 V21_LATE_CAPITAL_LATCH_FIRES = 0
 V21_LATE_CAPITAL_SUPPRESSED_ORDERS = 0
+MOON_V56_TOMATO_SCARCITY_FIRES = {
+    "trigger": 0, "seed_relay": 0, "plant": 0, "harvest": 0, "terminal_sale": 0,
+}
+_MOON_V56_TOMATO_STATE = {
+    0: {"last_step": -1, "active": False, "seed_debt": 0, "plants": 0, "harvests": 0},
+    1: {"last_step": -1, "active": False, "seed_debt": 0, "plants": 0, "harvests": 0},
+}
+MOON_V56_TOMATO_TARGET = 3
+MOON_V56_TRIGGER_STEP = 216
+MOON_V56_SEED_STEP = 264
+MOON_V56_RELAY_LIMIT = 8
+MOON_V56_PLANT_WINDOW = (271, 286)
+MOON_V56_TERMINAL_STEP = 708
 V21_LATE_CAPITAL_START_STEP = 577
 V21_LATE_CAPITAL_LEAD_THRESHOLD = 5000
 V21_CAPITAL_ORDER_TYPES = frozenset({
@@ -1355,6 +1377,91 @@ def _v21_late_capital_orders(obs, market):
     return filtered
 
 
+def _moon_v56_tomato_scarcity_action(obs, action):
+    """Port Moon V56's tomato fork as a bounded, independently gated patch.
+
+    Exactly three strawberry cohort slots are redirected.  A displaced seed
+    order is relayed for at most eight public-clock slots, and the state is
+    isolated per seat.  The trigger uses only the first three public shops;
+    later tracking uses the public clock, own visible tiles/actions, and own
+    inventory needed to execute the selected actions.
+    """
+    if not MOON_V56_TOMATO_SCARCITY_FORK:
+        return action
+    seat = int(obs.get("player", 0))
+    if seat not in _MOON_V56_TOMATO_STATE:
+        return action
+    step = max(0, int(obs.get("step", 0)))
+    state = _MOON_V56_TOMATO_STATE[seat]
+    if step == 0 or step < int(state.get("last_step", -1)):
+        state = {"last_step": step, "active": False, "seed_debt": 0,
+                 "plants": 0, "harvests": 0}
+        _MOON_V56_TOMATO_STATE[seat] = state
+    state["last_step"] = step
+    if step == MOON_V56_TRIGGER_STEP and not state["active"]:
+        shops = list(obs.get("town", {}).get("unlocked_shops", ()) or ())[:3]
+        state["active"] = sum(
+            shop in {"FARMERS_MARKET", "PIZZA_SHOP"} for shop in shops) >= 2
+        if state["active"]:
+            MOON_V56_TOMATO_SCARCITY_FIRES["trigger"] += 1
+    if not state["active"]:
+        return action
+
+    amended = {
+        "farmer": list(action.get("farmer", ["PASS"])),
+        "hands": [list(order) for order in action.get("hands", ())],
+        "market": [list(order) for order in action.get("market", ())],
+    }
+    market = amended["market"]
+    if step == MOON_V56_SEED_STEP and not state["seed_debt"]:
+        strawberry = next((order for order in market
+                           if len(order) >= 3 and order[:2] == ["BUY_SEED", "STRAWBERRY"]
+                           and int(order[2]) >= MOON_V56_TOMATO_TARGET), None)
+        if strawberry is not None:
+            strawberry[2] = int(strawberry[2]) - MOON_V56_TOMATO_TARGET
+            state["seed_debt"] = MOON_V56_TOMATO_TARGET
+    if (state["seed_debt"] and MOON_V56_SEED_STEP < step <=
+            MOON_V56_SEED_STEP + MOON_V56_RELAY_LIMIT and len(market) < MAX_MARKET_ORDERS):
+        market.append(["BUY_SEED", "TOMATO", state["seed_debt"]])
+        state["seed_debt"] = 0
+        MOON_V56_TOMATO_SCARCITY_FIRES["seed_relay"] += 1
+
+    orders = [amended["farmer"], *amended["hands"]]
+    if MOON_V56_PLANT_WINDOW[0] <= step <= MOON_V56_PLANT_WINDOW[1]:
+        remaining = max(0, MOON_V56_TOMATO_TARGET - state["plants"])
+        for order in orders:
+            if remaining and len(order) >= 2 and order[:2] in (
+                    ["PLANT", "STRAWBERRY"], ["PLACE", "STRAWBERRY"]):
+                order[1] = "TOMATO"
+                remaining -= 1
+                state["plants"] += 1
+                MOON_V56_TOMATO_SCARCITY_FIRES["plant"] += 1
+
+    farm = obs.get("farms", [{}])[seat]
+    tiles = farm.get("tiles", ())
+    positions = [farm.get("farmer", (0, 0)), *farm.get("hands", ())]
+    for position, order in zip(positions, orders):
+        if state["harvests"] >= 12 or not order or order[0] != "HARVEST":
+            continue
+        x, y = int(position[0]), int(position[1])
+        tile = tiles[y][x] if 0 <= y < len(tiles) and 0 <= x < len(tiles[y]) else None
+        if isinstance(tile, dict) and tile.get("kind") == "PLANT" and tile.get("crop") == "TOMATO":
+            state["harvests"] += 1
+            MOON_V56_TOMATO_SCARCITY_FIRES["harvest"] += 1
+
+    if step >= MOON_V56_TERMINAL_STEP:
+        tomatoes = max(0, int(obs.get("private", {}).get("shed", {}).get("TOMATO", 0)))
+        existing = next((order for order in market
+                         if len(order) >= 3 and order[:2] == ["SELL", "TOMATO"]), None)
+        if tomatoes and existing is not None:
+            existing[2] = max(int(existing[2]), tomatoes)
+            MOON_V56_TOMATO_SCARCITY_FIRES["terminal_sale"] += 1
+        elif tomatoes and len(market) < MAX_MARKET_ORDERS:
+            market.append(["SELL", "TOMATO", tomatoes])
+            MOON_V56_TOMATO_SCARCITY_FIRES["terminal_sale"] += 1
+    return amended
+
+
 def _policy_action(obs):
     global PROJECTED_MARKET_FIRES, CARE_LIVESTOCK_FIRES, CASH_RUNWAY_ACREAGE_FIRES
     history = _update_public_history(obs) if ROBUST_ONLINE_PLANNER else ()
@@ -1494,11 +1601,12 @@ def _policy_action(obs):
             CASH_RUNWAY_ACREAGE_FIRES += 1
 
     market = _v21_late_capital_orders(obs, market)
-    return {
+    action = {
         "farmer": actions[0],
         "hands": actions[1:],
         "market": market[:MAX_MARKET_ORDERS],
     }
+    return _moon_v56_tomato_scarcity_action(obs, action)
 
 
 def component_firing_counts():
@@ -1542,6 +1650,10 @@ def component_firing_counts():
             "suppressed_orders": V21_LATE_CAPITAL_SUPPRESSED_ORDERS,
             "decisions": [dict(row) for row in V21_LATE_CAPITAL_LATCH_DECISIONS],
             "state": {seat: dict(row) for seat, row in V21_LATE_CAPITAL_LATCH_STATE.items()},
+        },
+        "moon_v56_tomato_scarcity": {
+            **MOON_V56_TOMATO_SCARCITY_FIRES,
+            "seats": {seat: dict(row) for seat, row in _MOON_V56_TOMATO_STATE.items()},
         },
     }
 

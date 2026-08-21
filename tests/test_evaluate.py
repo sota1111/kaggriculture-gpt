@@ -43,6 +43,79 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    @staticmethod
+    def _tomato_obs(seat, step, shops=("PIZZA_SHOP", "FARMERS_MARKET", "BAKERY"),
+                    tomato_tile=False, tomatoes=0):
+        tile = ({"kind": "PLANT", "crop": "TOMATO", "yield_units": 3}
+                if tomato_tile else None)
+        farms = [
+            {"money": 1000, "farmer": [0, 0], "hands": [[1, 0], [2, 0]],
+             "tiles": [[tile, None, None]]},
+            {"money": 1000, "farmer": [0, 0], "hands": [[1, 0], [2, 0]],
+             "tiles": [[tile, None, None]]},
+        ]
+        return {
+            "player": seat, "step": step, "day": step // 24, "hour": step % 24,
+            "turns_per_day": 24, "total_days": 30, "farms": farms,
+            "town": {"unlocked_shops": list(shops)},
+            "private": {"shed": {"TOMATO": tomatoes}, "inventories": [{}, {}, {}]},
+        }
+
+    def test_moon_v56_tomato_fork_is_default_off_and_non_trigger_exact_control(self):
+        agent = load_agent(ROOT / "main.py")
+        action = {"farmer": ["PASS"], "hands": [["NORTH"], ["SOUTH"]],
+                  "market": [["BUY_PRODUCT", "FEED", 2]]}
+        obs = self._tomato_obs(0, 216)
+        self.assertIs(action, agent._moon_v56_tomato_scarcity_action(obs, action))
+        agent.MOON_V56_TOMATO_SCARCITY_FORK = True
+        control = json.loads(json.dumps(action))
+        obs = self._tomato_obs(0, 216, ("BAKERY", "BRUNCH_SPOT", "YARN_STORE"))
+        self.assertEqual(control, agent._moon_v56_tomato_scarcity_action(obs, action))
+        self.assertEqual(0, agent.component_firing_counts()["moon_v56_tomato_scarcity"]["trigger"])
+
+    def test_moon_v56_tomato_targeted_both_seats_fires_relay_plant_harvest_sale(self):
+        for seat in (0, 1):
+            agent = load_agent(ROOT / "main.py")
+            agent.MOON_V56_TOMATO_SCARCITY_FORK = True
+            neutral = {"farmer": ["PASS"], "hands": [["PASS"], ["PASS"]], "market": []}
+            agent._moon_v56_tomato_scarcity_action(self._tomato_obs(seat, 216), neutral)
+
+            full_market = [["BUY_SEED", "STRAWBERRY", 6]] + [
+                ["BUY_PRODUCT", "FEED", index + 1] for index in range(9)]
+            seed_action = {"farmer": ["EAST"], "hands": [["NORTH"], ["SOUTH"]],
+                           "market": full_market}
+            amended = agent._moon_v56_tomato_scarcity_action(
+                self._tomato_obs(seat, 264), seed_action)
+            self.assertEqual(10, len(amended["market"]))
+            self.assertEqual(["BUY_SEED", "STRAWBERRY", 3], amended["market"][0])
+            self.assertEqual(seed_action["farmer"], amended["farmer"])
+            self.assertEqual(seed_action["hands"], amended["hands"])
+            relayed = agent._moon_v56_tomato_scarcity_action(
+                self._tomato_obs(seat, 265), neutral)
+            self.assertIn(["BUY_SEED", "TOMATO", 3], relayed["market"])
+
+            planting = {"farmer": ["PLANT", "STRAWBERRY"],
+                        "hands": [["PLANT", "STRAWBERRY"], ["PLANT", "STRAWBERRY"]],
+                        "market": [["BUY_PRODUCT", "FEED", 2]]}
+            planted = agent._moon_v56_tomato_scarcity_action(
+                self._tomato_obs(seat, 271), planting)
+            self.assertEqual([["PLANT", "TOMATO"]] * 3,
+                             [planted["farmer"], *planted["hands"]])
+            self.assertEqual(planting["market"], planted["market"])
+
+            harvest = {"farmer": ["HARVEST"], "hands": [["PASS"], ["PASS"]], "market": []}
+            for step in range(432, 444):
+                agent._moon_v56_tomato_scarcity_action(
+                    self._tomato_obs(seat, step, tomato_tile=True), harvest)
+            sold = agent._moon_v56_tomato_scarcity_action(
+                self._tomato_obs(seat, 708, tomatoes=36), neutral)
+            self.assertIn(["SELL", "TOMATO", 36], sold["market"])
+            fires = agent.component_firing_counts()["moon_v56_tomato_scarcity"]
+            self.assertEqual({"trigger": 1, "seed_relay": 1, "plant": 3,
+                              "harvest": 12, "terminal_sale": 1},
+                             {key: fires[key] for key in (
+                                 "trigger", "seed_relay", "plant", "harvest", "terminal_sale")})
+
     def test_tomato_public_panel_is_hash_pinned_isolated_and_confirm_reserved(self):
         manifest = json.loads((ROOT / "tests/fixtures/tomato_public_sealed_panel.json").read_text())
         validation = validate_tomato_sealed_manifest(manifest)

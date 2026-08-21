@@ -24,6 +24,19 @@ is held below its configured sell target and sold into stronger markets. Cash is
 reserved before seed purchases or hiring, market orders are capped, and each
 available seed is reserved for at most one worker action.
 
+The independent `MOON_V56_TOMATO_SCARCITY_FORK` is default OFF. It ports only
+Moon V56's bounded tomato-scarcity boundary: two of the first three public
+shops must be `PIZZA_SHOP`/`FARMERS_MARKET`, three strawberry seed/plant slots
+are redirected to tomato, a market-full seed order may relay for eight slots,
+and the cohort is tracked through 3 plants, up to 12 harvest actions, and a
+terminal sale. The source is Kaggle notebook V56 at
+`prvsiyan/kaggriculture-frontier-the-moon-counts-melons` (notebook SHA-256
+`97be5f16511523daec1de44bc533e385353cc4e7d2170e88a6a4f31a123c5b5f`,
+agent SHA-256 `d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179`).
+No license declaration was present in the downloaded notebook metadata. The
+portable patch excludes the source's full fixed route, replay identity, seed,
+future outcome, opponent-private data, external weights, and submission logic.
+
 The independent `SHED_OVERFLOW_PROTECTION` component coordinates carried
 inventory, the public shed capacity, and the nightly clock. It drops goods when
 room exists and sells only the minimum low-value shed stock needed to prevent
