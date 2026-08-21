@@ -38,6 +38,7 @@ from scripts.measure_v21_late_capital_oracle import measure as measure_v21_oracl
 from scripts.measure_tomato_public_sealed_panel import validate_manifest as validate_tomato_sealed_manifest
 from scripts.measure_tomato_scarcity_sealed_panel import canonical_sha256 as tomato_config_sha256, decide as decide_tomato
 from scripts.measure_feed_denial_public_oracle import summarize as summarize_feed_denial, validate as validate_feed_denial, wheat as feed_wheat_order
+from scripts.measure_egg_cohort_public_screen import decision_families as egg_families, gate_and_veto as egg_gate, validate_manifest as validate_egg_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,6 +46,26 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_egg_cohort_manifest_is_leak_free_and_confirm_stays_unopened(self):
+        manifest = json.loads((ROOT / "tests/fixtures/egg_cohort_public_screen.json").read_text())
+        self.assertTrue(all(validate_egg_manifest(manifest).values()))
+        self.assertEqual("RESERVED_UNOPENED", manifest["confirm_status"])
+
+    def test_egg_gate_reconstructs_public_prefix_and_known_vetoes(self):
+        self.assertTrue(egg_gate(["BAKERY", "BRUNCH_SPOT", "CAFE"], False, False)["fires"])
+        vetoed = egg_gate(["BAKERY", "BRUNCH_SPOT", "YARN_STORE"], False, False)
+        self.assertFalse(vetoed["fires"])
+        self.assertIn("yarn_store", vetoed["vetoes"])
+        self.assertIn("triple_bakery", egg_gate(["BAKERY"] * 3, False, False)["vetoes"])
+
+    def test_egg_decision_families_count_gate_production_and_revenue(self):
+        action = {"farmer": ["BUILD_COOP"], "hands": [["PICKUP", "GOOSE"], ["PLACE", "CHICKEN"]],
+                  "market": [["BUY_ANIMAL", "GOOSE", 2], ["SELL", "EGG", 7]]}
+        counts = egg_families(action)
+        self.assertEqual(1, counts["egg_gate_build_coop"])
+        self.assertEqual(1, counts["egg_gate_buy_goose"])
+        self.assertEqual(7, counts["egg_revenue_sell_quantity"])
+
     def test_feed_denial_manifest_is_leak_free_and_confirm_stays_reserved(self):
         manifest = json.loads((ROOT / "tests/fixtures/feed_denial_public_oracle.json").read_text())
         self.assertTrue(all(validate_feed_denial(manifest).values()))

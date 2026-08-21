@@ -1,0 +1,272 @@
+{
+  "actual_engine": "1.32.7",
+  "checks": {
+    "both_seats_declared": true,
+    "confirm_reserved_unopened": true,
+    "engine_exact": true,
+    "entity_episode_seed_time_disjoint": true,
+    "exact_source_version_hash": true,
+    "forbidden_features_fail_closed": true,
+    "no_submission": true,
+    "public_current_features_only": true,
+    "schema_supported": true,
+    "source_hash_matches": true
+  },
+  "confirm": {
+    "cohort": [
+      {
+        "entity": "soil-v19-confirm",
+        "episode": "egg-confirm-288611",
+        "seats": [
+          0,
+          1
+        ],
+        "seed": 288611,
+        "time_utc": "2026-08-21T05:11:00Z"
+      }
+    ],
+    "outcomes": null,
+    "status": "RESERVED_UNOPENED"
+  },
+  "information_boundary": {
+    "allowed": [
+      "public_observation",
+      "current_action"
+    ],
+    "forbidden": [
+      "private_state",
+      "future_outcome",
+      "episode_identity",
+      "seed_as_policy_input"
+    ]
+  },
+  "issue": "SOT-2886",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "runtime_contract": "PASS",
+  "screen": {
+    "rows": [
+      {
+        "champion_seat": 0,
+        "decision_family_counts": {
+          "champion": {},
+          "moon-v56": {}
+        },
+        "divergence": {},
+        "entity": "moon-v56-screen-a",
+        "episode": "egg-screen-288601",
+        "live_public_shop_prefix": {
+          "champion": {
+            "egg_shop_count": 1,
+            "fires": false,
+            "shops": [
+              "ICE_CREAM_SHOP",
+              "BAKERY",
+              "FARMERS_MARKET"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          },
+          "moon-v56": {
+            "egg_shop_count": 1,
+            "fires": false,
+            "shops": [
+              "ICE_CREAM_SHOP",
+              "BAKERY",
+              "FARMERS_MARKET"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          }
+        },
+        "revenue_attribution": {
+          "champion_reward": 1294.0,
+          "margin": -154994.0,
+          "reference_reward": 156288.0
+        },
+        "seed": 288601,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "time_utc": "2026-08-21T05:01:00Z"
+      },
+      {
+        "champion_seat": 1,
+        "decision_family_counts": {
+          "champion": {},
+          "moon-v56": {}
+        },
+        "divergence": {},
+        "entity": "moon-v56-screen-a",
+        "episode": "egg-screen-288601",
+        "live_public_shop_prefix": {
+          "champion": {
+            "egg_shop_count": 1,
+            "fires": false,
+            "shops": [
+              "PIZZA_SHOP",
+              "PIZZA_SHOP",
+              "BAKERY"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          },
+          "moon-v56": {
+            "egg_shop_count": 1,
+            "fires": false,
+            "shops": [
+              "PIZZA_SHOP",
+              "PIZZA_SHOP",
+              "BAKERY"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          }
+        },
+        "revenue_attribution": {
+          "champion_reward": 1294.0,
+          "margin": -130681.0,
+          "reference_reward": 131975.0
+        },
+        "seed": 288601,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "time_utc": "2026-08-21T05:01:00Z"
+      },
+      {
+        "champion_seat": 0,
+        "decision_family_counts": {
+          "champion": {},
+          "moon-v56": {}
+        },
+        "divergence": {},
+        "entity": "moon-v56-screen-b",
+        "episode": "egg-screen-288602",
+        "live_public_shop_prefix": {
+          "champion": {
+            "egg_shop_count": 0,
+            "fires": false,
+            "shops": [
+              "SMOOTHIE_SHOP",
+              "ICE_CREAM_SHOP",
+              "PIZZA_SHOP"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          },
+          "moon-v56": {
+            "egg_shop_count": 0,
+            "fires": false,
+            "shops": [
+              "SMOOTHIE_SHOP",
+              "ICE_CREAM_SHOP",
+              "PIZZA_SHOP"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          }
+        },
+        "revenue_attribution": {
+          "champion_reward": 1294.0,
+          "margin": -179892.0,
+          "reference_reward": 181186.0
+        },
+        "seed": 288602,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "time_utc": "2026-08-21T05:02:00Z"
+      },
+      {
+        "champion_seat": 1,
+        "decision_family_counts": {
+          "champion": {},
+          "moon-v56": {}
+        },
+        "divergence": {},
+        "entity": "moon-v56-screen-b",
+        "episode": "egg-screen-288602",
+        "live_public_shop_prefix": {
+          "champion": {
+            "egg_shop_count": 0,
+            "fires": false,
+            "shops": [
+              "SMOOTHIE_SHOP",
+              "ICE_CREAM_SHOP",
+              "PIZZA_SHOP"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          },
+          "moon-v56": {
+            "egg_shop_count": 0,
+            "fires": false,
+            "shops": [
+              "SMOOTHIE_SHOP",
+              "ICE_CREAM_SHOP",
+              "PIZZA_SHOP"
+            ],
+            "vetoes": [
+              "fewer_than_two_egg_shops"
+            ]
+          }
+        },
+        "revenue_attribution": {
+          "champion_reward": 1294.0,
+          "margin": -179892.0,
+          "reference_reward": 181186.0
+        },
+        "seed": 288602,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "time_utc": "2026-08-21T05:02:00Z"
+      }
+    ],
+    "summary": {
+      "decision_family_counts": {
+        "champion": {},
+        "moon-v56": {}
+      },
+      "decision_family_divergence": {},
+      "egg_gate_action_count": 0,
+      "egg_production_action_count": 0,
+      "egg_revenue_sell_quantity": 0,
+      "episodes": 4,
+      "gate_firings": {
+        "champion": 0,
+        "moon-v56": 0
+      },
+      "intervention_possible": false,
+      "result": "inconclusive",
+      "same_seed_both_seat": true,
+      "veto_counts": {
+        "champion:fewer_than_two_egg_shops": 4,
+        "moon-v56:fewer_than_two_egg_shops": 4
+      }
+    }
+  },
+  "source": {
+    "agent_sha256": "d2f51ca8851e563e3b8d24aeda28ff358bfdb8901039a89c39ff2e75aac68179",
+    "id": "moon-v56",
+    "kaggle_ref": "prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+    "license": "not-declared-in-downloaded-notebook-metadata",
+    "notebook_file": "kaggriculture-frontier-the-moon-counts-melons.ipynb",
+    "notebook_sha256": "97be5f16511523daec1de44bc533e385353cc4e7d2170e88a6a4f31a123c5b5f",
+    "payload_symbol": "PAYLOAD",
+    "url": "https://www.kaggle.com/code/prvsiyan/kaggriculture-frontier-the-moon-counts-melons",
+    "version": 56
+  }
+}
