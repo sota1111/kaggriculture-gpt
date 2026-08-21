@@ -33,6 +33,7 @@ from scripts.measure_sequence_planner import measure as measure_sequence_planner
 from scripts.measure_sequence_planner_sealed_panel import gate as sequence_planner_sealed_gate
 from scripts.measure_layout_completion_oracle import measure as measure_layout_completion, validate_fixture as validate_layout_fixture
 from scripts.measure_layout_aware_production import targeted as layout_production_trace, gate as layout_production_gate
+from scripts.measure_layout_aware_sealed_panel import measure as measure_layout_sealed, panel_checks as layout_panel_checks
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,32 @@ FIXTURE = json.loads((ROOT / "tests/fixtures/evaluation.json").read_text())
 
 
 class EvaluationTest(unittest.TestCase):
+    def test_layout_aware_sealed_panel_is_fresh_isolated_and_reproducible(self):
+        manifest = json.loads((ROOT / "tests/fixtures/layout_aware_sealed_panel.json").read_text())
+        oracle = json.loads((ROOT / "docs/measurements/SOT-2858/SOT-2861-layout-completion-oracle.json").read_text())
+        self.assertTrue(all(layout_panel_checks(manifest).values()), layout_panel_checks(manifest))
+        with mock.patch("scripts.measure_layout_aware_sealed_panel.fetch_artifacts") as fetch:
+            fetch.return_value = {row["id"]: ROOT / "tests/fixtures/champion_sot_2263.py"
+                                  for row in manifest["artifacts"]}
+            first = measure_layout_sealed(ROOT / "main.py", FIXTURE, manifest, oracle)
+            second = measure_layout_sealed(ROOT / "main.py", FIXTURE, manifest, oracle)
+        stable_first, stable_second = json.loads(json.dumps(first)), json.loads(json.dumps(second))
+        for report in (stable_first, stable_second):
+            for name in ("screen", "confirm"):
+                report[name].pop("runtime", None)
+        self.assertEqual(stable_first, stable_second)
+        self.assertIn(first["decision"], {"promoted", "rejected"})
+        self.assertEqual("NOT_PERFORMED", first["kaggle_submission"])
+        for name in ("screen", "confirm"):
+            if not first[name].get("skipped"):
+                self.assertIn("productive_completion", first[name]["primary"])
+                self.assertEqual({0, 1}, {row["seat"] for row in first[name]["direct_ab"]["episodes"]})
+
+    def test_layout_aware_sealed_panel_fails_closed_on_oracle_screen_overlap(self):
+        manifest = json.loads((ROOT / "tests/fixtures/layout_aware_sealed_panel.json").read_text())
+        manifest["oracle_screen_opponents"] = [manifest["panels"]["screen"][0]["opponent"]]
+        self.assertFalse(layout_panel_checks(manifest)["screen_fresh_from_oracle"])
+
     def test_layout_aware_production_fires_both_seats_and_caps_deadline_demand(self):
         trace = layout_production_trace(ROOT / "main.py")
         self.assertTrue(trace["both_seats"])
