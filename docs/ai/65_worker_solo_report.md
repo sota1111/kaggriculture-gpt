@@ -1,43 +1,39 @@
-# Solo Worker Report — SOT-2952
+# Solo Worker Report — SOT-2948
 
 ## Summary
 
-Implemented the hash-frozen sealed tournament over the recalibrated factorial oracle, licensed whole-agent hedge, and opponent-shape portfolio. The whole agent failed screen and remains inconclusive. The portfolio earned confirm but regressed the pessimistic tail by 3,292, so it was rejected on same-seed/both-seat evidence. The current champion remains unchanged and no Kaggle submission was performed.
+Aggregated all four completed children and the sealed tournament. The opponent-shape portfolio was rejected on confirm-tail regression; the licensed whole-agent remained inconclusive. Under the issue's explicit due-probe exception, submitted the structurally independent whole-agent once as a hedge without promoting it or changing the champion. Kaggle ref 55678801 completed at public score 600.0.
 
 ## Changed Files
 
-- `scripts/measure_sealed_direction_tournament.py` — fail-closed tournament decision runner
-- `tests/fixtures/sealed_direction_tournament.json` — frozen manifest, hashes, opening order, and gates
-- `tests/test_sealed_direction_tournament.py` — hash-integrity and pessimistic-tail gate coverage
-- `docs/measurements/SOT-2948/SOT-2952-sealed-direction-tournament.json` — generated evidence and decision
-- `docs/ai/experiment_ledger.jsonl` — recorded each evaluated direction and evidence
-- `README.md` — documented tournament execution and selection discipline
+- `docs/ai/experiment_ledger.jsonl` — parent aggregation, evidence, effective configuration, artifact fingerprint, and result
+- `docs/ai/linear/SOT-2948.md` — parent/child, tournament, submission, and champion tracking
 - `docs/ai/65_worker_solo_report.md` — final lifecycle report
 - `docs/ai/70_final_report.md` — final acceptance summary
 
 ## Verification
 
-- `python3 scripts/measure_sealed_direction_tournament.py`: PASS
-- `python3 -m unittest discover -s tests -p 'test_*.py'`: 178 passed, 2 skipped
-- `python3 scripts/validate_submission.py main.py`: contract PASS
-- `python3 -m py_compile ...`: PASS
-- `git diff --check`: PASS
-- npm lint/typecheck/e2e: N/A (Python-only repository; no package.json or browser surface)
+- SOT-2949/SOT-2950/SOT-2951/SOT-2952: Done; PRs #111-#114 merged
+- Child quality gate: 178 tests passed, 2 expected skips; compile, submission contract, CI, GitGuardian, and diff review PASS
+- Candidate contract: PASS; archive gzip/member/content checks PASS
+- Candidate archive SHA-256: `444e84d4796d67c2987631fc99bb924dc9e9701972aff4333cc247eb9155e25a`
+- Candidate content SHA-256: `bad9dd849ee6b828183ee938d2a5732835715a23fcb25082269ba95c54808cf6`
+- Kaggle ref 55678801: COMPLETE, public 600.0
 - Champion SHA-256: `0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f`, unchanged
-- Kaggle submission: NOT_PERFORMED
 
 ## Acceptance Criteria
 
-- [x] Manifest, candidate hashes, measurement hashes, provenance and gate order fixed
-- [x] Each direction screened independently; only the portfolio earned confirm inspection
-- [x] CV-first/public-contradiction-only and pessimistic-tail discipline enforced
-- [x] Next direction outcome recorded as inconclusive; champion retained
-- [x] Ledger updated, exec contract PASS, Kaggle submission not performed
+- [x] Improvement strategy and rationale recorded
+- [x] All children reached Done
+- [x] Candidate/champion verification and effective-config fingerprint recorded
+- [x] Parent resume confirmed children and submitted a new hedge artifact
+- [x] Rejected axis has firing-logged same-seed/both-seat evidence
+- [x] Separate Linear handoff and Completion Report posted
 
 ## Risks
 
-- `cv_representative=false`; fixed panels remain a proxy and do not prove private-field transfer.
-- No direction passed both windows, so a new exploit axis must come from fresh evidence rather than more tuning of these configurations.
+- `cv_representative=false`; the 600.0 public probe does not establish private transfer and does not promote the candidate.
+- Market/opponent/time drift remains large; next cycle should rebuild the live-distribution proxy rather than tune the rejected selector.
 
 ## Linear Report: POSTED
 
