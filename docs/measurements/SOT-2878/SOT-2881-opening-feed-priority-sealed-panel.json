@@ -1,0 +1,120 @@
+{
+  "issue": "SOT-2881",
+  "cycle": 11,
+  "axis": "opening feed-purchase priority sealed promotion decision",
+  "decision": "inconclusive",
+  "decision_basis": "The fresh current-public screen completed both seats against two archetypes, but the champion emitted zero step-0 WHEAT orders and the prerequisite therefore observed zero feed-denial events. SOT-2880 correctly did not create a candidate, so a champion/candidate direct A/B cannot be truthfully executed.",
+  "source_artifacts": {
+    "oracle": {
+      "path": "docs/measurements/SOT-2878/SOT-2879-feed-denial-public-oracle.json",
+      "sha256": "7634aadcd1cd83c1fe54d132c0ce46fd144757c71a04e9ced89f7a9c48f06903"
+    },
+    "port_decision": {
+      "path": "docs/measurements/SOT-2878/SOT-2880-opening-feed-priority-decision.json",
+      "sha256": "a80c7e829f170fc4eae2381a454ba918126df9fa9b7829c6411581ff82c2adc3"
+    },
+    "champion": {
+      "path": "main.py",
+      "sha256": "dd2e58f2df80adee898c8fda64cfa8158bca33a4119eff7f6b43dbde13af3fd1"
+    }
+  },
+  "effective_config": {
+    "OPENING_FEED_PURCHASE_PRIORITY": "ABSENT"
+  },
+  "effective_config_fingerprint": "3c042347664bce3c43e39f6a37a75958cd2598d2fe3ad78a252bfe108453659d",
+  "screen": {
+    "source_issue": "SOT-2879",
+    "status": "COMPLETED_NO_TRIGGER",
+    "fresh_current_public": true,
+    "archetypes": [
+      "rayk-c95",
+      "boatlee-v16-rc5"
+    ],
+    "seeds": [
+      287901,
+      287902
+    ],
+    "both_seats": true,
+    "same_seed_across_seats": true,
+    "episodes": 4,
+    "statuses": [
+      "DONE",
+      "DONE",
+      "DONE",
+      "DONE"
+    ],
+    "opponent_first_purchase_quantities": [
+      5,
+      5,
+      14,
+      14
+    ],
+    "champion_step0_wheat_orders": 0,
+    "champion_actual_purchases": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "champion_day2_livestock_survival": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "feed_denial_events": 0,
+    "early_cash": [
+      2979,
+      2979,
+      2979,
+      2979
+    ],
+    "mid_cash_day2": [
+      2786,
+      2786,
+      2786,
+      2786
+    ],
+    "candidate_direct_ab": "NOT_RUN_CANDIDATE_ABSENT",
+    "rank": "NOT_APPLICABLE_NO_CANDIDATE",
+    "margin_tails": "NOT_APPLICABLE_NO_CANDIDATE",
+    "productive_completion": "NOT_APPLICABLE_NO_CANDIDATE",
+    "runtime": "NOT_APPLICABLE_NO_CANDIDATE",
+    "invalid_actions": "NOT_APPLICABLE_NO_CANDIDATE",
+    "contract_violations": "NOT_APPLICABLE_NO_CANDIDATE"
+  },
+  "confirm": {
+    "status": "RESERVED_UNOPENED",
+    "reason": "The primary screen did not establish intervention firing or an improving candidate; consuming untouched confirm would violate the screen-to-confirm gate.",
+    "cohort": [
+      {
+        "opponent": "salemali7-3094",
+        "seed": 287911,
+        "time_index": 11
+      },
+      {
+        "opponent": "tetsutani-adaptive",
+        "seed": 287912,
+        "time_index": 12
+      }
+    ],
+    "outcomes": null
+  },
+  "checks": {
+    "screen_before_confirm": true,
+    "source_hashes_fixed": true,
+    "both_seats": true,
+    "same_seed": true,
+    "multi_archetype": true,
+    "deterministic_source_rerun": true,
+    "required_fire_evidence": false,
+    "rejected_or_closed": false,
+    "confirm_unconsumed": true,
+    "effective_config_recorded": true,
+    "no_fabricated_candidate_metrics": true,
+    "no_submission": true
+  },
+  "archive_regenerated": false,
+  "kaggle_submission": "NOT_PERFORMED",
+  "parent_recommendation": "DO_NOT_PROMOTE_OR_SUBMIT; retain the current champion and record this axis as inconclusive until new evidence establishes an existing exactly-five WHEAT opening order and real feed-denial firing."
+}
