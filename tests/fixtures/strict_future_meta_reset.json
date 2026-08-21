@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.4",
+  "confirm_status": "RESERVED_UNOPENED_FOR_SOT-2947",
+  "source_descriptor": "candidates/strict-future-meta-reset/source.json",
+  "screen": [
+    {"opponent":"cok-v7","lineage":"COK-ZhangZiliang/V7","episode":"strict-screen-cok","seed":294501,"seat":0,"time_slice":"2026-W32","time_index":2},
+    {"opponent":"cok-v7","lineage":"COK-ZhangZiliang/V7","episode":"strict-screen-cok","seed":294501,"seat":1,"time_slice":"2026-W32","time_index":2},
+    {"opponent":"lonespear-v17","lineage":"lonespear/V17","episode":"strict-screen-v17","seed":294503,"seat":0,"time_slice":"2026-W34","time_index":4},
+    {"opponent":"lonespear-v17","lineage":"lonespear/V17","episode":"strict-screen-v17","seed":294503,"seat":1,"time_slice":"2026-W34","time_index":4}
+  ],
+  "confirm": [
+    {"opponent":"lonespear-v18","lineage":"lonespear/V18","episode":"strict-confirm-v18","seed":294511,"seat":0,"time_slice":"2026-W36","time_index":12},
+    {"opponent":"lonespear-v18","lineage":"lonespear/V18","episode":"strict-confirm-v18","seed":294511,"seat":1,"time_slice":"2026-W36","time_index":12},
+    {"opponent":"lonespear-v23","lineage":"lonespear/V23","episode":"strict-confirm-v23","seed":294513,"seat":0,"time_slice":"2026-W38","time_index":14},
+    {"opponent":"lonespear-v23","lineage":"lonespear/V23","episode":"strict-confirm-v23","seed":294513,"seat":1,"time_slice":"2026-W38","time_index":14}
+  ],
+  "kaggle_submission": "NOT_PERFORMED"
+}
