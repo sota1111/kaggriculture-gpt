@@ -20,10 +20,10 @@ The three-child external-solution transfer chain completed. The first current-pu
 - Sealed screen: mean margin +2214.25, lower-tail/worst +7, firing 4/4
 - Sealed confirm: mean/lower-tail/worst +8, firing 4/4
 - Runtime: <=1.01x; invalid actions/contract violations: 0
-- Guarded Kaggle submit: accepted as ref `55669739`; archive SHA-256 `cc66155ba75e67bd875864567191a9254e3a4108613899f150c1266a9cb45f9f`
+- Guarded Kaggle submit: ref `55669739` COMPLETE, public score `600.0`; archive SHA-256 `cc66155ba75e67bd875864567191a9254e3a4108613899f150c1266a9cb45f9f`
 
 ## Acceptance
 
-All issue criteria are satisfied. The live score remains a sparse follow-up signal because this competition is marked `cv_representative=false`.
+All issue criteria are satisfied. Public `600.0` is non-contradictory, but remains a sparse follow-up signal because this competition is marked `cv_representative=false`.
 
 ## Acceptance: PASS

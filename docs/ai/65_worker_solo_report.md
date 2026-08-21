@@ -14,7 +14,7 @@ Aggregated all completed child results, reverified the promoted step-0 WHEAT mar
 ## Risks
 
 - `cv_representative=false`; the live public score must remain a sparse contradiction signal rather than a tuning oracle.
-- Kaggle processing was pending immediately after upload; artifact acceptance and submission reference were confirmed.
+- Kaggle submission `55669739` completed at public score `600.0`; with `cv_representative=false`, this is non-contradictory but not proof of private uplift.
 
 ## Linear Report: POSTED
 
