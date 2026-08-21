@@ -1,0 +1,382 @@
+{
+  "axis": "Seyamalam V21 one-time step-577 late capital latch oracle",
+  "confirm": {
+    "both_seats": [
+      0,
+      1
+    ],
+    "episodes": [
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v18-confirm",
+          "episode": "fresh-confirm-286711",
+          "seat": 0,
+          "seed": 286711,
+          "time": 11
+        },
+        "opponent": "seyamalam-v18-public",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3599,
+          "leaderboard_proxy": -3599000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      },
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v18-confirm",
+          "episode": "fresh-confirm-286712",
+          "seat": 1,
+          "seed": 286712,
+          "time": 12
+        },
+        "opponent": "seyamalam-v18-public",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3598,
+          "leaderboard_proxy": -3598000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      },
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v21-release-confirm",
+          "episode": "fresh-confirm-286713",
+          "seat": 0,
+          "seed": 286713,
+          "time": 13
+        },
+        "opponent": "seyamalam-v21-release",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3598,
+          "leaderboard_proxy": -3598000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      },
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v21-release-confirm",
+          "episode": "fresh-confirm-286714",
+          "seat": 1,
+          "seed": 286714,
+          "time": 14
+        },
+        "opponent": "seyamalam-v21-release",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3598,
+          "leaderboard_proxy": -3598000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      }
+    ],
+    "summary": {
+      "contract_violations": 0,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "mean_champion_margin": 6683.0,
+      "mean_champion_rank": 1.0,
+      "worst_champion_margin": 6683
+    }
+  },
+  "deterministic_report_sha256": "9e85f4882df4b314771ff7a64f0c87a39167db2a070e06b36765780a9b70dd07",
+  "issue": "SOT-2867",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": {
+    "champion_sha256": "741d056f5e2dca83f0555bb7a4c96ab712b892e9331f3a92bb4c7e66ab496881",
+    "manifest_sha256": "b57c6f633204a9c632ec1f6cee7a7298196274bf0e6bd25d745d01fa645144ff",
+    "source_commit": "8b8c421eb10634c756583ce10c75189f50c83a72",
+    "source_license": "MIT",
+    "source_main_sha256": "0cd14b653102d276c4f902fa3b8c6bd81d869b8ab64c422cb881b9d2346ec639",
+    "source_url": "https://github.com/Seyamalam/Kaggriculture"
+  },
+  "result": "inconclusive",
+  "screen": {
+    "both_seats": [
+      0,
+      1
+    ],
+    "episodes": [
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v20-screen",
+          "episode": "fresh-screen-286701",
+          "seat": 0,
+          "seed": 286701,
+          "time": 1
+        },
+        "opponent": "seyamalam-v20",
+        "opponent_result": {
+          "assignment_conflicts": 336,
+          "contract_violations": 173,
+          "cultivated": 10,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 6,
+          "invalid_actions": 3484,
+          "leaderboard_proxy": -3484000,
+          "productive_actions": 1598,
+          "profit": -3000,
+          "reward": 0
+        }
+      },
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v20-screen",
+          "episode": "fresh-screen-286702",
+          "seat": 1,
+          "seed": 286702,
+          "time": 2
+        },
+        "opponent": "seyamalam-v20",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3598,
+          "leaderboard_proxy": -3598000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      },
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v21-candidate-screen",
+          "episode": "fresh-screen-286703",
+          "seat": 0,
+          "seed": 286703,
+          "time": 3
+        },
+        "opponent": "seyamalam-v21-candidate",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3599,
+          "leaderboard_proxy": -3599000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      },
+      {
+        "champion": {
+          "assignment_conflicts": 0,
+          "contract_violations": 0,
+          "cultivated": 360,
+          "discarded_units": 0,
+          "final_assets": 6683,
+          "harvested": 336,
+          "invalid_actions": 0,
+          "leaderboard_proxy": 6683,
+          "productive_actions": 1460,
+          "profit": 3683,
+          "reward": 6683
+        },
+        "champion_margin": 6683,
+        "champion_rank": 1,
+        "identity": {
+          "entity": "v21-candidate-screen",
+          "episode": "fresh-screen-286704",
+          "seat": 1,
+          "seed": 286704,
+          "time": 4
+        },
+        "opponent": "seyamalam-v21-candidate",
+        "opponent_result": {
+          "assignment_conflicts": 349,
+          "contract_violations": 172,
+          "cultivated": 12,
+          "discarded_units": 0,
+          "final_assets": 0,
+          "harvested": 8,
+          "invalid_actions": 3599,
+          "leaderboard_proxy": -3599000,
+          "productive_actions": 1691,
+          "profit": -3000,
+          "reward": 0
+        }
+      }
+    ],
+    "summary": {
+      "contract_violations": 0,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "mean_champion_margin": 6683.0,
+      "mean_champion_rank": 1.0,
+      "worst_champion_margin": 6683
+    }
+  },
+  "sensitive_artifacts": "NOT_COMMITTED",
+  "v21_delta": {
+    "change": "V21 extends the overlay to step 718 but latches once at step 577 and abstains only when rival_money-own_money <= -5000",
+    "inputs": [
+      "step",
+      "player",
+      "both farms' public money"
+    ],
+    "reference": "V20 ended the recovery overlay at step 577"
+  },
+  "validation": {
+    "checks": {
+      "artifacts_pinned": true,
+      "both_seats_each_entity": true,
+      "closed_loop": true,
+      "entity_holdout": true,
+      "episode_holdout": true,
+      "no_committed_sensitive_artifacts": true,
+      "opponents_resolve": true,
+      "panels_nonempty": true,
+      "public_manifest_only": true,
+      "required_fields": true,
+      "schema_supported": true,
+      "screen_before_confirm": true,
+      "seed_holdout": true,
+      "strict_temporal_order": true,
+      "time_holdout": true
+    },
+    "passed": true
+  }
+}
