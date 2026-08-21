@@ -101,6 +101,18 @@ artifact hash, candidate hash, engine, manifest, panels, and market-regime hash
 are recorded; private/future fields fail validation. The default command measures
 the champion only and performs no Kaggle submission.
 
+The SOT-2947 portfolio freezes that oracle and the V16-RC5, Strict-Future, and
+diversified-scheduler candidates before opening any result. It evaluates every
+direction on the registered screen and opens sealed confirm only for candidates
+with rank-or-mean-margin uplift and a non-regressing pessimistic tail. Rejection
+requires a same-identity A/B confirm regression plus real-firing evidence;
+otherwise the result remains inconclusive. The old champion is retained unless
+exactly one candidate clears both windows:
+
+```bash
+python3 scripts/measure_sealed_private_proxy_portfolio.py
+```
+
 The SOT-2941 portfolio freezes that oracle plus the independent V7 hedge and
 fertilizer architecture artifacts before evaluating them. It consumes the
 pre-registered confirm identities only after a candidate passes screen, uses
