@@ -51,6 +51,22 @@ python3 scripts/measure_shed_overflow.py \
 
 ## Reproducible offline evaluation
 
+### Private-proxy closed-loop oracle
+
+The SOT-2938 oracle runs the champion in fresh closed-loop engine episodes against
+four hash-pinned public opponent lineages. Screen and confirm are disjoint by
+opponent lineage, episode, seed, and chronological slice; every identity is run
+in both seats. It reports margin, rank, pessimistic tail, per-distribution
+aggregates, and confirm-minus-screen transfer stability. Open-loop replay remains
+a separately labelled diagnostic and is not included in transfer-trust:
+
+```bash
+python3 scripts/measure_private_proxy_oracle.py
+```
+
+The committed measurement pins the candidate, opponents, engine, manifest, and
+seed-panel hashes. It performs no Kaggle submission.
+
 The public-state productive-action capacity oracle measures executable work,
 standing-on-work, mandatory travel, route-repair assignments, capacity
 shortfall/utilization, and productive density without private or future fields.
