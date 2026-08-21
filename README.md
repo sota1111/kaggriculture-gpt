@@ -74,6 +74,25 @@ python3 scripts/measure_private_proxy_oracle.py
 The committed measurement pins the candidate, opponents, engine, manifest, and
 seed-panel hashes. It performs no Kaggle submission.
 
+The SOT-2943 extension additionally fixes four sparse official `marketParams`
+regimes and holds market regime, opponent lineage, episode, seed, seat pair, and
+chronological slice apart between screen and confirm. The repeatable
+`--candidate NAME=PATH` option evaluates the champion and independently packaged
+agents under the identical manifest. Confirm starts as `RESERVED_UNOPENED` and
+its digest is checked after screen before any confirm episode is run:
+
+```bash
+python3 scripts/measure_market_shift_oracle.py \
+  --candidate champion=main.py \
+  --candidate hedge=candidates/example.py
+```
+
+The report uses one schema for margin, mean rank, p20/worst tail, per-market
+regime summaries, and screen-to-confirm drift. Source URL, license, commit,
+artifact hash, candidate hash, engine, manifest, panels, and market-regime hash
+are recorded; private/future fields fail validation. The default command measures
+the champion only and performs no Kaggle submission.
+
 The SOT-2941 portfolio freezes that oracle plus the independent V7 hedge and
 fertilizer architecture artifacts before evaluating them. It consumes the
 pre-registered confirm identities only after a candidate passes screen, uses
