@@ -1,0 +1,877 @@
+{
+  "artifacts": {
+    "champion": {
+      "path": "main.py",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    },
+    "contract_farmer": {
+      "path": "candidates/deepeshumrao-whole-agent/agent.py",
+      "sha256": "bad9dd849ee6b828183ee938d2a5732835715a23fcb25082269ba95c54808cf6"
+    },
+    "field_scheduler": {
+      "path": "candidates/diversified-scheduler/policy.py",
+      "sha256": "55d8ee2efa11b22de887ab8c43840ce5c964e26f6d1508a5b4dd8d97cfebfb52"
+    },
+    "selector": {
+      "path": "candidates/opponent-shape-portfolio/agent.py",
+      "sha256": "58dbbbc0ea0517621d891ad70c62fef1b33189ddafa23e1abe098c29f4ee7580"
+    }
+  },
+  "axis": "public opponent day-3 shape conditional independent policy portfolio",
+  "checks": {
+    "chronological_confirm": true,
+    "lineage_episode_seed_time_holdout": true,
+    "no_kaggle_submission": true,
+    "same_seed_both_seats": true,
+    "three_structurally_independent_foundations": true
+  },
+  "decision": "inconclusive",
+  "issue": "SOT-2950",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_selection": false,
+  "runtime_contract": "PASS",
+  "selector_fired": true,
+  "windows": {
+    "confirm": {
+      "foundations": {
+        "champion": {
+          "rows": [
+            {
+              "action_families": {
+                "market": 250,
+                "production": 2846,
+                "routing": 281
+              },
+              "episode": "shape-confirm-v18",
+              "lineage": "lonespear/V18",
+              "margin": -133979.0,
+              "opponent": "lonespear-v18",
+              "opponent_reward": 135280.0,
+              "rank": 2,
+              "reward": 1301.0,
+              "runtime_seconds": 1.9001607890240848,
+              "seat": 0,
+              "seed": 295011,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 11
+            },
+            {
+              "action_families": {
+                "market": 232,
+                "production": 2846,
+                "routing": 281
+              },
+              "episode": "shape-confirm-v18",
+              "lineage": "lonespear/V18",
+              "margin": -125238.0,
+              "opponent": "lonespear-v18",
+              "opponent_reward": 126539.0,
+              "rank": 2,
+              "reward": 1301.0,
+              "runtime_seconds": 1.9323171121068299,
+              "seat": 1,
+              "seed": 295011,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 11
+            },
+            {
+              "action_families": {
+                "market": 252,
+                "production": 2846,
+                "routing": 281
+              },
+              "episode": "shape-confirm-v23",
+              "lineage": "lonespear/V23",
+              "margin": -128755.0,
+              "opponent": "lonespear-v23",
+              "opponent_reward": 130056.0,
+              "rank": 2,
+              "reward": 1301.0,
+              "runtime_seconds": 2.1541145211085677,
+              "seat": 0,
+              "seed": 295013,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 13
+            },
+            {
+              "action_families": {
+                "market": 248,
+                "production": 2846,
+                "routing": 281
+              },
+              "episode": "shape-confirm-v23",
+              "lineage": "lonespear/V23",
+              "margin": -126978.0,
+              "opponent": "lonespear-v23",
+              "opponent_reward": 128279.0,
+              "rank": 2,
+              "reward": 1301.0,
+              "runtime_seconds": 2.116382591892034,
+              "seat": 1,
+              "seed": 295013,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 13
+            }
+          ],
+          "summary": {
+            "episodes": 4,
+            "mean_margin": -128737.5,
+            "mean_rank": 2.0,
+            "p20_margin": -133979.0,
+            "wins_or_ties": 0,
+            "worst_margin": -133979.0
+          }
+        },
+        "contract_farmer": {
+          "rows": [
+            {
+              "action_families": {
+                "market": 48,
+                "production": 345,
+                "routing": 374
+              },
+              "episode": "shape-confirm-v18",
+              "lineage": "lonespear/V18",
+              "margin": -144896.0,
+              "opponent": "lonespear-v18",
+              "opponent_reward": 149812.0,
+              "rank": 2,
+              "reward": 4916.0,
+              "runtime_seconds": 1.7521950791124254,
+              "seat": 0,
+              "seed": 295011,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 11
+            },
+            {
+              "action_families": {
+                "market": 48,
+                "production": 345,
+                "routing": 374
+              },
+              "episode": "shape-confirm-v18",
+              "lineage": "lonespear/V18",
+              "margin": -136582.0,
+              "opponent": "lonespear-v18",
+              "opponent_reward": 141447.0,
+              "rank": 2,
+              "reward": 4865.0,
+              "runtime_seconds": 1.7542557308916003,
+              "seat": 1,
+              "seed": 295011,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 11
+            },
+            {
+              "action_families": {
+                "market": 49,
+                "production": 332,
+                "routing": 387
+              },
+              "episode": "shape-confirm-v23",
+              "lineage": "lonespear/V23",
+              "margin": -111334.0,
+              "opponent": "lonespear-v23",
+              "opponent_reward": 116228.0,
+              "rank": 2,
+              "reward": 4894.0,
+              "runtime_seconds": 2.0045056799426675,
+              "seat": 0,
+              "seed": 295013,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 13
+            },
+            {
+              "action_families": {
+                "market": 49,
+                "production": 328,
+                "routing": 391
+              },
+              "episode": "shape-confirm-v23",
+              "lineage": "lonespear/V23",
+              "margin": -111429.0,
+              "opponent": "lonespear-v23",
+              "opponent_reward": 116228.0,
+              "rank": 2,
+              "reward": 4799.0,
+              "runtime_seconds": 2.000130941160023,
+              "seat": 1,
+              "seed": 295013,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 13
+            }
+          ],
+          "summary": {
+            "episodes": 4,
+            "mean_margin": -126060.25,
+            "mean_rank": 2.0,
+            "p20_margin": -144896.0,
+            "wins_or_ties": 0,
+            "worst_margin": -144896.0
+          }
+        },
+        "field_scheduler": {
+          "rows": [
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-confirm-v18",
+              "lineage": "lonespear/V18",
+              "margin": -129265.0,
+              "opponent": "lonespear-v18",
+              "opponent_reward": 132265.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 1.703178514027968,
+              "seat": 0,
+              "seed": 295011,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 11
+            },
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-confirm-v18",
+              "lineage": "lonespear/V18",
+              "margin": -137271.0,
+              "opponent": "lonespear-v18",
+              "opponent_reward": 140271.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 1.6934451728593558,
+              "seat": 1,
+              "seed": 295011,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 11
+            },
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-confirm-v23",
+              "lineage": "lonespear/V23",
+              "margin": -121536.0,
+              "opponent": "lonespear-v23",
+              "opponent_reward": 124536.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 1.9316279240883887,
+              "seat": 0,
+              "seed": 295013,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 13
+            },
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-confirm-v23",
+              "lineage": "lonespear/V23",
+              "margin": -121536.0,
+              "opponent": "lonespear-v23",
+              "opponent_reward": 124536.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 1.9053666850086302,
+              "seat": 1,
+              "seed": 295013,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 13
+            }
+          ],
+          "summary": {
+            "episodes": 4,
+            "mean_margin": -127402.0,
+            "mean_rank": 2.0,
+            "p20_margin": -137271.0,
+            "wins_or_ties": 0,
+            "worst_margin": -137271.0
+          }
+        }
+      },
+      "selector": {
+        "mean_same_seed_champion_delta": 1335.5,
+        "rows": [
+          {
+            "episode": "shape-confirm-v18",
+            "lineage": "lonespear/V18",
+            "margin": -129265.0,
+            "opponent": "lonespear-v18",
+            "opponent_reward": 132265.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.4,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": 4714.0,
+            "seat": 0,
+            "seed": 295011,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 11
+          },
+          {
+            "episode": "shape-confirm-v18",
+            "lineage": "lonespear/V18",
+            "margin": -137271.0,
+            "opponent": "lonespear-v18",
+            "opponent_reward": 140271.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.4,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": -12033.0,
+            "seat": 1,
+            "seed": 295011,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 11
+          },
+          {
+            "episode": "shape-confirm-v23",
+            "lineage": "lonespear/V23",
+            "margin": -121536.0,
+            "opponent": "lonespear-v23",
+            "opponent_reward": 124536.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.56,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": 7219.0,
+            "seat": 0,
+            "seed": 295013,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 13
+          },
+          {
+            "episode": "shape-confirm-v23",
+            "lineage": "lonespear/V23",
+            "margin": -121536.0,
+            "opponent": "lonespear-v23",
+            "opponent_reward": 124536.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.56,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": 5442.0,
+            "seat": 1,
+            "seed": 295013,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 13
+          }
+        ],
+        "selection_distribution": {
+          "field_scheduler": 4
+        },
+        "summary": {
+          "episodes": 4,
+          "mean_margin": -127402.0,
+          "mean_rank": 2.0,
+          "p20_margin": -137271.0,
+          "wins_or_ties": 0,
+          "worst_margin": -137271.0
+        }
+      }
+    },
+    "screen": {
+      "foundations": {
+        "champion": {
+          "rows": [
+            {
+              "action_families": {
+                "market": 255,
+                "production": 2842,
+                "routing": 285
+              },
+              "episode": "shape-screen-cok",
+              "lineage": "COK-ZhangZiliang/V7",
+              "margin": -179097.0,
+              "opponent": "cok-v7",
+              "opponent_reward": 180396.0,
+              "rank": 2,
+              "reward": 1299.0,
+              "runtime_seconds": 2.2575469959992915,
+              "seat": 0,
+              "seed": 295001,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 1
+            },
+            {
+              "action_families": {
+                "market": 256,
+                "production": 2846,
+                "routing": 281
+              },
+              "episode": "shape-screen-cok",
+              "lineage": "COK-ZhangZiliang/V7",
+              "margin": -173768.0,
+              "opponent": "cok-v7",
+              "opponent_reward": 175067.0,
+              "rank": 2,
+              "reward": 1299.0,
+              "runtime_seconds": 2.2774589210748672,
+              "seat": 1,
+              "seed": 295001,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 1
+            },
+            {
+              "action_families": {
+                "market": 255,
+                "production": 2846,
+                "routing": 281
+              },
+              "episode": "shape-screen-v17",
+              "lineage": "lonespear/V17",
+              "margin": -129462.0,
+              "opponent": "lonespear-v17",
+              "opponent_reward": 130763.0,
+              "rank": 2,
+              "reward": 1301.0,
+              "runtime_seconds": 2.0344103008974344,
+              "seat": 0,
+              "seed": 295003,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 3
+            },
+            {
+              "action_families": {
+                "market": 256,
+                "production": 2819,
+                "routing": 308
+              },
+              "episode": "shape-screen-v17",
+              "lineage": "lonespear/V17",
+              "margin": -135452.0,
+              "opponent": "lonespear-v17",
+              "opponent_reward": 136753.0,
+              "rank": 2,
+              "reward": 1301.0,
+              "runtime_seconds": 1.9023311641067266,
+              "seat": 1,
+              "seed": 295003,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 3
+            }
+          ],
+          "summary": {
+            "episodes": 4,
+            "mean_margin": -154444.75,
+            "mean_rank": 2.0,
+            "p20_margin": -179097.0,
+            "wins_or_ties": 0,
+            "worst_margin": -179097.0
+          }
+        },
+        "contract_farmer": {
+          "rows": [
+            {
+              "action_families": {
+                "market": 51,
+                "production": 336,
+                "routing": 383
+              },
+              "episode": "shape-screen-cok",
+              "lineage": "COK-ZhangZiliang/V7",
+              "margin": -171715.0,
+              "opponent": "cok-v7",
+              "opponent_reward": 176426.0,
+              "rank": 2,
+              "reward": 4711.0,
+              "runtime_seconds": 2.1402024677954614,
+              "seat": 0,
+              "seed": 295001,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 1
+            },
+            {
+              "action_families": {
+                "market": 51,
+                "production": 335,
+                "routing": 384
+              },
+              "episode": "shape-screen-cok",
+              "lineage": "COK-ZhangZiliang/V7",
+              "margin": -167620.0,
+              "opponent": "cok-v7",
+              "opponent_reward": 172418.0,
+              "rank": 2,
+              "reward": 4798.0,
+              "runtime_seconds": 2.13580002496019,
+              "seat": 1,
+              "seed": 295001,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 1
+            },
+            {
+              "action_families": {
+                "market": 51,
+                "production": 327,
+                "routing": 392
+              },
+              "episode": "shape-screen-v17",
+              "lineage": "lonespear/V17",
+              "margin": -122218.0,
+              "opponent": "lonespear-v17",
+              "opponent_reward": 127051.0,
+              "rank": 2,
+              "reward": 4833.0,
+              "runtime_seconds": 1.7665009249467403,
+              "seat": 0,
+              "seed": 295003,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 3
+            },
+            {
+              "action_families": {
+                "market": 50,
+                "production": 331,
+                "routing": 388
+              },
+              "episode": "shape-screen-v17",
+              "lineage": "lonespear/V17",
+              "margin": -126754.0,
+              "opponent": "lonespear-v17",
+              "opponent_reward": 131454.0,
+              "rank": 2,
+              "reward": 4700.0,
+              "runtime_seconds": 1.7252442070748657,
+              "seat": 1,
+              "seed": 295003,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 3
+            }
+          ],
+          "summary": {
+            "episodes": 4,
+            "mean_margin": -147076.75,
+            "mean_rank": 2.0,
+            "p20_margin": -171715.0,
+            "wins_or_ties": 0,
+            "worst_margin": -171715.0
+          }
+        },
+        "field_scheduler": {
+          "rows": [
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-screen-cok",
+              "lineage": "COK-ZhangZiliang/V7",
+              "margin": -137072.0,
+              "opponent": "cok-v7",
+              "opponent_reward": 140072.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 2.068052160786465,
+              "seat": 0,
+              "seed": 295001,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 1
+            },
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-screen-cok",
+              "lineage": "COK-ZhangZiliang/V7",
+              "margin": -136284.0,
+              "opponent": "cok-v7",
+              "opponent_reward": 139284.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 2.0660777930170298,
+              "seat": 1,
+              "seed": 295001,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 1
+            },
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-screen-v17",
+              "lineage": "lonespear/V17",
+              "margin": -138499.0,
+              "opponent": "lonespear-v17",
+              "opponent_reward": 141499.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 1.6752235910389572,
+              "seat": 0,
+              "seed": 295003,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 3
+            },
+            {
+              "action_families": {
+                "routing": 719
+              },
+              "episode": "shape-screen-v17",
+              "lineage": "lonespear/V17",
+              "margin": -138499.0,
+              "opponent": "lonespear-v17",
+              "opponent_reward": 141499.0,
+              "rank": 2,
+              "reward": 3000.0,
+              "runtime_seconds": 1.6837326439563185,
+              "seat": 1,
+              "seed": 295003,
+              "statuses": [
+                "DONE",
+                "DONE"
+              ],
+              "steps": 720,
+              "time_index": 3
+            }
+          ],
+          "summary": {
+            "episodes": 4,
+            "mean_margin": -137588.5,
+            "mean_rank": 2.0,
+            "p20_margin": -138499.0,
+            "wins_or_ties": 0,
+            "worst_margin": -138499.0
+          }
+        }
+      },
+      "selector": {
+        "mean_same_seed_champion_delta": 16856.25,
+        "rows": [
+          {
+            "episode": "shape-screen-cok",
+            "lineage": "COK-ZhangZiliang/V7",
+            "margin": -137072.0,
+            "opponent": "cok-v7",
+            "opponent_reward": 140072.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.76,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": 42025.0,
+            "seat": 0,
+            "seed": 295001,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 1
+          },
+          {
+            "episode": "shape-screen-cok",
+            "lineage": "COK-ZhangZiliang/V7",
+            "margin": -136284.0,
+            "opponent": "cok-v7",
+            "opponent_reward": 139284.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.76,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": 37484.0,
+            "seat": 1,
+            "seed": 295001,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 1
+          },
+          {
+            "episode": "shape-screen-v17",
+            "lineage": "lonespear/V17",
+            "margin": -138499.0,
+            "opponent": "lonespear-v17",
+            "opponent_reward": 141499.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.4,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": -9037.0,
+            "seat": 0,
+            "seed": 295003,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 3
+          },
+          {
+            "episode": "shape-screen-v17",
+            "lineage": "lonespear/V17",
+            "margin": -138499.0,
+            "opponent": "lonespear-v17",
+            "opponent_reward": 141499.0,
+            "public_shape_at_fire": {
+              "livestock": 0,
+              "plant_share": 0.4,
+              "usable_tiles": 25
+            },
+            "rank": 2,
+            "reward": 3000.0,
+            "same_seed_champion_delta": -3047.0,
+            "seat": 1,
+            "seed": 295003,
+            "selection": "field_scheduler",
+            "statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "steps": 720,
+            "time_index": 3
+          }
+        ],
+        "selection_distribution": {
+          "field_scheduler": 4
+        },
+        "summary": {
+          "episodes": 4,
+          "mean_margin": -137588.5,
+          "mean_rank": 2.0,
+          "p20_margin": -138499.0,
+          "wins_or_ties": 0,
+          "worst_margin": -138499.0
+        }
+      }
+    }
+  }
+}

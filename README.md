@@ -296,3 +296,17 @@ The result is deliberately `inconclusive`: the candidate follows a clearly
 different action-family distribution, passes the runtime contract, but lost
 all registered screen and confirm episodes. It remains a measured hedge only;
 no public score was used and no Kaggle submission was performed.
+
+## Opponent-shape policy portfolio
+
+`candidates/opponent-shape-portfolio/agent.py` observes only the opponent's
+public farm through day 3, then latches one of three independently packaged
+foundations. Run each foundation alone and the selector on the same seeds,
+both seats, and disjoint chronological lineage windows with:
+
+```bash
+python3 scripts/measure_opponent_shape_portfolio.py
+```
+
+The default-OFF report records firing features, selection distribution,
+same-seed champion deltas, runtime status, and no Kaggle submission.
