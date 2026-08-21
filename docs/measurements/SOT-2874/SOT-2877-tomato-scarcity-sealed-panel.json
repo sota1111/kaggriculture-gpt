@@ -1,0 +1,332 @@
+{
+  "archive_regenerated": false,
+  "axis": "Moon V56 tomato scarcity fork sealed promotion panel",
+  "candidate_artifact": {
+    "configured_sha256": "a689448d0d74f57abf8a52584c05258756cc9d7ef7a52a4d06fff54a72148f68",
+    "effective_config": {
+      "MOON_V56_TOMATO_SCARCITY_FORK": true
+    },
+    "path": "main.py",
+    "retained": false,
+    "source_sha256": "dd2e58f2df80adee898c8fda64cfa8158bca33a4119eff7f6b43dbde13af3fd1"
+  },
+  "champion_artifact": {
+    "configured_sha256": "c7336bf09b6da1e02a9bf19bad0136cd9da1d67d8e39766822c6871ff4b418e1",
+    "effective_config": {
+      "MOON_V56_TOMATO_SCARCITY_FORK": false
+    },
+    "path": "main.py",
+    "source_sha256": "dd2e58f2df80adee898c8fda64cfa8158bca33a4119eff7f6b43dbde13af3fd1"
+  },
+  "confirm": {
+    "reason": "screen failed; untouched sealed confirm not consumed",
+    "skipped": true
+  },
+  "decision": "inconclusive",
+  "decision_basis": "direct A/B completed but mandatory fire telemetry was absent; inconclusive is required instead of rejected",
+  "effective_config": {
+    "MOON_V56_TOMATO_SCARCITY_FORK": false
+  },
+  "effective_config_fingerprint": "b3f374198834a19dc89d3c106f362ec907dcca947e6827c0636d852d475871b4",
+  "exec_compatibility": "PASS",
+  "issue": "SOT-2877",
+  "kaggle_submission": "NOT_PERFORMED",
+  "panel_checks": {
+    "acquisition_time_fixed": true,
+    "both_seats_declared": true,
+    "confirm_reserved": true,
+    "confirm_reserved_for_issue": true,
+    "engine_exact": true,
+    "episode_identity_disjoint": true,
+    "forbidden_features_fail_closed": true,
+    "no_submission": true,
+    "opponent_disjoint": true,
+    "panel_sources_match_pins": true,
+    "public_features_only": true,
+    "same_seed_both_seat": true,
+    "schema_supported": true,
+    "seed_disjoint": true,
+    "source_hash_disjoint": true,
+    "source_url_notebook_and_agent_hash_fixed": true,
+    "time_disjoint": true
+  },
+  "passed": true,
+  "production_flag_changed": false,
+  "required_fire_evidence": false,
+  "same_seed_both_seat": true,
+  "screen": {
+    "deterministic_reproduction": true,
+    "fire_evidence": {
+      "candidate": {
+        "harvest": 0,
+        "plant": 0,
+        "seed_relay": 0,
+        "terminal_sale": 0,
+        "trigger": 0
+      },
+      "champion": {
+        "harvest": 0,
+        "plant": 0,
+        "seed_relay": 0,
+        "terminal_sale": 0,
+        "trigger": 0
+      }
+    },
+    "passed": false,
+    "raw_rows": [
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -152642.0,
+          "opponent_reward": 153936.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.2055919859558344,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -152642.0,
+          "opponent_reward": 153936.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.1737637619953603,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "screen-moon-287501",
+          "opponent": "moon-v56",
+          "seed": 287501,
+          "time_utc": "2026-08-21T03:10:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -152642.0,
+          "opponent_reward": 153936.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.2136012779083103,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -152642.0,
+          "opponent_reward": 153936.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.2055057890247554,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "screen-moon-287501",
+          "opponent": "moon-v56",
+          "seed": 287501,
+          "time_utc": "2026-08-21T03:10:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -133334.0,
+          "opponent_reward": 134628.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.130900308955461,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -133334.0,
+          "opponent_reward": 134628.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.0459038929548115,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 0,
+          "episode_id": "screen-top-287502",
+          "opponent": "public-top-control",
+          "seed": 287502,
+          "time_utc": "2026-08-21T03:11:00Z",
+          "window": "screen"
+        }
+      },
+      {
+        "candidate": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -133334.0,
+          "opponent_reward": 134628.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.0747165291104466,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "champion": {
+          "contract_violations": 0,
+          "fire_telemetry": {
+            "harvest": 0,
+            "plant": 0,
+            "seed_relay": 0,
+            "terminal_sale": 0,
+            "trigger": 0
+          },
+          "invalid_actions": 0,
+          "margin": -133334.0,
+          "opponent_reward": 134628.0,
+          "productive_completion": 2846,
+          "rank": 2,
+          "reward": 1294.0,
+          "seconds": 2.0854630819521844,
+          "states": 720,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "stderr": "",
+          "terminal_cash": 1294.0
+        },
+        "identity": {
+          "candidate_seat": 1,
+          "episode_id": "screen-top-287502",
+          "opponent": "public-top-control",
+          "seed": 287502,
+          "time_utc": "2026-08-21T03:11:00Z",
+          "window": "screen"
+        }
+      }
+    ],
+    "reasons": [
+      "no strict rank or margin improvement"
+    ],
+    "runtime": {
+      "candidate_seconds": 8.624810101930052,
+      "champion_seconds": 8.510636525927112,
+      "passed": true,
+      "ratio": 1.0134153979734792,
+      "threshold": 2.0
+    },
+    "summary": {
+      "lower_tail_margin_delta": 0.0,
+      "matches": 4,
+      "mean_margin_delta": 0.0,
+      "mean_rank_improvement": 0.0,
+      "productive_completion_delta": 0,
+      "terminal_cash_delta": 0.0,
+      "worst_margin_delta": 0.0
+    }
+  },
+  "screen_pass_only_confirm": true,
+  "submission_contract": "PASS"
+}
