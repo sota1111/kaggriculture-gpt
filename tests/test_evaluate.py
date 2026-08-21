@@ -9,6 +9,7 @@ from scripts.evaluate import bounded_rollout, compare, compare_distribution, eva
 from scripts import evaluate as evaluator
 from scripts.measure_leak_free_cv import canonical_sha256, fetch_artifacts, measure, raw_url, validate_corpus_manifest
 from scripts.measure_private_proxy_oracle import aggregate as aggregate_private_proxy, validate_split as validate_private_proxy_split
+from scripts.measure_market_shift_oracle import aggregate as aggregate_market_shift, validate_manifest as validate_market_shift
 from scripts.measure_live_lb_reanchor import measure as measure_live_lb_reanchor
 from scripts.measure_demand_premium_sales import _gate as demand_premium_gate
 from scripts.measure_multi_step_transition_oracle import measure as measure_transition_oracle, validate_split
@@ -1903,6 +1904,46 @@ class PrivateProxyOracleTest(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual(-2, first["overall"]["p20_margin"])
         self.assertEqual({"a", "b"}, set(first["by_distribution"]))
+
+
+class MarketShiftOracleTest(unittest.TestCase):
+    def setUp(self):
+        self.manifest = json.loads((ROOT / "tests/fixtures/market_shift_oracle.json").read_text())
+
+    def test_market_opponent_seat_seed_time_are_isolated(self):
+        result = validate_market_shift(self.manifest)
+        self.assertTrue(result["passed"], result)
+        self.assertTrue(all(not values for values in result["overlap"].values()))
+        self.assertTrue(result["checks"]["both_seats_per_identity"])
+        self.assertTrue(result["checks"]["official_market_params_only"])
+
+    def test_rejects_private_future_and_opened_confirm(self):
+        for key in ("private", "future_prices"):
+            mutated = json.loads(json.dumps(self.manifest))
+            mutated["panels"]["screen"][0][key] = {"secret": 1}
+            self.assertFalse(validate_market_shift(mutated)["checks"]["no_private_or_future_fields"])
+        mutated = json.loads(json.dumps(self.manifest))
+        mutated["confirm_status"] = "OPENED"
+        self.assertFalse(validate_market_shift(mutated)["checks"]["confirm_reserved"])
+
+    def test_rejects_hash_provenance_or_market_overlap(self):
+        mutated = json.loads(json.dumps(self.manifest))
+        mutated["artifacts"][0]["sha256"] = ""
+        self.assertFalse(validate_market_shift(mutated)["checks"]["artifact_provenance_complete"])
+        mutated = json.loads(json.dumps(self.manifest))
+        mutated["panels"]["confirm"][0]["market_regime"] = "screen-tight-feed"
+        self.assertFalse(validate_market_shift(mutated)["checks"]["no_market_regime_overlap"])
+
+    def test_market_shift_schema_is_deterministic(self):
+        rows = [
+            {"margin": 5, "candidate_rank": 1, "market_regime": "tight"},
+            {"margin": -2, "candidate_rank": 2, "market_regime": "tight"},
+            {"margin": 1, "candidate_rank": 1, "market_regime": "glut"},
+        ]
+        first = aggregate_market_shift(rows)
+        self.assertEqual(first, aggregate_market_shift(json.loads(json.dumps(rows))))
+        self.assertEqual(-2, first["overall"]["p20_margin"])
+        self.assertEqual({"tight", "glut"}, set(first["by_market_regime"]))
 
 
 if __name__ == "__main__":
