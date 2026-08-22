@@ -1,7 +1,13 @@
-# Final Report — SOT-2962
+# Final Report — SOT-2972
 
-All four child issues are Done and their merged evidence was aggregated. The strongest cycle-5 whole-agent results remain default-OFF because their source licenses are unspecified. The previously verified MIT coherent CARE-production candidate was therefore submitted through the governed repo-scoped helper. Kaggle ref `55681343` completed at public score `600.0`; this matches the historical best and is recorded as an inconclusive live-field observation rather than private-improvement proof. The effective configuration and artifact fingerprint are recorded in the experiment ledger, and the retained champion remains the structural hedge.
+Moon Counts Melons V102 was reproduced as a licensed, standard-library-only,
+independent whole-agent candidate. Exact upstream and packaged hashes are
+pinned. It passed contract validation and improved rank, mean margin, and
+pessimistic tail in both the registered screen and separately sealed confirm.
 
-## Linear Report: POSTED
+The candidate is promoted only as a default-OFF hedge. No feature was spliced
+into the champion, `main.py` and `submission.tar.gz` remain byte-identical,
+and no Kaggle submission was performed.
+
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
