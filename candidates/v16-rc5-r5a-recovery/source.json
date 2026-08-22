@@ -1,0 +1,17 @@
+{
+  "source_url": "https://www.kaggle.com/code/boatlee/v16-rc5-r5a-high-score-8c-4s-recovery",
+  "kernel_id": 130546133,
+  "kernel_version": "public snapshot acquired 2026-08-22",
+  "notebook_sha256": "0bf9369f19ba97afb493a24bc9ea91df906bb1b1167d16fdae5b634e8e5f0466",
+  "published_agent_sha256": "168bb38bdac011d74723edce65d88719cc513c2ea639db4b629aa625d3239bc9",
+  "license": "not declared in downloaded notebook metadata or notebook body",
+  "redistribution": "not-authorized; downloaded notebook and executable remain fetch-only",
+  "implementation": "clean-room from public R5A prose on independently licensed MIT whole-agent foundation",
+  "boundary": "R5A public-state COW alignment recovery only; excluded compressed action trace replay bytes premium-market code identity private opponent state future outcomes and weights",
+  "foundation": "lonespear CARE-production MIT whole agent",
+  "foundation_sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+  "prior_v16_source": "candidates/v16-rc5-portable/source.json",
+  "champion_dependency": false,
+  "default_enabled": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}
