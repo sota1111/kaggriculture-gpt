@@ -1,39 +1,47 @@
-# Solo Worker Report — SOT-2948
+# Solo Worker Report — SOT-2958
 
 ## Summary
 
-Aggregated all four completed children and the sealed tournament. The opponent-shape portfolio was rejected on confirm-tail regression; the licensed whole-agent remained inconclusive. Under the issue's explicit due-probe exception, submitted the structurally independent whole-agent once as a hedge without promoting it or changing the champion. Kaggle ref 55678801 completed at public score 600.0.
+Recovered the exact Apache-2.0 Barnyard Economist v5 Version 4 output and
+registered it as an independent, default-OFF whole-agent hedge. The unchanged
+champion and candidate were evaluated on identical both-seat screen identities
+and a disjoint chronological confirm cohort. No Kaggle submission was made.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — parent aggregation, evidence, effective configuration, artifact fingerprint, and result
-- `docs/ai/linear/SOT-2948.md` — parent/child, tournament, submission, and champion tracking
-- `docs/ai/65_worker_solo_report.md` — final lifecycle report
-- `docs/ai/70_final_report.md` — final acceptance summary
+- `candidates/barnyard-economist-v5/` — exact agent, Apache license, provenance, effective config, and attribution
+- `scripts/measure_barnyard_economist.py` — reproducible paired screen/confirm evaluator and gate
+- `tests/fixtures/barnyard_economist.json` — registered opponent/seed/seat/time holdout
+- `tests/test_barnyard_economist.py` — provenance, portability, contract, and evidence tests
+- `docs/measurements/SOT-2957/SOT-2958-barnyard-economist.json` — real paired results and fingerprints
+- `docs/ai/experiment_ledger.jsonl` — cycle-4 axis result
 
 ## Verification
 
-- SOT-2949/SOT-2950/SOT-2951/SOT-2952: Done; PRs #111-#114 merged
-- Child quality gate: 178 tests passed, 2 expected skips; compile, submission contract, CI, GitGuardian, and diff review PASS
-- Candidate contract: PASS; archive gzip/member/content checks PASS
-- Candidate archive SHA-256: `444e84d4796d67c2987631fc99bb924dc9e9701972aff4333cc247eb9155e25a`
-- Candidate content SHA-256: `bad9dd849ee6b828183ee938d2a5732835715a23fcb25082269ba95c54808cf6`
-- Kaggle ref 55678801: COMPLETE, public 600.0
-- Champion SHA-256: `0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f`, unchanged
+- Exact source: Kaggle Version 4 / scriptVersionId `339537120`, 26,394 bytes, SHA-256 `26311e7c17449c862c0a2edc5b00224f81f0580aa7f4b8d78073b4026f7d814a`
+- License: Apache-2.0 vendored and hash-verified
+- Portability: stdlib-only imports; entrypoint and submission contract PASS
+- Screen: mean-margin delta `+87,198`; p20/worst delta `+69,483`; gate PASS
+- Confirm: mean-margin delta `+110,534.25`; p20/worst delta `+129,304`; gate PASS
+- Rank: both candidate and champion remained rank 2 in all registered matches
+- Runtime: all evaluated episodes reached `DONE/DONE` at 720 steps
+- Tests: 180 passed, 2 expected skips; candidate-specific 2/2 passed; compileall PASS
+- npm lint/typecheck/test/e2e: N/A (repository has no `package.json`; Python gates apply)
+- Champion `main.py`: SHA-256 `0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f`, unchanged
 
 ## Acceptance Criteria
 
-- [x] Improvement strategy and rationale recorded
-- [x] All children reached Done
-- [x] Candidate/champion verification and effective-config fingerprint recorded
-- [x] Parent resume confirmed children and submitted a new hedge artifact
-- [x] Rejected axis has firing-logged same-seed/both-seat evidence
-- [x] Separate Linear handoff and Completion Report posted
+- [x] Exact whole-agent source, Apache-2.0 license, and effective config recorded
+- [x] Independent same-seed/both-seat screen and disjoint confirm recorded with rank/margin/tail/worst
+- [x] Two-signal and tail-nonregression gate applied without using notebook grid-search/LB as evidence
+- [x] Action-family firing fingerprint differs from the champion
+- [x] stdlib/offline and agent entrypoint/submission contracts pass
+- [x] No Kaggle submission; champion runtime and submission artifact remain unchanged
 
 ## Risks
 
-- `cv_representative=false`; the 600.0 public probe does not establish private transfer and does not promote the candidate.
-- Market/opponent/time drift remains large; next cycle should rebuild the live-distribution proxy rather than tune the rejected selector.
+- Candidate and champion both lost every registered public-opponent match; this is a relative hedge promotion, not evidence of leaderboard-rank superiority.
+- The candidate is intentionally default-OFF and was not integrated into `main.py`.
 
 ## Linear Report: POSTED
 
