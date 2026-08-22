@@ -1,44 +1,30 @@
-# Solo Worker Report — SOT-2965
+# Solo Worker Report — SOT-2962
 
 ## Summary
 
-Audited the Kaggle API snapshot and transient embedded whole-agent, recorded exact notebook/agent
-hashes and runtime boundaries, and evaluated it with a disjoint same-seed/both-seat screen→confirm
-panel. The empirical performance gate passed, but the final portability decision is rejected because
-no redistribution license is declared. No source agent was committed; the champion remains unchanged.
+第5次サイクルの4子Issueを集約した。HarvestForge-XとKaito v39は独立hedgeとしてlocal screen/confirmを通過したが再配布licenseが未宣言、Pure Architectureも同理由でportable採用不可、live-meta oracleは評価系のみpromotedだった。そこで前サイクルで選定・検証済みのMIT coherent CARE-production artifactをgoverned helper経由で提出し、Kaggle ref 55681343がpublic 600.0で完了した。過去bestと同値なのでprivate改善とは判定せず、live-field観測としてinconclusiveに記録した。
 
 ## Changed Files
 
-- `candidates/pure-architecture-2600/` — fail-closed provenance descriptor and boundary note
-- `tests/fixtures/pure_architecture_2600.json` — independent screen/confirm identities
-- `scripts/measure_pure_architecture_2600.py` — transient acquisition, hash audit, and evaluation
-- `tests/test_pure_architecture_2600.py` — provenance, contract, tail, and hedge assertions
-- `docs/measurements/SOT-2962/SOT-2965-pure-architecture-2600.json` — reproducible evidence
-- `docs/ai/experiment_ledger.jsonl` — rejected portability-axis result
+- `docs/ai/experiment_ledger.jsonl` — cycle-5集約、提出fingerprint、実スコアを追記
+- `docs/ai/linear/SOT-2962.md` — 子Issue結果と提出判断を記録
+- `docs/ai/65_worker_solo_report.md` — solo最終レポート
+- `docs/ai/70_final_report.md` — acceptance要約
 
-## Commands Run
+## Verification
 
-- Kaggle API `kernels pull` / `kernels output` — source snapshot acquired; no output artifact published
-- measurement command — PASS; screen and confirm gates passed; final portability decision rejected
-- deterministic reruns — matching non-timing evidence hash before final decision encoding
-- `python -m compileall -q scripts tests` — PASS
-- `python -m unittest discover -s tests -v` — PASS, 195 tests, 2 expected skips
-- npm lint/typecheck/test/e2e — N/A, repository has no `package.json`
-- `git diff --check` — PASS
-
-## Acceptance Criteria
-
-- [x] License/source/hash/runtime boundary recorded fail-closed
-- [x] Whole-agent evaluated transiently through an independent fixture without redistribution
-- [x] Both-seat screen/confirm, rank, relative margin, p20/worst, and deterministic evidence recorded
-- [x] Existing champion and archive hashes match `origin/main`
-- [x] Evidence-aligned rejected decision appended to the experiment ledger
+- Children SOT-2963/SOT-2964/SOT-2965/SOT-2966: Done; PR #122/#125/#124/#123 merged
+- Submission artifact: single root `main.py`; archive SHA-256 `0c188c379e23291bee39ff95b0aa6da3b14c737d2dc84866d0ebc13c61ea7787`
+- Effective config: exact MIT coherent CARE-production agent at commit `774b26093ccf4246525517d48420349b841b6e50`; no flags, replay bytes, credentials, weights, or external runtime dependency
+- Governed submission: ref `55681343`, COMPLETE, public `600.0`
+- Full Python quality gates and submission contract: PASS
+- Diff review and GitHub CI: PASS
 
 ## Risks
 
-- The candidate cannot be redistributed or adopted until the author supplies a compatible license.
-- Public “2600+” wording was deliberately excluded from evidence.
+- Public score is sparse live-matchmaking evidence and tied the historical best; it is not private-rank proof.
+- Cycle-5 locally strong whole agents remain fetch-only/default-OFF until compatible redistribution licenses are declared.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
