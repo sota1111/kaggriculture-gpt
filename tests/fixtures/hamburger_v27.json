@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.7",
+  "screen": [
+    {"opponent":"incumbent","lineage":"incumbent-main","episode":"hv27-screen-a","seed":300901,"seat":0,"time_index":1},
+    {"opponent":"incumbent","lineage":"incumbent-main","episode":"hv27-screen-a","seed":300901,"seat":1,"time_index":1}
+  ],
+  "confirm": [
+    {"opponent":"c95","lineage":"c95-high-score","episode":"hv27-confirm-b","seed":300913,"seat":0,"time_index":13},
+    {"opponent":"c95","lineage":"c95-high-score","episode":"hv27-confirm-b","seed":300913,"seat":1,"time_index":13}
+  ],
+  "kaggle_submission": "NOT_PERFORMED"
+}

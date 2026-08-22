@@ -1,40 +1,37 @@
-# Solo Worker Report — SOT-3001
+# Solo Worker Report — SOT-3009
 
 ## Summary
 
-Cycle 3 resumed after all four child issues reached Done. Their merged evidence was aggregated without recreating children. C95 was selected as the only licensed, portable promoted whole-agent, packaged and verified in isolation, but the governed submission gate skipped it because the 180-minute spacing window had not elapsed. The incumbent and existing submission artifact remain untouched.
+Hamburger V27 was reconstructed as an independent, default-off clean-room whole-agent. The public snapshot did not declare a redistribution license, so no upstream source/blob/replay bytes were copied. The candidate passed offline/file-runner and runtime checks but failed the C95 confirmation panel, so it was rejected and not promoted into the working submission.
 
-## Child Results
+## Changed Files
 
-- SOT-3002 V16-RC5: inconclusive; strong closed-loop proxy, but redistribution license absent.
-- SOT-3003 v27 Strict-Future: inconclusive; strong closed-loop proxy, but redistribution license absent.
-- SOT-3004 C95 High-Score Pipeline: promoted as an Apache-2.0, offline, exact whole-agent candidate.
-- SOT-3005 strict-future live-field oracle: inconclusive; current authenticated replay refresh unavailable.
-
-## Submission Decision
-
-- Candidate agent SHA-256: `ed8c8420514acb5a96c0d44cfd42a8786e49c7cdc01a0de61d2e6b8997dda87a`
-- Effective-config fingerprint: `cd276b276df40fdd4c0c8b855991b1f59e0c3634db997af24e5eb8b434c1d04a`
-- Isolated archive SHA-256: `d8e5db8764228e96e4118ae2a6d44fe4257a96de8e2f726c95f4b5aeb11fa7fb`
-- Governed command result: skipped; previous submission was within 180 minutes, with about 112 minutes remaining.
-- Kaggle submission/reference/public score: none for this run.
+- `candidates/hamburger-v27/` — provenance-pinned clean-room agent and portability documentation.
+- `scripts/measure_hamburger_v27.py` — both-seat screen/confirm measurement and fingerprinting.
+- `tests/fixtures/hamburger_v27.json` / `tests/test_hamburger_v27.py` — isolated identities and behavior/contract tests.
+- `docs/measurements/SOT-3009/hamburger-v27-screen-confirm.json` — sealed result.
+- `docs/ai/experiment_ledger.jsonl` — rejected axis entry.
 
 ## Verification
 
-- C95 submission runtime and single-root archive contract: PASS
-- Repository unittest suite: 251 passed, 2 optional skipped
-- Ledger JSONL parse: PASS
-- Diff review/check: PASS
-- npm lint/typecheck/test/e2e: N/A (`package.json` absent)
+- Python compileall: PASS.
+- Full unittest discovery: 261 tests passed, 2 optional skipped.
+- File-runner smoke: 720 steps, both agents DONE.
+- Screen vs incumbent: 2/0/0 W/D/L, mean margin +1,695.
+- Confirm vs C95: 0/0/2 W/D/L, mean margin -164,034, worst -167,460.
+- Runtime contract: PASS; effective-config fingerprint recorded.
+- `git diff --check`: PASS.
+- npm lint/typecheck/test/e2e: N/A (`package.json` absent).
+- `main.py`, C95 agent, and `submission.tar.gz`: byte-identical to `origin/main`.
+- Kaggle submission: NOT_PERFORMED.
 
 ## Acceptance Criteria
 
-- [x] Improvement directions and selection rationale are recorded.
-- [x] All four children are terminal Done.
-- [x] Candidate, evidence, artifact identity, and effective configuration correspond in the ledger.
-- [x] Parent aggregation confirmed all children and explicitly records governed no-submission due to spacing.
-- [x] No unsupported rejected/CLOSED conclusion was added.
-- [x] A separate `## 申し送り` is posted to Linear.
+- [x] Source snapshot identity/hash/license and clean-room portability decision recorded.
+- [x] Independent whole-agent executes offline and through the file runner.
+- [x] Screen→confirm results and effective-config fingerprint recorded in measurement and ledger.
+- [x] Incumbent/C95 remain unchanged; rejected candidate remains default-off.
+- [x] No Kaggle submission performed.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS
