@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.7",
+  "frozen_before_evaluation": true,
+  "screen_reports": {
+    "v111": "docs/measurements/SOT-2981/SOT-2982-v111-economic-core.json",
+    "r5a": "docs/measurements/SOT-2981/SOT-2983-v16-rc5-r5a-recovery.json",
+    "conditional_memory": "docs/measurements/SOT-2981/SOT-2985-kaito-v211-conditional-memory.json"
+  },
+  "sealed_confirm": [
+    {"opponent":"candidates/soil-remembers-rain/agent.py","lineage":"prvsiyan/soil-remembers-rain","episode":"adaptive-sealed-soil","seed":298401,"seat":0,"seat_group":"sealed-soil-both","time_slice":"sealed-2026-08-22-a","time_index":21},
+    {"opponent":"candidates/soil-remembers-rain/agent.py","lineage":"prvsiyan/soil-remembers-rain","episode":"adaptive-sealed-soil","seed":298401,"seat":1,"seat_group":"sealed-soil-both","time_slice":"sealed-2026-08-22-a","time_index":21},
+    {"opponent":"candidates/moon-counts-melons/agent.py","lineage":"prvsiyan/moon-counts-melons","episode":"adaptive-sealed-moon","seed":298403,"seat":0,"seat_group":"sealed-moon-both","time_slice":"sealed-2026-08-22-b","time_index":23},
+    {"opponent":"candidates/moon-counts-melons/agent.py","lineage":"prvsiyan/moon-counts-melons","episode":"adaptive-sealed-moon","seed":298403,"seat":1,"seat_group":"sealed-moon-both","time_slice":"sealed-2026-08-22-b","time_index":23}
+  ],
+  "replay_boundary": {
+    "bytes": "local-only-not-committed",
+    "derived_fields_only": ["opponent", "lineage", "episode", "seed", "seat", "seat_group", "time_slice", "margin", "rank", "runtime", "terminal_status"],
+    "open_loop": "diagnostic-only-not-pooled",
+    "closed_loop": "official-engine-common-panel"
+  },
+  "selection_policy": "CV-only; public score is not a selection signal; retain old champion hedge",
+  "kaggle_submission": "NOT_PERFORMED"
+}

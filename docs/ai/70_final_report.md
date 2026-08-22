@@ -1,8 +1,9 @@
-# Final Report — SOT-2982
+# Final Report — SOT-2984
 
-V111 8C4S Economic Core was reproduced as a license-safe, independent clean-room candidate and evaluated with the required sealed protocol. The implementation and runtime contract pass, but the candidate is not promoted: it regressed rank, mean margin, and pessimistic tails in both screen and confirm. The current champion remains untouched and no Kaggle submission occurred.
+Adaptive Replay sealed portfolio evaluation is complete. Four immutable artifacts were evaluated in 16 official-engine matches using upstream-screen-unseen opponent lineages, disjoint episodes/seeds/time slices, and both seats. All runtime, leakage, repository test, and submission-contract gates passed.
 
-Quality gates: compile PASS; 221 unit tests PASS (2 optional skips); screen/confirm contract PASS; diff check PASS; acceptance PASS.
+Conditional Memory had the strongest pessimistic margin and lowest matchup spread, but all policies lost the sealed matchups. It is recorded only as a CV portfolio hedge; the old champion remains available and production `main.py` / `submission.tar.gz` are unchanged. No Kaggle submission was performed.
 
 ## Acceptance: PASS
+
 ## Next Action: READY_FOR_REVIEW

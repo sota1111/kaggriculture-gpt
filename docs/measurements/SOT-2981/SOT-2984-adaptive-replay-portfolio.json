@@ -1,0 +1,603 @@
+{
+  "axis": "adaptive replay sealed independent-agent portfolio",
+  "champion_hedge_retained": true,
+  "decision": "promote-conditional_memory-as-portfolio-hedge",
+  "frozen_artifacts": {
+    "conditional_memory": {
+      "bytes": 48715,
+      "sha256": "66ad5c3be41d4d115d7b0061660575257be7f74f42c921f9fb5c20e330881cb8"
+    },
+    "old_champion": {
+      "bytes": 86346,
+      "path": "main.py",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    },
+    "r5a_recovery": {
+      "bytes": 48383,
+      "sha256": "a335eff12092456d3a18a2c29dea5535d2984962d3d87a87c795405f2fc6da42"
+    },
+    "v111_economic_core": {
+      "bytes": 45850,
+      "sha256": "72553658c6fc5ef58329e6d58f35961a7f266a4e43cabec8b5493e1b738cac60"
+    }
+  },
+  "issue": "SOT-2984",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "protocol": {
+    "confirm": "closed-loop official engine, same-seed/both-seat common panel",
+    "isolation_axes": [
+      "opponent",
+      "lineage",
+      "episode",
+      "seed",
+      "seat_group",
+      "time_slice"
+    ],
+    "open_loop_boundary": "stress diagnostics only; never interpreted as live win probability",
+    "primary_metrics": [
+      "mean_margin",
+      "pessimistic_p20_margin",
+      "mean_rank",
+      "rank_stability_stdev",
+      "matchup_spread"
+    ],
+    "screen": "upstream-only; confirm identities remained unused"
+  },
+  "portfolio_selection": {
+    "basis": "lowest mean rank, then strongest pessimistic p20 margin, then mean margin on the sealed common panel",
+    "caveat": "CV is a non-representative private proxy; selection is a portfolio hedge, not a live-leaderboard claim",
+    "old_champion_retained_as_hedge": true,
+    "public_score_used": false,
+    "selected_candidate": "conditional_memory"
+  },
+  "provenance": {
+    "acquired_at_utc": "2026-08-22T06:05:00Z",
+    "manifest": {
+      "path": "tests/fixtures/adaptive_replay_portfolio.json",
+      "sha256": "a25800b3729ffbfa17972d2e022d9b25b28c98e36a9121e2aff786571c062e62"
+    },
+    "replay_bytes": "LOCAL_ONLY_NOT_COMMITTED",
+    "upstream_reports": {
+      "conditional_memory": {
+        "path": "docs/measurements/SOT-2981/SOT-2985-kaito-v211-conditional-memory.json",
+        "sha256": "571a3c8c839d479c7ca9d1b8a4b79e124b2c22c28fa92ded739301767ebf46ac"
+      },
+      "r5a": {
+        "path": "docs/measurements/SOT-2981/SOT-2983-v16-rc5-r5a-recovery.json",
+        "sha256": "c1fc9f1df76d5bbf97b2fa7e21520e1b30ad30ecfdec8c3d548365e09fb911aa"
+      },
+      "v111": {
+        "path": "docs/measurements/SOT-2981/SOT-2982-v111-economic-core.json",
+        "sha256": "c4960dfd81820910328a932e57b11f2d89f21f05040746e08dfb749f035a5abd"
+      }
+    }
+  },
+  "public_score_used_for_selection": false,
+  "rank_order": [
+    "conditional_memory",
+    "old_champion",
+    "v111_economic_core",
+    "r5a_recovery"
+  ],
+  "sealed_tournament": {
+    "conditional_memory": {
+      "rows": [
+        {
+          "action_families": {
+            "inventory": 717,
+            "market": 690,
+            "production": 1818,
+            "routing": 4741
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -36161.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 115890.0,
+          "rank": 2,
+          "reward": 79729.0,
+          "runtime_seconds": 2.9150452511385083,
+          "seat": 0,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "inventory": 717,
+            "market": 690,
+            "production": 1818,
+            "routing": 4741
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -35809.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 115897.0,
+          "rank": 2,
+          "reward": 80088.0,
+          "runtime_seconds": 2.9224912158679217,
+          "seat": 1,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "inventory": 744,
+            "market": 698,
+            "production": 1841,
+            "routing": 4691
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -36157.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 127940.0,
+          "rank": 2,
+          "reward": 91783.0,
+          "runtime_seconds": 3.022427022922784,
+          "seat": 0,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        },
+        {
+          "action_families": {
+            "inventory": 750,
+            "market": 698,
+            "production": 1846,
+            "routing": 4680
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -33434.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 136524.0,
+          "rank": 2,
+          "reward": 103090.0,
+          "runtime_seconds": 3.0135115701705217,
+          "seat": 1,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        }
+      ],
+      "summary": {
+        "all_done": true,
+        "episodes": 4,
+        "matchup_spread": 1189.5,
+        "matchups": {
+          "prvsiyan/moon-counts-melons": {
+            "mean_margin": -34795.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 2723.0
+          },
+          "prvsiyan/soil-remembers-rain": {
+            "mean_margin": -35985.0,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 352.0
+          }
+        },
+        "mean_margin": -35390.25,
+        "mean_rank": 2.0,
+        "pessimistic_p20_margin": -36161.0,
+        "rank_stability_stdev": 0.0,
+        "worst_margin": -36161.0
+      }
+    },
+    "old_champion": {
+      "rows": [
+        {
+          "action_families": {
+            "market": 251,
+            "production": 2846,
+            "routing": 281
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -129581.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 130883.0,
+          "rank": 2,
+          "reward": 1302.0,
+          "runtime_seconds": 2.2148263768758625,
+          "seat": 0,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "market": 255,
+            "production": 2846,
+            "routing": 281
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -129456.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 130758.0,
+          "rank": 2,
+          "reward": 1302.0,
+          "runtime_seconds": 2.1710193080361933,
+          "seat": 1,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "market": 244,
+            "production": 2846,
+            "routing": 281
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -137140.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 138439.0,
+          "rank": 2,
+          "reward": 1299.0,
+          "runtime_seconds": 2.285361539106816,
+          "seat": 0,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        },
+        {
+          "action_families": {
+            "market": 250,
+            "production": 2841,
+            "routing": 286
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -167749.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 169048.0,
+          "rank": 2,
+          "reward": 1299.0,
+          "runtime_seconds": 2.318562200991437,
+          "seat": 1,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        }
+      ],
+      "summary": {
+        "all_done": true,
+        "episodes": 4,
+        "matchup_spread": 22926.0,
+        "matchups": {
+          "prvsiyan/moon-counts-melons": {
+            "mean_margin": -152444.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 30609.0
+          },
+          "prvsiyan/soil-remembers-rain": {
+            "mean_margin": -129518.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 125.0
+          }
+        },
+        "mean_margin": -140981.5,
+        "mean_rank": 2.0,
+        "pessimistic_p20_margin": -167749.0,
+        "rank_stability_stdev": 0.0,
+        "worst_margin": -167749.0
+      }
+    },
+    "r5a_recovery": {
+      "rows": [
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -161118.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 164118.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 1.997251896886155,
+          "seat": 0,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -120433.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 123433.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 1.9958414318971336,
+          "seat": 1,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -181146.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 184146.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 2.1238506629597396,
+          "seat": 0,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        },
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -187485.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 190485.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 2.139382340013981,
+          "seat": 1,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        }
+      ],
+      "summary": {
+        "all_done": true,
+        "episodes": 4,
+        "matchup_spread": 43540.0,
+        "matchups": {
+          "prvsiyan/moon-counts-melons": {
+            "mean_margin": -184315.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 6339.0
+          },
+          "prvsiyan/soil-remembers-rain": {
+            "mean_margin": -140775.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 40685.0
+          }
+        },
+        "mean_margin": -162545.5,
+        "mean_rank": 2.0,
+        "pessimistic_p20_margin": -187485.0,
+        "rank_stability_stdev": 0.0,
+        "worst_margin": -187485.0
+      }
+    },
+    "v111_economic_core": {
+      "rows": [
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -161118.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 164118.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 2.1878783460706472,
+          "seat": 0,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-soil",
+          "lineage": "prvsiyan/soil-remembers-rain",
+          "margin": -120433.0,
+          "opponent": "candidates/soil-remembers-rain/agent.py",
+          "opponent_reward": 123433.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 1.9740633219480515,
+          "seat": 1,
+          "seat_group": "sealed-soil-both",
+          "seed": 298401,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 21,
+          "time_slice": "sealed-2026-08-22-a"
+        },
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -181146.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 184146.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 2.1286874669604003,
+          "seat": 0,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        },
+        {
+          "action_families": {
+            "routing": 719
+          },
+          "episode": "adaptive-sealed-moon",
+          "lineage": "prvsiyan/moon-counts-melons",
+          "margin": -187485.0,
+          "opponent": "candidates/moon-counts-melons/agent.py",
+          "opponent_reward": 190485.0,
+          "rank": 2,
+          "reward": 3000.0,
+          "runtime_seconds": 2.153374573914334,
+          "seat": 1,
+          "seat_group": "sealed-moon-both",
+          "seed": 298403,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 23,
+          "time_slice": "sealed-2026-08-22-b"
+        }
+      ],
+      "summary": {
+        "all_done": true,
+        "episodes": 4,
+        "matchup_spread": 43540.0,
+        "matchups": {
+          "prvsiyan/moon-counts-melons": {
+            "mean_margin": -184315.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 6339.0
+          },
+          "prvsiyan/soil-remembers-rain": {
+            "mean_margin": -140775.5,
+            "mean_rank": 2.0,
+            "seat_margin_spread": 40685.0
+          }
+        },
+        "mean_margin": -162545.5,
+        "mean_rank": 2.0,
+        "pessimistic_p20_margin": -187485.0,
+        "rank_stability_stdev": 0.0,
+        "worst_margin": -187485.0
+      }
+    }
+  },
+  "validation": {
+    "checks": {
+      "all_isolation_axes_disjoint": true,
+      "chronological_sealed_confirm": true,
+      "engine_pinned": true,
+      "no_submission": true,
+      "open_closed_loop_separated": true,
+      "protocol_pre_registered": true,
+      "public_not_selection_signal": true,
+      "replay_bytes_local_only": true,
+      "same_seed_both_seats": true,
+      "schema_supported": true,
+      "two_unseen_opponent_lineages": true,
+      "upstream_no_submission": true,
+      "upstream_reports_passed": true
+    },
+    "passed": true,
+    "screen_confirm_overlap": {
+      "episode": [],
+      "lineage": [],
+      "opponent": [],
+      "seat_group": [],
+      "seed": [],
+      "time_slice": []
+    }
+  }
+}
