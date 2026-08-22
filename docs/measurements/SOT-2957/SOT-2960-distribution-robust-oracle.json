@@ -1,0 +1,401 @@
+{
+  "axis": "distribution-robust live closed-loop private proxy",
+  "confirm_seal": {
+    "confirm_panel_sha256": "258ccb1968972a745408d9419f5f315bf88ecae9e9b8921723acfb845ab26a4b",
+    "digest_unchanged": true,
+    "opened": true
+  },
+  "issue": "SOT-2960",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "protocol": {
+    "confirm": "unseen opponent/lineage/episode/seed/time cohort opened after digest check",
+    "evidence_boundary": "open-loop and closed-loop metrics are never pooled",
+    "promotion_scope": "oracle validation only; no agent promotion",
+    "screen": "same-seed/both-seat live interactions"
+  },
+  "provenance": {
+    "actual_engine": "1.32.4",
+    "candidate": {
+      "path": "main.py",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    },
+    "engine": "kaggle-environments==1.32.4",
+    "manifest_sha256": "98c2c0904cd2bca54cc83f99761aa8015c584f0eed70c41d8d46ab2ca254489d",
+    "opponents": [
+      {
+        "cluster": "cok-foundation",
+        "commit": "58c91c390f1cf8b3cace8c078c00b938bae398ff",
+        "id": "cok-v7",
+        "license": "Apache-2.0",
+        "lineage": "COK-ZhangZiliang/V7",
+        "path": "main.py",
+        "redistribution": "fetch-only",
+        "sha256": "7ce060d8551cf3e7a20a800c1eea2e18ece63d6d6eab8e21199b65f9b78e4794",
+        "source_url": "https://github.com/COK-ZhangZiliang/Kaggriculture"
+      },
+      {
+        "cluster": "lonespear-early",
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v17",
+        "license": "MIT",
+        "lineage": "lonespear/V17",
+        "path": "main_v17.py",
+        "redistribution": "fetch-only",
+        "sha256": "14535fbd4a844b8d7b8c1fcb9a4c68c1081ba289b1c26e4c6c275b3b7c21090b",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "cluster": "lonespear-middle",
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v18",
+        "license": "MIT",
+        "lineage": "lonespear/V18",
+        "path": "main_v18.py",
+        "redistribution": "fetch-only",
+        "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      },
+      {
+        "cluster": "lonespear-late",
+        "commit": "774b26093ccf4246525517d48420349b841b6e50",
+        "id": "lonespear-v23",
+        "license": "MIT",
+        "lineage": "lonespear/V23",
+        "path": "main_v23.py",
+        "redistribution": "fetch-only",
+        "sha256": "c985cf938333d1ba0d4424143ee632d1be173e91724ae6c5d3f1cc82f94ae2ee",
+        "source_url": "https://github.com/lonespear/kaggriculture"
+      }
+    ],
+    "panel_sha256": {
+      "confirm": "258ccb1968972a745408d9419f5f315bf88ecae9e9b8921723acfb845ab26a4b",
+      "screen": "897e7bde4ed250f83611892873640986b533bfba1c66432eb16f45de6310252c"
+    }
+  },
+  "runtime_contract": "PASS",
+  "transfer_trust": {
+    "closed_loop_confirm_minus_screen": {
+      "mean_margin": -2007925.0,
+      "mean_rank": 0,
+      "p20_margin": -4088390.0,
+      "worst_margin": -4088390.0
+    },
+    "closed_minus_open_disagreement": {},
+    "comparable_metric_coverage": 0.0,
+    "interpretation": "Open-loop is a recorded-action stress proxy only; metric and interaction coverage quantify its transfer limit and are not live win-probability estimates.",
+    "live_interaction_feedback_coverage": 0.0,
+    "open_loop_reference_shift": {
+      "mean_margin": null,
+      "mean_rank": null,
+      "p20_margin": null,
+      "worst_margin": null
+    },
+    "stability_score_0_to_1": 0.0
+  },
+  "validation": {
+    "checks": {
+      "artifacts_unique": true,
+      "both_seats_same_identity": true,
+      "chronological_confirm": true,
+      "confirm_reserved": true,
+      "engine_pinned": true,
+      "hash_pinned_licensed_fetch_only": true,
+      "live_closed_loop_only": true,
+      "market_regimes_declared": true,
+      "multiple_clusters_each_window": true,
+      "no_episode_overlap": true,
+      "no_forbidden_payload": true,
+      "no_lineage_overlap": true,
+      "no_opponent_overlap": true,
+      "no_seed_overlap": true,
+      "no_submission": true,
+      "no_time_slice_overlap": true,
+      "open_loop_boundary_declared": true,
+      "open_loop_reference_hash_pinned": true,
+      "row_provenance_matches": true,
+      "rows_complete": true,
+      "schema_supported": true,
+      "unique_seat_identity": true,
+      "windows_nonempty": true
+    },
+    "overlap": {
+      "episode": [],
+      "lineage": [],
+      "opponent": [],
+      "seed": [],
+      "time_slice": []
+    },
+    "passed": true
+  },
+  "windows": {
+    "confirm": {
+      "by_cluster": {
+        "lonespear-late": {
+          "episodes": 2,
+          "mean_margin": -4355472.0,
+          "mean_rank": 2,
+          "p20_margin": -4355472.0,
+          "rank_1_count": 0,
+          "worst_margin": -4355472.0
+        },
+        "lonespear-middle": {
+          "episodes": 2,
+          "mean_margin": -113759.0,
+          "mean_rank": 2,
+          "p20_margin": -113759.0,
+          "rank_1_count": 0,
+          "worst_margin": -113759.0
+        }
+      },
+      "by_market_regime": {
+        "confirm-feed-surplus": {
+          "episodes": 2,
+          "mean_margin": -113759.0,
+          "mean_rank": 2,
+          "p20_margin": -113759.0,
+          "rank_1_count": 0,
+          "worst_margin": -113759.0
+        },
+        "confirm-premium-scarcity": {
+          "episodes": 2,
+          "mean_margin": -4355472.0,
+          "mean_rank": 2,
+          "p20_margin": -4355472.0,
+          "rank_1_count": 0,
+          "worst_margin": -4355472.0
+        }
+      },
+      "cluster_balanced": {
+        "mean_margin": -2234615.5,
+        "mean_rank": 2,
+        "p20_margin": -4355472.0,
+        "worst_margin": -4355472.0
+      },
+      "overall": {
+        "episodes": 4,
+        "mean_margin": -2234615.5,
+        "mean_rank": 2,
+        "p20_margin": -4355472.0,
+        "rank_1_count": 0,
+        "worst_margin": -4355472.0
+      },
+      "rows": [
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1421.0,
+          "cluster": "lonespear-middle",
+          "episode": "s2960-confirm-v18",
+          "lineage": "lonespear/V18",
+          "margin": -113759.0,
+          "market_params_sha256": "4090997fb8e0f6b18bdcd287ec2bedec3f2b6636a29cfcb9ef8adf07407ef0f4",
+          "market_regime": "confirm-feed-surplus",
+          "opponent": "lonespear-v18",
+          "opponent_reward": 115180.0,
+          "seat": 0,
+          "seed": 296011,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 11,
+          "time_slice": "2026-W35"
+        },
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1421.0,
+          "cluster": "lonespear-middle",
+          "episode": "s2960-confirm-v18",
+          "lineage": "lonespear/V18",
+          "margin": -113759.0,
+          "market_params_sha256": "4090997fb8e0f6b18bdcd287ec2bedec3f2b6636a29cfcb9ef8adf07407ef0f4",
+          "market_regime": "confirm-feed-surplus",
+          "opponent": "lonespear-v18",
+          "opponent_reward": 115180.0,
+          "seat": 1,
+          "seed": 296011,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 11,
+          "time_slice": "2026-W35"
+        },
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1301.0,
+          "cluster": "lonespear-late",
+          "episode": "s2960-confirm-v23",
+          "lineage": "lonespear/V23",
+          "margin": -4355472.0,
+          "market_params_sha256": "a2e4bf554e7706b9872fdbb4bf59e01360bd075ff882453fb38ca597cea34f03",
+          "market_regime": "confirm-premium-scarcity",
+          "opponent": "lonespear-v23",
+          "opponent_reward": 4356773.0,
+          "seat": 0,
+          "seed": 296013,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 13,
+          "time_slice": "2026-W37"
+        },
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1301.0,
+          "cluster": "lonespear-late",
+          "episode": "s2960-confirm-v23",
+          "lineage": "lonespear/V23",
+          "margin": -4355472.0,
+          "market_params_sha256": "a2e4bf554e7706b9872fdbb4bf59e01360bd075ff882453fb38ca597cea34f03",
+          "market_regime": "confirm-premium-scarcity",
+          "opponent": "lonespear-v23",
+          "opponent_reward": 4356773.0,
+          "seat": 1,
+          "seed": 296013,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 13,
+          "time_slice": "2026-W37"
+        }
+      ]
+    },
+    "screen": {
+      "by_cluster": {
+        "cok-foundation": {
+          "episodes": 2,
+          "mean_margin": -266579.0,
+          "mean_rank": 2,
+          "p20_margin": -267082.0,
+          "rank_1_count": 0,
+          "worst_margin": -267082.0
+        },
+        "lonespear-early": {
+          "episodes": 2,
+          "mean_margin": -186802.0,
+          "mean_rank": 2,
+          "p20_margin": -186802.0,
+          "rank_1_count": 0,
+          "worst_margin": -186802.0
+        }
+      },
+      "by_market_regime": {
+        "screen-feed-tight": {
+          "episodes": 2,
+          "mean_margin": -266579.0,
+          "mean_rank": 2,
+          "p20_margin": -267082.0,
+          "rank_1_count": 0,
+          "worst_margin": -267082.0
+        },
+        "screen-premium-glut": {
+          "episodes": 2,
+          "mean_margin": -186802.0,
+          "mean_rank": 2,
+          "p20_margin": -186802.0,
+          "rank_1_count": 0,
+          "worst_margin": -186802.0
+        }
+      },
+      "cluster_balanced": {
+        "mean_margin": -226690.5,
+        "mean_rank": 2,
+        "p20_margin": -267082.0,
+        "worst_margin": -267082.0
+      },
+      "overall": {
+        "episodes": 4,
+        "mean_margin": -226690.5,
+        "mean_rank": 2,
+        "p20_margin": -267082.0,
+        "rank_1_count": 0,
+        "worst_margin": -267082.0
+      },
+      "rows": [
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1434.0,
+          "cluster": "cok-foundation",
+          "episode": "s2960-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -267082.0,
+          "market_params_sha256": "dc2173e3a04f8beeaafd942714ca795f53293e45d53551e738247485658df271",
+          "market_regime": "screen-feed-tight",
+          "opponent": "cok-v7",
+          "opponent_reward": 268516.0,
+          "seat": 0,
+          "seed": 296001,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 1,
+          "time_slice": "2026-W31"
+        },
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1434.0,
+          "cluster": "cok-foundation",
+          "episode": "s2960-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -266076.0,
+          "market_params_sha256": "dc2173e3a04f8beeaafd942714ca795f53293e45d53551e738247485658df271",
+          "market_regime": "screen-feed-tight",
+          "opponent": "cok-v7",
+          "opponent_reward": 267510.0,
+          "seat": 1,
+          "seed": 296001,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 1,
+          "time_slice": "2026-W31"
+        },
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1301.0,
+          "cluster": "lonespear-early",
+          "episode": "s2960-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -186802.0,
+          "market_params_sha256": "e4d9d886721cdc96b4bb2ca84a7d2d2ada33510c29b21a1d2c66ddb6c4810405",
+          "market_regime": "screen-premium-glut",
+          "opponent": "lonespear-v17",
+          "opponent_reward": 188103.0,
+          "seat": 0,
+          "seed": 296003,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 3,
+          "time_slice": "2026-W33"
+        },
+        {
+          "candidate_rank": 2,
+          "candidate_reward": 1301.0,
+          "cluster": "lonespear-early",
+          "episode": "s2960-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -186802.0,
+          "market_params_sha256": "e4d9d886721cdc96b4bb2ca84a7d2d2ada33510c29b21a1d2c66ddb6c4810405",
+          "market_regime": "screen-premium-glut",
+          "opponent": "lonespear-v17",
+          "opponent_reward": 188103.0,
+          "seat": 1,
+          "seed": 296003,
+          "terminal_statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "time_index": 3,
+          "time_slice": "2026-W33"
+        }
+      ]
+    }
+  }
+}
