@@ -1,0 +1,541 @@
+{
+  "axis": "v21.1 conditional-memory clean-room whole agent",
+  "candidate": {
+    "build_sha256": "5e809f3393b3527106b0dbcca5b90d45b6593250a48433dd6cddbb21e504cfdf",
+    "default_enabled": false,
+    "static_audit": {
+      "forbidden_runtime_feature_hits": [],
+      "imports": [
+        "copy",
+        "numpy",
+        "scipy"
+      ],
+      "optional_scientific_imports_fail_closed": true,
+      "public_state_only": true,
+      "stdlib_only": true
+    },
+    "targeted_firing": {
+      "fallback_fired": true,
+      "hit_fired": true,
+      "hit_reordered": true,
+      "memory_max_distance": 48.0,
+      "miss_fired": true,
+      "sell_multiset_preserved": true,
+      "unknown_preserved_base": true
+    }
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "chronological_confirm": true,
+    "clean_room_independent": true,
+    "confirm_sealed": true,
+    "engine_pinned": true,
+    "license_fail_closed": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "source_license_hash_fixed": true,
+    "strict_future_all_dimensions": true,
+    "upstream_bytes_excluded": true
+  },
+  "confirm": {
+    "candidate": {
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.9914059191942215,
+      "mean_margin": -14486.0,
+      "mean_rank": 1.5,
+      "p20_margin": -36933.0,
+      "wins_or_ties": 2,
+      "worst_margin": -36933.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "4007d3aa09390727bf29679d603524f914a200dae2fdddb66748ee1ff9e21142",
+        "cohort": "confirm",
+        "episode": "v211-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": 4130.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 59427.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 63557.0,
+        "runtime_seconds": 2.9914059191942215,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298511,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11,
+        "time_slice": "confirm-a"
+      },
+      {
+        "action_trace_sha256": "4007d3aa09390727bf29679d603524f914a200dae2fdddb66748ee1ff9e21142",
+        "cohort": "confirm",
+        "episode": "v211-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": 4130.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 59427.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 63557.0,
+        "runtime_seconds": 2.9367258010897785,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298511,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11,
+        "time_slice": "confirm-a"
+      },
+      {
+        "action_trace_sha256": "c633fe5541f9f067af0a6fb34d6f98a068742dd64672139f0f778fe4a13b25b1",
+        "cohort": "confirm",
+        "episode": "v211-confirm-kaito-v19",
+        "lineage": "kaito/v19-replication-control",
+        "margin": -36933.0,
+        "opponent": "candidates/kaito-v19-replication-control/agent.py",
+        "opponent_reward": 141431.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 104498.0,
+        "runtime_seconds": 2.7479577499907464,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298513,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13,
+        "time_slice": "confirm-b"
+      },
+      {
+        "action_trace_sha256": "5bfcd777c94c754b6b6ec13b0bced356f243ed1c0dc1ba0b9cb9de90c60bf64d",
+        "cohort": "confirm",
+        "episode": "v211-confirm-kaito-v19",
+        "lineage": "kaito/v19-replication-control",
+        "margin": -29271.0,
+        "opponent": "candidates/kaito-v19-replication-control/agent.py",
+        "opponent_reward": 134306.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 105035.0,
+        "runtime_seconds": 2.7607766839209944,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298513,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13,
+        "time_slice": "confirm-b"
+      }
+    ],
+    "champion": {
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.306207116926089,
+      "mean_margin": -144800.25,
+      "mean_rank": 2.0,
+      "p20_margin": -192576.0,
+      "wins_or_ties": 0,
+      "worst_margin": -192576.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "d1fe0c80e4a3aead6a4f8aff330056a360880a8bebe8cde12f4a0906e40a4947",
+        "cohort": "confirm",
+        "episode": "v211-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": -109717.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 111012.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.305298827122897,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298511,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11,
+        "time_slice": "confirm-a"
+      },
+      {
+        "action_trace_sha256": "935dcf946010899fd71a384f792bf4dece6afec8d01c8aae57ad8f607c28cbc9",
+        "cohort": "confirm",
+        "episode": "v211-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": -105098.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 106393.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.306207116926089,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298511,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11,
+        "time_slice": "confirm-a"
+      },
+      {
+        "action_trace_sha256": "212c6c429860e951f814519a0777a181f9204bea2a5c4f679f90e73fbd4efe8e",
+        "cohort": "confirm",
+        "episode": "v211-confirm-kaito-v19",
+        "lineage": "kaito/v19-replication-control",
+        "margin": -192576.0,
+        "opponent": "candidates/kaito-v19-replication-control/agent.py",
+        "opponent_reward": 193872.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1296.0,
+        "runtime_seconds": 2.1316706931684166,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298513,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13,
+        "time_slice": "confirm-b"
+      },
+      {
+        "action_trace_sha256": "c038528f2de67cc1bead11a2426cbbb6a5d1f49cb50afbf90b2e5b61d10a00f7",
+        "cohort": "confirm",
+        "episode": "v211-confirm-kaito-v19",
+        "lineage": "kaito/v19-replication-control",
+        "margin": -171810.0,
+        "opponent": "candidates/kaito-v19-replication-control/agent.py",
+        "opponent_reward": 173106.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1296.0,
+        "runtime_seconds": 2.1089029849972576,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298513,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13,
+        "time_slice": "confirm-b"
+      }
+    ],
+    "consumed": true,
+    "delta": {
+      "mean_margin": 130314.25,
+      "mean_rank": -0.5,
+      "p20_margin": 155643.0,
+      "worst_margin": 155643.0
+    },
+    "paired_trace_divergences": 4
+  },
+  "decision": "promoted-independent-hedge",
+  "hypothesis": "Identity-free within-episode opponent-state memory can prioritize colliding existing SELL orders while preserving the coherent foundation and safely abstaining for unknown states.",
+  "issue": "SOT-2985",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "preregistered_difference_from_v39": "Current-episode public opponent-state conditional SELL-order memory with ordinary-action fallback; no fixed sparse-history checkpoint continuation, calibrated upstream prototypes, identity inputs, or cross-episode memory.",
+  "public_score_used_for_selection": false,
+  "runtime_contract": "PASS",
+  "screen": {
+    "candidate": {
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 1.8783791500609368,
+      "mean_margin": 110916.5,
+      "mean_rank": 1.0,
+      "p20_margin": 97989.0,
+      "wins_or_ties": 4,
+      "worst_margin": 97989.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "b354312144218dc37ba786c75ed23a20a8ce030c776066c649e6ad560a687efe",
+        "cohort": "screen",
+        "episode": "v211-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": 102958.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 5019.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 107977.0,
+        "runtime_seconds": 1.8783791500609368,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298501,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1,
+        "time_slice": "screen-a"
+      },
+      {
+        "action_trace_sha256": "5aa239f4aa0caac82c7ed06beae97216a8b43196628440aa81921cd915041804",
+        "cohort": "screen",
+        "episode": "v211-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": 97989.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4958.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 102947.0,
+        "runtime_seconds": 1.864654412958771,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298501,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1,
+        "time_slice": "screen-a"
+      },
+      {
+        "action_trace_sha256": "fc59015073ce95a282bbfb6a91ea8530735bede5f7e88d0dfb8b50a0fda58c77",
+        "cohort": "screen",
+        "episode": "v211-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": 120641.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 123641.0,
+        "runtime_seconds": 1.79999337811023,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298503,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3,
+        "time_slice": "screen-b"
+      },
+      {
+        "action_trace_sha256": "dd3c9e96de1b65a876649e4e882cb5afe16c820d0d57fdb49ebdc940f1b76a51",
+        "cohort": "screen",
+        "episode": "v211-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": 122078.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 125078.0,
+        "runtime_seconds": 1.828803604003042,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298503,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3,
+        "time_slice": "screen-b"
+      }
+    ],
+    "champion": {
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 1.1879676058888435,
+      "mean_margin": -2519.5,
+      "mean_rank": 2.0,
+      "p20_margin": -3385.0,
+      "wins_or_ties": 0,
+      "worst_margin": -3385.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "3b6247bb570cf1fdb3d48d5f1bbc18729e47134f89d41868ec8b5f99c4e71c58",
+        "cohort": "screen",
+        "episode": "v211-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": -3303.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4608.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1472221191506833,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298501,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1,
+        "time_slice": "screen-a"
+      },
+      {
+        "action_trace_sha256": "46ad227f3b86d1f15ccf9b7c3c861251410d3147b462fb4f42792bc2036c2718",
+        "cohort": "screen",
+        "episode": "v211-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": -3385.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4690.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1879676058888435,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298501,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1,
+        "time_slice": "screen-a"
+      },
+      {
+        "action_trace_sha256": "52b19ff136c730e0c9fa8ef78bb3153ed91ab714966eb9ff66e5176f084c7580",
+        "cohort": "screen",
+        "episode": "v211-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": -1695.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0955573699902743,
+        "seat": 0,
+        "seat_group": "both",
+        "seed": 298503,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3,
+        "time_slice": "screen-b"
+      },
+      {
+        "action_trace_sha256": "41364237252cb2cc1be3ca92054a260fae656ce820396c1086b27d0098d67d7e",
+        "cohort": "screen",
+        "episode": "v211-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": -1695.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0793194610159844,
+        "seat": 1,
+        "seat_group": "both",
+        "seed": 298503,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3,
+        "time_slice": "screen-b"
+      }
+    ],
+    "delta": {
+      "mean_margin": 113436.0,
+      "mean_rank": -1.0,
+      "p20_margin": 101374.0,
+      "worst_margin": 101374.0
+    },
+    "paired_trace_divergences": 4
+  },
+  "screen_gate": "PASS",
+  "source": {
+    "artifact": "Kaito v21.1 Conditional Memory clean-room whole agent",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "excluded_upstream_bytes": [
+      "notebook",
+      "main.py",
+      "submission.tar.gz",
+      "compressed action routes",
+      "prototype memory"
+    ],
+    "forbidden_runtime_features": [
+      "username",
+      "kernel slug",
+      "episode id",
+      "seed",
+      "private result",
+      "future metadata",
+      "cross-episode memory"
+    ],
+    "foundation": "candidates/lonespear-care-production/agent.py",
+    "foundation_license": "MIT",
+    "foundation_sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+    "implementation": "clean-room-public-condition-only",
+    "kaggle_ref": "kaitofukami/177-180-fresh-top-30-v21-1-conditional-memory",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129819535,
+    "license": "UNSPECIFIED",
+    "license_source": "Kaggle kernel-metadata.json contains no license field",
+    "notebook_sha256": "32471f25e3bc3c206a0539d8fd08ab3db52db8460c6ab90cac75249c6819e2d5",
+    "offline_fallback": "MIT foundation catches unavailable NumPy/SciPy and uses its deterministic greedy assignment",
+    "optional_acceleration": [
+      "numpy",
+      "scipy"
+    ],
+    "output_archive_members": [
+      "main.py"
+    ],
+    "output_archive_sha256": "8c87bc6928adcaec7869b2b531a51410812c872f8a953f8ea38b21f0a94206ad",
+    "output_main_sha256": "d9dc24ce5429ec628ead0621a160bee90725350683d7dfcc4686fcaf511f3aab",
+    "public_score_used_for_selection": false,
+    "redistribution": "prohibited-fail-closed",
+    "resolved_at": "2026-08-22T05:44Z",
+    "runtime_feature_boundary": [
+      "current-episode public observation",
+      "public opponent farm state",
+      "public step"
+    ],
+    "source_url": "https://www.kaggle.com/code/kaitofukami/177-180-fresh-top-30-v21-1-conditional-memory"
+  }
+}
