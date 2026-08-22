@@ -1,19 +1,28 @@
-# Final Report — SOT-2958
+# SOT-2957 Final Report
 
-Barnyard Economist v5 was recovered from the pinned Kaggle Version 4 output,
-licensed under Apache-2.0, and preserved as an exact independent hedge. Its
-source/config provenance, paired evaluation, contract checks, and structural
-fingerprint are reproducible from committed artifacts.
+## Summary
 
-Screen and confirm both passed the predefined two-signal plus tail gate versus
-the unchanged champion, but neither agent beat the registered public opponents.
-Accordingly the candidate is promoted only into the default-OFF hedge set;
-`main.py` remains unchanged and no Kaggle submission was performed.
+Cycle 4 compared four independent directions. The coherent CARE-production
+whole agent is selected for one governed submission; the closed-loop oracle is
+promoted for future evaluation. The retained champion remains unchanged as a
+hedge.
 
-Quality gate: PASS — submission contract, candidate tests, 180-test suite,
-compileall, source/license hashes, holdout isolation, and diff review passed.
+## Verification
 
-## Linear Report: POSTED
+- 189 unit tests passed; 2 expected upstream-checkout skips.
+- Python compileall passed.
+- Candidate screen and disjoint confirm both won 4/4, with rank and pessimistic
+  tail improvement.
+- Submission archive layout and gzip integrity passed.
+- No new rejected/CLOSED decision was made without direct evidence.
+
+## Acceptance
+
+- Improvement rationale and child evidence are recorded.
+- All four children are terminal and their PRs are merged.
+- Candidate/effective configuration and archive fingerprints are recorded.
+- Parent aggregation selected the new artifact under CV-first discipline.
+- A separate Linear handoff records next axes and unresolved hypotheses.
 
 ## Acceptance: PASS
 
