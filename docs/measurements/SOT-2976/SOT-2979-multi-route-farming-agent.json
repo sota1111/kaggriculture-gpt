@@ -1,0 +1,603 @@
+{
+  "actual_engine": "1.32.7",
+  "axis": "Multi-Route Farming Agent clean-room whole-agent",
+  "candidate": {
+    "build_sha256": "2973e3fb78616b7c36e9bff660ce96bf82e35ebbecd66c43c65f8d7108a2e2b8",
+    "default_enabled": false
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "all_route_families_fired": true,
+    "entrypoint": true,
+    "no_submission": true,
+    "opponent_episode_seed_seat_time_disjoint": true,
+    "route_selector": true,
+    "same_seed_both_seats": true,
+    "stdlib_only": true
+  },
+  "confirm": {
+    "attribution": {
+      "paired_trace_divergences": 4
+    },
+    "candidate": {
+      "action_families": {
+        "farm": 9967,
+        "market": 2846,
+        "movement": 13497
+      },
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.763470354024321,
+      "mean_margin": -53806.5,
+      "mean_rank": 2.0,
+      "p20_margin": -60728.0,
+      "route_family_fires": {
+        "balanced": 0,
+        "milk_supported": 4,
+        "yarn_led": 0
+      },
+      "wins_or_ties": 0,
+      "worst_margin": -60728.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "farm": 2449,
+          "market": 704,
+          "movement": 3324
+        },
+        "action_trace_sha256": "2680293c318bbf9a87056b1595ee78fe8351b661da52c579dd3a15783cfa5c2d",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-moon-v102",
+        "lineage": "moon-v102",
+        "margin": -60728.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "moon-v102",
+        "opponent_reward": 133890.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 73162.0,
+        "runtime_seconds": 2.743435856886208,
+        "seat": 0,
+        "seed": 297904,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 4
+      },
+      {
+        "action_families": {
+          "farm": 2449,
+          "market": 704,
+          "movement": 3324
+        },
+        "action_trace_sha256": "2680293c318bbf9a87056b1595ee78fe8351b661da52c579dd3a15783cfa5c2d",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-moon-v102",
+        "lineage": "moon-v102",
+        "margin": -60676.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "moon-v102",
+        "opponent_reward": 133845.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 73169.0,
+        "runtime_seconds": 2.763470354024321,
+        "seat": 1,
+        "seed": 297904,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 4
+      },
+      {
+        "action_families": {
+          "farm": 2534,
+          "market": 719,
+          "movement": 3422
+        },
+        "action_trace_sha256": "ac82c4e995bbffa5cc73b82d2ff359cc31d3268f5762c8b6642d7cd6d80659d4",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-soil-v26h",
+        "lineage": "soil-v26h",
+        "margin": -46911.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "soil-v26h",
+        "opponent_reward": 162231.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 115320.0,
+        "runtime_seconds": 2.748182712122798,
+        "seat": 0,
+        "seed": 297907,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 7
+      },
+      {
+        "action_families": {
+          "farm": 2535,
+          "market": 719,
+          "movement": 3427
+        },
+        "action_trace_sha256": "ef845ebfc4186136a9bcaf7ed12452cb694a9da7c5cac0132cc8993039ddc092",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-soil-v26h",
+        "lineage": "soil-v26h",
+        "margin": -46911.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "soil-v26h",
+        "opponent_reward": 162231.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 115320.0,
+        "runtime_seconds": 2.733781137969345,
+        "seat": 1,
+        "seed": 297907,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 7
+      }
+    ],
+    "champion": {
+      "action_families": {
+        "farm": 11381,
+        "market": 1004,
+        "movement": 1123
+      },
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.250432671047747,
+      "mean_margin": -174088.75,
+      "mean_rank": 2.0,
+      "p20_margin": -184155.0,
+      "route_family_fires": {
+        "balanced": 0,
+        "milk_supported": 4,
+        "yarn_led": 0
+      },
+      "wins_or_ties": 0,
+      "worst_margin": -184155.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "farm": 2843,
+          "market": 255,
+          "movement": 283
+        },
+        "action_trace_sha256": "a9032789cfe02bd2351990436ab5c4c0e7026cd901a506767dc91419c44eae2b",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-moon-v102",
+        "lineage": "moon-v102",
+        "margin": -178243.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "moon-v102",
+        "opponent_reward": 179542.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.250432671047747,
+        "seat": 0,
+        "seed": 297904,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 4
+      },
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 256,
+          "movement": 280
+        },
+        "action_trace_sha256": "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-moon-v102",
+        "lineage": "moon-v102",
+        "margin": -184155.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "moon-v102",
+        "opponent_reward": 185454.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.2211682540364563,
+        "seat": 1,
+        "seed": 297904,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 4
+      },
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 238,
+          "movement": 280
+        },
+        "action_trace_sha256": "78473b1977073e5966b89fac2aa87616b726da2159a06c54a7ea3610e633a7d7",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-soil-v26h",
+        "lineage": "soil-v26h",
+        "margin": -156896.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "soil-v26h",
+        "opponent_reward": 158198.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1302.0,
+        "runtime_seconds": 2.2502653039991856,
+        "seat": 0,
+        "seed": 297907,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 7
+      },
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 255,
+          "movement": 280
+        },
+        "action_trace_sha256": "2ce0b9e4c8d988f17350a762c2bbbfd5e949ecb594710db757f9dac4b61b499f",
+        "cohort": "confirm",
+        "episode": "multi-route-confirm-soil-v26h",
+        "lineage": "soil-v26h",
+        "margin": -177061.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "soil-v26h",
+        "opponent_reward": 178363.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1302.0,
+        "runtime_seconds": 2.208201666129753,
+        "seat": 1,
+        "seed": 297907,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 7
+      }
+    ],
+    "delta": {
+      "mean_margin": 120282.25,
+      "mean_rank": 0.0,
+      "p20_margin": 123427.0,
+      "worst_margin": 123427.0
+    }
+  },
+  "decision": "promoted",
+  "issue": "SOT-2979",
+  "route_family_holdout": {
+    "outcome_confirm": "identity-disjoint-sealed",
+    "selection_inputs": "public unlocked-shop prefix only",
+    "targeted_probes": [
+      "yarn_led",
+      "milk_supported",
+      "balanced"
+    ]
+  },
+  "screen": {
+    "attribution": {
+      "paired_trace_divergences": 4
+    },
+    "candidate": {
+      "action_families": {
+        "farm": 10031,
+        "market": 2795,
+        "movement": 13892
+      },
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.8005075121764094,
+      "mean_margin": 38810.5,
+      "mean_rank": 1.5,
+      "p20_margin": -1849.0,
+      "route_family_fires": {
+        "balanced": 1,
+        "milk_supported": 3,
+        "yarn_led": 0
+      },
+      "wins_or_ties": 2,
+      "worst_margin": -1849.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "farm": 2465,
+          "market": 698,
+          "movement": 3458
+        },
+        "action_trace_sha256": "0150b782f3873e85b4b75f8fb8eb729f51351ccff03b36cb2af58d1e388eb29a",
+        "cohort": "screen",
+        "episode": "multi-route-screen-barnyard-v5",
+        "lineage": "barnyard-v5",
+        "margin": -1841.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "barnyard-v5",
+        "opponent_reward": 66033.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 64192.0,
+        "runtime_seconds": 2.8005075121764094,
+        "seat": 0,
+        "seed": 297901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "farm": 2463,
+          "market": 697,
+          "movement": 3480
+        },
+        "action_trace_sha256": "e45e02bf27a031f28515bbb31dbf0ca14db381d286ac60f84de33613da617b17",
+        "cohort": "screen",
+        "episode": "multi-route-screen-barnyard-v5",
+        "lineage": "barnyard-v5",
+        "margin": -1849.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "barnyard-v5",
+        "opponent_reward": 66064.0,
+        "policy": "candidate",
+        "rank": 2,
+        "reward": 64215.0,
+        "runtime_seconds": 2.7827943451702595,
+        "seat": 1,
+        "seed": 297901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "farm": 2472,
+          "market": 704,
+          "movement": 3400
+        },
+        "action_trace_sha256": "de060d047dd5c3ceba70644e22773e251565f888b627fe1da9e848f45da87a9c",
+        "cohort": "screen",
+        "episode": "multi-route-screen-deepeshumrao",
+        "lineage": "deepeshumrao",
+        "margin": 107839.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4912.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 112751.0,
+        "runtime_seconds": 1.672716167056933,
+        "seat": 0,
+        "seed": 297903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "farm": 2631,
+          "market": 696,
+          "movement": 3554
+        },
+        "action_trace_sha256": "9913421eed2c8d263a9609822289f84ad18da84c540d710aaffa30d1ea7f52c5",
+        "cohort": "screen",
+        "episode": "multi-route-screen-deepeshumrao",
+        "lineage": "deepeshumrao",
+        "margin": 51093.0,
+        "observed_route_family": "balanced",
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4795.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 55888.0,
+        "runtime_seconds": 1.7452117148786783,
+        "seat": 1,
+        "seed": 297903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "action_families": {
+        "farm": 11384,
+        "market": 996,
+        "movement": 1120
+      },
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.2826402231585234,
+      "mean_margin": -42574.25,
+      "mean_rank": 2.0,
+      "p20_margin": -82922.0,
+      "route_family_fires": {
+        "balanced": 2,
+        "milk_supported": 2,
+        "yarn_led": 0
+      },
+      "wins_or_ties": 0,
+      "worst_margin": -82922.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 249,
+          "movement": 280
+        },
+        "action_trace_sha256": "287bdb3227fbd041264e1867a1b8c744f5524da57894c8ed05b14749c747c0e9",
+        "cohort": "screen",
+        "episode": "multi-route-screen-barnyard-v5",
+        "lineage": "barnyard-v5",
+        "margin": -82922.0,
+        "observed_route_family": "balanced",
+        "opponent": "barnyard-v5",
+        "opponent_reward": 84217.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2826402231585234,
+        "seat": 0,
+        "seed": 297901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 249,
+          "movement": 280
+        },
+        "action_trace_sha256": "287bdb3227fbd041264e1867a1b8c744f5524da57894c8ed05b14749c747c0e9",
+        "cohort": "screen",
+        "episode": "multi-route-screen-barnyard-v5",
+        "lineage": "barnyard-v5",
+        "margin": -80626.0,
+        "observed_route_family": "balanced",
+        "opponent": "barnyard-v5",
+        "opponent_reward": 81921.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2663926619570702,
+        "seat": 1,
+        "seed": 297901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 245,
+          "movement": 280
+        },
+        "action_trace_sha256": "0aaa58077920bc3ce00566f594a8f1a91918f67603dc4bdb87cdb3629adf7cf9",
+        "cohort": "screen",
+        "episode": "multi-route-screen-deepeshumrao",
+        "lineage": "deepeshumrao",
+        "margin": -3398.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4703.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1750142008531839,
+        "seat": 0,
+        "seed": 297903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "farm": 2846,
+          "market": 253,
+          "movement": 280
+        },
+        "action_trace_sha256": "370923a544bb4757f7aa480c39342a9bcd9e713dd8319fe0cf4904f395999a30",
+        "cohort": "screen",
+        "episode": "multi-route-screen-deepeshumrao",
+        "lineage": "deepeshumrao",
+        "margin": -3351.0,
+        "observed_route_family": "milk_supported",
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4656.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.142635164083913,
+        "seat": 1,
+        "seed": 297903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "delta": {
+      "mean_margin": 81384.75,
+      "mean_rank": -0.5,
+      "p20_margin": 81073.0,
+      "worst_margin": 81073.0
+    }
+  },
+  "screen_gate": "PASS",
+  "sealed_confirm_manifest_sha256": "54e28c14264d555b3287aa6ee6b9186d5cc13b5e78e67bd9e36580a28ceab231",
+  "source": {
+    "artifact": "Multi-Route Farming Agent clean-room whole-agent",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "foundation": "candidates/lonespear-care-production/agent.py",
+    "foundation_commit": "774b26093ccf4246525517d48420349b841b6e50",
+    "foundation_license": "MIT",
+    "implementation": "clean-room-from-public-markdown-description",
+    "kaggle_ref": "flexonafft/kaggriculture-multi-route-farming-agent",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129367546,
+    "license": "UNSPECIFIED",
+    "license_source": "Kaggle kernel metadata and notebook contain no license declaration",
+    "notebook_sha256": "50cc0b06b60f885d36b588609d6e7b165e96273625f4c57f402b9a3e13a570e6",
+    "output_archive_members": [
+      "main.py"
+    ],
+    "output_archive_sha256": "c2a65b91a54473f30029cb8809b6c5e06499e774fca691fe92ba000329e621da",
+    "output_main_sha256": "8ac34abce129cf5c9456776c90edf7d2233b3a280bbdcf7622628825ef3669a0",
+    "public_score_used_for_promotion": false,
+    "redistribution": "prohibited-fail-closed",
+    "script_version": "latest resolved 2026-08-22",
+    "source_url": "https://www.kaggle.com/code/flexonafft/kaggriculture-multi-route-farming-agent"
+  }
+}
