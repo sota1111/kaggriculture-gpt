@@ -1,45 +1,39 @@
-# Solo Worker Report — SOT-2974
+# Solo Worker Report — SOT-2973
 
 ## Summary
 
-Pinned and independently packaged Kaito v19 Replication-to-Control as an exact
-Apache-2.0, standard-library whole-agent hedge. It is distinct from v39's
-sparse delayed-history gate: v19 refreshes a four-expert whole route and adds
-clone-aware late inventory/collision control. The candidate passed the
-same-seed/both-seat screen and disjoint confirm. It remains default-OFF;
-production `main.py` and `submission.tar.gz` are unchanged.
+Apache-2.0 公開 notebook Soil Remembers Rain V26-H を、最新 script version 344052698 から byte-identical な独立 candidate として取得・包装した。same-seed/both-seat screen と opponent/episode/seed/seat/time 分離 sealed confirm はともに 4/4 勝で通過し、候補を台帳上 promoted とした。既存 `main.py` は変更せず hedge として保持し、Kaggle 提出は行っていない。
 
 ## Changed Files
 
-- `candidates/kaito-v19-replication-control/` — exact licensed agent, provenance, notice, and documentation
-- `scripts/measure_kaito_v19_replication_control.py` — gated lineage/time-separated evaluator
-- `docs/measurements/SOT-2971/SOT-2974-kaito-v19-replication-control.json` — closed-loop episode evidence
-- `docs/ai/experiment_ledger.jsonl` — promoted cycle-6 axis with direct evidence
-- `tests/test_kaito_v19_replication_control.py` — provenance, contract, novelty, holdout, and hedge checks
-- `docs/ai/linear/SOT-2974.md` — local issue record
+- `candidates/soil-remembers-rain/` — exact agent, provenance, Apache-2.0 license, notice, reproduction guide
+- `scripts/measure_soil_remembers_rain.py` — preregistered screen/confirm and intervention evidence
+- `docs/measurements/SOT-2971/SOT-2973-soil-remembers-rain.json` — sealed measurement rows and decision
+- `docs/ai/experiment_ledger.jsonl` — promoted axis with evidence
+- `tests/test_soil_remembers_rain.py` — provenance, contract, panel and hedge assertions
+- `docs/ai/linear/SOT-2973.md` — local issue record
 
-## Verification
+## Commands Run
 
-- Python compileall: PASS
-- Submission build, archive shape, and contract validator: PASS
-- Unit tests: PASS (208 tests, 2 expected upstream-checkout-dependent skips)
-- Screen: 4/4 DONE at 720 steps; rank 2.0→1.0; mean-margin delta +144297.5; p20/worst +165379
-- Confirm: 4/4 DONE at 720 steps; rank 2.0→1.0; mean-margin delta +134641.25; p20/worst +141737
-- npm lint/typecheck/test/e2e: N/A (Python repository; no `package.json` or e2e suite)
-- Diff review: scoped; champion/archive unchanged; no private trace or Kaggle submission
+- Kaggle authenticated kernels pull/output — PASS
+- `python3 scripts/measure_soil_remembers_rain.py` — PASS (`screen_gate=PASS`, `decision=promoted`)
+- `python3 scripts/validate_submission.py candidates/soil-remembers-rain/agent.py` — PASS
+- `python3 -m compileall -q main.py candidates scripts tests` — PASS
+- `python3 -m unittest discover -s tests -v` — PASS (210 passed, 2 skipped)
+- npm lint/typecheck/test/e2e — N/A (repository has no `package.json`; engine panel is the applicable e2e)
 
 ## Acceptance Criteria
 
-- [x] v39との差分と新規 whole-agent 根拠を記録
-- [x] source version/hash/license/可搬性を固定
-- [x] lineage/time-separated screen→confirm を実施
-- [x] 実験台帳へ証拠付き promoted 判定を追記
+- [x] Source version/hash/license/portability pinned
+- [x] Independent package is callable and submission-contract compatible
+- [x] Screen and sealed confirm record both-seat, split-isolated, firing/intervention evidence
+- [x] Experiment ledger records an evidence-backed promoted decision
 
 ## Risks
 
-Local engine panels are transfer proxies rather than leaderboard proof. The
-candidate is retained only as a default-off hedge and was not submitted.
+- Local engine panels are transfer proxies; no Kaggle submission was authorized or performed.
+- Two unrelated upstream tests skip when an optional exact V7 checkout is absent.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
