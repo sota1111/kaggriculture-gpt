@@ -1,11 +1,3 @@
-# Final Report — SOT-3003
+# Final Report — SOT-3008
 
-The exact v27 candidate was evaluated as an independent, default-OFF whole agent without modifying the incumbent. Hashes and runtime portability passed; all eight closed-loop candidate episodes completed with zero invalid actions, and the later sealed panel was disjoint from screen by opponent, lineage, episode, seed and time while retaining both seats. The intervention is structurally distinct from v19 and v39 and produced actor/market/SELL evidence.
-
-Acceptance passes with an `inconclusive` experiment conclusion: absent an upstream license, exact bytes are fetch-only and cannot be promoted or redistributed. No Kaggle submission occurred.
-
-## Linear Report: POSTED
-
-## Acceptance: PASS
-
-## Next Action: READY_FOR_REVIEW
+Acceptance PASS. Engine-derived economic snapshot, fail-closed drift checks, offline reproduction, and 12-game paired screen/confirm attribution are complete. Full repository verification passed (267 tests, 2 optional skips); production agent and submission artifact are unchanged; Kaggle submission was not performed.
