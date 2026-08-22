@@ -1,0 +1,17 @@
+{
+  "artifact": "Hamburger V27 clean-room whole-agent baseline",
+  "source_url": "https://www.kaggle.com/code/romantamrazov/kaggriculture-hamburger",
+  "kernel_id": 129255770,
+  "snapshot_acquired_at": "2026-08-22T10:45:00Z",
+  "notebook_sha256": "21b03bab1b349a889c6d2dee86dd78783aa1e33a138f02e1a2c7f6dfe912a5f8",
+  "kernel_metadata_sha256": "896392d58ea6fc795b4257368104e587362015ac2583bd705e125e098ab25872",
+  "license": "UNDECLARED",
+  "license_source": "downloaded Kaggle kernel metadata exposes no license field",
+  "redistribution": "upstream source excluded; clean-room behavioral reconstruction only",
+  "source_version": "latest public snapshot acquired at snapshot_acquired_at",
+  "dependencies": ["python-standard-library"],
+  "runtime_external_dependencies": [],
+  "excluded": ["upstream notebook source", "compressed source blobs", "replay bytes", "credentials", "network access"],
+  "default_enabled": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}

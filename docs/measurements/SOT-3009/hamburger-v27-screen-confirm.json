@@ -1,0 +1,163 @@
+{
+  "actual_engine": "1.32.7",
+  "artifact": {
+    "path": "candidates/hamburger-v27/agent.py",
+    "sha256": "731f6dc146d62fc8e6ce2c854b20b049d20e282baef0489aad78832e89379d49"
+  },
+  "axis": "Hamburger V27 clean-room independent whole agent",
+  "checks": {
+    "c95_unchanged": true,
+    "incumbent_unchanged": true,
+    "no_submission": true,
+    "source_hash_matches": true,
+    "stdlib_only": true,
+    "unlicensed_source_excluded": true
+  },
+  "confirm": {
+    "rows": [
+      {
+        "candidate_reward": 3000.0,
+        "episode": "hv27-confirm-b",
+        "leftover_inventory_value": 0.0,
+        "lineage": "c95-high-score",
+        "margin": -167460.0,
+        "opponent": "c95",
+        "opponent_reward": 170460.0,
+        "opponent_status": "DONE",
+        "runtime_seconds": 1.9430920141749084,
+        "seat": 0,
+        "seed": 300913,
+        "status": "DONE",
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "candidate_reward": 3000.0,
+        "episode": "hv27-confirm-b",
+        "leftover_inventory_value": 0.0,
+        "lineage": "c95-high-score",
+        "margin": -160608.0,
+        "opponent": "c95",
+        "opponent_reward": 163608.0,
+        "opponent_status": "DONE",
+        "runtime_seconds": 1.8900523618794978,
+        "seat": 1,
+        "seed": 300913,
+        "status": "DONE",
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "summary": {
+      "draws": 0,
+      "episodes": 2,
+      "losses": 2,
+      "mean_leftover_inventory_value": 0.0,
+      "mean_margin": -164034.0,
+      "wins": 0,
+      "worst_margin": -167460.0
+    }
+  },
+  "decision": "rejected-candidate-inactive",
+  "default_enabled": false,
+  "effective_config": {
+    "anchor": "deterministic-state-derived-v1",
+    "collision_sell": true,
+    "max_market_orders": 10,
+    "terminal_relay_steps": [
+      716,
+      717,
+      718
+    ]
+  },
+  "effective_config_fingerprint": "212cd8fbf1ea2207d08705d02b0fa4f51fce49971093dfad99c365876917292b",
+  "intervention_log": {
+    "anchor_calls": 2876,
+    "collision_sell_calls": 0,
+    "terminal_relay_calls": 12
+  },
+  "isolation": {
+    "chronological_confirm": true,
+    "episode_disjoint": true,
+    "lineage_episode_seed_time_composite_disjoint": true,
+    "opponent_disjoint": true,
+    "same_seed_both_seats": true,
+    "seat_recorded": true,
+    "seed_disjoint": true
+  },
+  "issue": "SOT-3009",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "runtime_contract": "PASS",
+  "screen": {
+    "rows": [
+      {
+        "candidate_reward": 3000.0,
+        "episode": "hv27-screen-a",
+        "leftover_inventory_value": 0.0,
+        "lineage": "incumbent-main",
+        "margin": 1695.0,
+        "opponent": "incumbent",
+        "opponent_reward": 1305.0,
+        "opponent_status": "DONE",
+        "runtime_seconds": 1.127991858869791,
+        "seat": 0,
+        "seed": 300901,
+        "status": "DONE",
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "candidate_reward": 3000.0,
+        "episode": "hv27-screen-a",
+        "leftover_inventory_value": 0.0,
+        "lineage": "incumbent-main",
+        "margin": 1695.0,
+        "opponent": "incumbent",
+        "opponent_reward": 1305.0,
+        "opponent_status": "DONE",
+        "runtime_seconds": 1.1320454890374094,
+        "seat": 1,
+        "seed": 300901,
+        "status": "DONE",
+        "steps": 720,
+        "time_index": 1
+      }
+    ],
+    "summary": {
+      "draws": 0,
+      "episodes": 2,
+      "losses": 0,
+      "mean_leftover_inventory_value": 0.0,
+      "mean_margin": 1695.0,
+      "wins": 2,
+      "worst_margin": 1695.0
+    }
+  },
+  "source": {
+    "artifact": "Hamburger V27 clean-room whole-agent baseline",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "excluded": [
+      "upstream notebook source",
+      "compressed source blobs",
+      "replay bytes",
+      "credentials",
+      "network access"
+    ],
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129255770,
+    "kernel_metadata_sha256": "896392d58ea6fc795b4257368104e587362015ac2583bd705e125e098ab25872",
+    "license": "UNDECLARED",
+    "license_source": "downloaded Kaggle kernel metadata exposes no license field",
+    "notebook_sha256": "21b03bab1b349a889c6d2dee86dd78783aa1e33a138f02e1a2c7f6dfe912a5f8",
+    "redistribution": "upstream source excluded; clean-room behavioral reconstruction only",
+    "runtime_external_dependencies": [],
+    "snapshot_acquired_at": "2026-08-22T10:45:00Z",
+    "source_url": "https://www.kaggle.com/code/romantamrazov/kaggriculture-hamburger",
+    "source_version": "latest public snapshot acquired at snapshot_acquired_at"
+  },
+  "synthetic_collision_fire_test": "tests/test_hamburger_v27.py::test_collision_order_and_terminal_relay_fire"
+}
