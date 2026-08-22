@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "decision_scope": "oracle-only",
+  "kaggle_submission": "NOT_PERFORMED",
+  "evaluation_targets": [
+    {"role":"current-champion","path":"main.py","sha256":"0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"},
+    {"role":"independent-candidate","path":"candidates/lonespear-care-production/agent.py","sha256":"eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0"}
+  ],
+  "sources": [
+    {"id":"live-meta-notebook-v19","url":"https://www.kaggle.com/code/georgymamarin/kaggriculture-daily-replays-the-live-meta-report","version":"19/19; acquired 2026-08-22","sha256":"6556a8307132fe45c22cc0d3821333d028e342167dfcbd880421f9e15668fb13","license":"Apache-2.0 input boundary; notebook observations only","boundary":"fetch-only-not-committed"},
+    {"id":"kaggriculture-episodes-2026-08-21","url":"https://www.kaggle.com/datasets/georgymamarin/kaggriculture-episodes","version":"daily snapshot 2026-08-21T05:10:20Z","sha256":"0069fe6ea1e8ee5c0ad0b08b12f22a655aa6e0ead10631e0beceffea9b43f534","license":"Apache-2.0","boundary":"fetch-only-not-committed"},
+    {"id":"benchmark-matchups-2026-08-16","url":"https://www.kaggle.com/datasets/destbreso/kaggriculture-benchmark-matchups","version":"45,404-matchup snapshot 2026-08-16","sha256":"bb94d1a5523468f83dacdaf33482648d25ab72c3ee2468fb3d9247d7cda8c11e","license":"CC0-1.0","boundary":"fetch-only-not-committed"},
+    {"id":"official-runtime-1.32.4","url":"https://github.com/Kaggle/kaggle-environments/blob/1.32.4/kaggle_environments/envs/kaggriculture/kaggriculture.py","version":"kaggle-environments==1.32.4","sha256":"9741c0470a8db98a70644491d5121ae6295413343d1a08ef9fcee35e0b76f2c5","license":"Apache-2.0","boundary":"fetch-only-not-committed"}
+  ],
+  "panels": {
+    "screen": [
+      {"episode":"bench-screen-a","seed":2131819326,"seat":0,"lineage_prefix":"910933c6a8cfc280","time_cohort":"2026-08-05-early","time_index":1,"market_regime":"premium-wide","strategy_fingerprint":"910933c6a8cfc280","candidate_bank":133747,"opponent_bank":124681,"crawler_coverage":0.62,"validation_episode":false},
+      {"episode":"bench-screen-a","seed":2131819326,"seat":1,"lineage_prefix":"910933c6a8cfc280","time_cohort":"2026-08-05-early","time_index":1,"market_regime":"premium-wide","strategy_fingerprint":"910933c6a8cfc280","candidate_bank":124681,"opponent_bank":133747,"crawler_coverage":0.62,"validation_episode":false},
+      {"episode":"bench-screen-b","seed":453739996,"seat":0,"lineage_prefix":"ffbf6d8724281b70","time_cohort":"2026-08-05-mid","time_index":2,"market_regime":"premium-tight","strategy_fingerprint":"ffbf6d8724281b70","candidate_bank":129887,"opponent_bank":128357,"crawler_coverage":0.45,"validation_episode":false},
+      {"episode":"bench-screen-b","seed":453739996,"seat":1,"lineage_prefix":"ffbf6d8724281b70","time_cohort":"2026-08-05-mid","time_index":2,"market_regime":"premium-tight","strategy_fingerprint":"ffbf6d8724281b70","candidate_bank":128357,"opponent_bank":129887,"crawler_coverage":0.45,"validation_episode":false}
+    ],
+    "confirm": [
+      {"episode":"live-confirm-a","seed":296401,"seat":0,"lineage_prefix":"9fbed391b8c961fc","time_cohort":"2026-08-20-late","time_index":11,"market_regime":"premium-tight","strategy_fingerprint":"9fbed391b8c961fc","candidate_bank":92425,"opponent_bank":81841,"crawler_coverage":0.83,"validation_episode":false},
+      {"episode":"live-confirm-a","seed":296401,"seat":1,"lineage_prefix":"9fbed391b8c961fc","time_cohort":"2026-08-20-late","time_index":11,"market_regime":"premium-tight","strategy_fingerprint":"c68f883b2151a428","candidate_bank":81841,"opponent_bank":92425,"crawler_coverage":0.83,"validation_episode":false},
+      {"episode":"live-confirm-b","seed":296403,"seat":0,"lineage_prefix":"cbb4e9e9356d800d","time_cohort":"2026-08-19-late","time_index":12,"market_regime":"premium-wide","strategy_fingerprint":"cbb4e9e9356d800d","candidate_bank":56785,"opponent_bank":58699,"crawler_coverage":0.31,"validation_episode":false},
+      {"episode":"live-confirm-b","seed":296403,"seat":1,"lineage_prefix":"cbb4e9e9356d800d","time_cohort":"2026-08-19-late","time_index":12,"market_regime":"premium-wide","strategy_fingerprint":"fe1d3916d62272bd","candidate_bank":58699,"opponent_bank":56785,"crawler_coverage":0.31,"validation_episode":false}
+    ]
+  }
+}
