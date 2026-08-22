@@ -1,0 +1,571 @@
+{
+  "acquisition": {
+    "archive_hash_ok": true,
+    "archive_member_ok": true,
+    "imports": [
+      "base64",
+      "copy",
+      "json",
+      "math",
+      "zlib"
+    ],
+    "main_hash_ok": true,
+    "method": "pinned-local-artifact",
+    "stdlib_only": true
+  },
+  "action_family_fingerprint": {
+    "counts": {
+      "candidate_screen": {
+        "inventory": 2092,
+        "market": 3850,
+        "production": 8956,
+        "routing": 16608
+      },
+      "champion_screen": {
+        "market": 1015,
+        "production": 11384,
+        "routing": 1124
+      }
+    },
+    "diverged_from_champion": true,
+    "sha256": "e388c552989c7009c1522caa2b83f0cdcf359877a7a64182ce55edef7367900b"
+  },
+  "actual_engine": "1.32.4",
+  "axis": "HarvestForge-X 3094 independent whole-agent",
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "chronological_confirm": true,
+    "default_off_independent": true,
+    "engine_pinned": true,
+    "license_fail_closed": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "screen_confirm_disjoint": true,
+    "source_not_redistributed": true,
+    "source_version_hashes_recorded": true
+  },
+  "confirm": {
+    "candidate": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 3.021404496859759,
+      "mean_margin": 65530.0,
+      "mean_rank": 1.0,
+      "p20_margin": 43894.0,
+      "wins_or_ties": 4,
+      "worst_margin": 43894.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "inventory": 523,
+          "market": 958,
+          "production": 2238,
+          "routing": 4153
+        },
+        "episode": "harvestforge-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": 43894.0,
+        "mean_step_seconds": 0.0038152435008871662,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 87625.0,
+        "rank": 1,
+        "reward": 131519.0,
+        "runtime_seconds": 2.7431600771378726,
+        "seat": 0,
+        "seed": 296311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "inventory": 523,
+          "market": 958,
+          "production": 2238,
+          "routing": 4153
+        },
+        "episode": "harvestforge-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": 43894.0,
+        "mean_step_seconds": 0.0038441184047423044,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 87625.0,
+        "rank": 1,
+        "reward": 131519.0,
+        "runtime_seconds": 2.763921133009717,
+        "seat": 1,
+        "seed": 296311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "inventory": 590,
+          "market": 962,
+          "production": 2310,
+          "routing": 4017
+        },
+        "episode": "harvestforge-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": 87166.0,
+        "mean_step_seconds": 0.004143477607938113,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 69422.0,
+        "rank": 1,
+        "reward": 156588.0,
+        "runtime_seconds": 2.979160400107503,
+        "seat": 0,
+        "seed": 296313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "inventory": 590,
+          "market": 962,
+          "production": 2310,
+          "routing": 4017
+        },
+        "episode": "harvestforge-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": 87166.0,
+        "mean_step_seconds": 0.004202231567259749,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 69422.0,
+        "rank": 1,
+        "reward": 156588.0,
+        "runtime_seconds": 3.021404496859759,
+        "seat": 1,
+        "seed": 296313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 2.1271808149758726,
+      "mean_margin": -129308.5,
+      "mean_rank": 2.0,
+      "p20_margin": -140248.0,
+      "wins_or_ties": 0,
+      "worst_margin": -140248.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -140248.0,
+        "mean_step_seconds": 0.002545093994468492,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 141549.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8299225820228457,
+        "seat": 0,
+        "seed": 296311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -140248.0,
+        "mean_step_seconds": 0.002612875502165381,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 141549.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.878657486056909,
+        "seat": 1,
+        "seed": 296311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -118369.0,
+        "mean_step_seconds": 0.002958526863666026,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 119670.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.1271808149758726,
+        "seat": 0,
+        "seed": 296313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -118369.0,
+        "mean_step_seconds": 0.002949195360228606,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 119670.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.1204714640043676,
+        "seat": 1,
+        "seed": 296313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": 194838.5,
+        "mean_rank": -1.0,
+        "p20_margin": 184142.0,
+        "worst_margin": 184142.0
+      },
+      "passed": true,
+      "signal_count": 4,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": true,
+        "worst_tail": true
+      },
+      "tails_non_regressing": true
+    }
+  },
+  "decision": "promoted",
+  "default_enabled": false,
+  "issue": "SOT-2963",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_promotion": false,
+  "runtime_contract": "PASS",
+  "screen": {
+    "candidate": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 3.25041808700189,
+      "mean_margin": 21101.75,
+      "mean_rank": 1.5,
+      "p20_margin": -4373.0,
+      "wins_or_ties": 2,
+      "worst_margin": -4373.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "inventory": 523,
+          "market": 967,
+          "production": 2238,
+          "routing": 4153
+        },
+        "episode": "harvestforge-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -4373.0,
+        "mean_step_seconds": 0.004370401360182628,
+        "opponent": "cok-v7",
+        "opponent_reward": 120228.0,
+        "rank": 2,
+        "reward": 115855.0,
+        "runtime_seconds": 3.1423185779713094,
+        "seat": 0,
+        "seed": 296301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "inventory": 523,
+          "market": 967,
+          "production": 2238,
+          "routing": 4153
+        },
+        "episode": "harvestforge-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -4373.0,
+        "mean_step_seconds": 0.004520748382478289,
+        "opponent": "cok-v7",
+        "opponent_reward": 120228.0,
+        "rank": 2,
+        "reward": 115855.0,
+        "runtime_seconds": 3.25041808700189,
+        "seat": 1,
+        "seed": 296301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "inventory": 523,
+          "market": 958,
+          "production": 2240,
+          "routing": 4151
+        },
+        "episode": "harvestforge-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": 45153.0,
+        "mean_step_seconds": 0.0038071616552122485,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 74900.0,
+        "rank": 1,
+        "reward": 120053.0,
+        "runtime_seconds": 2.737349230097607,
+        "seat": 0,
+        "seed": 296303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "inventory": 523,
+          "market": 958,
+          "production": 2240,
+          "routing": 4151
+        },
+        "episode": "harvestforge-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": 48000.0,
+        "mean_step_seconds": 0.003827405607739725,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 73964.0,
+        "rank": 1,
+        "reward": 121964.0,
+        "runtime_seconds": 2.7519046319648623,
+        "seat": 1,
+        "seed": 296303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 2.2812591660767794,
+      "mean_margin": -134453.0,
+      "mean_rank": 2.0,
+      "p20_margin": -135556.0,
+      "wins_or_ties": 0,
+      "worst_margin": -135556.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -133350.0,
+        "mean_step_seconds": 0.003172822205948233,
+        "opponent": "cok-v7",
+        "opponent_reward": 134649.0,
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.2812591660767794,
+        "seat": 0,
+        "seed": 296301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -133350.0,
+        "mean_step_seconds": 0.003156129802513728,
+        "opponent": "cok-v7",
+        "opponent_reward": 134649.0,
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.2692573280073702,
+        "seat": 1,
+        "seed": 296301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 247,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -135556.0,
+        "mean_step_seconds": 0.002823668709529955,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 136857.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.0302178021520376,
+        "seat": 0,
+        "seed": 296303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "harvestforge-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -135556.0,
+        "mean_step_seconds": 0.002621865376988128,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 136857.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.885121206054464,
+        "seat": 1,
+        "seed": 296303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": 155554.75,
+        "mean_rank": -0.5,
+        "p20_margin": 131183.0,
+        "worst_margin": 131183.0
+      },
+      "passed": true,
+      "signal_count": 4,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": true,
+        "worst_tail": true
+      },
+      "tails_non_regressing": true
+    }
+  },
+  "source": {
+    "archive_sha256": "a5f0e99ef483408fb524e7ae7c9c2df0c71fd849a30e4fcc54ef50fc166e3ee8",
+    "artifact": "HarvestForge-X 3094 whole agent",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "kaggle_ref": "salemali7/3094-score-kaggriculture",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 130232707,
+    "license": "UNSPECIFIED",
+    "main_py_sha256": "d39dba50793d9777c990347443bf0c481c78adaea86055f6f6b0600dcfcd9f2e",
+    "notebook_sha256": "b3ef54aca96ef9f8822ac230bf27215f5c965a9ea6f8658e2ab022f2460f6d9e",
+    "portable_boundary": "Fetch exact public output transiently through Kaggle API; do not vendor or redistribute source/archive; retain only hashes, metadata, and derived measurements.",
+    "redistribution": "prohibited-fail-closed",
+    "script_version": "lastRunTime=2026-08-21T18:50:10.387Z",
+    "source_url": "https://www.kaggle.com/code/salemali7/3094-score-kaggriculture"
+  }
+}

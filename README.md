@@ -8,6 +8,14 @@ Build and validate:
 bash scripts/build_submission.sh
 ```
 
+HarvestForge-X 3094 is tracked as a hash-pinned, default-OFF independent
+whole-agent hedge under `candidates/harvestforge-x/`. Its notebook declares no
+redistribution license, so no source or archive is vendored: the measurement
+fetches the exact public output transiently and fails closed on its pinned
+hashes. The same-seed/both-seat screen and disjoint confirm evidence is in
+`docs/measurements/SOT-2962/SOT-2963-harvestforge-x.json`; the production
+champion remains unchanged and no Kaggle submission was performed.
+
 The independent `candidates/relative-margin-market/` policy evaluates a finite
 set of buy-denial, timed-sale, and production-mix plans using only public rival
 farm footprint, town demand, and shared market state.  Its SOT-2961 screen
