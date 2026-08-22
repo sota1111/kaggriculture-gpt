@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "source": "https://www.kaggle.com/code/andrewsokolovsky/kaggriculture-breaking-the-tie",
+    "version": "current public notebook observed 2026-08-22",
+    "notebook_hash": "unavailable-fail-closed-no-source-ingested",
+    "license": "unknown",
+    "implementation": "clean-room evaluation protocol only"
+  },
+  "engine": {
+    "package": "kaggle-environments",
+    "version": "1.32.7",
+    "source_commit": "28b6d8af3ce73926b3d0fda1410c1ddd8384ab8c",
+    "source_sha256": "61f1d031afceb5ea3324918723941e0ea2dcc89c8190a64d6837d9fb8a7e53c0",
+    "pricing_semantics": "shared-market-lockstep-precommit-unit-quotes-v1",
+    "action_semantics": "farmer-hands-market-orders-kaggriculture-v1"
+  },
+  "blocks": {"screen": [300701, 300703], "confirm": [300711, 300713], "final": [300721, 300723]},
+  "opponents": ["incumbent", "hamburger"],
+  "candidates": {"incumbent": "main.py", "C95": "candidates/c95-high-score/agent.py", "Hamburger": "candidates/barnyard-economist-v5/agent.py"},
+  "bootstrap": {"unit": "opponent-seed seat-pair", "samples": 2000, "seed": 3007},
+  "kaggle_submission": "NOT_PERFORMED"
+}
