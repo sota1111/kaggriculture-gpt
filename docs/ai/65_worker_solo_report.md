@@ -36,6 +36,6 @@ Cycle 6 の四つの子 Issue を集約した。三つの Apache-2.0 whole-agent
 - Local closed-loop panel は live matchmaking/private の保証ではない。
 - Soil の public 観測は spacing gate 後の将来 cycle に持ち越し。
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
