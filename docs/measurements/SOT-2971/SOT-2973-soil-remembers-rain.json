@@ -1,0 +1,461 @@
+{
+  "actual_engine": "1.32.7",
+  "axis": "Soil Remembers Rain V26-H independent whole-agent",
+  "candidate": {
+    "default_enabled": false,
+    "path": "candidates/soil-remembers-rain/agent.py",
+    "sha256": "f4b8c16395382060d23f70fa65dd376fd567ab55c430d7aee41bbe0bc117a88c"
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "contract_pass": true,
+    "no_submission": true,
+    "opponent_seed_time_disjoint": true,
+    "same_seed_both_seats": true
+  },
+  "confirm": {
+    "candidate": {
+      "action_trace_sha256s": [
+        "2c7232200bc7ff3884cbeecc9b748b0ab18c329c1b6162ed1b8e296b48104525",
+        "2c7232200bc7ff3884cbeecc9b748b0ab18c329c1b6162ed1b8e296b48104525",
+        "4dd56051670be1c09cc5c9eca866e2cd85f2f7a0f68c0015571e57cd106728b2",
+        "cea466501052b7355c4930fd33785e25fb29e09d17917a40ca7b3c4ad1684d5c"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.904644591966644,
+      "mean_margin": 111243.0,
+      "mean_rank": 1.0,
+      "non_pass_actions": 27898,
+      "p20_margin": 55868.0,
+      "wins_or_ties": 4,
+      "worst_margin": 55868.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "2c7232200bc7ff3884cbeecc9b748b0ab18c329c1b6162ed1b8e296b48104525",
+        "cohort": "confirm",
+        "episode": "soil-confirm-lonespear-care",
+        "margin": 55868.0,
+        "non_pass_actions": 6974,
+        "opponent": "lonespear-care",
+        "opponent_reward": 35938.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 91806.0,
+        "runtime_seconds": 2.904644591966644,
+        "seat": 0,
+        "seed": 297311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "2c7232200bc7ff3884cbeecc9b748b0ab18c329c1b6162ed1b8e296b48104525",
+        "cohort": "confirm",
+        "episode": "soil-confirm-lonespear-care",
+        "margin": 55868.0,
+        "non_pass_actions": 6974,
+        "opponent": "lonespear-care",
+        "opponent_reward": 35938.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 91806.0,
+        "runtime_seconds": 2.8248290128540248,
+        "seat": 1,
+        "seed": 297311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "4dd56051670be1c09cc5c9eca866e2cd85f2f7a0f68c0015571e57cd106728b2",
+        "cohort": "confirm",
+        "episode": "soil-confirm-opponent-shape",
+        "margin": 176494.0,
+        "non_pass_actions": 6975,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 179494.0,
+        "runtime_seconds": 1.9172135009430349,
+        "seat": 0,
+        "seed": 297313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "cea466501052b7355c4930fd33785e25fb29e09d17917a40ca7b3c4ad1684d5c",
+        "cohort": "confirm",
+        "episode": "soil-confirm-opponent-shape",
+        "margin": 156742.0,
+        "non_pass_actions": 6975,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 159742.0,
+        "runtime_seconds": 1.9039553930051625,
+        "seat": 1,
+        "seed": 297313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion": {
+      "action_trace_sha256s": [
+        "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "927d933059f5321028a95065f08812d5c02b4c32fbfaa376278095a54bb280d3",
+        "a6b1e22bac2a306c8d2b21d8f720b87a7181dcfd704a9f008426575f7c41cf78"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 1.8854243580717593,
+      "mean_margin": -44187.0,
+      "mean_rank": 2.0,
+      "non_pass_actions": 13488,
+      "p20_margin": -86679.0,
+      "wins_or_ties": 0,
+      "worst_margin": -86679.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "cohort": "confirm",
+        "episode": "soil-confirm-lonespear-care",
+        "margin": -86679.0,
+        "non_pass_actions": 3382,
+        "opponent": "lonespear-care",
+        "opponent_reward": 87980.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8854243580717593,
+        "seat": 0,
+        "seed": 297311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "cohort": "confirm",
+        "episode": "soil-confirm-lonespear-care",
+        "margin": -86679.0,
+        "non_pass_actions": 3382,
+        "opponent": "lonespear-care",
+        "opponent_reward": 87980.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8827173120807856,
+        "seat": 1,
+        "seed": 297311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "927d933059f5321028a95065f08812d5c02b4c32fbfaa376278095a54bb280d3",
+        "cohort": "confirm",
+        "episode": "soil-confirm-opponent-shape",
+        "margin": -1695.0,
+        "non_pass_actions": 3365,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1014859550632536,
+        "seat": 0,
+        "seed": 297313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "a6b1e22bac2a306c8d2b21d8f720b87a7181dcfd704a9f008426575f7c41cf78",
+        "cohort": "confirm",
+        "episode": "soil-confirm-opponent-shape",
+        "margin": -1695.0,
+        "non_pass_actions": 3359,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0844040110241622,
+        "seat": 1,
+        "seed": 297313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "delta": {
+      "mean_margin": 155430.0,
+      "mean_rank": -1.0,
+      "p20_margin": 142547.0,
+      "worst_margin": 142547.0
+    },
+    "intervention": {
+      "action_trace_divergences": 4,
+      "candidate_non_pass_actions": 27898,
+      "paired_rows": 4
+    }
+  },
+  "decision": "promoted",
+  "screen": {
+    "candidate": {
+      "action_trace_sha256s": [
+        "1a4fa795b6ed2d2c53c785ff1c2ec41d317e4250b7f556b987d298d712d74212",
+        "2c0b4f52cd202513c5258fe9d14a241e253ff2aaebec1ec09301eacf0b3fa384",
+        "3ea9bbcdac9819710ee4fba3e541c7f7aa4df6e3c4931a3f914e2905f2676800",
+        "c3c03b2fb946c4ed81f4de2dd36f35dfad864fb4ff04883f036e7f7ecb9c951e"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 3.2316993549466133,
+      "mean_margin": 118257.0,
+      "mean_rank": 1.0,
+      "non_pass_actions": 27900,
+      "p20_margin": 76834.0,
+      "wins_or_ties": 4,
+      "worst_margin": 76834.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "2c0b4f52cd202513c5258fe9d14a241e253ff2aaebec1ec09301eacf0b3fa384",
+        "cohort": "screen",
+        "episode": "soil-screen-barnyard-v5",
+        "margin": 77647.0,
+        "non_pass_actions": 6975,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 60530.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 138177.0,
+        "runtime_seconds": 3.191783720161766,
+        "seat": 0,
+        "seed": 297301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "c3c03b2fb946c4ed81f4de2dd36f35dfad864fb4ff04883f036e7f7ecb9c951e",
+        "cohort": "screen",
+        "episode": "soil-screen-barnyard-v5",
+        "margin": 76834.0,
+        "non_pass_actions": 6975,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 69988.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 146822.0,
+        "runtime_seconds": 3.2316993549466133,
+        "seat": 1,
+        "seed": 297301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "1a4fa795b6ed2d2c53c785ff1c2ec41d317e4250b7f556b987d298d712d74212",
+        "cohort": "screen",
+        "episode": "soil-screen-deepeshumrao",
+        "margin": 158358.0,
+        "non_pass_actions": 6975,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4701.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 163059.0,
+        "runtime_seconds": 2.0300182360224426,
+        "seat": 0,
+        "seed": 297303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "3ea9bbcdac9819710ee4fba3e541c7f7aa4df6e3c4931a3f914e2905f2676800",
+        "cohort": "screen",
+        "episode": "soil-screen-deepeshumrao",
+        "margin": 160189.0,
+        "non_pass_actions": 6975,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4802.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 164991.0,
+        "runtime_seconds": 2.035512777045369,
+        "seat": 1,
+        "seed": 297303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "action_trace_sha256s": [
+        "0aaa58077920bc3ce00566f594a8f1a91918f67603dc4bdb87cdb3629adf7cf9",
+        "41364237252cb2cc1be3ca92054a260fae656ce820396c1086b27d0098d67d7e",
+        "64f89af1472e305d1f00f8921ab23172a29e9b2d0d4e563ae60a57b97abcb162",
+        "c039cb613f07c665945114c23ae1ceff885c9374f70918fa5377a9e65039d2d2"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.319488931912929,
+      "mean_margin": -48610.25,
+      "mean_rank": 2.0,
+      "non_pass_actions": 13505,
+      "p20_margin": -105744.0,
+      "wins_or_ties": 0,
+      "worst_margin": -105744.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "64f89af1472e305d1f00f8921ab23172a29e9b2d0d4e563ae60a57b97abcb162",
+        "cohort": "screen",
+        "episode": "soil-screen-barnyard-v5",
+        "margin": -81664.0,
+        "non_pass_actions": 3383,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 82959.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2749180970713496,
+        "seat": 0,
+        "seed": 297301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "c039cb613f07c665945114c23ae1ceff885c9374f70918fa5377a9e65039d2d2",
+        "cohort": "screen",
+        "episode": "soil-screen-barnyard-v5",
+        "margin": -105744.0,
+        "non_pass_actions": 3369,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 107039.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.319488931912929,
+        "seat": 1,
+        "seed": 297301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "41364237252cb2cc1be3ca92054a260fae656ce820396c1086b27d0098d67d7e",
+        "cohort": "screen",
+        "episode": "soil-screen-deepeshumrao",
+        "margin": -3519.0,
+        "non_pass_actions": 3382,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4824.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.170316267060116,
+        "seat": 0,
+        "seed": 297303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "0aaa58077920bc3ce00566f594a8f1a91918f67603dc4bdb87cdb3629adf7cf9",
+        "cohort": "screen",
+        "episode": "soil-screen-deepeshumrao",
+        "margin": -3514.0,
+        "non_pass_actions": 3371,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4819.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1696595570538193,
+        "seat": 1,
+        "seed": 297303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "delta": {
+      "mean_margin": 166867.25,
+      "mean_rank": -1.0,
+      "p20_margin": 182578.0,
+      "worst_margin": 182578.0
+    },
+    "intervention": {
+      "action_trace_divergences": 4,
+      "candidate_non_pass_actions": 27900,
+      "paired_rows": 4
+    }
+  },
+  "screen_gate": "PASS",
+  "sealed_confirm_manifest_sha256": "27a86fb26f89fcb81f3d291c545053bec447beaab0405da0e147cd4a2d71ce6e"
+}

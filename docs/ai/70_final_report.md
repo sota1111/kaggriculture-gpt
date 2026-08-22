@@ -1,16 +1,14 @@
-# Final Report — SOT-2974
+# Final Report — SOT-2973
 
-Kaito v19 Replication-to-Control was reproduced as an exact Apache-2.0,
-standard-library-only independent whole-agent candidate. Source version and
-hashes are pinned, and the intervention is explicitly separated from v39's
-sparse-history gate.
+Soil Remembers Rain V26-H was reproduced as an exact, Apache-2.0,
+stdlib-only independent candidate. Provenance and artifact hashes are pinned.
+The candidate passed the offline contract, all 720-step episodes, the
+same-seed/both-seat screen, and the disjoint sealed confirm. It won 4/4 rows
+in each cohort, with action-trace divergence in every paired row. The current
+champion remains unchanged and no Kaggle submission occurred.
 
-The candidate won 4/4 episodes in both the registered same-seed/both-seat
-screen and the opponent/episode/seed/seat/time-disjoint confirm, improving
-rank, mean margin, and pessimistic tail against the retained champion. It is
-promoted only as a default-OFF hedge; `main.py` and `submission.tar.gz`
-remain unchanged, private traces were not shipped, and no Kaggle submission
-was performed.
+Verification: compileall PASS; submission validator PASS; 210 tests PASS with
+2 pre-existing optional-checkout skips.
 
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
