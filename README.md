@@ -8,6 +8,14 @@ Build and validate:
 bash scripts/build_submission.sh
 ```
 
+The independent `candidates/relative-margin-market/` policy evaluates a finite
+set of buy-denial, timed-sale, and production-mix plans using only public rival
+farm footprint, town demand, and shared market state.  Its SOT-2961 screen
+improved the pessimistic tail but missed the mean relative-margin gate, so the
+sealed confirm stayed unopened and the production champion remains unchanged.
+Reproduce the firing-logged same-seed/both-seat evidence with
+`python3 scripts/measure_relative_margin_market.py`.
+
 The public COK-ZhangZiliang V7 whole agent is tracked separately as a
 hash-pinned, fetch-only hedge descriptor under `candidates/v7-portable/`.
 Its stdlib-only contract and local screen pass, but it is not vendored or
