@@ -1,0 +1,257 @@
+{
+  "axis": "public-state adversarial relative-margin market policy",
+  "candidate": {
+    "default_enabled": false,
+    "path": "candidates/relative-margin-market/policy.py",
+    "sha256": "6c291a3b4ea8b2f06cabf52b9f649880255ed5b59f6463c901677a9c274f7a94"
+  },
+  "candidate_retained": false,
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "cash_runway": true,
+    "champion_hedge_unchanged": true,
+    "chronological_confirm": true,
+    "finite_counterfactual_set": true,
+    "market_order_cap": true,
+    "no_submission": true,
+    "opponent_seed_time_holdout": true,
+    "public_state_model": true,
+    "relative_margin_objective": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true
+  },
+  "decision": "inconclusive",
+  "issue": "SOT-2961",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "runtime_contract": "PASS",
+  "runtime_diff_reverted": true,
+  "submission_contract": "PASS",
+  "windows": {
+    "confirm": {
+      "reason": "screen relative-margin/tail promotion gate failed",
+      "status": "RESERVED_UNOPENED"
+    },
+    "screen": {
+      "candidate": {
+        "episodes": 4,
+        "mean_margin": -156309.25,
+        "mean_opponent_reward": 159309.25,
+        "mean_own_reward": 3000.0,
+        "mean_rank": 2.0,
+        "p20_margin": -179020.0,
+        "worst_margin": -179020.0
+      },
+      "candidate_rows": [
+        {
+          "episode": "relative-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -179020.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 182020.0,
+          "own_reward": 3000.0,
+          "rank": 2,
+          "seat": 0,
+          "seed": 296101,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 1
+        },
+        {
+          "episode": "relative-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -179020.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 182020.0,
+          "own_reward": 3000.0,
+          "rank": 2,
+          "seat": 1,
+          "seed": 296101,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 1
+        },
+        {
+          "episode": "relative-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -135565.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 138565.0,
+          "own_reward": 3000.0,
+          "rank": 2,
+          "seat": 0,
+          "seed": 296103,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 3
+        },
+        {
+          "episode": "relative-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -131632.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 134632.0,
+          "own_reward": 3000.0,
+          "rank": 2,
+          "seat": 1,
+          "seed": 296103,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 3
+        }
+      ],
+      "champion": {
+        "episodes": 4,
+        "mean_margin": -156297.5,
+        "mean_opponent_reward": 157597.5,
+        "mean_own_reward": 1300.0,
+        "mean_rank": 2.0,
+        "p20_margin": -183763.0,
+        "worst_margin": -183763.0
+      },
+      "champion_rows": [
+        {
+          "episode": "relative-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -182374.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 183673.0,
+          "own_reward": 1299.0,
+          "rank": 2,
+          "seat": 0,
+          "seed": 296101,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 1
+        },
+        {
+          "episode": "relative-screen-cok",
+          "lineage": "COK-ZhangZiliang/V7",
+          "margin": -183763.0,
+          "opponent": "cok-v7",
+          "opponent_reward": 185062.0,
+          "own_reward": 1299.0,
+          "rank": 2,
+          "seat": 1,
+          "seed": 296101,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 1
+        },
+        {
+          "episode": "relative-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -128915.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 130216.0,
+          "own_reward": 1301.0,
+          "rank": 2,
+          "seat": 0,
+          "seed": 296103,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 3
+        },
+        {
+          "episode": "relative-screen-v17",
+          "lineage": "lonespear/V17",
+          "margin": -130138.0,
+          "opponent": "lonespear-v17",
+          "opponent_reward": 131439.0,
+          "own_reward": 1301.0,
+          "rank": 2,
+          "seat": 1,
+          "seed": 296103,
+          "statuses": [
+            "DONE",
+            "DONE"
+          ],
+          "steps": 720,
+          "time_index": 3
+        }
+      ],
+      "direct_ab": {
+        "delta": {
+          "mean_margin": -11.75,
+          "mean_opponent_reward": 1711.75,
+          "mean_own_reward": 1700.0,
+          "mean_rank": 0.0,
+          "p20_margin": 4743.0,
+          "worst_margin": 4743.0
+        },
+        "passed": false,
+        "signals": {
+          "margin": false,
+          "p20": true,
+          "rank": false,
+          "worst": true
+        },
+        "tails_non_regressing": true
+      },
+      "interventions": {
+        "market": 987,
+        "production_mix": 2868,
+        "rows": [
+          {
+            "action_interventions": 718,
+            "market_interventions": 250,
+            "opponent": "cok-v7",
+            "production_mix_interventions": 717,
+            "seat": 0,
+            "seed": 296101
+          },
+          {
+            "action_interventions": 718,
+            "market_interventions": 240,
+            "opponent": "cok-v7",
+            "production_mix_interventions": 717,
+            "seat": 1,
+            "seed": 296101
+          },
+          {
+            "action_interventions": 718,
+            "market_interventions": 249,
+            "opponent": "lonespear-v17",
+            "production_mix_interventions": 717,
+            "seat": 0,
+            "seed": 296103
+          },
+          {
+            "action_interventions": 718,
+            "market_interventions": 248,
+            "opponent": "lonespear-v17",
+            "production_mix_interventions": 717,
+            "seat": 1,
+            "seed": 296103
+          }
+        ],
+        "total": 2872
+      }
+    }
+  }
+}
