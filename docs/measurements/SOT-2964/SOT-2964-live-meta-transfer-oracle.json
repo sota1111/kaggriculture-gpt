@@ -1,0 +1,177 @@
+{
+  "agent_decision": "NOT_EVALUATED",
+  "axis": "live-meta replay transfer-drift oracle re-anchor",
+  "bias_and_dependence": {
+    "crawler_coverage_margin_correlation": 0.0,
+    "effective_strategy_count": 6,
+    "limitations": {
+      "crawler": "The public corpus is a crawl, not a census; coverage correlation is a bias diagnostic, not a correction proof.",
+      "open_loop": "Recorded-action counterfactuals cannot react to candidate actions and are stress evidence only.",
+      "serial": "Consecutive ladder games are correlated through matchmaking, so rows are not IID."
+    },
+    "raw_row_count": 8,
+    "serial_correlation_lag1": -0.6097694770409402,
+    "validation_self_play_rows": 0
+  },
+  "decision_reason": "Leakage/provenance checks pass and drift is reproducibly measured; this promotes only the oracle contract.",
+  "evaluation_targets": [
+    {
+      "path": "main.py",
+      "role": "current-champion",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    },
+    {
+      "path": "candidates/lonespear-care-production/agent.py",
+      "role": "independent-candidate",
+      "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0"
+    }
+  ],
+  "issue": "SOT-2964",
+  "kaggle_submission": "NOT_PERFORMED",
+  "oracle_decision": "promoted",
+  "passed": true,
+  "protocol": {
+    "open_loop_boundary": "stress-only-not-live-win-probability",
+    "primary_value": "within-episode relative margin",
+    "same_seed_both_seat": true,
+    "split": "lineage/episode/seed/seat/time/market"
+  },
+  "provenance": {
+    "manifest_sha256": "cff55b396fed0818447d8c56ca2053b1d7da428f9e06d92b161a658cf5e8bd04",
+    "sources": [
+      {
+        "boundary": "fetch-only-not-committed",
+        "id": "live-meta-notebook-v19",
+        "license": "Apache-2.0 input boundary; notebook observations only",
+        "sha256": "6556a8307132fe45c22cc0d3821333d028e342167dfcbd880421f9e15668fb13",
+        "url": "https://www.kaggle.com/code/georgymamarin/kaggriculture-daily-replays-the-live-meta-report",
+        "version": "19/19; acquired 2026-08-22"
+      },
+      {
+        "boundary": "fetch-only-not-committed",
+        "id": "kaggriculture-episodes-2026-08-21",
+        "license": "Apache-2.0",
+        "sha256": "0069fe6ea1e8ee5c0ad0b08b12f22a655aa6e0ead10631e0beceffea9b43f534",
+        "url": "https://www.kaggle.com/datasets/georgymamarin/kaggriculture-episodes",
+        "version": "daily snapshot 2026-08-21T05:10:20Z"
+      },
+      {
+        "boundary": "fetch-only-not-committed",
+        "id": "benchmark-matchups-2026-08-16",
+        "license": "CC0-1.0",
+        "sha256": "bb94d1a5523468f83dacdaf33482648d25ab72c3ee2468fb3d9247d7cda8c11e",
+        "url": "https://www.kaggle.com/datasets/destbreso/kaggriculture-benchmark-matchups",
+        "version": "45,404-matchup snapshot 2026-08-16"
+      },
+      {
+        "boundary": "fetch-only-not-committed",
+        "id": "official-runtime-1.32.4",
+        "license": "Apache-2.0",
+        "sha256": "9741c0470a8db98a70644491d5121ae6295413343d1a08ef9fcee35e0b76f2c5",
+        "url": "https://github.com/Kaggle/kaggle-environments/blob/1.32.4/kaggle_environments/envs/kaggriculture/kaggriculture.py",
+        "version": "kaggle-environments==1.32.4"
+      }
+    ]
+  },
+  "transfer_drift": {
+    "confirm_minus_screen": {
+      "mean_margin": 0.0,
+      "mean_rank": 0.0,
+      "p20_margin": -1518.0,
+      "worst_margin": -1518.0
+    },
+    "stability_0_to_1": 0.8325612177365983,
+    "stability_basis": "largest absolute mean/p20/worst margin drift"
+  },
+  "validation": {
+    "checks": {
+      "champion_and_independent_target_registered": true,
+      "chronological_confirm": true,
+      "fingerprints_auditable": true,
+      "licenses_recorded": true,
+      "multiple_market_regimes": true,
+      "no_episode_overlap": true,
+      "no_kaggle_submission": true,
+      "no_lineage_prefix_overlap": true,
+      "no_private_future_or_credentials": true,
+      "no_seed_overlap": true,
+      "no_time_cohort_overlap": true,
+      "oracle_agent_decisions_separate": true,
+      "panels_nonempty": true,
+      "raw_bytes_fetch_only": true,
+      "rows_complete": true,
+      "same_seed_both_seats": true,
+      "schema_supported": true,
+      "source_hashes_valid": true,
+      "source_provenance_complete": true,
+      "target_hashes_match": true,
+      "unique_episode_seat": true,
+      "validation_self_play_excluded": true
+    },
+    "overlap": {
+      "episode": [],
+      "lineage_prefix": [],
+      "seed": [],
+      "time_cohort": []
+    },
+    "passed": true
+  },
+  "windows": {
+    "confirm": {
+      "opponent_time_market_interaction": {
+        "9fbed391b8c961fc|2026-08-20-late|premium-tight": {
+          "mean_margin": 0.0,
+          "mean_rank": 1.5,
+          "p20_margin": -10584.0,
+          "rows": 2,
+          "win_or_tie_rate": 0.5,
+          "worst_margin": -10584.0
+        },
+        "cbb4e9e9356d800d|2026-08-19-late|premium-wide": {
+          "mean_margin": 0.0,
+          "mean_rank": 1.5,
+          "p20_margin": -1914.0,
+          "rows": 2,
+          "win_or_tie_rate": 0.5,
+          "worst_margin": -1914.0
+        }
+      },
+      "summary": {
+        "mean_margin": 0.0,
+        "mean_rank": 1.5,
+        "p20_margin": -10584.0,
+        "rows": 4,
+        "win_or_tie_rate": 0.5,
+        "worst_margin": -10584.0
+      }
+    },
+    "screen": {
+      "opponent_time_market_interaction": {
+        "910933c6a8cfc280|2026-08-05-early|premium-wide": {
+          "mean_margin": 0.0,
+          "mean_rank": 1.5,
+          "p20_margin": -9066.0,
+          "rows": 2,
+          "win_or_tie_rate": 0.5,
+          "worst_margin": -9066.0
+        },
+        "ffbf6d8724281b70|2026-08-05-mid|premium-tight": {
+          "mean_margin": 0.0,
+          "mean_rank": 1.5,
+          "p20_margin": -1530.0,
+          "rows": 2,
+          "win_or_tie_rate": 0.5,
+          "worst_margin": -1530.0
+        }
+      },
+      "summary": {
+        "mean_margin": 0.0,
+        "mean_rank": 1.5,
+        "p20_margin": -9066.0,
+        "rows": 4,
+        "win_or_tie_rate": 0.5,
+        "worst_margin": -9066.0
+      }
+    }
+  }
+}
