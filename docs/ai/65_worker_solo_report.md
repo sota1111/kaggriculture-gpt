@@ -1,40 +1,45 @@
-# Solo Worker Report — SOT-2976
+# Solo Worker Report — SOT-2982
 
 ## Summary
 
-Cycle 7 の四つの子 Issue を集約した。全候補が独立 screen/confirm を通過し、confirm mean-margin が同等上位かつ pessimistic-tail delta が最大の Adaptive Farming Strategy を live-field candidate に選定した。governed submission gate は直近提出から 180 分未満（約29分残）として skip したため、提出・public 観測はない。旧 champion は hedge として保持した。
+- V111 notebook version 1, notebook SHA-256, and emitted agent SHA-256 were pinned.
+- Because the acquired metadata/body declares no license, upstream executable and opaque replay-derived action table were not redistributed.
+- Added a default-off, champion-independent clean-room whole-agent package on the attributed MIT lonespear foundation.
+- Completed same-seed/both-seat screen and opponent/episode/seed/seat/time-separated confirm.
+- Candidate was rejected: screen mean-margin delta -91,990.5 and tail delta -74,376; confirm mean-margin delta -88,756.5 and tail delta -106,669.
+- No Kaggle submission was performed.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — 子結果、effective-config fingerprint、spacing-gate no-submit を記録
-- `docs/ai/linear/SOT-2976.md` — 親集約と検証・提出判定を記録
-- `docs/ai/65_worker_solo_report.md` — lifecycle report
-- `docs/ai/70_final_report.md` — 最終受け入れ報告
+- `candidates/v111-economic-core/*` — clean-room overlay, provenance, attribution, usage notes.
+- `scripts/package_v111_economic_core.py` — deterministic standalone artifact builder.
+- `scripts/measure_v111_economic_core.py` — sealed screen/confirm A/B harness and firing evidence.
+- `tests/fixtures/v111_economic_core.json` — pre-registered disjoint panel.
+- `tests/test_v111_economic_core.py` — provenance, packaging, and evidence assertions.
+- `docs/measurements/SOT-2981/SOT-2982-v111-economic-core.json` — complete evaluation evidence.
+- `docs/ai/experiment_ledger.jsonl` — rejected-axis record.
 
-## Commands Run
+## Verification
 
-- child issue/comment/PR aggregation — PASS（SOT-2977〜SOT-2980 Done、PR #133〜#136 merged）
-- `python3 scripts/validate_submission.py <adaptive-candidate>` — PASS
-- `python3 -m compileall -q main.py candidates scripts tests <adaptive-candidate>` — PASS
-- `python3 -m unittest discover -s tests -v` — PASS（218 passed、2 skipped）
-- deterministic candidate archive build — PASS（SHA-256 `c50681de...`）
-- governed `kaggle_targets_submit.sh --execute` — SAFE SKIP（spacing 約29分残）
-- npm lint/typecheck/e2e — N/A（Python-only repo、package.json/UI なし）
+- `python3 scripts/measure_v111_economic_core.py` — PASS; rejected-same-seed-ab; all 16 A/B episodes DONE/DONE at 720 steps.
+- `python3 -m compileall -q ...` — PASS.
+- `python3 -m unittest discover -s tests` — PASS, 221 tests, 2 skipped optional checkouts.
+- `git diff --check` — PASS.
+- npm lint/typecheck/test/e2e — N/A; repository has no `package.json` and uses Python gates.
 
 ## Acceptance Criteria
 
-- [x] 改善方針・選定理由を記録
-- [x] 全子 Issue が Done
-- [x] candidate と screen/confirm evidence、effective fingerprint を対応付け
-- [x] 親再開 run が集約し、spacing gate による新 artifact no-submit を明記
-- [x] rejected/CLOSED を新規作成せず、no-submit は inconclusive として記録
-- [x] Linear に申し送りと Completion Report を投稿
+- [x] Source URL/license/hash/provenance fixed; missing license is explicitly fail-closed.
+- [x] Candidate builds as one independent offline agent and never depends on `main.py`.
+- [x] Same-seed/both-seat screen and sealed confirm completed.
+- [x] Ledger includes the evidence-backed rejected result.
+- [x] No Kaggle submission performed.
 
 ## Risks
 
-- Local closed-loop panel は live matchmaking/private の保証ではない。
-- Adaptive candidate の public 観測は spacing gate 後の将来 cycle に持ち越す。
+- The exact public route could not be redistributed due to absent license metadata; the clean-room direction is intentionally narrower than the opaque artifact.
+- Rejection applies to this clean-room 8C4S/premium-order implementation, not to inaccessible upstream code under a future explicit license.
 
-## Linear Report: POSTED
+## Linear Report: PENDING
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
