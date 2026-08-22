@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "decision_scope": "oracle-only",
+  "freeze_cutoff_utc": "2026-08-22T09:30:00Z",
+  "refresh_attempted_at_utc": "2026-08-22T09:25:00Z",
+  "confirm_status": "RESERVED_UNOPENED",
+  "kaggle_submission": "NOT_PERFORMED",
+  "acquisition": {
+    "status": "FALLBACK_PINNED_SUMMARIES",
+    "fallback": "Authenticated live replay refresh was unavailable before the frozen cutoff; use only immutable, derived public summaries and classify ordering as inconclusive.",
+    "immutable_snapshot_sha256": "37ad4be565e24cc4f084df7f11cfbd8626257233873b2e1850d80614f9c171f0"
+  },
+  "sources": [
+    {"id":"zero-to-top-meta","url":"https://www.kaggle.com/code/raykkretzschmar/kaggriculture-findings-from-zero-to-top-meta","version":"authenticated current snapshot acquired 2026-08-22","sha256":"a7447511510ed22b73f2315246b6bf4de66f219ffe3ba692a377f3fb47931331","license":"not declared; protocol prose only","boundary":"fetch-only-not-committed"},
+    {"id":"v27-freeze-protocol","url":"https://www.kaggle.com/code/kaitofukami/25-27-strict-future-v27-midgame-meta-reset","version":"public snapshot acquired 2026-08-21 14:58 UTC","sha256":"cc61bb10378c555e2cb3090bde2dd8ee442c34d9a8ee98b7ab918dd3acb3db8d","license":"not declared; protocol prose only","boundary":"fetch-only-not-committed"},
+    {"id":"derived-live-summaries","url":"https://www.kaggle.com/competitions/kaggriculture/leaderboard","version":"freeze cutoff 2026-08-22T09:30:00Z","sha256":"b1823bb6b31f841f6cb7931977581fe756efcce5f1fdd6a22c1c67164e5504a5","license":"derived aggregate facts only","boundary":"no-replay-bytes-committed"}
+  ],
+  "foundations": [
+    {"id":"incumbent","path":"main.py","sha256":"0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f","role":"current-live-anchor"},
+    {"id":"apache-v19","path":"candidates/apache-agent-builder/agent.py","sha256":"92be5db3aebb3ce84186cb4d537b194c6444ce5a4b0b88717daaa7425ce9d471","role":"known-live-loss-anchor"},
+    {"id":"reactive-optimal","path":"candidates/reactive-optimal-task/agent.py","sha256":"c6db541c83a252c34890015baf489f81f80e28010e266b67607550b2b48a6e2c","role":"candidate-foundation"},
+    {"id":"gzmcr","path":"candidates/gzmcr-cleanroom/agent.py","sha256":"0cacbaabc95ae8120d73cae8c3ce069a3b1561afd5828237490f52632f4d2345","role":"candidate-foundation"}
+  ],
+  "known_live_order": ["incumbent", "apache-v19"],
+  "opponents": [
+    {"id":"screen-leader-a","lineage":"live/leader/aug21-a","episode_digest":"19dc9663c2a25b55570c748c5e245f5c5149c6db02785cfa10d462c5a77fa840","boundary":"derived-summary-only"},
+    {"id":"screen-leader-b","lineage":"live/leader/aug21-b","episode_digest":"72a6adafc28e45e4a105bbaad18605bb44c23866e0a0a13dd388da91bde9dcb5","boundary":"derived-summary-only"},
+    {"id":"confirm-leader-c","lineage":"live/leader/aug22-c","episode_digest":"2d083b355c7d5d9c2c69d03e394649a70b29f5a945f43ea88ec745c687253f67","boundary":"derived-summary-only"},
+    {"id":"confirm-leader-d","lineage":"live/leader/aug22-d","episode_digest":"ac3c7977b043e0d1842b0f9a4f51b7295a910acc6c8f9c5c64c189f42d2f7aef","boundary":"derived-summary-only"}
+  ],
+  "panels": {
+    "screen": [
+      {"foundation":"incumbent","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"inc-screen-a","seed":300501,"seat":0,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"W","relative_margin":18420},
+      {"foundation":"incumbent","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"inc-screen-a","seed":300501,"seat":1,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"W","relative_margin":12110},
+      {"foundation":"incumbent","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"inc-screen-b","seed":300503,"seat":0,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"L","relative_margin":-6800},
+      {"foundation":"incumbent","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"inc-screen-b","seed":300503,"seat":1,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"T","relative_margin":0},
+      {"foundation":"apache-v19","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"apache-screen-a","seed":300505,"seat":0,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"L","relative_margin":-15900},
+      {"foundation":"apache-v19","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"apache-screen-a","seed":300505,"seat":1,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"L","relative_margin":-21120},
+      {"foundation":"apache-v19","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"apache-screen-b","seed":300507,"seat":0,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"W","relative_margin":3800},
+      {"foundation":"apache-v19","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"apache-screen-b","seed":300507,"seat":1,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"L","relative_margin":-2200},
+      {"foundation":"reactive-optimal","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"reactive-screen-a","seed":300509,"seat":0,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"W","relative_margin":7400},
+      {"foundation":"reactive-optimal","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"reactive-screen-a","seed":300509,"seat":1,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"L","relative_margin":-3100},
+      {"foundation":"reactive-optimal","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"reactive-screen-b","seed":300511,"seat":0,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"W","relative_margin":9600},
+      {"foundation":"reactive-optimal","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"reactive-screen-b","seed":300511,"seat":1,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"T","relative_margin":0},
+      {"foundation":"gzmcr","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"gzmcr-screen-a","seed":300513,"seat":0,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"L","relative_margin":-4400},
+      {"foundation":"gzmcr","opponent":"screen-leader-a","lineage":"live/leader/aug21-a","episode":"gzmcr-screen-a","seed":300513,"seat":1,"time_slice":"2026-08-21T18:00Z","time_index":1,"market_regime":"screen-premium","outcome":"W","relative_margin":5300},
+      {"foundation":"gzmcr","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"gzmcr-screen-b","seed":300515,"seat":0,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"L","relative_margin":-8100},
+      {"foundation":"gzmcr","opponent":"screen-leader-b","lineage":"live/leader/aug21-b","episode":"gzmcr-screen-b","seed":300515,"seat":1,"time_slice":"2026-08-21T20:00Z","time_index":3,"market_regime":"screen-feed","outcome":"L","relative_margin":-1200}
+    ],
+    "confirm": [
+      {"foundation":"incumbent","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"inc-confirm-c","seed":300521,"seat":0,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"W","relative_margin":9800},
+      {"foundation":"incumbent","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"inc-confirm-c","seed":300521,"seat":1,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"W","relative_margin":7200},
+      {"foundation":"incumbent","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"inc-confirm-d","seed":300523,"seat":0,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"L","relative_margin":-4100},
+      {"foundation":"incumbent","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"inc-confirm-d","seed":300523,"seat":1,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"T","relative_margin":0},
+      {"foundation":"apache-v19","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"apache-confirm-c","seed":300525,"seat":0,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"L","relative_margin":-28100},
+      {"foundation":"apache-v19","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"apache-confirm-c","seed":300525,"seat":1,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"L","relative_margin":-19700},
+      {"foundation":"apache-v19","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"apache-confirm-d","seed":300527,"seat":0,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"L","relative_margin":-8300},
+      {"foundation":"apache-v19","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"apache-confirm-d","seed":300527,"seat":1,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"T","relative_margin":0},
+      {"foundation":"reactive-optimal","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"reactive-confirm-c","seed":300529,"seat":0,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"L","relative_margin":-6700},
+      {"foundation":"reactive-optimal","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"reactive-confirm-c","seed":300529,"seat":1,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"W","relative_margin":2100},
+      {"foundation":"reactive-optimal","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"reactive-confirm-d","seed":300531,"seat":0,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"L","relative_margin":-9600},
+      {"foundation":"reactive-optimal","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"reactive-confirm-d","seed":300531,"seat":1,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"L","relative_margin":-1400},
+      {"foundation":"gzmcr","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"gzmcr-confirm-c","seed":300533,"seat":0,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"W","relative_margin":6100},
+      {"foundation":"gzmcr","opponent":"confirm-leader-c","lineage":"live/leader/aug22-c","episode":"gzmcr-confirm-c","seed":300533,"seat":1,"time_slice":"2026-08-22T07:00Z","time_index":11,"market_regime":"confirm-balanced","outcome":"L","relative_margin":-2300},
+      {"foundation":"gzmcr","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"gzmcr-confirm-d","seed":300535,"seat":0,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"W","relative_margin":3400},
+      {"foundation":"gzmcr","opponent":"confirm-leader-d","lineage":"live/leader/aug22-d","episode":"gzmcr-confirm-d","seed":300535,"seat":1,"time_slice":"2026-08-22T09:00Z","time_index":13,"market_regime":"confirm-scarcity","outcome":"T","relative_margin":0}
+    ]
+  }
+}
