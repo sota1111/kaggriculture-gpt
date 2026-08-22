@@ -1,12 +1,7 @@
-# Final Report — SOT-2965
+# Final Report — SOT-2962
 
-The Pure Architecture candidate is demonstrably strong in the independent public-opponent panel but
-is not portable as a repository artifact under the available provenance. Screen mean rank improved
-from 2.0 to 1.5 and confirm from 2.0 to 1.0; p20/worst margins improved by 162,517 and 185,220,
-respectively. All evaluated runs ended DONE at 720 steps with zero invalid actions. The notebook has no
-declared redistribution license, so only hashes, descriptors, fixtures, and measurements are retained.
-The champion and submission archive are byte-identical to `origin/main`, and no Kaggle submission was
-made.
+All four child issues are Done and their merged evidence was aggregated. The strongest cycle-5 whole-agent results remain default-OFF because their source licenses are unspecified. The previously verified MIT coherent CARE-production candidate was therefore submitted through the governed repo-scoped helper. Kaggle ref `55681343` completed at public score `600.0`; this matches the historical best and is recorded as an inconclusive live-field observation rather than private-improvement proof. The effective configuration and artifact fingerprint are recorded in the experiment ledger, and the retained champion remains the structural hedge.
 
+## Linear Report: POSTED
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
