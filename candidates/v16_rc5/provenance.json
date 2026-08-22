@@ -1,0 +1,29 @@
+{
+  "candidate": "V16-RC5-PremiumMarketLead",
+  "source_url": "https://www.kaggle.com/code/boatlee/v16-rc5-high-score-8c-4s-premium-market-lead",
+  "source_notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+  "source_agent_sha256": "f029fa0cb66a9eb509afbe44e3f59b800332d0419db91607183410e4089c4d19",
+  "source_version": {
+    "kaggle_kernel_id": 130530296,
+    "engine": "kaggle-environments 1.32.6",
+    "source_submission": 55440039,
+    "source_episodes": [92165990, 92185587, 92223213]
+  },
+  "license": {
+    "status": "unknown",
+    "evidence": "Neither the downloaded kernel-metadata.json nor notebook metadata declares a license.",
+    "decision": "fail-closed-no-redistribution"
+  },
+  "packaging": {
+    "candidate_artifact": null,
+    "evaluation_mode": "hash-pinned transient extraction from an operator-supplied notebook",
+    "promotion_allowed": false,
+    "reason": "Redistribution rights are not established; exact source is never written into this repository."
+  },
+  "incumbent": {
+    "path": "main.py",
+    "sha256_at_evaluation": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f",
+    "modified": false
+  },
+  "kaggle_submission": "NOT_PERFORMED"
+}

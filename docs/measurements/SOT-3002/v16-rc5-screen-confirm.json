@@ -1,0 +1,211 @@
+{
+  "issue": "SOT-3002",
+  "recorded_at": "2026-08-22T09:40:14.608963+00:00",
+  "identity": {
+    "notebook_sha256": "92faf3269de09bdf8bcbb3d306f12cf8a8d83385e9cec94b78f6134a04d4143f",
+    "agent_sha256": "f029fa0cb66a9eb509afbe44e3f59b800332d0419db91607183410e4089c4d19",
+    "agent_bytes": 18946
+  },
+  "license_decision": "fail-closed-no-redistribution",
+  "effective_config_fingerprint": "d3bb0fcd0c6bbe0ba6f2c73effbb43c70a85476db6bbf9937becbc8998efb3ee",
+  "isolation": {
+    "seed": true,
+    "opponent_lineage": true,
+    "episode": true,
+    "seat": true,
+    "time": true
+  },
+  "screen": {
+    "episodes": [
+      {
+        "episode": "local-01",
+        "seed": 451781128,
+        "seat": 0,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "candidate_reward": 178007,
+        "opponent_reward": 1302,
+        "margin": 176705,
+        "runtime_seconds": 2.486,
+        "frames": 720,
+        "invalid_or_runtime_errors": [],
+        "firing": {
+          "calls": 719,
+          "active_field_calls": 702,
+          "market_orders": 626,
+          "premium_lead": 36,
+          "weed_recovery": 1
+        },
+        "opponent": "main.py",
+        "opponent_lineage": "incumbent-main",
+        "time_slice": 1
+      },
+      {
+        "episode": "local-02",
+        "seed": 451781128,
+        "seat": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "candidate_reward": 178007,
+        "opponent_reward": 1302,
+        "margin": 176705,
+        "runtime_seconds": 2.445,
+        "frames": 720,
+        "invalid_or_runtime_errors": [],
+        "firing": {
+          "calls": 719,
+          "active_field_calls": 702,
+          "market_orders": 626,
+          "premium_lead": 36,
+          "weed_recovery": 0
+        },
+        "opponent": "main.py",
+        "opponent_lineage": "incumbent-main",
+        "time_slice": 2
+      }
+    ],
+    "summary": {
+      "games": 2,
+      "wins": 2,
+      "ties": 0,
+      "losses": 0,
+      "mean_margin": 176705.0,
+      "worst_margin": 176705,
+      "both_seats": true,
+      "all_done": true,
+      "invalid_or_runtime_errors": 0,
+      "premium_lead_fires": 72,
+      "weed_recovery_fires": 1,
+      "active_field_calls": 1404,
+      "market_orders": 1252
+    }
+  },
+  "confirm": {
+    "episodes": [
+      {
+        "episode": "local-03",
+        "seed": 314159265,
+        "seat": 0,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "candidate_reward": 175255,
+        "opponent_reward": 3338,
+        "margin": 171917,
+        "runtime_seconds": 2.176,
+        "frames": 720,
+        "invalid_or_runtime_errors": [],
+        "firing": {
+          "calls": 719,
+          "active_field_calls": 702,
+          "market_orders": 626,
+          "premium_lead": 36,
+          "weed_recovery": 0
+        },
+        "opponent": "tests/fixtures/champion_sot_2262.py",
+        "opponent_lineage": "sot-2262",
+        "time_slice": 3
+      },
+      {
+        "episode": "local-04",
+        "seed": 314159265,
+        "seat": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "candidate_reward": 175385,
+        "opponent_reward": 3336,
+        "margin": 172049,
+        "runtime_seconds": 2.155,
+        "frames": 720,
+        "invalid_or_runtime_errors": [],
+        "firing": {
+          "calls": 719,
+          "active_field_calls": 702,
+          "market_orders": 626,
+          "premium_lead": 36,
+          "weed_recovery": 1
+        },
+        "opponent": "tests/fixtures/champion_sot_2262.py",
+        "opponent_lineage": "sot-2262",
+        "time_slice": 4
+      },
+      {
+        "episode": "local-05",
+        "seed": 271828183,
+        "seat": 0,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "candidate_reward": 174004,
+        "opponent_reward": 1302,
+        "margin": 172702,
+        "runtime_seconds": 2.389,
+        "frames": 720,
+        "invalid_or_runtime_errors": [],
+        "firing": {
+          "calls": 719,
+          "active_field_calls": 702,
+          "market_orders": 626,
+          "premium_lead": 36,
+          "weed_recovery": 1
+        },
+        "opponent": "tests/fixtures/champion_sot_2263.py",
+        "opponent_lineage": "sot-2263",
+        "time_slice": 5
+      },
+      {
+        "episode": "local-06",
+        "seed": 271828183,
+        "seat": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "candidate_reward": 188665,
+        "opponent_reward": 1302,
+        "margin": 187363,
+        "runtime_seconds": 2.373,
+        "frames": 720,
+        "invalid_or_runtime_errors": [],
+        "firing": {
+          "calls": 719,
+          "active_field_calls": 702,
+          "market_orders": 625,
+          "premium_lead": 34,
+          "weed_recovery": 0
+        },
+        "opponent": "tests/fixtures/champion_sot_2263.py",
+        "opponent_lineage": "sot-2263",
+        "time_slice": 6
+      }
+    ],
+    "summary": {
+      "games": 4,
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "mean_margin": 176007.75,
+      "worst_margin": 171917,
+      "both_seats": true,
+      "all_done": true,
+      "invalid_or_runtime_errors": 0,
+      "premium_lead_fires": 142,
+      "weed_recovery_fires": 2,
+      "active_field_calls": 2808,
+      "market_orders": 2503
+    }
+  },
+  "runtime_contract_passed": true,
+  "portable_candidate": false,
+  "decision": "inconclusive",
+  "decision_reason": "Runtime evidence passed, but unknown source license prevents redistribution or promotion.",
+  "kaggle_submission": "NOT_PERFORMED"
+}
