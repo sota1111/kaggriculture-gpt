@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.7",
+  "decision_scope": "oracle-only",
+  "confirm_status": "RESERVED_UNOPENED",
+  "kaggle_submission": "NOT_PERFORMED",
+  "public_blind_anchors": [
+    {"id":"old-champion","path":"main.py","sha256":"0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f","public_score":781.5,"role":"retained-independent-hedge"},
+    {"id":"conditional-memory","descriptor":"candidates/kaito-v211-conditional-memory/source.json","descriptor_sha256":"d05727ee16ee135a2b82dc167bde4e6ca88881865c85d54caab21cec0f6beba8","public_score":600.0,"role":"live-transfer-failure-anchor"}
+  ],
+  "sources": [
+    {"id":"c22-control-source","url":"https://www.kaggle.com/code/beicicc/kaggriculture-c22-exact-reproducibility-control","kernel_id":129552524,"version":"public snapshot acquired 2026-08-22","filename":"kaggriculture-c22-exact-reproducibility-control.py","sha256":"bb058dc0dc02ad4a21a07afeef00de631ef1a51ac1a5fbc5443a295b33087ac5","license":"Apache-2.0 (SPDX header in source)","boundary":"fetch-only-not-committed"},
+    {"id":"c22-kernel-metadata","url":"https://www.kaggle.com/api/v1/kernels/view/beicicc/kaggriculture-c22-exact-reproducibility-control","kernel_id":129552524,"version":"public metadata acquired 2026-08-22","filename":"kernel-metadata.json","sha256":"d7c27707ebbe617f49579a87275cbcb4495c0a2e4ac081ca9e56788ec6098fa6","license":"metadata-only","boundary":"fetch-only-not-committed"},
+    {"id":"official-runtime","url":"https://github.com/Kaggle/kaggle-environments/blob/1.32.7/kaggle_environments/envs/kaggriculture/kaggriculture.py","version":"kaggle-environments==1.32.7","sha256":"bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e","license":"Apache-2.0","boundary":"installed-package-hash-only"}
+  ],
+  "opponents": [
+    {"id":"c22-control","lineage":"beicicc/c22-moon-repro-control","kind":"external-c22","sha256":"bb058dc0dc02ad4a21a07afeef00de631ef1a51ac1a5fbc5443a295b33087ac5","license":"Apache-2.0","boundary":"fetch-only-not-committed"},
+    {"id":"kaito-v19-control","lineage":"kaito/v19-replication-control","kind":"repository","path":"candidates/kaito-v19-replication-control/agent.py","sha256":"9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536","license":"clean-room control; see package source descriptor","boundary":"repository-public-agent"},
+    {"id":"barnyard-v5","lineage":"romanrozen/barnyard-economist-v5","kind":"repository","path":"candidates/barnyard-economist-v5/agent.py","sha256":"26311e7c17449c862c0a2edc5b00224f81f0580aa7f4b8d78073b4026f7d814a","license":"public agent fixture","boundary":"repository-public-agent"}
+  ],
+  "market_regimes": {
+    "screen-default-a": {},
+    "screen-feed-tight": {"WHEAT":{"base":20,"I0":28,"T":18,"below_func":"linear","below_target":2.2,"above_func":"sqrt","above_target":0.55}},
+    "confirm-feed-surplus": {"WHEAT":{"base":18,"I0":55,"T":35,"below_func":"sqrt","below_target":1.4,"above_func":"log","above_target":0.5}},
+    "confirm-premium-scarcity": {"MILK":{"base":108,"I0":6,"T":16,"below_func":"sq","below_target":2.5,"above_func":"sqrt","above_target":0.45},"WOOL":{"base":82,"I0":5,"T":14,"below_func":"sq","below_target":2.3,"above_func":"sqrt","above_target":0.5}}
+  },
+  "panels": {
+    "screen": [
+      {"opponent":"c22-control","lineage":"beicicc/c22-moon-repro-control","episode":"c22-screen-default","seed":299101,"seat":0,"time_slice":"2026-08-22T06-screen-a","time_index":1,"market_regime":"screen-default-a"},
+      {"opponent":"c22-control","lineage":"beicicc/c22-moon-repro-control","episode":"c22-screen-default","seed":299101,"seat":1,"time_slice":"2026-08-22T06-screen-a","time_index":1,"market_regime":"screen-default-a"},
+      {"opponent":"c22-control","lineage":"beicicc/c22-moon-repro-control","episode":"c22-screen-tight","seed":299103,"seat":0,"time_slice":"2026-08-22T07-screen-b","time_index":3,"market_regime":"screen-feed-tight"},
+      {"opponent":"c22-control","lineage":"beicicc/c22-moon-repro-control","episode":"c22-screen-tight","seed":299103,"seat":1,"time_slice":"2026-08-22T07-screen-b","time_index":3,"market_regime":"screen-feed-tight"}
+    ],
+    "confirm": [
+      {"opponent":"kaito-v19-control","lineage":"kaito/v19-replication-control","episode":"confirm-v19-surplus","seed":299111,"seat":0,"time_slice":"2026-08-22T09-confirm-a","time_index":11,"market_regime":"confirm-feed-surplus"},
+      {"opponent":"kaito-v19-control","lineage":"kaito/v19-replication-control","episode":"confirm-v19-surplus","seed":299111,"seat":1,"time_slice":"2026-08-22T09-confirm-a","time_index":11,"market_regime":"confirm-feed-surplus"},
+      {"opponent":"barnyard-v5","lineage":"romanrozen/barnyard-economist-v5","episode":"confirm-barnyard-scarcity","seed":299113,"seat":0,"time_slice":"2026-08-22T10-confirm-b","time_index":13,"market_regime":"confirm-premium-scarcity"},
+      {"opponent":"barnyard-v5","lineage":"romanrozen/barnyard-economist-v5","episode":"confirm-barnyard-scarcity","seed":299113,"seat":1,"time_slice":"2026-08-22T10-confirm-b","time_index":13,"market_regime":"confirm-premium-scarcity"}
+    ]
+  }
+}
