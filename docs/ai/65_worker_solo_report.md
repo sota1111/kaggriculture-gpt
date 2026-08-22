@@ -28,13 +28,13 @@ Cycle 7 の四つの子 Issue を集約した。全候補が独立 screen/confir
 - [x] candidate と screen/confirm evidence、effective fingerprint を対応付け
 - [x] 親再開 run が集約し、spacing gate による新 artifact no-submit を明記
 - [x] rejected/CLOSED を新規作成せず、no-submit は inconclusive として記録
-- [ ] Linear に申し送りと Completion Report を投稿（PR merge 後に実施）
+- [x] Linear に申し送りと Completion Report を投稿
 
 ## Risks
 
 - Local closed-loop panel は live matchmaking/private の保証ではない。
 - Adaptive candidate の public 観測は spacing gate 後の将来 cycle に持ち越す。
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
