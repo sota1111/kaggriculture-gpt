@@ -1,0 +1,19 @@
+{
+  "artifact": "Kaito v39 hierarchical lineage-floor whole agent",
+  "source_url": "https://www.kaggle.com/code/kaitofukami/103-126-untouched-future-top-30-v39-history-gate",
+  "kaggle_ref": "kaitofukami/103-126-untouched-future-top-30-v39-history-gate",
+  "kernel_id": 129557885,
+  "script_version": "api-fetch=2026-08-22T01:38Z",
+  "notebook_sha256": "9e86ef93a93f5af1be8f64b7a491f9714f92db89a8e92fc5eeda7fdb4e09a0c5",
+  "main_py_sha256": "c0298c82c2a2f9b41cd48657b63b16a9c6f07ea3ee02dc85062f807e54e8c54a",
+  "archive_sha256": "5b4da36562e2c1a13004a495150b3e05a0db45dc8327ccd5c1479615a53a5ad2",
+  "manifest_sha256": "ffb6cbf344b307ecf27d8d4da5962a8ded78289f0f533433ae66d0bb52784a85",
+  "license": "UNSPECIFIED",
+  "redistribution": "prohibited-fail-closed",
+  "portable_boundary": "Fetch the exact public output transiently through the Kaggle API; do not vendor or redistribute notebook, source, bytecode, or archive; retain only hashes, public metadata, structural audit, and derived measurements.",
+  "dependencies": ["python-standard-library"],
+  "runtime_feature_boundary": ["public observation", "public configuration", "steps 96/120/122/132/144 public history"],
+  "forbidden_runtime_features": ["username", "kernel slug", "episode id", "seed", "private result", "future metadata"],
+  "default_enabled": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}

@@ -8,6 +8,17 @@ Build and validate:
 bash scripts/build_submission.sh
 ```
 
+Kaito v39 is tracked as a hash-pinned, default-OFF independent whole-agent
+hedge under `candidates/kaito-v39-history-gate/`. The exact public output uses
+only the standard library and routes from public-state checkpoints
+96/120/122/132/144, but has no declared redistribution license; source and
+archive therefore remain fetch-only. The lineage-disjoint screen and sealed
+confirm both passed their rank/margin/pessimistic-tail gates, history vetoes
+were observed, unfamiliar states abstained to the conservative base, and the
+runtime contract passed. See
+`docs/measurements/SOT-2962/SOT-2966-kaito-v39-history-gate.json`. The champion
+and submission archive remain unchanged; no Kaggle submission was performed.
+
 HarvestForge-X 3094 is tracked as a hash-pinned, default-OFF independent
 whole-agent hedge under `candidates/harvestforge-x/`. Its notebook declares no
 redistribution license, so no source or archive is vendored: the measurement
