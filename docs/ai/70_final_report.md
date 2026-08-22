@@ -1,5 +1,7 @@
-# Final Report — SOT-2989
+# Final Report — SOT-2986
 
-The undeclared-license public kernel is hash-pinned but not redistributed. A stdlib-only clean-room whole agent was implemented from public prose, executed with task-selection firing logs, and passed both same-seed/both-seat screen and identity/opponent/episode/seed/seat/time-separated confirm under the pre-registered tail-sensitive hedge gate. It remains default-OFF; the champion and submission archive are unchanged, and no Kaggle submission occurred.
+All four child issues completed and merged. The strongest portable candidate was validated, submitted under the official gates, and observed at public 600.0. Because this regressed from the retained champion range and contradicted local confirm, it is rejected for champion replacement. The incumbent hedge remains unchanged; the cycle evidence and next-axis handoff are recorded.
 
 ## Acceptance: PASS
+
+## Next Action: READY_FOR_REVIEW
