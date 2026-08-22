@@ -1,29 +1,41 @@
-# Solo Worker Report — SOT-2962
+# Solo Worker Report — SOT-2972
 
 ## Summary
 
-第5次サイクルの4子Issueを集約した。HarvestForge-XとKaito v39は独立hedgeとしてlocal screen/confirmを通過したが再配布licenseが未宣言、Pure Architectureも同理由でportable採用不可、live-meta oracleは評価系のみpromotedだった。そこで前サイクルで選定・検証済みのMIT coherent CARE-production artifactをgoverned helper経由で提出し、Kaggle ref 55681343がpublic 600.0で完了した。過去bestと同値なのでprivate改善とは判定せず、live-field観測としてinconclusiveに記録した。
+Pinned and independently packaged the Apache-2.0 Moon Counts Melons V102
+whole agent. The candidate passed the stdlib `main.py:agent` contract, the
+same-seed/both-seat screen, and the disjoint sealed confirm. It remains
+default-OFF; production `main.py` and `submission.tar.gz` are unchanged.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — cycle-5集約、提出fingerprint、実スコアを追記
-- `docs/ai/linear/SOT-2962.md` — 子Issue結果と提出判断を記録
-- `docs/ai/65_worker_solo_report.md` — solo最終レポート
-- `docs/ai/70_final_report.md` — acceptance要約
+- `candidates/moon-counts-melons/` — licensed agent, provenance, notice, and documentation
+- `scripts/measure_moon_counts_melons.py` — reproducible gated screen/confirm runner
+- `docs/measurements/SOT-2971/SOT-2972-moon-counts-melons.json` — real episode evidence
+- `docs/ai/experiment_ledger.jsonl` — promoted cycle-6 axis with evidence
+- `tests/test_moon_counts_melons.py` — provenance, contract, holdout, and hedge checks
+- `docs/ai/linear/SOT-2972.md` — local issue record
 
 ## Verification
 
-- Children SOT-2963/SOT-2964/SOT-2965/SOT-2966: Done; PR #122/#125/#124/#123 merged
-- Submission artifact: single root `main.py`; archive SHA-256 `0c188c379e23291bee39ff95b0aa6da3b14c737d2dc84866d0ebc13c61ea7787`
-- Effective config: exact MIT coherent CARE-production agent at commit `774b26093ccf4246525517d48420349b841b6e50`; no flags, replay bytes, credentials, weights, or external runtime dependency
-- Governed submission: ref `55681343`, COMPLETE, public `600.0`
-- Full Python quality gates and submission contract: PASS
-- Diff review and GitHub CI: PASS
+- Python compileall: PASS
+- Submission contract validator: PASS
+- Unit tests: PASS (199 tests, 2 upstream-checkout-dependent skips), plus SOT-2972 tests
+- Screen: 4/4 DONE at 720 steps; rank 2.0→1.0; mean margin delta +155871.75; p20/worst +190814
+- Confirm: 4/4 DONE at 720 steps; rank 2.0→1.0; mean margin delta +109845.75; p20/worst +142325
+- npm lint/typecheck/test/e2e: N/A (Python repository; no `package.json` or e2e suite)
+- Diff review: scoped; champion/archive SHA-256 unchanged
+
+## Acceptance Criteria
+
+- [x] Source version, hashes, Apache-2.0 license, and portability recorded
+- [x] Independent package is stdlib/offline and contract/exec compatible
+- [x] Screen and sealed confirm completed with action firing hashes/counts
+- [x] Experiment ledger records promoted with direct evidence
 
 ## Risks
 
-- Public score is sparse live-matchmaking evidence and tied the historical best; it is not private-rank proof.
-- Cycle-5 locally strong whole agents remain fetch-only/default-OFF until compatible redistribution licenses are declared.
+- Local engine panels remain proxy evidence; no Kaggle submission was made by this child issue.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS

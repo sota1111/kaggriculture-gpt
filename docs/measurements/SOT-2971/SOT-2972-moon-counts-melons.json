@@ -1,0 +1,451 @@
+{
+  "actual_engine": "1.32.7",
+  "axis": "Moon Counts Melons V102 independent whole-agent",
+  "candidate": {
+    "default_enabled": false,
+    "path": "candidates/moon-counts-melons/agent.py",
+    "sha256": "88e93435056a9a6b8483fdf872330ee152b86d2b38b443919f6da6234af95646"
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "contract_pass": true,
+    "no_submission": true,
+    "opponent_seed_time_disjoint": true,
+    "same_seed_both_seats": true
+  },
+  "confirm": {
+    "candidate": {
+      "action_trace_sha256s": [
+        "2189cce2b39ddc8cfee26e3262c5d9669dffd840f4a70892c365b1495514968c",
+        "34b7577a867a6dbca711cdb7619e9cace8f59a661e2cd407a70f8de4525bf7b5",
+        "769659ccb102d4eecc26627c1a7bad42684043a5b7699a8c0aa3ca47123a0679",
+        "a1fa70566036e1d3f89fba54046e56e3cec4f667b44f40dcae753c1fe19e3d20"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 3.085155552951619,
+      "mean_margin": 65907.0,
+      "mean_rank": 1.0,
+      "non_pass_actions": 29722,
+      "p20_margin": 56070.0,
+      "wins_or_ties": 4,
+      "worst_margin": 56070.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "769659ccb102d4eecc26627c1a7bad42684043a5b7699a8c0aa3ca47123a0679",
+        "cohort": "confirm",
+        "episode": "moon-confirm-lonespear-care",
+        "margin": 56070.0,
+        "non_pass_actions": 7555,
+        "opponent": "lonespear-care",
+        "opponent_reward": 63360.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 119430.0,
+        "runtime_seconds": 3.085155552951619,
+        "seat": 0,
+        "seed": 297211,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "a1fa70566036e1d3f89fba54046e56e3cec4f667b44f40dcae753c1fe19e3d20",
+        "cohort": "confirm",
+        "episode": "moon-confirm-lonespear-care",
+        "margin": 61534.0,
+        "non_pass_actions": 7541,
+        "opponent": "lonespear-care",
+        "opponent_reward": 69179.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 130713.0,
+        "runtime_seconds": 2.8984253879170865,
+        "seat": 1,
+        "seed": 297211,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "34b7577a867a6dbca711cdb7619e9cace8f59a661e2cd407a70f8de4525bf7b5",
+        "cohort": "confirm",
+        "episode": "moon-confirm-opponent-shape",
+        "margin": 73012.0,
+        "non_pass_actions": 7313,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 76012.0,
+        "runtime_seconds": 1.8883081141393632,
+        "seat": 0,
+        "seed": 297213,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "2189cce2b39ddc8cfee26e3262c5d9669dffd840f4a70892c365b1495514968c",
+        "cohort": "confirm",
+        "episode": "moon-confirm-opponent-shape",
+        "margin": 73012.0,
+        "non_pass_actions": 7313,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 76012.0,
+        "runtime_seconds": 1.8950759160798043,
+        "seat": 1,
+        "seed": 297213,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion": {
+      "action_trace_sha256s": [
+        "41364237252cb2cc1be3ca92054a260fae656ce820396c1086b27d0098d67d7e",
+        "7e1f10d8fb2a9c1dc864482123c0f5c0ee8e663129c698a40c5d0de25bf5c696",
+        "8c5b42546f21ce11a155fe0086b538f0f761c10e2101a28eef9b60e0f31a8ec2",
+        "c6d2cf51d733617380fca630017d3d71e3c47bb37d23252c31bfef4bc78ba246"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 1.9083948931656778,
+      "mean_margin": -43938.75,
+      "mean_rank": 2.0,
+      "non_pass_actions": 13483,
+      "p20_margin": -86255.0,
+      "wins_or_ties": 0,
+      "worst_margin": -86255.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "7e1f10d8fb2a9c1dc864482123c0f5c0ee8e663129c698a40c5d0de25bf5c696",
+        "cohort": "confirm",
+        "episode": "moon-confirm-lonespear-care",
+        "margin": -86110.0,
+        "non_pass_actions": 3366,
+        "opponent": "lonespear-care",
+        "opponent_reward": 87411.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.9083948931656778,
+        "seat": 0,
+        "seed": 297211,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "c6d2cf51d733617380fca630017d3d71e3c47bb37d23252c31bfef4bc78ba246",
+        "cohort": "confirm",
+        "episode": "moon-confirm-lonespear-care",
+        "margin": -86255.0,
+        "non_pass_actions": 3366,
+        "opponent": "lonespear-care",
+        "opponent_reward": 87556.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.897169454023242,
+        "seat": 1,
+        "seed": 297211,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "8c5b42546f21ce11a155fe0086b538f0f761c10e2101a28eef9b60e0f31a8ec2",
+        "cohort": "confirm",
+        "episode": "moon-confirm-opponent-shape",
+        "margin": -1695.0,
+        "non_pass_actions": 3369,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0595844958443195,
+        "seat": 0,
+        "seed": 297213,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "41364237252cb2cc1be3ca92054a260fae656ce820396c1086b27d0098d67d7e",
+        "cohort": "confirm",
+        "episode": "moon-confirm-opponent-shape",
+        "margin": -1695.0,
+        "non_pass_actions": 3382,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0447104410268366,
+        "seat": 1,
+        "seed": 297213,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "delta": {
+      "mean_margin": 109845.75,
+      "mean_rank": -1.0,
+      "p20_margin": 142325.0,
+      "worst_margin": 142325.0
+    }
+  },
+  "decision": "promoted",
+  "screen": {
+    "candidate": {
+      "action_trace_sha256s": [
+        "67e879f721e015b1fc6aa96e0898fb397b0635e32ed3b0974a3841f25c2235b4",
+        "aa2c0684c27e7eb284c1d239e2d5c5837b4b0e77e38d9fb31caae4d48491542d",
+        "b1ce96680084fed544431d4f20cfe1504a1be75fec39369d878af41b452bda5d",
+        "b1ce96680084fed544431d4f20cfe1504a1be75fec39369d878af41b452bda5d"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 3.1673243588302284,
+      "mean_margin": 102660.25,
+      "mean_rank": 1.0,
+      "non_pass_actions": 29292,
+      "p20_margin": 76087.0,
+      "wins_or_ties": 4,
+      "worst_margin": 76087.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "b1ce96680084fed544431d4f20cfe1504a1be75fec39369d878af41b452bda5d",
+        "cohort": "screen",
+        "episode": "moon-screen-barnyard-v5",
+        "margin": 77112.0,
+        "non_pass_actions": 7323,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 34856.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 111968.0,
+        "runtime_seconds": 3.1485618548467755,
+        "seat": 0,
+        "seed": 297201,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "b1ce96680084fed544431d4f20cfe1504a1be75fec39369d878af41b452bda5d",
+        "cohort": "screen",
+        "episode": "moon-screen-barnyard-v5",
+        "margin": 76087.0,
+        "non_pass_actions": 7323,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 35708.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 111795.0,
+        "runtime_seconds": 3.1673243588302284,
+        "seat": 1,
+        "seed": 297201,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "aa2c0684c27e7eb284c1d239e2d5c5837b4b0e77e38d9fb31caae4d48491542d",
+        "cohort": "screen",
+        "episode": "moon-screen-deepeshumrao",
+        "margin": 115775.0,
+        "non_pass_actions": 7330,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4824.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 120599.0,
+        "runtime_seconds": 2.0410254339221865,
+        "seat": 0,
+        "seed": 297203,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "67e879f721e015b1fc6aa96e0898fb397b0635e32ed3b0974a3841f25c2235b4",
+        "cohort": "screen",
+        "episode": "moon-screen-deepeshumrao",
+        "margin": 141667.0,
+        "non_pass_actions": 7316,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4995.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 146662.0,
+        "runtime_seconds": 2.0734263048507273,
+        "seat": 1,
+        "seed": 297203,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "action_trace_sha256s": [
+        "0bba8e4595fc9e63af32934a9ae486125bc54b5270d03e0f88ff24197564b1fb",
+        "3ffe801db9e276b825a002821f4c2c5d395159f821caa002b975dcd52c1c86ab",
+        "832da0bbf8203f1aa7da7ed38f6da14656290bdd38194c434080b426c2362c23",
+        "84f5be0759b1b9ffda954692b9a814625c5355d8671ce8d001674c75816d6089"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.2822907720692456,
+      "mean_margin": -53211.5,
+      "mean_rank": 2.0,
+      "non_pass_actions": 13515,
+      "p20_margin": -114727.0,
+      "wins_or_ties": 0,
+      "worst_margin": -114727.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "832da0bbf8203f1aa7da7ed38f6da14656290bdd38194c434080b426c2362c23",
+        "cohort": "screen",
+        "episode": "moon-screen-barnyard-v5",
+        "margin": -114727.0,
+        "non_pass_actions": 3383,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 116022.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2586294980719686,
+        "seat": 0,
+        "seed": 297201,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "84f5be0759b1b9ffda954692b9a814625c5355d8671ce8d001674c75816d6089",
+        "cohort": "screen",
+        "episode": "moon-screen-barnyard-v5",
+        "margin": -91318.0,
+        "non_pass_actions": 3377,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 92613.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2822907720692456,
+        "seat": 1,
+        "seed": 297201,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "0bba8e4595fc9e63af32934a9ae486125bc54b5270d03e0f88ff24197564b1fb",
+        "cohort": "screen",
+        "episode": "moon-screen-deepeshumrao",
+        "margin": -3309.0,
+        "non_pass_actions": 3381,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4614.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1600074779707938,
+        "seat": 0,
+        "seed": 297203,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "3ffe801db9e276b825a002821f4c2c5d395159f821caa002b975dcd52c1c86ab",
+        "cohort": "screen",
+        "episode": "moon-screen-deepeshumrao",
+        "margin": -3492.0,
+        "non_pass_actions": 3374,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4797.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1554875888396055,
+        "seat": 1,
+        "seed": 297203,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "delta": {
+      "mean_margin": 155871.75,
+      "mean_rank": -1.0,
+      "p20_margin": 190814.0,
+      "worst_margin": 190814.0
+    }
+  },
+  "screen_gate": "PASS",
+  "sealed_confirm_manifest_sha256": "1c283120efe751eac5915c506a3cafc7b2c24f0510f4cdfdb5b03a3924f8fd5c"
+}
