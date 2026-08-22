@@ -1,9 +1,7 @@
-# Final Report — SOT-2984
+# Final Report — SOT-2981
 
-Adaptive Replay sealed portfolio evaluation is complete. Four immutable artifacts were evaluated in 16 official-engine matches using upstream-screen-unseen opponent lineages, disjoint episodes/seeds/time slices, and both seats. All runtime, leakage, repository test, and submission-contract gates passed.
+All four child directions completed. Conditional Memory was selected from the sealed portfolio and submitted through the governed gate with effective artifact fingerprint `e1de7bede...`. Kaggle submission `55684729` completed at `600.0`, below the retained champion's `781.5`; the candidate is rejected for promotion and the old champion remains the active hedge.
 
-Conditional Memory had the strongest pessimistic margin and lowest matchup spread, but all policies lost the sealed matchups. It is recorded only as a CV portfolio hedge; the old champion remains available and production `main.py` / `submission.tar.gz` are unchanged. No Kaggle submission was performed.
+Quality gates passed: submission contract, compileall, 229 unit tests (2 optional skips), deterministic single-root archive, child evidence review, and unintended-diff review limited to parent reporting records.
 
 ## Acceptance: PASS
-
-## Next Action: READY_FOR_REVIEW

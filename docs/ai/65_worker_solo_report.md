@@ -1,38 +1,39 @@
-# Solo Worker Report
+# Solo Worker Report — SOT-2981
 
 ## Summary
 
-Implemented a hash-pinned Adaptive Replay common oracle and ran a fresh sealed closed-loop tournament over V111, R5A, Conditional Memory, and the old champion. The manifest fails closed on opponent/lineage/episode/seed/seat-group/time overlap, keeps replay bytes local-only, and separates open-loop diagnostics from closed-loop strength.
+Aggregated all four completed children, selected Conditional Memory by the pre-registered sealed-oracle ordering, built and verified its exact offline artifact, and submitted it through the governed control-plane path. Submission `55684729` completed at public score `600.0`, below the retained champion's `781.5`; the candidate is rejected for champion promotion and the old champion remains unchanged.
 
 ## Changed Files
 
-- `scripts/measure_adaptive_replay_portfolio.py` — validation, artifact freezing, tournament, robust aggregation and selection
-- `tests/fixtures/adaptive_replay_portfolio.json` — pre-registered unused confirm identities and leakage boundary
-- `tests/test_adaptive_replay_portfolio.py` — overlap fail-closed and committed-result tests
-- `docs/measurements/SOT-2981/SOT-2984-adaptive-replay-portfolio.json` — 16-match sealed evidence
-- `docs/ai/experiment_ledger.jsonl` — evidence-backed promoted portfolio hedge result
-- `docs/ai/linear/SOT-2984.md` — issue tracking and acceptance record
+- `docs/ai/experiment_ledger.jsonl` — exact artifact fingerprint, submission result, and transfer-failure decision.
+- `docs/ai/linear/SOT-2981.md` — parent aggregation record.
+- `docs/ai/65_worker_solo_report.md` — lifecycle evidence.
+- `docs/ai/70_final_report.md` — final acceptance summary.
 
-## Commands Run
+## Verification
 
-- `python3 scripts/measure_adaptive_replay_portfolio.py` — PASS; 16 matches completed
-- `python3 -m compileall -q main.py scripts` — PASS
-- `python3 -m unittest discover -s tests -v` — PASS; 229 tests, 2 skipped
-- `bash scripts/build_submission.sh` and archive contract check — PASS; generated archive reverted
-- `git diff --check` — PASS
+- All children SOT-2982/2983/2984/2985: Done, merged, completion evidence reviewed.
+- Candidate `main.py`: SHA-256 `66ad5c3be41d4d115d7b0061660575257be7f74f42c921f9fb5c20e330881cb8`.
+- Submission archive/effective-config fingerprint: `e1de7bede5c07435dbb42ad9f12a01fdf00ee0d3aaa0c1c453eefebfc6606693`.
+- Submission contract and compileall: PASS.
+- Unit tests: 229 passed, 2 environment-dependent skips.
+- Archive: gzip valid, single root member `main.py`.
+- Governed submission ref `55684729`: COMPLETE, public score `600.0`.
+- Previous champion artifact restored and retained; previous public score `781.5`.
 
 ## Acceptance Criteria
 
-- [x] provenance, immutable hashes, and local-only replay boundary fixed
-- [x] all four artifacts compared on a common sealed panel
-- [x] opponent/lineage/episode/seed/seat/time leakage checks passed
-- [x] tail, rank stability, and matchup spread saved
-- [x] portfolio evidence appended to ledger
-- [x] no Kaggle submission; champion and archive unchanged
+- [x] Improvement strategy and selection reasoning recorded.
+- [x] All registered children reached Done.
+- [x] Candidate, verification, fingerprint, and submission result mapped in the ledger.
+- [x] Parent aggregation confirmed child completion and performed a governed submission.
+- [x] Rejected axes have same-seed/firing-confirm evidence; unsupported conclusions remain inconclusive.
+- [x] Handoff comment prepared with next axes, closed axes/evidence, hypotheses, and operational notes.
 
 ## Risks
 
-All four policies lost both unseen opponent matchups, and mean rank was tied at 2.0. Conditional Memory leads only on relative margin/tail/spread under a non-representative CV proxy, so it is retained as a portfolio hedge rather than installed as the production champion.
+The local/common oracle is not representative of live matchmaking: Conditional Memory improved its sealed proxy but regressed public score by 181.5. Future cycles should re-anchor transfer evaluation rather than tune this rejected candidate without new evidence.
 
 ## Linear Report: POSTED
 
