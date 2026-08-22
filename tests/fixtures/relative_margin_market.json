@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.4",
+  "candidate": "candidates/relative-margin-market/policy.py",
+  "opponent_manifest": "tests/fixtures/market_shift_oracle.json",
+  "screen": [
+    {"opponent":"cok-v7","lineage":"COK-ZhangZiliang/V7","episode":"relative-screen-cok","seed":296101,"seat":0,"time_index":1},
+    {"opponent":"cok-v7","lineage":"COK-ZhangZiliang/V7","episode":"relative-screen-cok","seed":296101,"seat":1,"time_index":1},
+    {"opponent":"lonespear-v17","lineage":"lonespear/V17","episode":"relative-screen-v17","seed":296103,"seat":0,"time_index":3},
+    {"opponent":"lonespear-v17","lineage":"lonespear/V17","episode":"relative-screen-v17","seed":296103,"seat":1,"time_index":3}
+  ],
+  "confirm": [
+    {"opponent":"lonespear-v18","lineage":"lonespear/V18","episode":"relative-confirm-v18","seed":296111,"seat":0,"time_index":11},
+    {"opponent":"lonespear-v18","lineage":"lonespear/V18","episode":"relative-confirm-v18","seed":296111,"seat":1,"time_index":11},
+    {"opponent":"lonespear-v23","lineage":"lonespear/V23","episode":"relative-confirm-v23","seed":296113,"seat":0,"time_index":13},
+    {"opponent":"lonespear-v23","lineage":"lonespear/V23","episode":"relative-confirm-v23","seed":296113,"seat":1,"time_index":13}
+  ],
+  "kaggle_submission": "NOT_PERFORMED"
+}
