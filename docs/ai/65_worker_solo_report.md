@@ -34,7 +34,7 @@ Implemented a hash-pinned Adaptive Replay common oracle and ran a fresh sealed c
 
 All four policies lost both unseen opponent matchups, and mean rank was tied at 2.0. Conditional Memory leads only on relative margin/tail/spread under a non-representative CV proxy, so it is retained as a portfolio hedge rather than installed as the production champion.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 
 ## Acceptance: PASS
 
