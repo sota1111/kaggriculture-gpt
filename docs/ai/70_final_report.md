@@ -1,9 +1,11 @@
-# Final Report — SOT-3004
+# Final Report — SOT-3003
 
-C95 was reproduced as a byte-exact, Apache-2.0, offline/default-off whole-agent candidate. Hash, byte count, callable and 720-turn runtime contracts passed; isolated screen/confirm evidence supports retaining it as a structurally independent working-baseline hedge. The incumbent and submission archive are unchanged, and no Kaggle submission occurred.
+The exact v27 candidate was evaluated as an independent, default-OFF whole agent without modifying the incumbent. Hashes and runtime portability passed; all eight closed-loop candidate episodes completed with zero invalid actions, and the later sealed panel was disjoint from screen by opponent, lineage, episode, seed and time while retaining both seats. The intervention is structurally distinct from v19 and v39 and produced actor/market/SELL evidence.
 
-## Acceptance: PASS
+Acceptance passes with an `inconclusive` experiment conclusion: absent an upstream license, exact bytes are fetch-only and cannot be promoted or redistributed. No Kaggle submission occurred.
 
 ## Linear Report: POSTED
+
+## Acceptance: PASS
 
 ## Next Action: READY_FOR_REVIEW
