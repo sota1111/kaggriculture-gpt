@@ -32,7 +32,7 @@ Aggregated four completed child directions. Apache Agent Builder clean-room was 
 - Fixed-opponent local panels again failed to predict live ordering; do not use them for promotion.
 - Apache clean-room, Conditional Memory, V111, and R5A must not be retried without new opponent-distribution evidence.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 
 ## Acceptance: PASS
 
