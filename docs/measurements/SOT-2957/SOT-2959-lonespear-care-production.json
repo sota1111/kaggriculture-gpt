@@ -1,0 +1,541 @@
+{
+  "action_family_fingerprint": {
+    "counts": {
+      "candidate_screen": {
+        "inventory": 2981,
+        "market": 2843,
+        "production": 7363,
+        "routing": 18780
+      },
+      "champion_screen": {
+        "market": 983,
+        "production": 11360,
+        "routing": 1148
+      }
+    },
+    "diverged_from_champion": true,
+    "sha256": "8e03e2d635ff604ba57e162b3e14ea5621e5f8e9bd56b3a9a5506aa58a93816b"
+  },
+  "actual_engine": "1.32.4",
+  "axis": "lonespear coherent CARE-production independent whole-agent",
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "chronological_confirm": true,
+    "default_off_independent": true,
+    "engine_pinned": true,
+    "exact_source_hash": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "screen_confirm_disjoint": true,
+    "source_commit_hash_license_attribution": true,
+    "stdlib_offline_with_optional_acceleration": true,
+    "vendored_license_hash": true
+  },
+  "coherent_intervention": {
+    "exact_whole_agent": true,
+    "individual_rejected_axes_retried": false,
+    "policy_components": [
+      "early-capital",
+      "CARE-livestock",
+      "strawberry-fertilizer-production",
+      "relative-margin-selling"
+    ]
+  },
+  "confirm": {
+    "candidate": {
+      "episodes": 4,
+      "mean_margin": 88811.25,
+      "mean_rank": 1.0,
+      "p20_margin": 27020.0,
+      "wins_or_ties": 4,
+      "worst_margin": 27020.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "inventory": 731,
+          "market": 701,
+          "production": 1842,
+          "routing": 4708
+        },
+        "episode": "care-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-economist-v5",
+        "margin": 27020.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 73745.0,
+        "rank": 1,
+        "reward": 100765.0,
+        "runtime_seconds": 2.8568621401209384,
+        "seat": 0,
+        "seed": 295911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "inventory": 731,
+          "market": 700,
+          "production": 1843,
+          "routing": 4707
+        },
+        "episode": "care-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-economist-v5",
+        "margin": 27130.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 73745.0,
+        "rank": 1,
+        "reward": 100875.0,
+        "runtime_seconds": 2.8691519529093057,
+        "seat": 1,
+        "seed": 295911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "inventory": 750,
+          "market": 714,
+          "production": 1839,
+          "routing": 4692
+        },
+        "episode": "care-confirm-v7",
+        "lineage": "COK/V7-portable",
+        "margin": 150486.0,
+        "opponent": "candidates/v7-portable/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 1,
+        "reward": 153486.0,
+        "runtime_seconds": 1.6392786279320717,
+        "seat": 0,
+        "seed": 295913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "inventory": 751,
+          "market": 715,
+          "production": 1840,
+          "routing": 4690
+        },
+        "episode": "care-confirm-v7",
+        "lineage": "COK/V7-portable",
+        "margin": 150609.0,
+        "opponent": "candidates/v7-portable/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 1,
+        "reward": 153609.0,
+        "runtime_seconds": 1.632384032011032,
+        "seat": 1,
+        "seed": 295913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "mean_margin": -57958.0,
+      "mean_rank": 2.0,
+      "p20_margin": -114221.0,
+      "wins_or_ties": 0,
+      "worst_margin": -114221.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 242,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "care-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-economist-v5",
+        "margin": -114221.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 115516.0,
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2718179910443723,
+        "seat": 0,
+        "seed": 295911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 242,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "care-confirm-barnyard",
+        "lineage": "romanrozen/barnyard-economist-v5",
+        "margin": -114221.0,
+        "opponent": "candidates/barnyard-economist-v5/agent.py",
+        "opponent_reward": 115516.0,
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.2906001361552626,
+        "seat": 1,
+        "seed": 295911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2822,
+          "routing": 305
+        },
+        "episode": "care-confirm-v7",
+        "lineage": "COK/V7-portable",
+        "margin": -1695.0,
+        "opponent": "candidates/v7-portable/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0847036780323833,
+        "seat": 0,
+        "seed": 295913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "market": 249,
+          "production": 2840,
+          "routing": 287
+        },
+        "episode": "care-confirm-v7",
+        "lineage": "COK/V7-portable",
+        "margin": -1695.0,
+        "opponent": "candidates/v7-portable/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0833172530401498,
+        "seat": 1,
+        "seed": 295913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": 146769.25,
+        "mean_rank": -1.0,
+        "p20_margin": 141241.0,
+        "worst_margin": 141241.0
+      },
+      "passed": true,
+      "signal_count": 4,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": true,
+        "worst_tail": true
+      },
+      "tails_non_regressing": true
+    }
+  },
+  "decision": "promoted-independent-hedge",
+  "default_enabled": false,
+  "issue": "SOT-2959",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_promotion": false,
+  "runtime_contract": "PASS",
+  "screen": {
+    "candidate": {
+      "episodes": 4,
+      "mean_margin": 134939.25,
+      "mean_rank": 1.0,
+      "p20_margin": 126592.0,
+      "wins_or_ties": 4,
+      "worst_margin": 126592.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "inventory": 750,
+          "market": 714,
+          "production": 1841,
+          "routing": 4690
+        },
+        "episode": "care-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": 141702.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4968.0,
+        "rank": 1,
+        "reward": 146670.0,
+        "runtime_seconds": 1.9126696051098406,
+        "seat": 0,
+        "seed": 295901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "inventory": 750,
+          "market": 714,
+          "production": 1839,
+          "routing": 4692
+        },
+        "episode": "care-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": 141787.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4981.0,
+        "rank": 1,
+        "reward": 146768.0,
+        "runtime_seconds": 1.7990287439897656,
+        "seat": 1,
+        "seed": 295901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "inventory": 750,
+          "market": 714,
+          "production": 1839,
+          "routing": 4692
+        },
+        "episode": "care-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": 126592.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 1,
+        "reward": 129592.0,
+        "runtime_seconds": 1.7123657511547208,
+        "seat": 0,
+        "seed": 295903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "inventory": 731,
+          "market": 701,
+          "production": 1844,
+          "routing": 4706
+        },
+        "episode": "care-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": 129676.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 1,
+        "reward": 132676.0,
+        "runtime_seconds": 1.7194113528821617,
+        "seat": 1,
+        "seed": 295903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "mean_margin": -2592.25,
+      "mean_rank": 2.0,
+      "p20_margin": -3583.0,
+      "wins_or_ties": 0,
+      "worst_margin": -3583.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 235,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "care-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": -3583.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4888.0,
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1541547570377588,
+        "seat": 0,
+        "seed": 295901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2827,
+          "routing": 300
+        },
+        "episode": "care-screen-deepeshumrao",
+        "lineage": "deepeshumrao/contract-first",
+        "margin": -3396.0,
+        "opponent": "candidates/deepeshumrao-whole-agent/agent.py",
+        "opponent_reward": 4701.0,
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1724127500783652,
+        "seat": 1,
+        "seed": 295901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 255,
+          "production": 2841,
+          "routing": 286
+        },
+        "episode": "care-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": -1695.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.116727164015174,
+        "seat": 0,
+        "seed": 295903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "market": 237,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "care-screen-scheduler",
+        "lineage": "ektarr/diversified-scheduler",
+        "margin": -1695.0,
+        "opponent": "candidates/diversified-scheduler/policy.py",
+        "opponent_reward": 3000.0,
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1074860719963908,
+        "seat": 1,
+        "seed": 295903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": 137531.5,
+        "mean_rank": -1.0,
+        "p20_margin": 130175.0,
+        "worst_margin": 130175.0
+      },
+      "passed": true,
+      "signal_count": 4,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": true,
+        "worst_tail": true
+      },
+      "tails_non_regressing": true
+    }
+  },
+  "source": {
+    "acquired_utc": "2026-08-22T00:39:00Z",
+    "artifact": "lonespear coherent CARE-production whole agent",
+    "commit": "774b26093ccf4246525517d48420349b841b6e50",
+    "copyright": "Copyright (c) 2026 lonespear",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library",
+      "optional-numpy-scipy-acceleration"
+    ],
+    "effective_config": {
+      "CARE_PRIORITY": 3,
+      "COW_MAX": 8,
+      "FERTILIZE_CROPS": 1,
+      "GOOSE_MAX": 0,
+      "MAX_HANDS": 11,
+      "MAX_QUADRANTS": 2,
+      "SHEEP_MAX": 6,
+      "STRAWBERRY_MAX": 24,
+      "WHEAT_TILES": 10
+    },
+    "kaggle_submission": "NOT_PERFORMED",
+    "license": "MIT",
+    "license_sha256": "2f8d94e96cab28aeefdb4bae7d35295bf14a8e590bcc075f91d33b8e172f4f87",
+    "license_source_path": "LICENSE",
+    "public_score_used_for_promotion": false,
+    "redistribution": "authorized-with-copyright-and-license-notice",
+    "source_path": "main.py",
+    "source_sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0",
+    "source_url": "https://github.com/lonespear/kaggriculture"
+  }
+}
