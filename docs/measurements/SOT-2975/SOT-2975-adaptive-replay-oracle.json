@@ -1,0 +1,166 @@
+{
+  "agent_decision": "NOT_EVALUATED",
+  "axis": "adaptive replay live-lineage transfer oracle",
+  "issue": "SOT-2975",
+  "oracle_decision": "promoted",
+  "passed": true,
+  "protocol": {
+    "open_loop_boundary": "stress-only-not-win-probability",
+    "split_axes": [
+      "opponent_lineage",
+      "episode_id",
+      "seed",
+      "seat_group",
+      "time_slice",
+      "market_regime"
+    ]
+  },
+  "provenance": {
+    "manifest_sha256": "cdd80e9cdc946e9dab10d53ddf31380d0914c12eba7a1edde6d5412393de430f",
+    "sources": [
+      {
+        "content_sha256": "202c116f0f30881bcbad09a8d2e5245f01f5d333e0a10d4bb6d78cbfd571b2e0",
+        "id": "adaptive-replay-agent-v6",
+        "identity_only": true,
+        "raw_boundary": "local-only-not-committed",
+        "url": "https://www.kaggle.com/code/tetsutani/adaptive-farming-strategy-for-kaggriculture",
+        "version": "public page version 6; acquired 2026-08-22"
+      },
+      {
+        "content_sha256": "e1a80501a7b02a212eaac9370ada4129a64e0ee6cb3cbc790f3d77d22863fe22",
+        "id": "official-kaggriculture-runtime-1.32.6",
+        "identity_only": true,
+        "raw_boundary": "local-only-not-committed",
+        "url": "https://github.com/Kaggle/kaggle-environments/blob/28b6d8af3ce73926b3d0fda1410c1ddd8384ab8c/kaggle_environments/envs/kaggriculture/AGENTS.md",
+        "version": "master commit 28b6d8af3ce73926b3d0fda1410c1ddd8384ab8c; acquired 2026-08-22"
+      }
+    ]
+  },
+  "scope": "oracle-only-no-submission-no-champion-change",
+  "splits": {
+    "live": {
+      "closed_loop_rows": 2,
+      "closed_loop_win_probability": 0.435,
+      "mean_margin": -3500.0,
+      "mean_rank": 2.0,
+      "open_loop_stress": {
+        "interpretation": "stress-only; never pooled with closed-loop win probability",
+        "mean_margin": null
+      },
+      "open_loop_stress_rows": 0,
+      "p20_margin": -6000.0,
+      "worst_margin": -6000.0
+    },
+    "local": {
+      "closed_loop_rows": 2,
+      "closed_loop_win_probability": 0.55,
+      "mean_margin": 5000.0,
+      "mean_rank": 1.5,
+      "open_loop_stress": {
+        "interpretation": "stress-only; never pooled with closed-loop win probability",
+        "mean_margin": -9000.0
+      },
+      "open_loop_stress_rows": 1,
+      "p20_margin": -2000.0,
+      "worst_margin": -2000.0
+    },
+    "public": {
+      "closed_loop_rows": 2,
+      "closed_loop_win_probability": 0.515,
+      "mean_margin": 2500.0,
+      "mean_rank": 1.5,
+      "open_loop_stress": {
+        "interpretation": "stress-only; never pooled with closed-loop win probability",
+        "mean_margin": null
+      },
+      "open_loop_stress_rows": 0,
+      "p20_margin": -3500.0,
+      "worst_margin": -3500.0
+    }
+  },
+  "transfer_trust": {
+    "live": {
+      "basis": "worst normalized rank/margin/lower-tail/worst/win-probability transfer gap",
+      "score_0_to_1": 0.0,
+      "vs_local_gap": {
+        "closed_loop_win_probability": -0.11500000000000005,
+        "mean_margin": -8500.0,
+        "mean_rank": 0.5,
+        "p20_margin": -4000.0,
+        "worst_margin": -4000.0
+      }
+    },
+    "public": {
+      "basis": "worst normalized rank/margin/lower-tail/worst/win-probability transfer gap",
+      "score_0_to_1": 0.5,
+      "vs_local_gap": {
+        "closed_loop_win_probability": -0.03500000000000003,
+        "mean_margin": -2500.0,
+        "mean_rank": 0.0,
+        "p20_margin": -1500.0,
+        "worst_margin": -1500.0
+      }
+    }
+  },
+  "validation": {
+    "checks": {
+      "all_splits_present": true,
+      "chronological_transfer": true,
+      "closed_loop_probability_valid": true,
+      "execution_modes_explicit": true,
+      "identity_hashes_match": true,
+      "identity_hashes_valid": true,
+      "identity_only_sources": true,
+      "no_authenticated_bytes_or_credentials": true,
+      "no_episode_id_overlap": true,
+      "no_market_regime_overlap": true,
+      "no_opponent_lineage_overlap": true,
+      "no_seat_group_overlap": true,
+      "no_seed_overlap": true,
+      "no_submission_or_champion_change": true,
+      "no_time_slice_overlap": true,
+      "open_loop_has_no_win_probability": true,
+      "raw_bytes_local_only": true,
+      "record_ids_unique": true,
+      "rows_complete": true,
+      "schema_supported": true,
+      "source_hashes_valid": true,
+      "source_references_resolve": true,
+      "sources_complete": true,
+      "split_plan_pre_registered": true
+    },
+    "overlaps": {
+      "episode_id": {
+        "local_vs_live": [],
+        "local_vs_public": [],
+        "public_vs_live": []
+      },
+      "market_regime": {
+        "local_vs_live": [],
+        "local_vs_public": [],
+        "public_vs_live": []
+      },
+      "opponent_lineage": {
+        "local_vs_live": [],
+        "local_vs_public": [],
+        "public_vs_live": []
+      },
+      "seat_group": {
+        "local_vs_live": [],
+        "local_vs_public": [],
+        "public_vs_live": []
+      },
+      "seed": {
+        "local_vs_live": [],
+        "local_vs_public": [],
+        "public_vs_live": []
+      },
+      "time_slice": {
+        "local_vs_live": [],
+        "local_vs_public": [],
+        "public_vs_live": []
+      }
+    },
+    "passed": true
+  }
+}
