@@ -1,0 +1,23 @@
+{
+  "artifact": "Adaptive Farming Strategy clean-room whole-agent",
+  "source_url": "https://www.kaggle.com/code/tetsutani/adaptive-farming-strategy-for-kaggriculture",
+  "kaggle_ref": "tetsutani/adaptive-farming-strategy-for-kaggriculture",
+  "kernel_id": 129434690,
+  "script_version": "latest resolved 2026-08-22; lastRunTime 2026-08-19T23:57:35.430Z",
+  "notebook_sha256": "ba18ed4f6077168a52850c31ad1a677b07bc6d1df1a942a40b52a113b2c0c1df",
+  "output_main_sha256": "c26402b67a0d04a46348353069645b1a49c3cb3df6df69d7fa35d8adbbdbeae4",
+  "output_archive_sha256": "697d4e0144bcb8c190d91e904641a61e1d09ee0ca00342c8033f9ffe8e4cb978",
+  "output_archive_members": ["main.py"],
+  "output_archive_main_sha256": "c26402b67a0d04a46348353069645b1a49c3cb3df6df69d7fa35d8adbbdbeae4",
+  "license": "UNSPECIFIED",
+  "license_source": "Kaggle kernels pull metadata contains no license field",
+  "redistribution": "prohibited-fail-closed",
+  "implementation": "clean-room-from-public-markdown-description",
+  "foundation": "candidates/lonespear-care-production/agent.py",
+  "foundation_license": "MIT",
+  "foundation_commit": "774b26093ccf4246525517d48420349b841b6e50",
+  "dependencies": ["python-standard-library"],
+  "default_enabled": false,
+  "public_score_used_for_promotion": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}
