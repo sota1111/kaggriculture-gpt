@@ -1,0 +1,20 @@
+{
+  "artifact": "GzmCR role-planned clean-room whole agent",
+  "source_url": "https://github.com/GzmCR/Kaggriculture",
+  "source_commit": "6a76335397d5cd2facffa91c938f629b119ea350",
+  "source_main_sha256": "e5fe6dc3a24412fb856b4c3eed16202dd1d8c23b2a7342c2fa5a20bce309129b",
+  "historical_control_path": "baseline/history/v000_baseline/main.py",
+  "historical_control_sha256": "e5fe6dc3a24412fb856b4c3eed16202dd1d8c23b2a7342c2fa5a20bce309129b",
+  "history_first_main_commit": "64f8f511835530af8009c64b147c972e4cf53988",
+  "license": "UNDECLARED",
+  "license_boundary": "No LICENSE/COPYING file or explicit redistribution grant was present at the pinned commit; upstream executable source and history are not vendored or copied.",
+  "acquired_utc": "2026-08-22T08:31:00Z",
+  "implementation": "clean-room from README strategy prose only: role assignment, deterministic movement/work queues, current-price inventory sales",
+  "reused_boundary": ["public README strategy description", "generic deterministic role/task scheduling", "official Kaggriculture action contract"],
+  "excluded": ["upstream main.py source code", "upstream historical source code", "replay bytes", "weights", "credentials", "network dependency"],
+  "dependencies": ["python-standard-library"],
+  "candidate_sha256": "0cacbaabc95ae8120d73cae8c3ce069a3b1561afd5828237490f52632f4d2345",
+  "default_enabled": false,
+  "public_score_used_for_promotion": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}
