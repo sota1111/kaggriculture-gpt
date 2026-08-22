@@ -27,3 +27,10 @@ production champion.
 
 The previous `main.py` remains unchanged as a hedge. Public LB is used only as
 a contradiction signal and never as the selection metric.
+
+## Submission decision
+
+No submission was executed in this run. Kaggle ref `55678801` was submitted at
+`2026-08-21T23:41:45.490Z`, and the required 180-minute spacing interval had not
+elapsed at the final decision. The verified archive is retained for a later
+governed slot; this operational skip does not reject the candidate.
