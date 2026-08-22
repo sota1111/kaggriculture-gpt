@@ -1,7 +1,5 @@
-# Final Report — SOT-2981
+# Final Report — SOT-2989
 
-All four child directions completed. Conditional Memory was selected from the sealed portfolio and submitted through the governed gate with effective artifact fingerprint `e1de7bede...`. Kaggle submission `55684729` completed at `600.0`, below the retained champion's `781.5`; the candidate is rejected for promotion and the old champion remains the active hedge.
-
-Quality gates passed: submission contract, compileall, 229 unit tests (2 optional skips), deterministic single-root archive, child evidence review, and unintended-diff review limited to parent reporting records.
+The undeclared-license public kernel is hash-pinned but not redistributed. A stdlib-only clean-room whole agent was implemented from public prose, executed with task-selection firing logs, and passed both same-seed/both-seat screen and identity/opponent/episode/seed/seat/time-separated confirm under the pre-registered tail-sensitive hedge gate. It remains default-OFF; the champion and submission archive are unchanged, and no Kaggle submission occurred.
 
 ## Acceptance: PASS
