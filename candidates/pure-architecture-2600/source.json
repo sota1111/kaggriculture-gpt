@@ -1,0 +1,18 @@
+{
+  "source_url": "https://www.kaggle.com/code/saitejabandaruin/kaggriculture-pure-architecture-2600-elo-v3",
+  "kaggle_ref": "saitejabandaruin/kaggriculture-pure-architecture-2600-elo-v3",
+  "kernel_id": 129702073,
+  "version": "API snapshot acquired 2026-08-22",
+  "notebook_sha256": "5e769f59b4d64b93cdd400807416d097c5a847e6aaaa6b9f137c3954245a0320",
+  "agent_sha256": "580931ce9a59d0fb7e6c61503ef61811c1b9ec49350b0259cad867c2326ad6c4",
+  "agent_bytes": 22204,
+  "license": "UNSPECIFIED",
+  "redistribution": "prohibited-fail-closed",
+  "source_engine_claim": "kaggriculture==1.32.3",
+  "runtime_imports": ["__future__", "base64", "copy", "json", "zlib"],
+  "runtime_boundary": "single main.py; Python stdlib only; no internet, GPU, model, credential, dataset, or replay file dependency at execution",
+  "notebook_internet_setting": true,
+  "notebook_gpu_setting": false,
+  "public_2600_claim_evidence": false,
+  "default_enabled": false
+}
