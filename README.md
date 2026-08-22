@@ -8,6 +8,17 @@ Build and validate:
 bash scripts/build_submission.sh
 ```
 
+The public `A Reactive Agent with Optimal Task` notebook is tracked as a
+hash-pinned, default-OFF clean-room whole-agent hedge under
+`candidates/reactive-optimal-task/`. Kaggle exposed no redistribution license,
+so neither its notebook source nor generated output is vendored. The independent
+stdlib agent uses only the public prose concepts: rebuild live tasks each turn,
+price their immediate value, subtract travel cost, and assign jobs globally.
+Its same-seed/both-seat screen and opponent/episode/seed/seat/time-disjoint
+confirm both passed the pre-registered tail-sensitive hedge gate. Reproduce the
+firing log and sealed result with `python3 scripts/measure_reactive_optimal_task.py`.
+The existing champion remains unchanged and no Kaggle submission was performed.
+
 Kaito v39 is tracked as a hash-pinned, default-OFF independent whole-agent
 hedge under `candidates/kaito-v39-history-gate/`. The exact public output uses
 only the standard library and routes from public-state checkpoints

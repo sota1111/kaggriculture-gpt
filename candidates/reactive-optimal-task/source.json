@@ -1,0 +1,23 @@
+{
+  "artifact": "reactive optimal-task clean-room whole agent",
+  "source_url": "https://www.kaggle.com/code/sidhaarthshree/a-reactive-agent-with-optimal-task",
+  "author": "SIDHAARTH SHREE",
+  "kernel_id": 129729709,
+  "kernel_version": "latest pulled 2026-08-22; API did not expose a numeric version",
+  "kernel_last_run_utc": "2026-08-04T22:39:35.903Z",
+  "notebook_sha256": "0b240b05905c2e9a2ed5892ba3d38a819ba0f6a051dec7cc3a330a72cdc1d1a3",
+  "kernel_metadata_sha256": "ef94cebefe65c45eae56f51746867efc5805764dee26a368584816fbb769c75a",
+  "output_main_sha256": "2b260c09dd0ebc0d6160ba47948947e1c0be50f6bf3c7ecbf87a40df145e8ddc",
+  "candidate_sha256": "c6db541c83a252c34890015baf489f81f80e28010e266b67607550b2b48a6e2c",
+  "license": "UNDECLARED",
+  "license_boundary": "No license field or redistribution grant was present in pulled kernel metadata/notebook; executable source/output are not vendored or copied.",
+  "acquired_utc": "2026-08-22T08:15:00Z",
+  "acquisition": "authenticated Kaggle kernels pull/output for provenance hashing; transient files excluded from repository",
+  "implementation": "clean-room from public prose concepts only: live-observation jobs, dollar-valued task selection, travel-cost global assignment",
+  "reused_boundary": ["public strategic prose", "generic reactive scheduling concepts", "official Kaggriculture action contract"],
+  "excluded": ["notebook source code", "output main.py", "submission.py", "replay actions", "weights", "credentials", "network dependency"],
+  "dependencies": ["python-standard-library"],
+  "default_enabled": false,
+  "public_score_used_for_promotion": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}

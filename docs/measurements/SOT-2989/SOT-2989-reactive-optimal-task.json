@@ -1,0 +1,576 @@
+{
+  "action_family_fingerprint": {
+    "counts": {
+      "confirm": {
+        "candidate": {
+          "market": 72,
+          "production": 1394,
+          "routing": 1826
+        },
+        "champion": {
+          "market": 989,
+          "production": 11357,
+          "routing": 1151
+        }
+      },
+      "screen": {
+        "candidate": {
+          "market": 72,
+          "production": 1392,
+          "routing": 1828
+        },
+        "champion": {
+          "market": 980,
+          "production": 11369,
+          "routing": 1139
+        }
+      }
+    },
+    "diverged_from_champion": true,
+    "sha256": "0d82adf665c6c88e0ff386c12156a8b685cf6771f5c400d98acaba2e2c9502db"
+  },
+  "actual_engine": "1.32.7",
+  "axis": "reactive optimal-task clean-room independent whole-agent",
+  "candidate": {
+    "path": "candidates/reactive-optimal-task/agent.py",
+    "sha256": "c6db541c83a252c34890015baf489f81f80e28010e266b67607550b2b48a6e2c"
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "candidate_hash_pinned": true,
+    "chronological_confirm": true,
+    "clean_room_unlicensed_boundary": true,
+    "composite_identities_disjoint": true,
+    "default_off_independent": true,
+    "engine_pinned": true,
+    "no_submission": true,
+    "opponent_episode_seed_time_disjoint": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "source_version_license_hash_boundary": true,
+    "stdlib_only": true
+  },
+  "confirm": {
+    "candidate": {
+      "episodes": 4,
+      "mean_margin": -94879.75,
+      "mean_rank": 2.0,
+      "p20_margin": -101188.0,
+      "wins_or_ties": 0,
+      "worst_margin": -101188.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "market": 18,
+          "production": 348,
+          "routing": 457
+        },
+        "episode": "reactive-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -89547.0,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 89820.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 1.9451614969875664,
+        "seat": 0,
+        "seed": 298911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 18,
+          "production": 349,
+          "routing": 456
+        },
+        "episode": "reactive-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -89847.0,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 90120.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 1.994941822020337,
+        "seat": 1,
+        "seed": 298911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 18,
+          "production": 348,
+          "routing": 457
+        },
+        "episode": "reactive-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -101188.0,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 101461.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 2.236477052094415,
+        "seat": 0,
+        "seed": 298913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "market": 18,
+          "production": 349,
+          "routing": 456
+        },
+        "episode": "reactive-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -98937.0,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 99210.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 2.212339155143127,
+        "seat": 1,
+        "seed": 298913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "mean_margin": -91686.25,
+      "mean_rank": 2.0,
+      "p20_margin": -106578.0,
+      "wins_or_ties": 0,
+      "worst_margin": -106578.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 242,
+          "production": 2844,
+          "routing": 283
+        },
+        "episode": "reactive-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -106578.0,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 107879.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.9161488169338554,
+        "seat": 0,
+        "seed": 298911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 244,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "reactive-confirm-v18",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -94792.0,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 96093.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8936772299930453,
+        "seat": 1,
+        "seed": 298911,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 247,
+          "production": 2838,
+          "routing": 289
+        },
+        "episode": "reactive-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -79609.0,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 80910.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.150379935046658,
+        "seat": 0,
+        "seed": 298913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2829,
+          "routing": 298
+        },
+        "episode": "reactive-confirm-v23",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -85766.0,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 87067.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.130102086113766,
+        "seat": 1,
+        "seed": 298913,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": -3193.5,
+        "mean_rank": 0.0,
+        "p20_margin": 5390.0,
+        "worst_margin": 5390.0
+      },
+      "passed": true,
+      "signal_count": 2,
+      "signals": {
+        "mean_margin": false,
+        "p20_tail": true,
+        "rank": false,
+        "worst_tail": true
+      }
+    }
+  },
+  "decision": "promoted-independent-hedge",
+  "default_enabled": false,
+  "invalid_observation_contract": "PASS",
+  "issue": "SOT-2989",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_promotion": false,
+  "runtime_contract": "PASS",
+  "screen": {
+    "candidate": {
+      "episodes": 4,
+      "mean_margin": -115589.5,
+      "mean_rank": 2.0,
+      "p20_margin": -132958.0,
+      "wins_or_ties": 0,
+      "worst_margin": -132958.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "market": 18,
+          "production": 348,
+          "routing": 457
+        },
+        "episode": "reactive-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -132958.0,
+        "opponent": "cok-v7",
+        "opponent_reward": 133231.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 2.3921244349330664,
+        "seat": 0,
+        "seed": 298901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 18,
+          "production": 348,
+          "routing": 457
+        },
+        "episode": "reactive-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -132958.0,
+        "opponent": "cok-v7",
+        "opponent_reward": 133231.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 2.408650714205578,
+        "seat": 1,
+        "seed": 298901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 18,
+          "production": 348,
+          "routing": 457
+        },
+        "episode": "reactive-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -98221.0,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 98494.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 1.9540839190594852,
+        "seat": 0,
+        "seed": 298903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "market": 18,
+          "production": 348,
+          "routing": 457
+        },
+        "episode": "reactive-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -98221.0,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 98494.0,
+        "rank": 2,
+        "reward": 273.0,
+        "runtime_seconds": 1.9459767639636993,
+        "seat": 1,
+        "seed": 298903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "mean_margin": -140164.25,
+      "mean_rank": 2.0,
+      "p20_margin": -160416.0,
+      "wins_or_ties": 0,
+      "worst_margin": -160416.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 232,
+          "production": 2844,
+          "routing": 283
+        },
+        "episode": "reactive-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -151629.0,
+        "opponent": "cok-v7",
+        "opponent_reward": 152928.0,
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.434268310898915,
+        "seat": 0,
+        "seed": 298901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 252,
+          "production": 2833,
+          "routing": 294
+        },
+        "episode": "reactive-screen-cok",
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -160416.0,
+        "opponent": "cok-v7",
+        "opponent_reward": 161715.0,
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.396903057815507,
+        "seat": 1,
+        "seed": 298901,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 248,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "reactive-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -124306.0,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 125607.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.0543396819848567,
+        "seat": 0,
+        "seed": 298903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "market": 248,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "reactive-screen-v17",
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -124306.0,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 125607.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.858943702885881,
+        "seat": 1,
+        "seed": 298903,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": 24574.75,
+        "mean_rank": 0.0,
+        "p20_margin": 27458.0,
+        "worst_margin": 27458.0
+      },
+      "passed": true,
+      "signal_count": 3,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": false,
+        "worst_tail": true
+      }
+    }
+  },
+  "source": {
+    "acquired_utc": "2026-08-22T08:15:00Z",
+    "acquisition": "authenticated Kaggle kernels pull/output for provenance hashing; transient files excluded from repository",
+    "artifact": "reactive optimal-task clean-room whole agent",
+    "author": "SIDHAARTH SHREE",
+    "candidate_sha256": "c6db541c83a252c34890015baf489f81f80e28010e266b67607550b2b48a6e2c",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "excluded": [
+      "notebook source code",
+      "output main.py",
+      "submission.py",
+      "replay actions",
+      "weights",
+      "credentials",
+      "network dependency"
+    ],
+    "implementation": "clean-room from public prose concepts only: live-observation jobs, dollar-valued task selection, travel-cost global assignment",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129729709,
+    "kernel_last_run_utc": "2026-08-04T22:39:35.903Z",
+    "kernel_metadata_sha256": "ef94cebefe65c45eae56f51746867efc5805764dee26a368584816fbb769c75a",
+    "kernel_version": "latest pulled 2026-08-22; API did not expose a numeric version",
+    "license": "UNDECLARED",
+    "license_boundary": "No license field or redistribution grant was present in pulled kernel metadata/notebook; executable source/output are not vendored or copied.",
+    "notebook_sha256": "0b240b05905c2e9a2ed5892ba3d38a819ba0f6a051dec7cc3a330a72cdc1d1a3",
+    "output_main_sha256": "2b260c09dd0ebc0d6160ba47948947e1c0be50f6bf3c7ecbf87a40df145e8ddc",
+    "public_score_used_for_promotion": false,
+    "reused_boundary": [
+      "public strategic prose",
+      "generic reactive scheduling concepts",
+      "official Kaggriculture action contract"
+    ],
+    "source_url": "https://www.kaggle.com/code/sidhaarthshree/a-reactive-agent-with-optimal-task"
+  },
+  "task_selection_intervention_log": {
+    "assigned": {
+      "dig": 840,
+      "plant": 632,
+      "water": 4960
+    },
+    "calls": 5752,
+    "invalid_observations": 1,
+    "unassigned": {
+      "dig": 71822,
+      "plant": 1256,
+      "water": 27072
+    }
+  }
+}

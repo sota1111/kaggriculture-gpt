@@ -1,39 +1,39 @@
-# Solo Worker Report — SOT-2981
+# Solo Worker Report — SOT-2989
 
 ## Summary
 
-Aggregated all four completed children, selected Conditional Memory by the pre-registered sealed-oracle ordering, built and verified its exact offline artifact, and submitted it through the governed control-plane path. Submission `55684729` completed at public score `600.0`, below the retained champion's `781.5`; the candidate is rejected for champion promotion and the old champion remains unchanged.
+Pinned the public Reactive Optimal Task kernel and its outputs, recorded the undeclared-license boundary, implemented an independent standard-library clean-room whole agent, and completed same-seed/both-seat screen plus fully separated confirm. The candidate passed the tail-sensitive hedge gate and is retained default-OFF; the prior champion remains unchanged and no Kaggle submission was made.
 
 ## Changed Files
 
-- `docs/ai/experiment_ledger.jsonl` — exact artifact fingerprint, submission result, and transfer-failure decision.
-- `docs/ai/linear/SOT-2981.md` — parent aggregation record.
-- `docs/ai/65_worker_solo_report.md` — lifecycle evidence.
-- `docs/ai/70_final_report.md` — final acceptance summary.
+- `candidates/reactive-optimal-task/agent.py` / `source.json` — clean-room agent and provenance boundary.
+- `scripts/measure_reactive_optimal_task.py` — contract, intervention, screen, and confirm evaluator.
+- `tests/fixtures/reactive_optimal_task.json` / `tests/test_reactive_optimal_task.py` — sealed identities and focused tests.
+- `docs/measurements/SOT-2989/SOT-2989-reactive-optimal-task.json` — reproducible evidence.
+- `docs/ai/experiment_ledger.jsonl`, `docs/ai/linear/SOT-2989.md`, `README.md` — decision and usage records.
 
 ## Verification
 
-- All children SOT-2982/2983/2984/2985: Done, merged, completion evidence reviewed.
-- Candidate `main.py`: SHA-256 `66ad5c3be41d4d115d7b0061660575257be7f74f42c921f9fb5c20e330881cb8`.
-- Submission archive/effective-config fingerprint: `e1de7bede5c07435dbb42ad9f12a01fdf00ee0d3aaa0c1c453eefebfc6606693`.
-- Submission contract and compileall: PASS.
-- Unit tests: 229 passed, 2 environment-dependent skips.
-- Archive: gzip valid, single root member `main.py`.
-- Governed submission ref `55684729`: COMPLETE, public score `600.0`.
-- Previous champion artifact restored and retained; previous public score `781.5`.
+- Python compile: PASS.
+- Full unit suite: 234 PASS, 2 environment-dependent skips.
+- Submission contract and existing single-root archive integrity: PASS.
+- Official-engine evaluation: 16/16 champion/candidate episodes ended `DONE/DONE` at 720 steps, within timeout, with 0 invalid actions.
+- Screen candidate vs champion: mean-margin delta +24574.75; p20/worst +27458; equal mean rank 2.0; gate PASS.
+- Confirm candidate vs champion: mean-margin delta -3193.5; p20/worst +5390; equal mean rank 2.0; two-signal non-regressing-tail gate PASS.
+- Intervention log: 5752 calls; 6432 assigned tasks; action-family fingerprint diverged from champion.
+- Kaggle submission: NOT_PERFORMED.
 
 ## Acceptance Criteria
 
-- [x] Improvement strategy and selection reasoning recorded.
-- [x] All registered children reached Done.
-- [x] Candidate, verification, fingerprint, and submission result mapped in the ledger.
-- [x] Parent aggregation confirmed child completion and performed a governed submission.
-- [x] Rejected axes have same-seed/firing-confirm evidence; unsupported conclusions remain inconclusive.
-- [x] Handoff comment prepared with next axes, closed axes/evidence, hypotheses, and operational notes.
+- [x] Source/version/license/hash and clean-room boundary recorded.
+- [x] Independent agent runs and records task-selection interventions.
+- [x] Same-seed/both-seat screen and separated confirm are saved.
+- [x] Evidence-backed decision appended to the experiment ledger.
+- [x] No Kaggle submission; old champion remains an independent hedge.
 
 ## Risks
 
-The local/common oracle is not representative of live matchmaking: Conditional Memory improved its sealed proxy but regressed public score by 181.5. Future cycles should re-anchor transfer evaluation rather than tune this rejected candidate without new evidence.
+Mean rank remained 2.0 in both panels and confirm mean margin regressed slightly. Promotion is limited to a structurally independent default-OFF portfolio hedge; it is not a champion replacement or live-field claim.
 
 ## Linear Report: POSTED
 
