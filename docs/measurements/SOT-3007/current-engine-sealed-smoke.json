@@ -1,0 +1,71 @@
+{
+  "candidate_smoke": {
+    "C95": {
+      "error": null,
+      "loadable": true,
+      "modified": false,
+      "path": "candidates/c95-high-score/agent.py",
+      "sha256": "ed8c8420514acb5a96c0d44cfd42a8786e49c7cdc01a0de61d2e6b8997dda87a"
+    },
+    "Hamburger": {
+      "error": null,
+      "loadable": true,
+      "modified": false,
+      "path": "candidates/barnyard-economist-v5/agent.py",
+      "sha256": "26311e7c17449c862c0a2edc5b00224f81f0580aa7f4b8d78073b4026f7d814a"
+    },
+    "incumbent": {
+      "error": null,
+      "loadable": true,
+      "modified": false,
+      "path": "main.py",
+      "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+    }
+  },
+  "effective_config_fingerprint": "8457574987b8cb400a462636f40b1056940fd3810308c500280360fd5439eaf3",
+  "engine_validation": {
+    "actual_version": "1.32.7",
+    "checks": {
+      "action_semantics": true,
+      "pricing_semantics": true,
+      "runtime_version": true,
+      "source_commit": true,
+      "source_sha256": true
+    },
+    "passed": true
+  },
+  "final_holdout_opened": false,
+  "issue": "SOT-3007",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "protocol_validation": {
+    "checks": {
+      "bootstrap_configured": true,
+      "multiple_opponents": true,
+      "nonempty_blocks": true,
+      "seed_blocks_disjoint": true
+    },
+    "passed": true,
+    "seeds": {
+      "confirm": [
+        300711,
+        300713
+      ],
+      "final": [
+        300721,
+        300723
+      ],
+      "screen": [
+        300701,
+        300703
+      ]
+    }
+  },
+  "provenance": {
+    "implementation": "clean-room evaluation protocol only",
+    "license": "unknown",
+    "notebook_hash": "unavailable-fail-closed-no-source-ingested",
+    "source": "https://www.kaggle.com/code/andrewsokolovsky/kaggriculture-breaking-the-tie",
+    "version": "current public notebook observed 2026-08-22"
+  }
+}
