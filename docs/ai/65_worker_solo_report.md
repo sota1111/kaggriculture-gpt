@@ -1,41 +1,44 @@
-# Solo Worker Report — SOT-2972
+# Solo Worker Report — SOT-2974
 
 ## Summary
 
-Pinned and independently packaged the Apache-2.0 Moon Counts Melons V102
-whole agent. The candidate passed the stdlib `main.py:agent` contract, the
-same-seed/both-seat screen, and the disjoint sealed confirm. It remains
-default-OFF; production `main.py` and `submission.tar.gz` are unchanged.
+Pinned and independently packaged Kaito v19 Replication-to-Control as an exact
+Apache-2.0, standard-library whole-agent hedge. It is distinct from v39's
+sparse delayed-history gate: v19 refreshes a four-expert whole route and adds
+clone-aware late inventory/collision control. The candidate passed the
+same-seed/both-seat screen and disjoint confirm. It remains default-OFF;
+production `main.py` and `submission.tar.gz` are unchanged.
 
 ## Changed Files
 
-- `candidates/moon-counts-melons/` — licensed agent, provenance, notice, and documentation
-- `scripts/measure_moon_counts_melons.py` — reproducible gated screen/confirm runner
-- `docs/measurements/SOT-2971/SOT-2972-moon-counts-melons.json` — real episode evidence
-- `docs/ai/experiment_ledger.jsonl` — promoted cycle-6 axis with evidence
-- `tests/test_moon_counts_melons.py` — provenance, contract, holdout, and hedge checks
-- `docs/ai/linear/SOT-2972.md` — local issue record
+- `candidates/kaito-v19-replication-control/` — exact licensed agent, provenance, notice, and documentation
+- `scripts/measure_kaito_v19_replication_control.py` — gated lineage/time-separated evaluator
+- `docs/measurements/SOT-2971/SOT-2974-kaito-v19-replication-control.json` — closed-loop episode evidence
+- `docs/ai/experiment_ledger.jsonl` — promoted cycle-6 axis with direct evidence
+- `tests/test_kaito_v19_replication_control.py` — provenance, contract, novelty, holdout, and hedge checks
+- `docs/ai/linear/SOT-2974.md` — local issue record
 
 ## Verification
 
 - Python compileall: PASS
-- Submission contract validator: PASS
-- Unit tests: PASS (199 tests, 2 upstream-checkout-dependent skips), plus SOT-2972 tests
-- Screen: 4/4 DONE at 720 steps; rank 2.0→1.0; mean margin delta +155871.75; p20/worst +190814
-- Confirm: 4/4 DONE at 720 steps; rank 2.0→1.0; mean margin delta +109845.75; p20/worst +142325
+- Submission build, archive shape, and contract validator: PASS
+- Unit tests: PASS (208 tests, 2 expected upstream-checkout-dependent skips)
+- Screen: 4/4 DONE at 720 steps; rank 2.0→1.0; mean-margin delta +144297.5; p20/worst +165379
+- Confirm: 4/4 DONE at 720 steps; rank 2.0→1.0; mean-margin delta +134641.25; p20/worst +141737
 - npm lint/typecheck/test/e2e: N/A (Python repository; no `package.json` or e2e suite)
-- Diff review: scoped; champion/archive SHA-256 unchanged
+- Diff review: scoped; champion/archive unchanged; no private trace or Kaggle submission
 
 ## Acceptance Criteria
 
-- [x] Source version, hashes, Apache-2.0 license, and portability recorded
-- [x] Independent package is stdlib/offline and contract/exec compatible
-- [x] Screen and sealed confirm completed with action firing hashes/counts
-- [x] Experiment ledger records promoted with direct evidence
+- [x] v39との差分と新規 whole-agent 根拠を記録
+- [x] source version/hash/license/可搬性を固定
+- [x] lineage/time-separated screen→confirm を実施
+- [x] 実験台帳へ証拠付き promoted 判定を追記
 
 ## Risks
 
-- Local engine panels remain proxy evidence; no Kaggle submission was made by this child issue.
+Local engine panels are transfer proxies rather than leaderboard proof. The
+candidate is retained only as a default-off hedge and was not submitted.
 
 ## Linear Report: POSTED
 ## Acceptance: PASS

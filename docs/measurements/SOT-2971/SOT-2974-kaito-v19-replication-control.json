@@ -1,0 +1,508 @@
+{
+  "actual_engine": "1.32.7",
+  "axis": "Kaito v19 replication-to-control independent whole agent",
+  "candidate": {
+    "default_enabled": false,
+    "path": "candidates/kaito-v19-replication-control/agent.py",
+    "sha256": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536"
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "contract_pass": true,
+    "no_private_trace_shipped": true,
+    "no_submission": true,
+    "opponent_episode_seed_seat_time_disjoint": true,
+    "same_seed_both_seats": true,
+    "screen_confirm_lineage_disjoint": true
+  },
+  "confirm": {
+    "candidate": {
+      "action_trace_sha256s": [
+        "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "558fdfbb9e851f9ed325e141328d9fb758d99df0edc4f8b7c7b81240f282828f",
+        "558fdfbb9e851f9ed325e141328d9fb758d99df0edc4f8b7c7b81240f282828f"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.815972566837445,
+      "mean_margin": 76851.75,
+      "mean_rank": 1.0,
+      "non_pass_actions": 32520,
+      "p20_margin": 25830.0,
+      "wins_or_ties": 4,
+      "worst_margin": 25830.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "558fdfbb9e851f9ed325e141328d9fb758d99df0edc4f8b7c7b81240f282828f",
+        "cohort": "confirm",
+        "episode": "v19-confirm-lonespear-care",
+        "lineage": "lonespear/CARE-production",
+        "margin": 40151.0,
+        "non_pass_actions": 8130,
+        "opponent": "lonespear-care",
+        "opponent_reward": 118594.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 158745.0,
+        "runtime_seconds": 2.815972566837445,
+        "seat": 0,
+        "seed": 297413,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "558fdfbb9e851f9ed325e141328d9fb758d99df0edc4f8b7c7b81240f282828f",
+        "cohort": "confirm",
+        "episode": "v19-confirm-lonespear-care",
+        "lineage": "lonespear/CARE-production",
+        "margin": 25830.0,
+        "non_pass_actions": 8130,
+        "opponent": "lonespear-care",
+        "opponent_reward": 103254.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 129084.0,
+        "runtime_seconds": 2.6575843431055546,
+        "seat": 1,
+        "seed": 297413,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "cohort": "confirm",
+        "episode": "v19-confirm-opponent-shape",
+        "lineage": "local/opponent-shape-portfolio",
+        "margin": 123274.0,
+        "non_pass_actions": 8130,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 126274.0,
+        "runtime_seconds": 1.8180680968798697,
+        "seat": 0,
+        "seed": 297415,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 15
+      },
+      {
+        "action_trace_sha256": "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "cohort": "confirm",
+        "episode": "v19-confirm-opponent-shape",
+        "lineage": "local/opponent-shape-portfolio",
+        "margin": 118152.0,
+        "non_pass_actions": 8130,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 121152.0,
+        "runtime_seconds": 1.7986838358920068,
+        "seat": 1,
+        "seed": 297415,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 15
+      }
+    ],
+    "champion": {
+      "action_trace_sha256s": [
+        "37d0d07199b64277c4d37815f08b9b2da5e9108170f7bc0653ac3a430242537b",
+        "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "ce9da054d7f9aa21723ab6fa9528e22b8e21e106640b0324e40b06b867a16991"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 1.9235427149105817,
+      "mean_margin": -57789.5,
+      "mean_rank": 2.0,
+      "non_pass_actions": 13504,
+      "p20_margin": -115907.0,
+      "wins_or_ties": 0,
+      "worst_margin": -115907.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "cohort": "confirm",
+        "episode": "v19-confirm-lonespear-care",
+        "lineage": "lonespear/CARE-production",
+        "margin": -111861.0,
+        "non_pass_actions": 3382,
+        "opponent": "lonespear-care",
+        "opponent_reward": 113162.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.9235427149105817,
+        "seat": 0,
+        "seed": 297413,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "6627292a6a5daeb40db9750300fa3d3d7db6d4a8ada436e54a4ad948e56f6fe8",
+        "cohort": "confirm",
+        "episode": "v19-confirm-lonespear-care",
+        "lineage": "lonespear/CARE-production",
+        "margin": -115907.0,
+        "non_pass_actions": 3382,
+        "opponent": "lonespear-care",
+        "opponent_reward": 117208.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8887487379834056,
+        "seat": 1,
+        "seed": 297413,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "ce9da054d7f9aa21723ab6fa9528e22b8e21e106640b0324e40b06b867a16991",
+        "cohort": "confirm",
+        "episode": "v19-confirm-opponent-shape",
+        "lineage": "local/opponent-shape-portfolio",
+        "margin": -1695.0,
+        "non_pass_actions": 3358,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1051743270363659,
+        "seat": 0,
+        "seed": 297415,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 15
+      },
+      {
+        "action_trace_sha256": "37d0d07199b64277c4d37815f08b9b2da5e9108170f7bc0653ac3a430242537b",
+        "cohort": "confirm",
+        "episode": "v19-confirm-opponent-shape",
+        "lineage": "local/opponent-shape-portfolio",
+        "margin": -1695.0,
+        "non_pass_actions": 3382,
+        "opponent": "opponent-shape",
+        "opponent_reward": 3000.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.0810040920041502,
+        "seat": 1,
+        "seed": 297415,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 15
+      }
+    ],
+    "delta": {
+      "mean_margin": 134641.25,
+      "mean_rank": -1.0,
+      "p20_margin": 141737.0,
+      "worst_margin": 141737.0
+    }
+  },
+  "decision": "promoted",
+  "issue": "SOT-2974",
+  "novelty_vs_v39": {
+    "new_evidence": "exact Apache-2.0 whole-agent closed-loop A/B on new opponent lineages, seeds, seats and time indices",
+    "same_intervention": false,
+    "v19_axis": "refreshed four-expert whole-route medoid plus clone-aware late inventory/collision control",
+    "v39_axis": "sparse delayed-history lineage gate with distance guard and conservative base fallback"
+  },
+  "screen": {
+    "candidate": {
+      "action_trace_sha256s": [
+        "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "c7483c0b121d0b2a10130b691a5931904c4ae533ba76f1c55e1b28eb0c8f2a83"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 3.1115044199395925,
+      "mean_margin": 94831.5,
+      "mean_rank": 1.0,
+      "non_pass_actions": 32520,
+      "p20_margin": 60381.0,
+      "wins_or_ties": 4,
+      "worst_margin": 60381.0
+    },
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "cohort": "screen",
+        "episode": "v19-screen-barnyard-v5",
+        "lineage": "romanrozen/BarnyardV5",
+        "margin": 60381.0,
+        "non_pass_actions": 8130,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 61291.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 121672.0,
+        "runtime_seconds": 3.1115044199395925,
+        "seat": 0,
+        "seed": 297401,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "cohort": "screen",
+        "episode": "v19-screen-barnyard-v5",
+        "lineage": "romanrozen/BarnyardV5",
+        "margin": 61523.0,
+        "non_pass_actions": 8130,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 60476.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 121999.0,
+        "runtime_seconds": 3.0279598459601402,
+        "seat": 1,
+        "seed": 297401,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "085ab9a62d630f1869fd09a3f495e443d64cefeab550d54ea2ae49d81f5b13f7",
+        "cohort": "screen",
+        "episode": "v19-screen-deepeshumrao",
+        "lineage": "deepeshumrao/whole-agent",
+        "margin": 111672.0,
+        "non_pass_actions": 8130,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4901.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 116573.0,
+        "runtime_seconds": 1.9202140690758824,
+        "seat": 0,
+        "seed": 297403,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "c7483c0b121d0b2a10130b691a5931904c4ae533ba76f1c55e1b28eb0c8f2a83",
+        "cohort": "screen",
+        "episode": "v19-screen-deepeshumrao",
+        "lineage": "deepeshumrao/whole-agent",
+        "margin": 145750.0,
+        "non_pass_actions": 8130,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4805.0,
+        "policy": "candidate",
+        "rank": 1,
+        "reward": 150555.0,
+        "runtime_seconds": 1.9774635788053274,
+        "seat": 1,
+        "seed": 297403,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "action_trace_sha256s": [
+        "4a0816cdf891f8cf70727f27575478273a7ac85adeaa87418df4f39f70666bda",
+        "82cee6e57b614836a4343a2f7b8e21c68ab6123e315fe61b43842c8ede293cde",
+        "84f5be0759b1b9ffda954692b9a814625c5355d8671ce8d001674c75816d6089",
+        "a077442268435c8076e718d1d711482eba1dd1f04908a6bd5bb27205dad25e84"
+      ],
+      "all_done": true,
+      "episodes": 4,
+      "max_runtime_seconds": 2.356107502942905,
+      "mean_margin": -49466.0,
+      "mean_rank": 2.0,
+      "non_pass_actions": 13495,
+      "p20_margin": -104998.0,
+      "wins_or_ties": 0,
+      "worst_margin": -104998.0
+    },
+    "champion_rows": [
+      {
+        "action_trace_sha256": "4a0816cdf891f8cf70727f27575478273a7ac85adeaa87418df4f39f70666bda",
+        "cohort": "screen",
+        "episode": "v19-screen-barnyard-v5",
+        "lineage": "romanrozen/BarnyardV5",
+        "margin": -86403.0,
+        "non_pass_actions": 3383,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 87698.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.356107502942905,
+        "seat": 0,
+        "seed": 297401,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "84f5be0759b1b9ffda954692b9a814625c5355d8671ce8d001674c75816d6089",
+        "cohort": "screen",
+        "episode": "v19-screen-barnyard-v5",
+        "lineage": "romanrozen/BarnyardV5",
+        "margin": -104998.0,
+        "non_pass_actions": 3377,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 106293.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1295.0,
+        "runtime_seconds": 2.28045372501947,
+        "seat": 1,
+        "seed": 297401,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "82cee6e57b614836a4343a2f7b8e21c68ab6123e315fe61b43842c8ede293cde",
+        "cohort": "screen",
+        "episode": "v19-screen-deepeshumrao",
+        "lineage": "deepeshumrao/whole-agent",
+        "margin": -3283.0,
+        "non_pass_actions": 3369,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4588.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.1874495260417461,
+        "seat": 0,
+        "seed": 297403,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "a077442268435c8076e718d1d711482eba1dd1f04908a6bd5bb27205dad25e84",
+        "cohort": "screen",
+        "episode": "v19-screen-deepeshumrao",
+        "lineage": "deepeshumrao/whole-agent",
+        "margin": -3180.0,
+        "non_pass_actions": 3366,
+        "opponent": "deepeshumrao",
+        "opponent_reward": 4485.0,
+        "policy": "champion",
+        "rank": 2,
+        "reward": 1305.0,
+        "runtime_seconds": 1.186311834026128,
+        "seat": 1,
+        "seed": 297403,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "delta": {
+      "mean_margin": 144297.5,
+      "mean_rank": -1.0,
+      "p20_margin": 165379.0,
+      "worst_margin": 165379.0
+    }
+  },
+  "screen_gate": "PASS",
+  "sealed_confirm_manifest_sha256": "18c7f3104e44af12bbc3bd2e4985f28f53160de0336c59c964a1a0748360f581",
+  "source": {
+    "acquired_utc": "2026-08-22T03:21:00Z",
+    "acquisition": "Authenticated Kaggle kernels pull/output; canonical script version resolved from Kaggle page oEmbed URL",
+    "artifact": "Kaito v19 Replication-to-Control whole agent",
+    "author": "Kaito Fukami",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "excluded": [
+      "notebook output log",
+      "replay bytes",
+      "private traces",
+      "credentials",
+      "external weights"
+    ],
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129684439,
+    "last_run_utc": "2026-08-04T11:38:57.497Z",
+    "license": "Apache-2.0",
+    "license_source": "Kaggle notebook license panel for script version 340133955",
+    "notebook_sha256": "777dc0e9b5e5aa628299946f4a30ab9f8f44ca1133059e89821a1f4a583a5925",
+    "output_archive_sha256": "baa437b90731429f250ee4700c53e9e13c677a002c87720eaced7e5158492b3b",
+    "output_main_sha256": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536",
+    "packaged_agent_sha256": "9f18c729b16133443c981b0456515ef21824da72c89ce1387edab69c7e2fb536",
+    "portable_boundary": "Exact Apache-2.0 output main.py only; no notebook outputs, replay/private traces, credentials, or external weights",
+    "public_score_used_for_promotion": false,
+    "resolved_url": "https://www.kaggle.com/code/kaitofukami/41-49-future-unseen-v19-replication-to-control?scriptVersionId=340133955",
+    "script_version_id": 340133955,
+    "source_size": 393699,
+    "source_url": "https://www.kaggle.com/code/kaitofukami/41-49-future-unseen-v19-replication-to-control"
+  }
+}
