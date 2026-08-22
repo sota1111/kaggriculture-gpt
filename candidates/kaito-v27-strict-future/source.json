@@ -1,0 +1,19 @@
+{
+  "artifact": "Kaito v27 Strict-Future coherent-continuation whole agent",
+  "source_url": "https://www.kaggle.com/code/kaitofukami/25-27-strict-future-v27-midgame-meta-reset",
+  "kaggle_ref": "kaitofukami/25-27-strict-future-v27-midgame-meta-reset",
+  "kernel_id": 129916747,
+  "notebook_sha256": "cc61bb10378c555e2cb3090bde2dd8ee442c34d9a8ee98b7ab918dd3acb3db8d",
+  "output_main_sha256": "f48c21166eac68d1b05a401f04f94a2eb6154e65415af64893672365ff33c7b8",
+  "output_archive_sha256": "9a158d0b251d18d042386d33fb31a4f4096005637c80953162e329d2eb7ff072",
+  "output_main_bytes": 20813,
+  "license": "UNSPECIFIED",
+  "license_evidence": "No license field in downloaded kernel-metadata.json and no license declaration in the pinned notebook body.",
+  "redistribution": "prohibited-fail-closed",
+  "acquisition": "Authenticated Kaggle kernels pull/output on 2026-08-22; exact output is used transiently only.",
+  "dependencies": ["python-standard-library"],
+  "route_contract": "One 719-action route in both seats; common HIRE4 opening; first market divergence from v26 at step 161; actor-local WEED repair; ordering only pre-existing SELL slots.",
+  "evidence_boundary": "Notebook 25/27 replay counterfactual is descriptive only and is not treated as live/public/private performance evidence.",
+  "default_enabled": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}

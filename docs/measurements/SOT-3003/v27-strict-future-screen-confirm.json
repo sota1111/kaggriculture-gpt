@@ -1,0 +1,579 @@
+{
+  "acquisition": {
+    "archive_ok": true,
+    "imports": [
+      "base64",
+      "copy",
+      "json",
+      "math",
+      "zlib"
+    ],
+    "main_bytes_ok": true,
+    "main_hash_ok": true,
+    "method": "pinned-local-artifact",
+    "stdlib_only": true
+  },
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "chronological_confirm": true,
+    "default_off": true,
+    "license_fail_closed": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "screen_confirm_isolated": true,
+    "source_hashes_pinned": true,
+    "source_not_redistributed": true
+  },
+  "confirm": {
+    "candidate_rows": [
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "336f2aa5cbb0a5a2f2d10c1d4c48dfaf43056ab5808561ba86a143b35ff05de1",
+        "episode": "v27-confirm-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care-production",
+        "margin": 58239.0,
+        "opponent": "lonespear-care",
+        "opponent_reward": 32430.0,
+        "path": "candidates/lonespear-care-production/agent.py",
+        "policy": "candidate",
+        "reward": 90669.0,
+        "runtime_seconds": 2.867,
+        "seat": 0,
+        "seed": 300311,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "7dd295a59d2160ebc43ee05a3f961a049c38faf3eaba59402b6914b285bfdea5",
+        "episode": "v27-confirm-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care-production",
+        "margin": 58239.0,
+        "opponent": "lonespear-care",
+        "opponent_reward": 32430.0,
+        "path": "candidates/lonespear-care-production/agent.py",
+        "policy": "candidate",
+        "reward": 90669.0,
+        "runtime_seconds": 2.726,
+        "seat": 1,
+        "seed": 300311,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "979cb529551a4314981ae64ad3be73a19b9584b1d9e691638161b3127d1dd794",
+        "episode": "v27-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": 2813.0,
+        "opponent": "moon-v102",
+        "opponent_reward": 77155.0,
+        "path": "candidates/moon-counts-melons/agent.py",
+        "policy": "candidate",
+        "reward": 79968.0,
+        "runtime_seconds": 3.119,
+        "seat": 0,
+        "seed": 300313,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "8eeface1a039d643c02ed80f76c5be1e3150f989a5284a9eb2b4e0db630fe46a",
+        "episode": "v27-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": 5392.0,
+        "opponent": "moon-v102",
+        "opponent_reward": 85042.0,
+        "path": "candidates/moon-counts-melons/agent.py",
+        "policy": "candidate",
+        "reward": 90434.0,
+        "runtime_seconds": 3.097,
+        "seat": 1,
+        "seed": 300313,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion_rows": [
+      {
+        "action_families": {
+          "actor": 2836,
+          "market": 238,
+          "routing": 292
+        },
+        "action_trace_sha256": "e7e8f384bc590f9256e91ef31796efabbc8817029301dd92ee09f00fadbc6442",
+        "episode": "v27-confirm-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care-production",
+        "margin": -127471.0,
+        "opponent": "lonespear-care",
+        "opponent_reward": 128772.0,
+        "path": "candidates/lonespear-care-production/agent.py",
+        "policy": "champion",
+        "reward": 1301.0,
+        "runtime_seconds": 1.917,
+        "seat": 0,
+        "seed": 300311,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "actor": 2836,
+          "market": 248,
+          "routing": 292
+        },
+        "action_trace_sha256": "b0d926314fd373251ba9f53432b26347bdc2dece2e081779cdcd784a9f755eaa",
+        "episode": "v27-confirm-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care-production",
+        "margin": -134707.0,
+        "opponent": "lonespear-care",
+        "opponent_reward": 136008.0,
+        "path": "candidates/lonespear-care-production/agent.py",
+        "policy": "champion",
+        "reward": 1301.0,
+        "runtime_seconds": 1.926,
+        "seat": 1,
+        "seed": 300311,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "actor": 2846,
+          "market": 242,
+          "routing": 282
+        },
+        "action_trace_sha256": "631cb62736f4f0098978e765822fffef1862c335793338f0db418c9ad75c93e2",
+        "episode": "v27-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": -150345.0,
+        "opponent": "moon-v102",
+        "opponent_reward": 151644.0,
+        "path": "candidates/moon-counts-melons/agent.py",
+        "policy": "champion",
+        "reward": 1299.0,
+        "runtime_seconds": 2.33,
+        "seat": 0,
+        "seed": 300313,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "actor": 2846,
+          "market": 232,
+          "routing": 282
+        },
+        "action_trace_sha256": "b3fd814715b329edafe4310f6af86d39a30fb82d04d422b5d8795866b9b2e82c",
+        "episode": "v27-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": -151959.0,
+        "opponent": "moon-v102",
+        "opponent_reward": 153258.0,
+        "path": "candidates/moon-counts-melons/agent.py",
+        "policy": "champion",
+        "reward": 1299.0,
+        "runtime_seconds": 2.281,
+        "seat": 1,
+        "seed": 300313,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion_summary": {
+      "actor_firings": 11364,
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "market_firings": 960,
+      "max_runtime_seconds": 2.33,
+      "mean_margin": -141120.5,
+      "p20_margin": -151959.0,
+      "sell_slot_firings": 4,
+      "wins_or_ties": 0,
+      "worst_margin": -151959.0
+    },
+    "delta": {
+      "mean_margin": 172291.25,
+      "p20_margin": 154772.0,
+      "worst_margin": 154772.0
+    },
+    "summary": {
+      "actor_firings": 11200,
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "market_firings": 2568,
+      "max_runtime_seconds": 3.119,
+      "mean_margin": 31170.75,
+      "p20_margin": 2813.0,
+      "sell_slot_firings": 672,
+      "wins_or_ties": 4,
+      "worst_margin": 2813.0
+    }
+  },
+  "decision": "inconclusive",
+  "decision_reason": "Exact v27 is portable at runtime and produced new closed-loop firing evidence, but redistribution is unlicensed and sealed confirm is insufficient for promotion; the incumbent remains unchanged.",
+  "issue": "SOT-3003",
+  "kaggle_submission": "NOT_PERFORMED",
+  "novelty_vs_v19_v39": {
+    "new_evidence": "exact transient whole-agent closed-loop A/B on new chronological opponent/lineage/episode/seed/seat panels",
+    "v19": "four-expert medoid plus clone-aware late inventory/collision control",
+    "v27": "fixed coherent HIRE4 route with post-step-161 continuation reset, actor-local WEED repair, and existing SELL-slot ordering",
+    "v39": "sparse delayed-history lineage gate with distance guard"
+  },
+  "recorded_at": "2026-08-22T10:15:08.894358+00:00",
+  "route_identity": {
+    "artifact_sha256": "f48c21166eac68d1b05a401f04f94a2eb6154e65415af64893672365ff33c7b8",
+    "distinct_from_v19_sha256": true,
+    "distinct_from_v39_sha256": true,
+    "route_steps": 719,
+    "single_route_both_seats": true
+  },
+  "runtime_contract_passed": true,
+  "screen": {
+    "candidate_rows": [
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "a4ef63e9b5810dc6ec6f884230834a205bed2b4fbdbc83183d9de48b69773494",
+        "episode": "v27-screen-incumbent",
+        "invalid_actions": 0,
+        "lineage": "local/incumbent",
+        "margin": 138878.0,
+        "opponent": "incumbent",
+        "opponent_reward": 1301.0,
+        "path": "main.py",
+        "policy": "candidate",
+        "reward": 140179.0,
+        "runtime_seconds": 2.149,
+        "seat": 0,
+        "seed": 300301,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "a4ef63e9b5810dc6ec6f884230834a205bed2b4fbdbc83183d9de48b69773494",
+        "episode": "v27-screen-incumbent",
+        "invalid_actions": 0,
+        "lineage": "local/incumbent",
+        "margin": 138878.0,
+        "opponent": "incumbent",
+        "opponent_reward": 1301.0,
+        "path": "main.py",
+        "policy": "candidate",
+        "reward": 140179.0,
+        "runtime_seconds": 2.128,
+        "seat": 1,
+        "seed": 300301,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "f9bf86d4f7510b091eb66a377b778df7475758487624563f0c4fbd474c3a04fc",
+        "episode": "v27-screen-barnyard",
+        "invalid_actions": 0,
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": 63557.0,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 58412.0,
+        "path": "candidates/barnyard-economist-v5/agent.py",
+        "policy": "candidate",
+        "reward": 121969.0,
+        "runtime_seconds": 3.1,
+        "seat": 0,
+        "seed": 300303,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "actor": 2800,
+          "market": 642,
+          "routing": 3831
+        },
+        "action_trace_sha256": "f9bf86d4f7510b091eb66a377b778df7475758487624563f0c4fbd474c3a04fc",
+        "episode": "v27-screen-barnyard",
+        "invalid_actions": 0,
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": 63557.0,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 58412.0,
+        "path": "candidates/barnyard-economist-v5/agent.py",
+        "policy": "candidate",
+        "reward": 121969.0,
+        "runtime_seconds": 3.127,
+        "seat": 1,
+        "seed": 300303,
+        "sell_slot_firings": 168,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion_rows": [
+      {
+        "action_families": {
+          "actor": 2842,
+          "market": 246,
+          "routing": 286
+        },
+        "action_trace_sha256": "c47ee5f457545326882e925ee470a2cf50f512ccd3d2dd1a163f66ee07a71d5f",
+        "episode": "v27-screen-incumbent",
+        "invalid_actions": 0,
+        "lineage": "local/incumbent",
+        "margin": 0.0,
+        "opponent": "incumbent",
+        "opponent_reward": 1296.0,
+        "path": "main.py",
+        "policy": "champion",
+        "reward": 1296.0,
+        "runtime_seconds": 1.31,
+        "seat": 0,
+        "seed": 300301,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "actor": 2832,
+          "market": 246,
+          "routing": 296
+        },
+        "action_trace_sha256": "0e752fd92383ca2b41935f61ca19fb039027cea49a69d2e7c0fbee5b7d96c38e",
+        "episode": "v27-screen-incumbent",
+        "invalid_actions": 0,
+        "lineage": "local/incumbent",
+        "margin": 0.0,
+        "opponent": "incumbent",
+        "opponent_reward": 1296.0,
+        "path": "main.py",
+        "policy": "champion",
+        "reward": 1296.0,
+        "runtime_seconds": 1.293,
+        "seat": 1,
+        "seed": 300301,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "actor": 2846,
+          "market": 257,
+          "routing": 282
+        },
+        "action_trace_sha256": "e5949befb8ee9079791cf9ff5aaf0c137bdaf72397cc4afcafa16993d4620774",
+        "episode": "v27-screen-barnyard",
+        "invalid_actions": 0,
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": -102375.0,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 103670.0,
+        "path": "candidates/barnyard-economist-v5/agent.py",
+        "policy": "champion",
+        "reward": 1295.0,
+        "runtime_seconds": 2.276,
+        "seat": 0,
+        "seed": 300303,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "actor": 2846,
+          "market": 257,
+          "routing": 282
+        },
+        "action_trace_sha256": "e5949befb8ee9079791cf9ff5aaf0c137bdaf72397cc4afcafa16993d4620774",
+        "episode": "v27-screen-barnyard",
+        "invalid_actions": 0,
+        "lineage": "romanrozen/barnyard-v5",
+        "margin": -102355.0,
+        "opponent": "barnyard-v5",
+        "opponent_reward": 103650.0,
+        "path": "candidates/barnyard-economist-v5/agent.py",
+        "policy": "champion",
+        "reward": 1295.0,
+        "runtime_seconds": 2.277,
+        "seat": 1,
+        "seed": 300303,
+        "sell_slot_firings": 1,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion_summary": {
+      "actor_firings": 11366,
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "market_firings": 1006,
+      "max_runtime_seconds": 2.277,
+      "mean_margin": -51182.5,
+      "p20_margin": -102375.0,
+      "sell_slot_firings": 4,
+      "wins_or_ties": 2,
+      "worst_margin": -102375.0
+    },
+    "delta": {
+      "mean_margin": 152400.0,
+      "p20_margin": 165932.0,
+      "worst_margin": 165932.0
+    },
+    "summary": {
+      "actor_firings": 11200,
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "market_firings": 2568,
+      "max_runtime_seconds": 3.127,
+      "mean_margin": 101217.5,
+      "p20_margin": 63557.0,
+      "sell_slot_firings": 672,
+      "wins_or_ties": 4,
+      "worst_margin": 63557.0
+    }
+  },
+  "screen_gate": "PASS",
+  "source": {
+    "acquisition": "Authenticated Kaggle kernels pull/output on 2026-08-22; exact output is used transiently only.",
+    "artifact": "Kaito v27 Strict-Future coherent-continuation whole agent",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "evidence_boundary": "Notebook 25/27 replay counterfactual is descriptive only and is not treated as live/public/private performance evidence.",
+    "kaggle_ref": "kaitofukami/25-27-strict-future-v27-midgame-meta-reset",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129916747,
+    "license": "UNSPECIFIED",
+    "license_evidence": "No license field in downloaded kernel-metadata.json and no license declaration in the pinned notebook body.",
+    "notebook_sha256": "cc61bb10378c555e2cb3090bde2dd8ee442c34d9a8ee98b7ab918dd3acb3db8d",
+    "output_archive_sha256": "9a158d0b251d18d042386d33fb31a4f4096005637c80953162e329d2eb7ff072",
+    "output_main_bytes": 20813,
+    "output_main_sha256": "f48c21166eac68d1b05a401f04f94a2eb6154e65415af64893672365ff33c7b8",
+    "redistribution": "prohibited-fail-closed",
+    "route_contract": "One 719-action route in both seats; common HIRE4 opening; first market divergence from v26 at step 161; actor-local WEED repair; ordering only pre-existing SELL slots.",
+    "source_url": "https://www.kaggle.com/code/kaitofukami/25-27-strict-future-v27-midgame-meta-reset"
+  }
+}
