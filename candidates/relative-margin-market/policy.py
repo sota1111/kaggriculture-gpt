@@ -132,4 +132,3 @@ def agent(obs):
         hands = [["PLANT", plan["crop"]] if action and action[0] == "PLANT" else action
                  for action in hands]
     return {"farmer": farmer, "hands": hands, "market": plan["market"][:MAX_ORDERS]}
-

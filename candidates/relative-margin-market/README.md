@@ -11,4 +11,3 @@ The candidate never reads `private`, future observations, replay identity, or
 seed.  It preserves the ten-order contract and a public cash runway.  It is an
 evaluation artifact only: `main.py` and `submission.tar.gz` remain the champion
 unless both the screen and sealed confirm gates pass.
-
