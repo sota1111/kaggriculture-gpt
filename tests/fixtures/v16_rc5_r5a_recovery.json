@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "engine": "kaggle-environments==1.32.7",
+  "source_descriptor": "candidates/v16-rc5-r5a-recovery/source.json",
+  "screen": [
+    {"opponent":"candidates/deepeshumrao-whole-agent/agent.py","lineage":"deepeshumrao/contract-first","episode":"r5a-screen-deepeshumrao","seed":298301,"seat":0,"time_slice":"screen-a","time_index":1},
+    {"opponent":"candidates/deepeshumrao-whole-agent/agent.py","lineage":"deepeshumrao/contract-first","episode":"r5a-screen-deepeshumrao","seed":298301,"seat":1,"time_slice":"screen-a","time_index":1},
+    {"opponent":"candidates/diversified-scheduler/policy.py","lineage":"ektarr/diversified-scheduler","episode":"r5a-screen-scheduler","seed":298303,"seat":0,"time_slice":"screen-b","time_index":3},
+    {"opponent":"candidates/diversified-scheduler/policy.py","lineage":"ektarr/diversified-scheduler","episode":"r5a-screen-scheduler","seed":298303,"seat":1,"time_slice":"screen-b","time_index":3}
+  ],
+  "confirm": [
+    {"opponent":"candidates/barnyard-economist-v5/agent.py","lineage":"romanrozen/barnyard-v5","episode":"r5a-confirm-barnyard","seed":298311,"seat":0,"time_slice":"confirm-a","time_index":11},
+    {"opponent":"candidates/barnyard-economist-v5/agent.py","lineage":"romanrozen/barnyard-v5","episode":"r5a-confirm-barnyard","seed":298311,"seat":1,"time_slice":"confirm-a","time_index":11},
+    {"opponent":"candidates/kaito-v19-replication-control/agent.py","lineage":"kaito/v19","episode":"r5a-confirm-kaito","seed":298313,"seat":0,"time_slice":"confirm-b","time_index":13},
+    {"opponent":"candidates/kaito-v19-replication-control/agent.py","lineage":"kaito/v19","episode":"r5a-confirm-kaito","seed":298313,"seat":1,"time_slice":"confirm-b","time_index":13}
+  ],
+  "kaggle_submission": "NOT_PERFORMED"
+}

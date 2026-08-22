@@ -50,6 +50,14 @@ and inventory-feasible premium sale ordering. Its screen evidence is recorded
 at `docs/measurements/SOT-2942/SOT-2944-v16-rc5-portable.json`; confirm remains
 reserved for the common SOT-2947 portfolio gate.
 
+The later V16-RC5-R5A recovery direction is evaluated separately under
+`candidates/v16-rc5-r5a-recovery/`. Its newly pinned notebook also declares no
+license, so the candidate clean-room implements only the described carried-COW
+alignment transaction on the MIT lonespear foundation. The state machine fired
+through align/place/resume in both seats, but the sealed confirm regressed mean
+and pessimistic-tail margins; it remains rejected and default OFF. Reproduce the
+evidence with `python3 scripts/measure_v16_rc5_r5a_recovery.py`.
+
 Submit:
 
 ```bash
