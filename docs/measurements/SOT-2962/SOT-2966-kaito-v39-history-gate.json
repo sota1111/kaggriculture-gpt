@@ -1,0 +1,727 @@
+{
+  "acquisition": {
+    "archive_hash_ok": true,
+    "archive_member_ok": true,
+    "imports": [
+      "base64",
+      "json",
+      "sys",
+      "types",
+      "zlib"
+    ],
+    "main_hash_ok": true,
+    "manifest_hash_ok": true,
+    "method": "pinned-local-artifact",
+    "stdlib_only": true
+  },
+  "actual_engine": "1.32.4",
+  "axis": "Kaito v39 sparse history-gate independent whole agent",
+  "champion": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "checks": {
+    "chronological_confirm": true,
+    "default_off_independent": true,
+    "engine_pinned": true,
+    "history_checkpoints_complete": true,
+    "license_fail_closed": true,
+    "no_submission": true,
+    "same_seed_both_seats": true,
+    "schema_supported": true,
+    "screen_confirm_lineage_episode_seed_time_disjoint": true,
+    "source_not_redistributed": true,
+    "source_version_hashes_recorded": true
+  },
+  "confirm": {
+    "candidate": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 3.027838292066008,
+      "mean_margin": 61032.5,
+      "mean_rank": 1.0,
+      "p20_margin": 46412.0,
+      "wins_or_ties": 4,
+      "worst_margin": 46412.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "inventory": 566,
+          "market": 701,
+          "production": 2832,
+          "routing": 3274
+        },
+        "episode": "v39-confirm-v18",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 0,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": 46412.0,
+        "mean_step_seconds": 0.003810642275477401,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 110308.0,
+        "rank": 1,
+        "reward": 156720.0,
+        "runtime_seconds": 2.739851796068251,
+        "seat": 0,
+        "seed": 296611,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "inventory": 566,
+          "market": 701,
+          "production": 2832,
+          "routing": 3274
+        },
+        "episode": "v39-confirm-v18",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 0,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": 46412.0,
+        "mean_step_seconds": 0.0038817464046941885,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 110308.0,
+        "rank": 1,
+        "reward": 156720.0,
+        "runtime_seconds": 2.7909756649751216,
+        "seat": 1,
+        "seed": 296611,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "inventory": 566,
+          "market": 701,
+          "production": 2832,
+          "routing": 3274
+        },
+        "episode": "v39-confirm-v23",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 0,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": 75653.0,
+        "mean_step_seconds": 0.004202905424478074,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 92429.0,
+        "rank": 1,
+        "reward": 168082.0,
+        "runtime_seconds": 3.021889000199735,
+        "seat": 0,
+        "seed": 296613,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "inventory": 566,
+          "market": 701,
+          "production": 2832,
+          "routing": 3274
+        },
+        "episode": "v39-confirm-v23",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 0,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": 75653.0,
+        "mean_step_seconds": 0.00421117982206677,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 92429.0,
+        "rank": 1,
+        "reward": 168082.0,
+        "runtime_seconds": 3.027838292066008,
+        "seat": 1,
+        "seed": 296613,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 2.156036024913192,
+      "mean_margin": -139331.25,
+      "mean_rank": 2.0,
+      "p20_margin": -153214.0,
+      "wins_or_ties": 0,
+      "worst_margin": -153214.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 248,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-confirm-v18",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -153214.0,
+        "mean_step_seconds": 0.0026293063755840145,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 154515.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8904712840449065,
+        "seat": 0,
+        "seed": 296611,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 248,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-confirm-v18",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "lonespear/V18",
+        "margin": -153214.0,
+        "mean_step_seconds": 0.002572868820810911,
+        "opponent": "lonespear-v18",
+        "opponent_reward": 154515.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8498926821630448,
+        "seat": 1,
+        "seed": 296611,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-confirm-v23",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -128502.0,
+        "mean_step_seconds": 0.0029986592836066645,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 129803.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.156036024913192,
+        "seat": 0,
+        "seed": 296613,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_families": {
+          "market": 242,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-confirm-v23",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "lonespear/V23",
+        "margin": -122395.0,
+        "mean_step_seconds": 0.002962676739910817,
+        "opponent": "lonespear-v23",
+        "opponent_reward": 123696.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.1301645759958774,
+        "seat": 1,
+        "seed": 296613,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "consumed": true,
+    "gate": {
+      "deltas": {
+        "mean_margin": 200363.75,
+        "mean_rank": -1.0,
+        "p20_margin": 199626.0,
+        "worst_margin": 199626.0
+      },
+      "passed": true,
+      "pessimistic_tail_non_regression": true,
+      "signal_count": 4,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": true,
+        "worst_tail": true
+      }
+    }
+  },
+  "decision": "promoted",
+  "default_enabled": false,
+  "history_gate_evidence": {
+    "action_divergence_measured": true,
+    "fired": true,
+    "per_episode": [
+      {
+        "delayed_prefix_mismatches": 1,
+        "fallback_wool": 0,
+        "games": 1,
+        "stage1_familiar": 0,
+        "stage1_overrides": 0,
+        "stage2_alt": 0,
+        "stage2_familiar": 0
+      },
+      {
+        "delayed_prefix_mismatches": 1,
+        "fallback_wool": 0,
+        "games": 1,
+        "stage1_familiar": 0,
+        "stage1_overrides": 0,
+        "stage2_alt": 0,
+        "stage2_familiar": 0
+      },
+      {
+        "delayed_prefix_mismatches": 0,
+        "fallback_wool": 0,
+        "games": 1,
+        "stage1_familiar": 0,
+        "stage1_overrides": 0,
+        "stage2_alt": 0,
+        "stage2_familiar": 0
+      },
+      {
+        "delayed_prefix_mismatches": 0,
+        "fallback_wool": 0,
+        "games": 1,
+        "stage1_familiar": 0,
+        "stage1_overrides": 0,
+        "stage2_alt": 0,
+        "stage2_familiar": 0
+      }
+    ],
+    "route_override": false,
+    "screen_action_families": {
+      "candidate": {
+        "inventory": 2266,
+        "market": 2816,
+        "production": 11522,
+        "routing": 12900
+      },
+      "champion": {
+        "market": 995,
+        "production": 11367,
+        "routing": 1141
+      }
+    }
+  },
+  "issue": "SOT-2966",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "router_audit": {
+    "checkpoints": [
+      96,
+      120,
+      122,
+      132,
+      144
+    ],
+    "checkpoints_match_manifest": true,
+    "fallback_maximum_distance": 0.1,
+    "forbidden_runtime_feature_code_hits": [],
+    "history_gate_present": true,
+    "private_future_metadata_mutation_invariant": true,
+    "public_state_only": true,
+    "stage2_maximum_distance": 0.0,
+    "unknown_state": {
+      "abstained_to_conservative_fallback": true,
+      "distance": 92.2114675711541,
+      "selected": "base"
+    }
+  },
+  "runtime_contract": "PASS",
+  "screen": {
+    "candidate": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 3.3173328780103475,
+      "mean_margin": 31110.75,
+      "mean_rank": 1.0,
+      "p20_margin": 3906.0,
+      "wins_or_ties": 4,
+      "worst_margin": 3906.0
+    },
+    "candidate_rows": [
+      {
+        "action_families": {
+          "inventory": 567,
+          "market": 708,
+          "production": 2928,
+          "routing": 3177
+        },
+        "episode": "v39-screen-cok",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 1,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": 3906.0,
+        "mean_step_seconds": 0.004613814851196589,
+        "opponent": "cok-v7",
+        "opponent_reward": 135868.0,
+        "rank": 1,
+        "reward": 139774.0,
+        "runtime_seconds": 3.3173328780103475,
+        "seat": 0,
+        "seed": 296601,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "inventory": 567,
+          "market": 708,
+          "production": 2928,
+          "routing": 3177
+        },
+        "episode": "v39-screen-cok",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 1,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": 3906.0,
+        "mean_step_seconds": 0.004539869109787803,
+        "opponent": "cok-v7",
+        "opponent_reward": 135868.0,
+        "rank": 1,
+        "reward": 139774.0,
+        "runtime_seconds": 3.2641658899374306,
+        "seat": 1,
+        "seed": 296601,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "inventory": 566,
+          "market": 703,
+          "production": 2834,
+          "routing": 3272
+        },
+        "episode": "v39-screen-v17",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 0,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": 58494.0,
+        "mean_step_seconds": 0.0038412778650608655,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 74217.0,
+        "rank": 1,
+        "reward": 132711.0,
+        "runtime_seconds": 2.7618787849787623,
+        "seat": 0,
+        "seed": 296603,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "inventory": 566,
+          "market": 697,
+          "production": 2832,
+          "routing": 3274
+        },
+        "episode": "v39-screen-v17",
+        "history_telemetry": {
+          "delayed_prefix_mismatches": 0,
+          "fallback_wool": 0,
+          "games": 1,
+          "stage1_familiar": 0,
+          "stage1_overrides": 0,
+          "stage2_alt": 0,
+          "stage2_familiar": 0
+        },
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": 58137.0,
+        "mean_step_seconds": 0.0038271422782247067,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 72406.0,
+        "rank": 1,
+        "reward": 130543.0,
+        "runtime_seconds": 2.751715298043564,
+        "seat": 1,
+        "seed": 296603,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "champion": {
+      "episodes": 4,
+      "invalid_actions": 0,
+      "max_runtime_seconds": 2.339459983166307,
+      "mean_margin": -147189.5,
+      "mean_rank": 2.0,
+      "p20_margin": -160607.0,
+      "wins_or_ties": 0,
+      "worst_margin": -160607.0
+    },
+    "champion_rows": [
+      {
+        "action_families": {
+          "market": 250,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-screen-cok",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -160607.0,
+        "mean_step_seconds": 0.0031720927815433587,
+        "opponent": "cok-v7",
+        "opponent_reward": 161906.0,
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.280734709929675,
+        "seat": 0,
+        "seed": 296601,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 250,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-screen-cok",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "COK-ZhangZiliang/V7",
+        "margin": -160607.0,
+        "mean_step_seconds": 0.0032537691003703857,
+        "opponent": "cok-v7",
+        "opponent_reward": 161906.0,
+        "rank": 2,
+        "reward": 1299.0,
+        "runtime_seconds": 2.339459983166307,
+        "seat": 1,
+        "seed": 296601,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_families": {
+          "market": 239,
+          "production": 2846,
+          "routing": 281
+        },
+        "episode": "v39-screen-v17",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -132319.0,
+        "mean_step_seconds": 0.002792424655108815,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 133620.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 2.007753327023238,
+        "seat": 0,
+        "seed": 296603,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_families": {
+          "market": 256,
+          "production": 2829,
+          "routing": 298
+        },
+        "episode": "v39-screen-v17",
+        "history_telemetry": null,
+        "invalid_actions": 0,
+        "lineage": "lonespear/V17",
+        "margin": -135225.0,
+        "mean_step_seconds": 0.0026261082086815745,
+        "opponent": "lonespear-v17",
+        "opponent_reward": 136526.0,
+        "rank": 2,
+        "reward": 1301.0,
+        "runtime_seconds": 1.8881718020420521,
+        "seat": 1,
+        "seed": 296603,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "gate": {
+      "deltas": {
+        "mean_margin": 178300.25,
+        "mean_rank": -1.0,
+        "p20_margin": 164513.0,
+        "worst_margin": 164513.0
+      },
+      "passed": true,
+      "pessimistic_tail_non_regression": true,
+      "signal_count": 4,
+      "signals": {
+        "mean_margin": true,
+        "p20_tail": true,
+        "rank": true,
+        "worst_tail": true
+      }
+    }
+  },
+  "source": {
+    "archive_sha256": "5b4da36562e2c1a13004a495150b3e05a0db45dc8327ccd5c1479615a53a5ad2",
+    "artifact": "Kaito v39 hierarchical lineage-floor whole agent",
+    "default_enabled": false,
+    "dependencies": [
+      "python-standard-library"
+    ],
+    "forbidden_runtime_features": [
+      "username",
+      "kernel slug",
+      "episode id",
+      "seed",
+      "private result",
+      "future metadata"
+    ],
+    "kaggle_ref": "kaitofukami/103-126-untouched-future-top-30-v39-history-gate",
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 129557885,
+    "license": "UNSPECIFIED",
+    "main_py_sha256": "c0298c82c2a2f9b41cd48657b63b16a9c6f07ea3ee02dc85062f807e54e8c54a",
+    "manifest_sha256": "ffb6cbf344b307ecf27d8d4da5962a8ded78289f0f533433ae66d0bb52784a85",
+    "notebook_sha256": "9e86ef93a93f5af1be8f64b7a491f9714f92db89a8e92fc5eeda7fdb4e09a0c5",
+    "portable_boundary": "Fetch the exact public output transiently through the Kaggle API; do not vendor or redistribute notebook, source, bytecode, or archive; retain only hashes, public metadata, structural audit, and derived measurements.",
+    "redistribution": "prohibited-fail-closed",
+    "runtime_feature_boundary": [
+      "public observation",
+      "public configuration",
+      "steps 96/120/122/132/144 public history"
+    ],
+    "script_version": "api-fetch=2026-08-22T01:38Z",
+    "source_url": "https://www.kaggle.com/code/kaitofukami/103-126-untouched-future-top-30-v39-history-gate"
+  }
+}
