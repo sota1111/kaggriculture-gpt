@@ -1,0 +1,23 @@
+{
+  "artifact": "Structured Economic Policy clean-room whole-agent",
+  "source_url": "https://www.kaggle.com/code/pilkwang/kaggriculture-structured-economic-policy",
+  "kaggle_ref": "pilkwang/kaggriculture-structured-economic-policy",
+  "script_version": "latest resolved 2026-08-22",
+  "kernel_id": 129273466,
+  "notebook_sha256": "2968c446a3c978a0680f99f67b9f0fcb64e1343b9b703d29a41cdc88514ac981",
+  "kernel_metadata_sha256": "f60822e4c067af39aa64165fdbe884e3ab66abfcb666892072f89de98734a446",
+  "acquired_content_fingerprint_sha256": "6c0f2671123e9b5f0f1a62e9716bb0b4ab774298ae2644c21f64b3a71870d7b1",
+  "acquired_content_fingerprint_method": "sha256 of sorted filename:sha256 lines for notebook and kernel metadata",
+  "output_archive_members": ["main.py"],
+  "license": "UNSPECIFIED",
+  "license_source": "notebook metadata contains no license field",
+  "redistribution": "prohibited-fail-closed",
+  "implementation": "clean-room-from-public-markdown-description",
+  "foundation": "candidates/lonespear-care-production/agent.py",
+  "foundation_license": "MIT",
+  "foundation_commit": "774b26093ccf4246525517d48420349b841b6e50",
+  "dependencies": ["python-standard-library"],
+  "default_enabled": false,
+  "public_score_used_for_promotion": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}
