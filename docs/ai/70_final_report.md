@@ -1,33 +1,12 @@
-# SOT-2957 Final Report
+# Final Report — SOT-2965
 
-## Summary
-
-Cycle 4 compared four independent directions. The coherent CARE-production
-whole agent is selected as the next governed submission artifact; the
-closed-loop oracle is promoted for future evaluation. The retained champion
-remains unchanged as a hedge. This run did not submit because the mandatory
-180-minute interval after Kaggle ref 55678801 had not elapsed; this is the
-explicit spacing-gate no-submit path, not a rejected candidate.
-
-## Verification
-
-- 189 unit tests passed; 2 expected upstream-checkout skips.
-- Python compileall passed.
-- Candidate screen and disjoint confirm both won 4/4, with rank and pessimistic
-  tail improvement.
-- Submission archive layout and gzip integrity passed.
-- Latest Kaggle history was checked immediately before the submission decision;
-  the spacing gate required no-submit.
-- No new rejected/CLOSED decision was made without direct evidence.
-
-## Acceptance
-
-- Improvement rationale and child evidence are recorded.
-- All four children are terminal and their PRs are merged.
-- Candidate/effective configuration and archive fingerprints are recorded.
-- Parent aggregation selected the new artifact under CV-first discipline.
-- A separate Linear handoff records next axes and unresolved hypotheses.
+The Pure Architecture candidate is demonstrably strong in the independent public-opponent panel but
+is not portable as a repository artifact under the available provenance. Screen mean rank improved
+from 2.0 to 1.5 and confirm from 2.0 to 1.0; p20/worst margins improved by 162,517 and 185,220,
+respectively. All evaluated runs ended DONE at 720 steps with zero invalid actions. The notebook has no
+declared redistribution license, so only hashes, descriptors, fixtures, and measurements are retained.
+The champion and submission archive are byte-identical to `origin/main`, and no Kaggle submission was
+made.
 
 ## Acceptance: PASS
-
 ## Next Action: READY_FOR_REVIEW
