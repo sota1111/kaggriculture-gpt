@@ -1,0 +1,492 @@
+{
+  "agent_decision": "NOT_EVALUATED_OR_PROMOTED",
+  "anchors": {
+    "conditional-memory": {
+      "confirm": {
+        "episodes": 4,
+        "mean_margin": 16936.0,
+        "mean_rank": 1.5,
+        "p20_margin": -42160.0,
+        "rank_1_count": 2,
+        "rows": [
+          {
+            "agent_reward": 30500.0,
+            "episode": "confirm-v19-surplus",
+            "lineage": "kaito/v19-replication-control",
+            "margin": -42160.0,
+            "market_params_sha256": "4090997fb8e0f6b18bdcd287ec2bedec3f2b6636a29cfcb9ef8adf07407ef0f4",
+            "market_regime": "confirm-feed-surplus",
+            "opponent": "kaito-v19-control",
+            "opponent_reward": 72660.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299111,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 11,
+            "time_slice": "2026-08-22T09-confirm-a"
+          },
+          {
+            "agent_reward": 40071.0,
+            "episode": "confirm-v19-surplus",
+            "lineage": "kaito/v19-replication-control",
+            "margin": -21701.0,
+            "market_params_sha256": "4090997fb8e0f6b18bdcd287ec2bedec3f2b6636a29cfcb9ef8adf07407ef0f4",
+            "market_regime": "confirm-feed-surplus",
+            "opponent": "kaito-v19-control",
+            "opponent_reward": 61772.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299111,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 11,
+            "time_slice": "2026-08-22T09-confirm-a"
+          },
+          {
+            "agent_reward": 163644.0,
+            "episode": "confirm-barnyard-scarcity",
+            "lineage": "romanrozen/barnyard-economist-v5",
+            "margin": 71174.0,
+            "market_params_sha256": "89eba1094f22b53330df6028a002c5c88c3255af5cac08d831df49a99f3b5399",
+            "market_regime": "confirm-premium-scarcity",
+            "opponent": "barnyard-v5",
+            "opponent_reward": 92470.0,
+            "rank": 1,
+            "seat": 0,
+            "seed": 299113,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 13,
+            "time_slice": "2026-08-22T10-confirm-b"
+          },
+          {
+            "agent_reward": 133352.0,
+            "episode": "confirm-barnyard-scarcity",
+            "lineage": "romanrozen/barnyard-economist-v5",
+            "margin": 60431.0,
+            "market_params_sha256": "89eba1094f22b53330df6028a002c5c88c3255af5cac08d831df49a99f3b5399",
+            "market_regime": "confirm-premium-scarcity",
+            "opponent": "barnyard-v5",
+            "opponent_reward": 72921.0,
+            "rank": 1,
+            "seat": 1,
+            "seed": 299113,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 13,
+            "time_slice": "2026-08-22T10-confirm-b"
+          }
+        ],
+        "worst_margin": -42160.0
+      },
+      "public_score": 600.0,
+      "screen": {
+        "episodes": 4,
+        "mean_margin": -32861.0,
+        "mean_rank": 2.0,
+        "p20_margin": -45964.0,
+        "rank_1_count": 0,
+        "rows": [
+          {
+            "agent_reward": 51940.0,
+            "episode": "c22-screen-default",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -45964.0,
+            "market_params_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "market_regime": "screen-default-a",
+            "opponent": "c22-control",
+            "opponent_reward": 97904.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299101,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 1,
+            "time_slice": "2026-08-22T06-screen-a"
+          },
+          {
+            "agent_reward": 48701.0,
+            "episode": "c22-screen-default",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -44806.0,
+            "market_params_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "market_regime": "screen-default-a",
+            "opponent": "c22-control",
+            "opponent_reward": 93507.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299101,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 1,
+            "time_slice": "2026-08-22T06-screen-a"
+          },
+          {
+            "agent_reward": 542.0,
+            "episode": "c22-screen-tight",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -33182.0,
+            "market_params_sha256": "dc2173e3a04f8beeaafd942714ca795f53293e45d53551e738247485658df271",
+            "market_regime": "screen-feed-tight",
+            "opponent": "c22-control",
+            "opponent_reward": 33724.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299103,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 3,
+            "time_slice": "2026-08-22T07-screen-b"
+          },
+          {
+            "agent_reward": 30162.0,
+            "episode": "c22-screen-tight",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -7492.0,
+            "market_params_sha256": "dc2173e3a04f8beeaafd942714ca795f53293e45d53551e738247485658df271",
+            "market_regime": "screen-feed-tight",
+            "opponent": "c22-control",
+            "opponent_reward": 37654.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299103,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 3,
+            "time_slice": "2026-08-22T07-screen-b"
+          }
+        ],
+        "worst_margin": -45964.0
+      },
+      "transfer_trust": {
+        "confirm_minus_screen": {
+          "mean_margin": 49797.0,
+          "mean_rank": -0.5,
+          "p20_margin": 3804.0,
+          "worst_margin": 3804.0
+        },
+        "stability_0_to_1": 0.0
+      }
+    },
+    "old-champion": {
+      "confirm": {
+        "episodes": 4,
+        "mean_margin": -2294232.0,
+        "mean_rank": 2.0,
+        "p20_margin": -5741351.0,
+        "rank_1_count": 0,
+        "rows": [
+          {
+            "agent_reward": 1408.0,
+            "episode": "confirm-v19-surplus",
+            "lineage": "kaito/v19-replication-control",
+            "margin": -144889.0,
+            "market_params_sha256": "4090997fb8e0f6b18bdcd287ec2bedec3f2b6636a29cfcb9ef8adf07407ef0f4",
+            "market_regime": "confirm-feed-surplus",
+            "opponent": "kaito-v19-control",
+            "opponent_reward": 146297.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299111,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 11,
+            "time_slice": "2026-08-22T09-confirm-a"
+          },
+          {
+            "agent_reward": 1408.0,
+            "episode": "confirm-v19-surplus",
+            "lineage": "kaito/v19-replication-control",
+            "margin": -140087.0,
+            "market_params_sha256": "4090997fb8e0f6b18bdcd287ec2bedec3f2b6636a29cfcb9ef8adf07407ef0f4",
+            "market_regime": "confirm-feed-surplus",
+            "opponent": "kaito-v19-control",
+            "opponent_reward": 141495.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299111,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 11,
+            "time_slice": "2026-08-22T09-confirm-a"
+          },
+          {
+            "agent_reward": 1295.0,
+            "episode": "confirm-barnyard-scarcity",
+            "lineage": "romanrozen/barnyard-economist-v5",
+            "margin": -5741351.0,
+            "market_params_sha256": "89eba1094f22b53330df6028a002c5c88c3255af5cac08d831df49a99f3b5399",
+            "market_regime": "confirm-premium-scarcity",
+            "opponent": "barnyard-v5",
+            "opponent_reward": 5742646.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299113,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 13,
+            "time_slice": "2026-08-22T10-confirm-b"
+          },
+          {
+            "agent_reward": 1295.0,
+            "episode": "confirm-barnyard-scarcity",
+            "lineage": "romanrozen/barnyard-economist-v5",
+            "margin": -3150601.0,
+            "market_params_sha256": "89eba1094f22b53330df6028a002c5c88c3255af5cac08d831df49a99f3b5399",
+            "market_regime": "confirm-premium-scarcity",
+            "opponent": "barnyard-v5",
+            "opponent_reward": 3151896.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299113,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 13,
+            "time_slice": "2026-08-22T10-confirm-b"
+          }
+        ],
+        "worst_margin": -5741351.0
+      },
+      "public_score": 781.5,
+      "screen": {
+        "episodes": 4,
+        "mean_margin": -114710.75,
+        "mean_rank": 2.0,
+        "p20_margin": -152747.0,
+        "rank_1_count": 0,
+        "rows": [
+          {
+            "agent_reward": 1296.0,
+            "episode": "c22-screen-default",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -152473.0,
+            "market_params_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "market_regime": "screen-default-a",
+            "opponent": "c22-control",
+            "opponent_reward": 153769.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299101,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 1,
+            "time_slice": "2026-08-22T06-screen-a"
+          },
+          {
+            "agent_reward": 1296.0,
+            "episode": "c22-screen-default",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -152747.0,
+            "market_params_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "market_regime": "screen-default-a",
+            "opponent": "c22-control",
+            "opponent_reward": 154043.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299101,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 1,
+            "time_slice": "2026-08-22T06-screen-a"
+          },
+          {
+            "agent_reward": 1433.0,
+            "episode": "c22-screen-tight",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -89905.0,
+            "market_params_sha256": "dc2173e3a04f8beeaafd942714ca795f53293e45d53551e738247485658df271",
+            "market_regime": "screen-feed-tight",
+            "opponent": "c22-control",
+            "opponent_reward": 91338.0,
+            "rank": 2,
+            "seat": 0,
+            "seed": 299103,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 3,
+            "time_slice": "2026-08-22T07-screen-b"
+          },
+          {
+            "agent_reward": 1433.0,
+            "episode": "c22-screen-tight",
+            "lineage": "beicicc/c22-moon-repro-control",
+            "margin": -63718.0,
+            "market_params_sha256": "dc2173e3a04f8beeaafd942714ca795f53293e45d53551e738247485658df271",
+            "market_regime": "screen-feed-tight",
+            "opponent": "c22-control",
+            "opponent_reward": 65151.0,
+            "rank": 2,
+            "seat": 1,
+            "seed": 299103,
+            "steps": 720,
+            "terminal_statuses": [
+              "DONE",
+              "DONE"
+            ],
+            "time_index": 3,
+            "time_slice": "2026-08-22T07-screen-b"
+          }
+        ],
+        "worst_margin": -152747.0
+      },
+      "transfer_trust": {
+        "confirm_minus_screen": {
+          "mean_margin": -2179521.25,
+          "mean_rank": 0.0,
+          "p20_margin": -5588604.0,
+          "worst_margin": -5588604.0
+        },
+        "stability_0_to_1": 0.0
+      }
+    }
+  },
+  "axis": "C22 reproducibility live-transfer oracle re-anchor",
+  "blind_anchor_fidelity": {
+    "all_windows_recover_public_ordering": false,
+    "by_window": {
+      "confirm": false,
+      "screen": false
+    },
+    "expected": "old-champion (781.5) > conditional-memory (600.0)"
+  },
+  "confirm_seal": {
+    "digest_unchanged": true,
+    "opened": true,
+    "sha256": "155d6d4ab61c5091db29ea8feae80609eb0f42b26b2fd53151137a61e6fa3414"
+  },
+  "issue": "SOT-2991",
+  "kaggle_submission": "NOT_PERFORMED",
+  "oracle_decision": "rejected",
+  "oracle_decision_reason": "The mechanically valid local oracle contradicts the pre-registered 781.5 > 600.0 live ordering in both windows, so this panel is rejected as a promotion oracle; no agent is rejected or promoted by this result.",
+  "passed": true,
+  "protocol": {
+    "opening_order": "screen first; confirm digest rechecked before opening",
+    "primary_kpi": "live public ordering fidelity; local margin/rank/tails are proxy diagnostics",
+    "same_seed_both_seats": true,
+    "split": "opponent/lineage/episode/seed/seat/time/market"
+  },
+  "provenance": {
+    "acquisition_checks": {
+      "c22_metadata_hash_match": true,
+      "c22_not_committed": true,
+      "c22_source_hash_match": true,
+      "engine_version_match": true,
+      "runtime_hash_match": true
+    },
+    "manifest_sha256": "7f5b757ba08390823a7b2c3af118f8a6c408292fc1b68ca696f7e78c81e1dea6",
+    "sources": [
+      {
+        "boundary": "fetch-only-not-committed",
+        "filename": "kaggriculture-c22-exact-reproducibility-control.py",
+        "id": "c22-control-source",
+        "kernel_id": 129552524,
+        "license": "Apache-2.0 (SPDX header in source)",
+        "sha256": "bb058dc0dc02ad4a21a07afeef00de631ef1a51ac1a5fbc5443a295b33087ac5",
+        "url": "https://www.kaggle.com/code/beicicc/kaggriculture-c22-exact-reproducibility-control",
+        "version": "public snapshot acquired 2026-08-22"
+      },
+      {
+        "boundary": "fetch-only-not-committed",
+        "filename": "kernel-metadata.json",
+        "id": "c22-kernel-metadata",
+        "kernel_id": 129552524,
+        "license": "metadata-only",
+        "sha256": "d7c27707ebbe617f49579a87275cbcb4495c0a2e4ac081ca9e56788ec6098fa6",
+        "url": "https://www.kaggle.com/api/v1/kernels/view/beicicc/kaggriculture-c22-exact-reproducibility-control",
+        "version": "public metadata acquired 2026-08-22"
+      },
+      {
+        "boundary": "installed-package-hash-only",
+        "id": "official-runtime",
+        "license": "Apache-2.0",
+        "sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+        "url": "https://github.com/Kaggle/kaggle-environments/blob/1.32.7/kaggle_environments/envs/kaggriculture/kaggriculture.py",
+        "version": "kaggle-environments==1.32.7"
+      }
+    ]
+  },
+  "runtime_contract": "PASS",
+  "validation": {
+    "checks": {
+      "anchor_hashes_match": true,
+      "blind_scores_fixed": true,
+      "c22_bytes_fetch_only": true,
+      "chronological_confirm": true,
+      "confirm_reserved": true,
+      "engine_pinned": true,
+      "market_regimes_declared": true,
+      "no_episode_overlap": true,
+      "no_kaggle_submission": true,
+      "no_lineage_overlap": true,
+      "no_market_regime_overlap": true,
+      "no_opponent_overlap": true,
+      "no_private_future_replay_fields": true,
+      "no_seed_overlap": true,
+      "no_time_slice_overlap": true,
+      "opponent_provenance_complete": true,
+      "oracle_agent_decisions_separate": true,
+      "panels_nonempty": true,
+      "repository_opponent_hashes_match": true,
+      "rows_complete": true,
+      "same_seed_both_seats": true,
+      "schema_supported": true,
+      "source_hashes_valid": true,
+      "sources_complete": true
+    },
+    "overlap": {
+      "episode": [],
+      "lineage": [],
+      "market_regime": [],
+      "opponent": [],
+      "seed": [],
+      "time_slice": []
+    },
+    "passed": true
+  }
+}
