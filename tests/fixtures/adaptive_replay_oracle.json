@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "scope": "oracle-only-no-submission-no-champion-change",
+  "split_plan": {
+    "frozen_before_evaluation": true,
+    "axes": ["opponent_lineage", "episode_id", "seed", "seat_group", "time_slice", "market_regime"],
+    "policy": "group-isolated and chronological local -> public -> live"
+  },
+  "sources": [
+    {
+      "id": "adaptive-replay-agent-v6",
+      "url": "https://www.kaggle.com/code/tetsutani/adaptive-farming-strategy-for-kaggriculture",
+      "version": "public page version 6; acquired 2026-08-22",
+      "content_sha256": "202c116f0f30881bcbad09a8d2e5245f01f5d333e0a10d4bb6d78cbfd571b2e0",
+      "identity_only": true,
+      "raw_boundary": "local-only-not-committed"
+    },
+    {
+      "id": "official-kaggriculture-runtime-1.32.6",
+      "url": "https://github.com/Kaggle/kaggle-environments/blob/28b6d8af3ce73926b3d0fda1410c1ddd8384ab8c/kaggle_environments/envs/kaggriculture/AGENTS.md",
+      "version": "master commit 28b6d8af3ce73926b3d0fda1410c1ddd8384ab8c; acquired 2026-08-22",
+      "content_sha256": "e1a80501a7b02a212eaac9370ada4129a64e0ee6cb3cbc790f3d77d22863fe22",
+      "identity_only": true,
+      "raw_boundary": "local-only-not-committed"
+    }
+  ],
+  "records": [
+    {"record_id":"local-a-seat0","split":"local","opponent_lineage":"opp-local-a","episode_id":"local-ep-a","seed":101,"seat":0,"seat_group":"local-paired","time_slice":"2026-08-01","time_index":1,"market_regime":"local-calm","execution_mode":"closed-loop","rank":1,"margin":12000,"closed_loop_win_probability":0.64,"identity_hash":"eb697bd8a8038d48aee2462ff2a7e7c623d2cc314298aeb433a2b3e8b38df089","source_id":"official-kaggriculture-runtime-1.32.6"},
+    {"record_id":"local-a-seat1","split":"local","opponent_lineage":"opp-local-a","episode_id":"local-ep-a","seed":101,"seat":1,"seat_group":"local-paired","time_slice":"2026-08-01","time_index":1,"market_regime":"local-calm","execution_mode":"closed-loop","rank":2,"margin":-2000,"closed_loop_win_probability":0.46,"identity_hash":"f1758e74c92ac8b9ba7adac0b52aea766180ae0cb1137b37728bdd5e119418d8","source_id":"official-kaggriculture-runtime-1.32.6"},
+    {"record_id":"local-stress","split":"local","opponent_lineage":"opp-local-b","episode_id":"local-stress-a","seed":102,"seat":0,"seat_group":"local-stress","time_slice":"2026-08-02","time_index":2,"market_regime":"local-volatile","execution_mode":"open-loop-stress","rank":2,"margin":-9000,"closed_loop_win_probability":null,"identity_hash":"4dcbcdb134fbda2ec42bca4ea2ba95eb44757014dac204fe020c194fb308b66e","source_id":"adaptive-replay-agent-v6"},
+    {"record_id":"public-a-seat0","split":"public","opponent_lineage":"opp-public-a","episode_id":"public-ep-a","seed":201,"seat":0,"seat_group":"public-paired","time_slice":"2026-08-10","time_index":10,"market_regime":"public-calm","execution_mode":"closed-loop","rank":1,"margin":8500,"closed_loop_win_probability":0.60,"identity_hash":"5435b00ff4a371f01aa183493d8520fbcf88fe274de708a7a817329f714f6065","source_id":"adaptive-replay-agent-v6"},
+    {"record_id":"public-a-seat1","split":"public","opponent_lineage":"opp-public-a","episode_id":"public-ep-a","seed":201,"seat":1,"seat_group":"public-paired","time_slice":"2026-08-10","time_index":10,"market_regime":"public-calm","execution_mode":"closed-loop","rank":2,"margin":-3500,"closed_loop_win_probability":0.43,"identity_hash":"36a817f4069193fccc722d40d0b44b4aa1699685eb58e477a3b4cc427a9a3091","source_id":"adaptive-replay-agent-v6"},
+    {"record_id":"live-a-seat0","split":"live","opponent_lineage":"opp-live-a","episode_id":"live-ep-a","seed":301,"seat":0,"seat_group":"live-paired","time_slice":"2026-08-20","time_index":20,"market_regime":"live-tight","execution_mode":"closed-loop","rank":2,"margin":-1000,"closed_loop_win_probability":0.48,"identity_hash":"b7599530f8eea76f8995c75d8e849fea2d024addedd7b9b35b8ea933df401157","source_id":"adaptive-replay-agent-v6"},
+    {"record_id":"live-a-seat1","split":"live","opponent_lineage":"opp-live-a","episode_id":"live-ep-a","seed":301,"seat":1,"seat_group":"live-paired","time_slice":"2026-08-20","time_index":20,"market_regime":"live-tight","execution_mode":"closed-loop","rank":2,"margin":-6000,"closed_loop_win_probability":0.39,"identity_hash":"a7d516afbaa17a78e1adfe9fe21f651b7fc32396ffe816fcc0a9fb96a02f1562","source_id":"adaptive-replay-agent-v6"}
+  ]
+}
