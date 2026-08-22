@@ -1,0 +1,151 @@
+{
+  "cohort_sha256": "5824794572c62eaede96104f6e3b69eab408a656b45788324a7374b7e42b2df8",
+  "cutoff_utc": "2026-08-22T11:45:00Z",
+  "drift": {
+    "C95": {
+      "mean_relative_margin": -1925.0,
+      "p20_relative_margin": -1400.0,
+      "worst_relative_margin": -1400.0
+    },
+    "incumbent": {
+      "mean_relative_margin": -1175.0,
+      "p20_relative_margin": -1200.0,
+      "worst_relative_margin": -1200.0
+    }
+  },
+  "final_holdout": {
+    "opened": false,
+    "role": "post-selection-veto-only",
+    "used_for_selection": false
+  },
+  "issue": "SOT-3018",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "result": "inconclusive-final-reserved",
+  "selected_before_final": "incumbent",
+  "selection_inputs": [
+    "stage_a",
+    "stage_b"
+  ],
+  "stages": {
+    "stage_a": {
+      "C95": {
+        "mean_relative_margin": 2125.0,
+        "p20_relative_margin": -1800.0,
+        "seat_pair_bootstrap_95": [
+          2050.0,
+          2200.0
+        ],
+        "seat_pairs": 2,
+        "w_d_l": {
+          "D": 1,
+          "L": 1,
+          "W": 2
+        },
+        "worst_relative_margin": -1800.0
+      },
+      "incumbent": {
+        "mean_relative_margin": 2175.0,
+        "p20_relative_margin": -900.0,
+        "seat_pair_bootstrap_95": [
+          1850.0,
+          2500.0
+        ],
+        "seat_pairs": 2,
+        "w_d_l": {
+          "D": 1,
+          "L": 1,
+          "W": 2
+        },
+        "worst_relative_margin": -900.0
+      }
+    },
+    "stage_b": {
+      "C95": {
+        "mean_relative_margin": 200.0,
+        "p20_relative_margin": -3200.0,
+        "seat_pair_bootstrap_95": [
+          -200.0,
+          600.0
+        ],
+        "seat_pairs": 2,
+        "w_d_l": {
+          "D": 0,
+          "L": 2,
+          "W": 2
+        },
+        "worst_relative_margin": -3200.0
+      },
+      "incumbent": {
+        "mean_relative_margin": 1000.0,
+        "p20_relative_margin": -2100.0,
+        "seat_pair_bootstrap_95": [
+          750.0,
+          1250.0
+        ],
+        "seat_pairs": 2,
+        "w_d_l": {
+          "D": 1,
+          "L": 1,
+          "W": 2
+        },
+        "worst_relative_margin": -2100.0
+      }
+    }
+  },
+  "validation": {
+    "checks": {
+      "both_seats": true,
+      "candidate_pair": true,
+      "chronological_stages": true,
+      "cohort_hash_matches": true,
+      "cutoff_frozen": true,
+      "episode_disjoint": true,
+      "final_holdout_reserved": true,
+      "final_is_veto_only": true,
+      "identity_only_provenance": true,
+      "lineage_disjoint": true,
+      "lineage_matches_identity": true,
+      "no_replay_payloads": true,
+      "opponent_disjoint": true,
+      "opponent_hashes_pinned": true,
+      "opponent_identity_resolves": true,
+      "outcomes_wdl": true,
+      "rows_complete": true,
+      "schema_supported": true,
+      "seed_disjoint": true,
+      "selection_inputs_exclude_final": true,
+      "selection_stages_nonempty": true,
+      "submission_not_performed": true,
+      "time_slice_disjoint": true
+    },
+    "overlap": {
+      "episode": {
+        "stage_a:final_holdout": [],
+        "stage_a:stage_b": [],
+        "stage_b:final_holdout": []
+      },
+      "lineage": {
+        "stage_a:final_holdout": [],
+        "stage_a:stage_b": [],
+        "stage_b:final_holdout": []
+      },
+      "opponent": {
+        "stage_a:final_holdout": [],
+        "stage_a:stage_b": [],
+        "stage_b:final_holdout": []
+      },
+      "seed": {
+        "stage_a:final_holdout": [],
+        "stage_a:stage_b": [],
+        "stage_b:final_holdout": []
+      },
+      "time_slice": {
+        "stage_a:final_holdout": [],
+        "stage_a:stage_b": [],
+        "stage_b:final_holdout": []
+      }
+    },
+    "passed": true
+  }
+}

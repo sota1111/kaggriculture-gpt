@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "cohort_sha256": "5824794572c62eaede96104f6e3b69eab408a656b45788324a7374b7e42b2df8",
+  "cohort": {
+    "cutoff_utc": "2026-08-22T11:45:00Z",
+    "source": {
+      "id": "current-field-derived-summary-snapshot",
+      "identity_sha256": "93a2b08bce201b8779683ad3e476b621bba1da16c819eaba3618662629158be4",
+      "boundary": "identity/hash/cutoff only; no replay bytes or credentials"
+    },
+    "opponents": [
+      {"id":"stage-a-field-01","lineage":"field/20260822/a01","identity_sha256":"56b8d8ccbbca2a7bb360a0e4b36f11ba970aa25f1c87ed3d3e894f98b8382201","boundary":"identity-hash-only"},
+      {"id":"stage-a-field-02","lineage":"field/20260822/a02","identity_sha256":"d58f7a80be744264e89135eed2dcb5db4e2a06437c458e97fdf8d9bc5a9ce502","boundary":"identity-hash-only"},
+      {"id":"stage-b-field-03","lineage":"field/20260822/b03","identity_sha256":"2854f0176f6986417c139672cc452d1ad7e1ed72f01f2956b72b7ef02dfa9eef","boundary":"identity-hash-only"},
+      {"id":"stage-b-field-04","lineage":"field/20260822/b04","identity_sha256":"833a9f54b734ac9024f0e19eecc613d8025e99941bed528e7fac8b7cbf94b977","boundary":"identity-hash-only"},
+      {"id":"final-field-05","lineage":"field/20260822/f05","identity_sha256":"138f2578deace876090de49f76e9c4b7fc22d68e7af5d2593575fdf0cedcbf35","boundary":"identity-hash-only"},
+      {"id":"final-field-06","lineage":"field/20260822/f06","identity_sha256":"0fc07d8dc15f53bd83c2b27b1d401f733f321e8777fbc713e36449e2f653a061","boundary":"identity-hash-only"}
+    ],
+    "stages": {
+      "stage_a": [
+        {"candidate":"C95","opponent":"stage-a-field-01","lineage":"field/20260822/a01","episode":"c95-a01","seed":301801,"seat":0,"time_slice":"2026-08-22T08:00:00Z","outcome":"W","relative_margin":6200},
+        {"candidate":"C95","opponent":"stage-a-field-01","lineage":"field/20260822/a01","episode":"c95-a01","seed":301801,"seat":1,"time_slice":"2026-08-22T08:00:00Z","outcome":"L","relative_margin":-1800},
+        {"candidate":"C95","opponent":"stage-a-field-02","lineage":"field/20260822/a02","episode":"c95-a02","seed":301803,"seat":0,"time_slice":"2026-08-22T08:20:00Z","outcome":"W","relative_margin":4100},
+        {"candidate":"C95","opponent":"stage-a-field-02","lineage":"field/20260822/a02","episode":"c95-a02","seed":301803,"seat":1,"time_slice":"2026-08-22T08:20:00Z","outcome":"D","relative_margin":0},
+        {"candidate":"incumbent","opponent":"stage-a-field-01","lineage":"field/20260822/a01","episode":"inc-a01","seed":301805,"seat":0,"time_slice":"2026-08-22T08:00:00Z","outcome":"W","relative_margin":5900},
+        {"candidate":"incumbent","opponent":"stage-a-field-01","lineage":"field/20260822/a01","episode":"inc-a01","seed":301805,"seat":1,"time_slice":"2026-08-22T08:00:00Z","outcome":"L","relative_margin":-900},
+        {"candidate":"incumbent","opponent":"stage-a-field-02","lineage":"field/20260822/a02","episode":"inc-a02","seed":301807,"seat":0,"time_slice":"2026-08-22T08:20:00Z","outcome":"W","relative_margin":3700},
+        {"candidate":"incumbent","opponent":"stage-a-field-02","lineage":"field/20260822/a02","episode":"inc-a02","seed":301807,"seat":1,"time_slice":"2026-08-22T08:20:00Z","outcome":"D","relative_margin":0}
+      ],
+      "stage_b": [
+        {"candidate":"C95","opponent":"stage-b-field-03","lineage":"field/20260822/b03","episode":"c95-b03","seed":301811,"seat":0,"time_slice":"2026-08-22T10:00:00Z","outcome":"W","relative_margin":2800},
+        {"candidate":"C95","opponent":"stage-b-field-03","lineage":"field/20260822/b03","episode":"c95-b03","seed":301811,"seat":1,"time_slice":"2026-08-22T10:00:00Z","outcome":"L","relative_margin":-3200},
+        {"candidate":"C95","opponent":"stage-b-field-04","lineage":"field/20260822/b04","episode":"c95-b04","seed":301813,"seat":0,"time_slice":"2026-08-22T10:20:00Z","outcome":"W","relative_margin":1900},
+        {"candidate":"C95","opponent":"stage-b-field-04","lineage":"field/20260822/b04","episode":"c95-b04","seed":301813,"seat":1,"time_slice":"2026-08-22T10:20:00Z","outcome":"L","relative_margin":-700},
+        {"candidate":"incumbent","opponent":"stage-b-field-03","lineage":"field/20260822/b03","episode":"inc-b03","seed":301815,"seat":0,"time_slice":"2026-08-22T10:00:00Z","outcome":"W","relative_margin":3600},
+        {"candidate":"incumbent","opponent":"stage-b-field-03","lineage":"field/20260822/b03","episode":"inc-b03","seed":301815,"seat":1,"time_slice":"2026-08-22T10:00:00Z","outcome":"L","relative_margin":-2100},
+        {"candidate":"incumbent","opponent":"stage-b-field-04","lineage":"field/20260822/b04","episode":"inc-b04","seed":301817,"seat":0,"time_slice":"2026-08-22T10:20:00Z","outcome":"W","relative_margin":2500},
+        {"candidate":"incumbent","opponent":"stage-b-field-04","lineage":"field/20260822/b04","episode":"inc-b04","seed":301817,"seat":1,"time_slice":"2026-08-22T10:20:00Z","outcome":"D","relative_margin":0}
+      ],
+      "final_holdout": [
+        {"opponent":"final-field-05","lineage":"field/20260822/f05","episode":"final-f05","seed":301821,"seat":0,"time_slice":"2026-08-22T11:00:00Z","identity_sha256":"7ac166a72a29438bb71fe562df37a5998a6df25a7c609eea110464431ffb207d"},
+        {"opponent":"final-field-05","lineage":"field/20260822/f05","episode":"final-f05","seed":301821,"seat":1,"time_slice":"2026-08-22T11:00:00Z","identity_sha256":"7ac166a72a29438bb71fe562df37a5998a6df25a7c609eea110464431ffb207d"},
+        {"opponent":"final-field-06","lineage":"field/20260822/f06","episode":"final-f06","seed":301823,"seat":0,"time_slice":"2026-08-22T11:20:00Z","identity_sha256":"674833b8267e43f2181b92c25403a54d37fd1b64b2d2f9c22a23346a846f4478"},
+        {"opponent":"final-field-06","lineage":"field/20260822/f06","episode":"final-f06","seed":301823,"seat":1,"time_slice":"2026-08-22T11:20:00Z","identity_sha256":"674833b8267e43f2181b92c25403a54d37fd1b64b2d2f9c22a23346a846f4478"}
+      ]
+    }
+  },
+  "selection_policy": {
+    "candidate_selection_inputs": ["stage_a", "stage_b"],
+    "final_holdout_role": "post-selection-veto-only"
+  },
+  "bootstrap": {"unit":"opponent-seed-seat-pair","samples":2000,"seed":3018},
+  "kaggle_submission": "NOT_PERFORMED"
+}
