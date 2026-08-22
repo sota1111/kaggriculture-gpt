@@ -1,0 +1,19 @@
+{
+  "artifact": "Market-Aware Farm Selection clean-room whole-agent",
+  "source_url": "https://www.kaggle.com/code/indarkarhana/rank-top10-read-the-market-choose-the-farm",
+  "kaggle_ref": "indarkarhana/rank-top10-read-the-market-choose-the-farm",
+  "script_version": "latest resolved 2026-08-22",
+  "notebook_sha256": "f0c7ccf2781f9287e5728e737e6ef3f72d047f66fa8dfeb33843146842ce1edd",
+  "acquired_content_fingerprint_sha256": "f0c7ccf2781f9287e5728e737e6ef3f72d047f66fa8dfeb33843146842ce1edd",
+  "acquired_content_fingerprint_method": "SHA-256 of the acquired notebook; no upstream files redistributed",
+  "license": "UNSPECIFIED",
+  "license_source": "public notebook description did not provide a reusable source license",
+  "redistribution": "prohibited-fail-closed",
+  "implementation": "clean-room-from-public-description",
+  "foundation": "candidates/lonespear-care-production/agent.py",
+  "foundation_license": "MIT",
+  "dependencies": ["python-standard-library"],
+  "default_enabled": false,
+  "public_score_used_for_promotion": false,
+  "kaggle_submission": "NOT_PERFORMED"
+}
