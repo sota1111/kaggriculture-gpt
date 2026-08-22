@@ -1,0 +1,676 @@
+{
+  "aggregate_identity_gaps": {
+    "care_feed_payback": {
+      "gap": -200.0,
+      "planned": -80.0,
+      "realized": -280.0
+    },
+    "crop_tile_day": {
+      "gap": 402.0,
+      "planned": 0.0,
+      "realized": 402.0
+    },
+    "market_impact": {
+      "gap": 149.0,
+      "planned": 0.0,
+      "realized": 149.0
+    },
+    "shed_overflow": {
+      "gap": 0.0,
+      "planned": 0.0,
+      "realized": 0.0
+    },
+    "terminal_inventory": {
+      "gap": 2116410.0,
+      "planned": -2116290.0,
+      "realized": 120.0
+    },
+    "town_demand": {
+      "gap": 0.0,
+      "planned": 0.0,
+      "realized": 0.0
+    }
+  },
+  "axis": "c95-engine-identity-planning-to-trajectory-attribution",
+  "candidate_sha256": "ed8c8420514acb5a96c0d44cfd42a8786e49c7cdc01a0de61d2e6b8997dda87a",
+  "checks": {
+    "engine_identity_validated": true,
+    "external_replay_bytes_used": false,
+    "fail_closed": true,
+    "future_state_used": false,
+    "kaggle_submission": "NOT_PERFORMED",
+    "new_policy_introduced": false,
+    "opponent_private_state_used": false,
+    "same_seed_both_seats": true,
+    "seat_opponent_phase_recorded": true,
+    "trace_recalculation_matches": true
+  },
+  "current_field": {
+    "cohort_sha256": "93a2b08bce201b8779683ad3e476b621bba1da16c819eaba3618662629158be4",
+    "fallback": "same-seed both-seat official starter/random corpus",
+    "manifest": "tests/fixtures/current_field_sealed_cohort.json",
+    "manifest_sha256": "d8771b79ea2bd8fab0f11650479ad6df919caa5ed1a492dc2696fd00dd991d6d",
+    "usable_for_trajectory_attribution": false
+  },
+  "engine_snapshot_sha256": "f373cefc8cf124dbccc3dabb109f0e330d94e5361edfc01b0fa4e733f3f9d445",
+  "issue": "SOT-3017",
+  "major_drift_identities": [
+    "terminal_inventory",
+    "crop_tile_day",
+    "care_feed_payback"
+  ],
+  "reason": "current-field manifest contains identity/hash/outcome summaries but no executable or replay trajectories; official-engine fallback is diagnostic only",
+  "result": "inconclusive",
+  "rows": [
+    {
+      "events": {
+        "care_actions": 308,
+        "feed_actions": 319,
+        "overflow_turns": 0,
+        "town_unlock_changes": 8
+      },
+      "identity_totals": {
+        "care_feed_payback": {
+          "gap": -50.0,
+          "planned": -20.0,
+          "realized": -70.0
+        },
+        "crop_tile_day": {
+          "gap": 96.0,
+          "planned": 0.0,
+          "realized": 96.0
+        },
+        "market_impact": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "shed_overflow": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "terminal_inventory": {
+          "gap": 542109.0,
+          "planned": -542109.0,
+          "realized": 0.0
+        },
+        "town_demand": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        }
+      },
+      "lineage": "official-starter",
+      "margin": 185001.0,
+      "opponent": "starter",
+      "opponent_reward": 3421.0,
+      "phase": "screen",
+      "phase_identity_totals": {
+        "early": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": 60.0,
+            "realized": 60.0
+          },
+          "crop_tile_day": {
+            "gap": 11463.0,
+            "planned": 0.0,
+            "realized": 11463.0
+          },
+          "market_impact": {
+            "gap": 296.0,
+            "planned": 0.0,
+            "realized": 296.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 19850.0,
+            "planned": -18160.0,
+            "realized": 1690.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "late": {
+          "care_feed_payback": {
+            "gap": -50.0,
+            "planned": 0.0,
+            "realized": -50.0
+          },
+          "crop_tile_day": {
+            "gap": -10794.0,
+            "planned": 0.0,
+            "realized": -10794.0
+          },
+          "market_impact": {
+            "gap": -3035.0,
+            "planned": 0.0,
+            "realized": -3035.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 346413.0,
+            "planned": -353178.0,
+            "realized": -6765.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "mid": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": -80.0,
+            "realized": -80.0
+          },
+          "crop_tile_day": {
+            "gap": -573.0,
+            "planned": 0.0,
+            "realized": -573.0
+          },
+          "market_impact": {
+            "gap": 2739.0,
+            "planned": 0.0,
+            "realized": 2739.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 175846.0,
+            "planned": -170771.0,
+            "realized": 5075.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        }
+      },
+      "reward": 188422.0,
+      "seat": 0,
+      "seed": 301701,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720
+    },
+    {
+      "events": {
+        "care_actions": 308,
+        "feed_actions": 319,
+        "overflow_turns": 0,
+        "town_unlock_changes": 8
+      },
+      "identity_totals": {
+        "care_feed_payback": {
+          "gap": -50.0,
+          "planned": -20.0,
+          "realized": -70.0
+        },
+        "crop_tile_day": {
+          "gap": 96.0,
+          "planned": 0.0,
+          "realized": 96.0
+        },
+        "market_impact": {
+          "gap": 149.0,
+          "planned": 0.0,
+          "realized": 149.0
+        },
+        "shed_overflow": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "terminal_inventory": {
+          "gap": 526186.0,
+          "planned": -526066.0,
+          "realized": 120.0
+        },
+        "town_demand": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        }
+      },
+      "lineage": "official-starter",
+      "margin": 180081.0,
+      "opponent": "starter",
+      "opponent_reward": 3421.0,
+      "phase": "screen",
+      "phase_identity_totals": {
+        "early": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": 60.0,
+            "realized": 60.0
+          },
+          "crop_tile_day": {
+            "gap": 11463.0,
+            "planned": 0.0,
+            "realized": 11463.0
+          },
+          "market_impact": {
+            "gap": 296.0,
+            "planned": 0.0,
+            "realized": 296.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 19850.0,
+            "planned": -18160.0,
+            "realized": 1690.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "late": {
+          "care_feed_payback": {
+            "gap": -50.0,
+            "planned": 0.0,
+            "realized": -50.0
+          },
+          "crop_tile_day": {
+            "gap": -10794.0,
+            "planned": 0.0,
+            "realized": -10794.0
+          },
+          "market_impact": {
+            "gap": -2633.0,
+            "planned": 0.0,
+            "realized": -2633.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 334599.0,
+            "planned": -341364.0,
+            "realized": -6765.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "mid": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": -80.0,
+            "realized": -80.0
+          },
+          "crop_tile_day": {
+            "gap": -573.0,
+            "planned": 0.0,
+            "realized": -573.0
+          },
+          "market_impact": {
+            "gap": 2486.0,
+            "planned": 0.0,
+            "realized": 2486.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 171737.0,
+            "planned": -166542.0,
+            "realized": 5195.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        }
+      },
+      "reward": 183502.0,
+      "seat": 1,
+      "seed": 301701,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720
+    },
+    {
+      "events": {
+        "care_actions": 308,
+        "feed_actions": 319,
+        "overflow_turns": 0,
+        "town_unlock_changes": 8
+      },
+      "identity_totals": {
+        "care_feed_payback": {
+          "gap": -50.0,
+          "planned": -20.0,
+          "realized": -70.0
+        },
+        "crop_tile_day": {
+          "gap": 106.0,
+          "planned": 0.0,
+          "realized": 106.0
+        },
+        "market_impact": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "shed_overflow": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "terminal_inventory": {
+          "gap": 525206.0,
+          "planned": -525206.0,
+          "realized": 0.0
+        },
+        "town_demand": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        }
+      },
+      "lineage": "official-random",
+      "margin": 175341.0,
+      "opponent": "random",
+      "opponent_reward": 0.0,
+      "phase": "confirm",
+      "phase_identity_totals": {
+        "early": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": 60.0,
+            "realized": 60.0
+          },
+          "crop_tile_day": {
+            "gap": 11507.0,
+            "planned": 0.0,
+            "realized": 11507.0
+          },
+          "market_impact": {
+            "gap": 448.0,
+            "planned": 0.0,
+            "realized": 448.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 20593.0,
+            "planned": -18903.0,
+            "realized": 1690.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "late": {
+          "care_feed_payback": {
+            "gap": -50.0,
+            "planned": 0.0,
+            "realized": -50.0
+          },
+          "crop_tile_day": {
+            "gap": -10071.0,
+            "planned": 0.0,
+            "realized": -10071.0
+          },
+          "market_impact": {
+            "gap": -3516.0,
+            "planned": 0.0,
+            "realized": -3516.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 327796.0,
+            "planned": -334561.0,
+            "realized": -6765.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "mid": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": -80.0,
+            "realized": -80.0
+          },
+          "crop_tile_day": {
+            "gap": -1330.0,
+            "planned": 0.0,
+            "realized": -1330.0
+          },
+          "market_impact": {
+            "gap": 3068.0,
+            "planned": 0.0,
+            "realized": 3068.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 176817.0,
+            "planned": -171742.0,
+            "realized": 5075.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        }
+      },
+      "reward": 175341.0,
+      "seat": 0,
+      "seed": 301711,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720
+    },
+    {
+      "events": {
+        "care_actions": 308,
+        "feed_actions": 319,
+        "overflow_turns": 0,
+        "town_unlock_changes": 8
+      },
+      "identity_totals": {
+        "care_feed_payback": {
+          "gap": -50.0,
+          "planned": -20.0,
+          "realized": -70.0
+        },
+        "crop_tile_day": {
+          "gap": 104.0,
+          "planned": 0.0,
+          "realized": 104.0
+        },
+        "market_impact": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "shed_overflow": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        },
+        "terminal_inventory": {
+          "gap": 522909.0,
+          "planned": -522909.0,
+          "realized": 0.0
+        },
+        "town_demand": {
+          "gap": 0.0,
+          "planned": 0.0,
+          "realized": 0.0
+        }
+      },
+      "lineage": "official-random",
+      "margin": 176604.0,
+      "opponent": "random",
+      "opponent_reward": 0.0,
+      "phase": "confirm",
+      "phase_identity_totals": {
+        "early": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": 60.0,
+            "realized": 60.0
+          },
+          "crop_tile_day": {
+            "gap": 11507.0,
+            "planned": 0.0,
+            "realized": 11507.0
+          },
+          "market_impact": {
+            "gap": 472.0,
+            "planned": 0.0,
+            "realized": 472.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 20593.0,
+            "planned": -18903.0,
+            "realized": 1690.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "late": {
+          "care_feed_payback": {
+            "gap": -50.0,
+            "planned": 0.0,
+            "realized": -50.0
+          },
+          "crop_tile_day": {
+            "gap": -10518.0,
+            "planned": 0.0,
+            "realized": -10518.0
+          },
+          "market_impact": {
+            "gap": -3388.0,
+            "planned": 0.0,
+            "realized": -3388.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 327315.0,
+            "planned": -334080.0,
+            "realized": -6765.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        },
+        "mid": {
+          "care_feed_payback": {
+            "gap": 0.0,
+            "planned": -80.0,
+            "realized": -80.0
+          },
+          "crop_tile_day": {
+            "gap": -885.0,
+            "planned": 0.0,
+            "realized": -885.0
+          },
+          "market_impact": {
+            "gap": 2916.0,
+            "planned": 0.0,
+            "realized": 2916.0
+          },
+          "shed_overflow": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          },
+          "terminal_inventory": {
+            "gap": 175001.0,
+            "planned": -169926.0,
+            "realized": 5075.0
+          },
+          "town_demand": {
+            "gap": 0.0,
+            "planned": 0.0,
+            "realized": 0.0
+          }
+        }
+      },
+      "reward": 176604.0,
+      "seat": 1,
+      "seed": 301711,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720
+    }
+  ],
+  "summary": {
+    "all_done": true,
+    "both_seats": true,
+    "episodes": 4,
+    "mean_margin": 179256.75
+  }
+}
