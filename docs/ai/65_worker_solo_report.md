@@ -40,6 +40,6 @@
 - The exact public route could not be redistributed due to absent license metadata; the clean-room direction is intentionally narrower than the opaque artifact.
 - Rejection applies to this clean-room 8C4S/premium-order implementation, not to inaccessible upstream code under a future explicit license.
 
-## Linear Report: PENDING
+## Linear Report: POSTED
 ## Acceptance: PASS
 ## Next Action: READY_FOR_REVIEW
