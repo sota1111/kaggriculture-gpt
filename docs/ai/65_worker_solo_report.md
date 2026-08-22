@@ -1,39 +1,41 @@
-# Solo Worker Report — SOT-2989
+# Solo Worker Report — SOT-3004
 
 ## Summary
 
-Pinned the public Reactive Optimal Task kernel and its outputs, recorded the undeclared-license boundary, implemented an independent standard-library clean-room whole agent, and completed same-seed/both-seat screen plus fully separated confirm. The candidate passed the tail-sensitive hedge gate and is retained default-OFF; the prior champion remains unchanged and no Kaggle submission was made.
+Reproduced the Apache-2.0 C95 notebook's embedded agent byte-for-byte, packaged it as a default-off offline candidate, and completed a 720-turn both-seat screen plus opponent/lineage/episode/seed/seat/time-disjoint confirm. The candidate is promoted only as a structurally independent working-baseline hedge; the incumbent and submission archive remain unchanged and no Kaggle submission occurred.
 
 ## Changed Files
 
-- `candidates/reactive-optimal-task/agent.py` / `source.json` — clean-room agent and provenance boundary.
-- `scripts/measure_reactive_optimal_task.py` — contract, intervention, screen, and confirm evaluator.
-- `tests/fixtures/reactive_optimal_task.json` / `tests/test_reactive_optimal_task.py` — sealed identities and focused tests.
-- `docs/measurements/SOT-2989/SOT-2989-reactive-optimal-task.json` — reproducible evidence.
-- `docs/ai/experiment_ledger.jsonl`, `docs/ai/linear/SOT-2989.md`, `README.md` — decision and usage records.
+- `candidates/c95-high-score/` — exact agent, provenance, license, and package boundary.
+- `scripts/extract_c95_exact.py` — fail-closed notebook/artifact extractor.
+- `scripts/measure_c95_high_score.py` — screen/confirm and runtime evidence runner.
+- `tests/test_c95_high_score.py` — identity, portability, and evidence contracts.
+- `docs/measurements/SOT-3004/c95-screen-confirm.json` — sealed evidence and effective-config fingerprint.
+- `docs/ai/experiment_ledger.jsonl` / `docs/ai/linear/SOT-3004.md` — decision ledger and issue record.
 
 ## Verification
 
-- Python compile: PASS.
-- Full unit suite: 234 PASS, 2 environment-dependent skips.
-- Submission contract and existing single-root archive integrity: PASS.
-- Official-engine evaluation: 16/16 champion/candidate episodes ended `DONE/DONE` at 720 steps, within timeout, with 0 invalid actions.
-- Screen candidate vs champion: mean-margin delta +24574.75; p20/worst +27458; equal mean rank 2.0; gate PASS.
-- Confirm candidate vs champion: mean-margin delta -3193.5; p20/worst +5390; equal mean rank 2.0; two-signal non-regressing-tail gate PASS.
-- Intervention log: 5752 calls; 6432 assigned tasks; action-family fingerprint diverged from champion.
+- Notebook SHA-256: `cdca09ed40f2c3a8b142791dd2f1b5f3dffc2de4332a153e53da6c63d58e7b5a`.
+- Exact agent: 133270 bytes, SHA-256 `ed8c8420514acb5a96c0d44cfd42a8786e49c7cdc01a0de61d2e6b8997dda87a`.
+- Compile and file-runner submission contracts: PASS.
+- Full unit suite: 249 PASS, 2 optional skips.
+- Screen: 4/4 wins-or-ties; mean-margin delta +139739.5; p20/worst delta +125000.
+- Confirm: mean-margin delta +163872.25; p20/worst delta +156084.
+- All eight candidate games ended DONE/DONE at 720 turns; zero invalid actions; 64894 non-PASS actions.
+- Effective-config fingerprint: `cd276b276df40fdd4c0c8b855991b1f59e0c3634db997af24e5eb8b434c1d04a`.
 - Kaggle submission: NOT_PERFORMED.
 
 ## Acceptance Criteria
 
-- [x] Source/version/license/hash and clean-room boundary recorded.
-- [x] Independent agent runs and records task-selection interventions.
-- [x] Same-seed/both-seat screen and separated confirm are saved.
-- [x] Evidence-backed decision appended to the experiment ledger.
-- [x] No Kaggle submission; old champion remains an independent hedge.
+- [x] License/source/notebook/artifact identity fixed.
+- [x] Candidate is offline, stdlib-only, file-runner callable, and fail-closed on extraction drift.
+- [x] Screen/confirm, firing, runtime, and invalid-action evidence saved.
+- [x] Evidence-backed promoted-hedge conclusion appended to the ledger.
+- [x] No Kaggle submission; incumbent hedge preserved.
 
 ## Risks
 
-Mean rank remained 2.0 in both panels and confirm mean margin regressed slightly. Promotion is limited to a structurally independent default-OFF portfolio hedge; it is not a champion replacement or live-field claim.
+This promotion is a local working-baseline/portfolio decision, not a champion replacement or leaderboard claim. The issue explicitly prohibits submission, so live transfer remains unobserved.
 
 ## Linear Report: POSTED
 

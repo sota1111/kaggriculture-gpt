@@ -1,6 +1,6 @@
-# Final Report — SOT-2986
+# Final Report — SOT-3004
 
-All four child issues completed and merged. The strongest portable candidate was validated, submitted under the official gates, and observed at public 600.0. Because this regressed from the retained champion range and contradicted local confirm, it is rejected for champion replacement. The incumbent hedge remains unchanged; the cycle evidence and next-axis handoff are recorded.
+C95 was reproduced as a byte-exact, Apache-2.0, offline/default-off whole-agent candidate. Hash, byte count, callable and 720-turn runtime contracts passed; isolated screen/confirm evidence supports retaining it as a structurally independent working-baseline hedge. The incumbent and submission archive are unchanged, and no Kaggle submission occurred.
 
 ## Acceptance: PASS
 
