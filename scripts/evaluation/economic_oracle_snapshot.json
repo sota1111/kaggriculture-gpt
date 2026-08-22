@@ -1,0 +1,350 @@
+{
+  "animals": {
+    "COW": {
+      "care_bonus_value_per_fed_day": 160,
+      "cost": 400,
+      "feed_cost_to_first_yield": 200,
+      "first_yield_day": 8,
+      "first_yield_net": -40,
+      "interval": 2,
+      "max_held": 6,
+      "payback_productions_without_care": 4,
+      "product": "MILK",
+      "product_base_price": 160,
+      "structure": "PASTURE"
+    },
+    "GOOSE": {
+      "care_bonus_value_per_fed_day": 50,
+      "cost": 300,
+      "feed_cost_to_first_yield": 100,
+      "first_yield_day": 4,
+      "first_yield_net": -50,
+      "interval": 1,
+      "max_held": 4,
+      "payback_productions_without_care": 8,
+      "product": "EGG",
+      "product_base_price": 50,
+      "structure": "COOP"
+    },
+    "SHEEP": {
+      "care_bonus_value_per_fed_day": 200,
+      "cost": 500,
+      "feed_cost_to_first_yield": 150,
+      "first_yield_day": 6,
+      "first_yield_net": 50,
+      "interval": 3,
+      "max_held": 6,
+      "payback_productions_without_care": 4,
+      "product": "WOOL",
+      "product_base_price": 200,
+      "structure": "PASTURE"
+    }
+  },
+  "crops": {
+    "CARROT": {
+      "base_price": 35,
+      "base_profit": 85,
+      "base_profit_per_tile_day": 28.333333333333332,
+      "base_yield": 3,
+      "cycle_days": 3,
+      "fertilized_yield": 4,
+      "fertilizer_increment_value": 35,
+      "first_yield_day": 2,
+      "interval": 0,
+      "max_yield": 4,
+      "max_yield_day": 3,
+      "ongoing": false,
+      "seed": 20
+    },
+    "MELON": {
+      "base_price": 250,
+      "base_profit": 1420,
+      "base_profit_per_tile_day": 118.33333333333333,
+      "base_yield": 6,
+      "cycle_days": 12,
+      "fertilized_yield": 6,
+      "fertilizer_increment_value": 0,
+      "first_yield_day": 10,
+      "interval": 0,
+      "max_yield": 6,
+      "max_yield_day": 12,
+      "ongoing": false,
+      "seed": 80
+    },
+    "STRAWBERRY": {
+      "base_price": 120,
+      "base_profit": 380,
+      "base_profit_per_tile_day": 38.0,
+      "base_yield": 4,
+      "cycle_days": 10,
+      "fertilized_yield": 4,
+      "fertilizer_increment_value": 0,
+      "first_yield_day": 10,
+      "interval": 2,
+      "max_yield": 4,
+      "max_yield_day": 10,
+      "ongoing": true,
+      "seed": 100
+    },
+    "TOMATO": {
+      "base_price": 60,
+      "base_profit": 190,
+      "base_profit_per_tile_day": 23.75,
+      "base_yield": 4,
+      "cycle_days": 8,
+      "fertilized_yield": 4,
+      "fertilizer_increment_value": 0,
+      "first_yield_day": 8,
+      "interval": 1,
+      "max_yield": 4,
+      "max_yield_day": 8,
+      "ongoing": true,
+      "seed": 50
+    },
+    "WHEAT": {
+      "base_price": 25,
+      "base_profit": 90,
+      "base_profit_per_tile_day": 22.5,
+      "base_yield": 4,
+      "cycle_days": 4,
+      "fertilized_yield": 6,
+      "fertilizer_increment_value": 50,
+      "first_yield_day": 2,
+      "interval": 0,
+      "max_yield": 6,
+      "max_yield_day": 4,
+      "ongoing": false,
+      "seed": 10
+    }
+  },
+  "engine": {
+    "agents_sha256": "e1a80501a7b02a212eaac9370ada4129a64e0ee6cb3cbc790f3d77d22863fe22",
+    "engine_sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+    "license": "Apache-2.0",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "package": "kaggle-environments",
+    "source_commit": "28b6d8af3ce73926b3d0fda1410c1ddd8384ab8c",
+    "version": "1.32.7"
+  },
+  "execution": {
+    "default_episode_steps": 720,
+    "done_condition": "previous_step >= episodeSteps - 2",
+    "last_action_step": 718
+  },
+  "labor": {
+    "daily_hire_costs_first_10": [
+      1,
+      1,
+      2,
+      3,
+      5,
+      8,
+      13,
+      21,
+      34,
+      55
+    ],
+    "resets_daily": true
+  },
+  "land": {
+    "order": [
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "prices": [
+      1000,
+      2000,
+      4000
+    ]
+  },
+  "market": {
+    "CARROT": {
+      "I0": 10000,
+      "T": 450,
+      "above_func": "sqrt",
+      "above_target": 0.7,
+      "base": 35,
+      "below_func": "hinge",
+      "below_target": 1.0,
+      "price_at_i0": 35,
+      "price_at_i0_minus_t": 70,
+      "price_at_i0_plus_t": 10
+    },
+    "EGG": {
+      "I0": 10000,
+      "T": 332,
+      "above_func": "log",
+      "above_target": 0.2,
+      "base": 50,
+      "below_func": "hinge",
+      "below_target": 0.4,
+      "price_at_i0": 50,
+      "price_at_i0_minus_t": 70,
+      "price_at_i0_plus_t": 40
+    },
+    "FERTILIZER": {
+      "I0": 10000,
+      "T": 200,
+      "above_func": "linear",
+      "above_target": 0.4,
+      "base": 100,
+      "below_func": "linear",
+      "below_target": 0.4,
+      "price_at_i0": 100,
+      "price_at_i0_minus_t": 140,
+      "price_at_i0_plus_t": 60
+    },
+    "MELON": {
+      "I0": 10000,
+      "T": 300,
+      "above_func": "sq",
+      "above_target": 3.6,
+      "base": 250,
+      "below_func": "log",
+      "below_target": 0.2,
+      "price_at_i0": 250,
+      "price_at_i0_minus_t": 300,
+      "price_at_i0_plus_t": 1
+    },
+    "MILK": {
+      "I0": 10000,
+      "T": 122,
+      "above_func": "linear",
+      "above_target": 1.6,
+      "base": 160,
+      "below_func": "sqrt",
+      "below_target": 0.6,
+      "price_at_i0": 160,
+      "price_at_i0_minus_t": 256,
+      "price_at_i0_plus_t": 1
+    },
+    "STRAWBERRY": {
+      "I0": 10000,
+      "T": 100,
+      "above_func": "linear",
+      "above_target": 1.6,
+      "base": 120,
+      "below_func": "sqrt",
+      "below_target": 0.7,
+      "price_at_i0": 120,
+      "price_at_i0_minus_t": 204,
+      "price_at_i0_plus_t": 1
+    },
+    "TOMATO": {
+      "I0": 10000,
+      "T": 200,
+      "above_func": "sqrt",
+      "above_target": 0.6,
+      "base": 60,
+      "below_func": "hinge",
+      "below_target": 0.4,
+      "price_at_i0": 60,
+      "price_at_i0_minus_t": 84,
+      "price_at_i0_plus_t": 24
+    },
+    "WHEAT": {
+      "I0": 10000,
+      "T": 400,
+      "above_func": "log",
+      "above_target": 0.2,
+      "base": 25,
+      "below_func": "sqrt",
+      "below_target": 0.8,
+      "price_at_i0": 25,
+      "price_at_i0_minus_t": 45,
+      "price_at_i0_plus_t": 20
+    },
+    "WOOL": {
+      "I0": 10000,
+      "T": 105,
+      "above_func": "sq",
+      "above_target": 3.2,
+      "base": 200,
+      "below_func": "log",
+      "below_target": 0.2,
+      "price_at_i0": 200,
+      "price_at_i0_minus_t": 240,
+      "price_at_i0_plus_t": 1
+    }
+  },
+  "privacy": {
+    "allowed": [
+      "public observation",
+      "own private observation",
+      "engine constants/functions"
+    ],
+    "forbidden": [
+      "external replay bytes",
+      "credentials",
+      "opponent private state"
+    ]
+  },
+  "schema_version": 1,
+  "shed": {
+    "default_capacity": 100,
+    "overflow": "discarded-end-of-day"
+  },
+  "sources": [
+    {
+      "kernel_id": 129206683,
+      "license": "UNSPECIFIED",
+      "notebook_sha256": "4c22f50f2e2ee28f92713d304a927d060b26ca73bba3904a35f6870f999b0446",
+      "url": "https://www.kaggle.com/code/georgymamarin/kaggriculture-visualized-what-every-crop-pays",
+      "use": "provenance-and-design-only-no-code-copied",
+      "version": "pulled-2026-08-22"
+    }
+  ],
+  "town": {
+    "center_products": [
+      "WHEAT",
+      "CARROT",
+      "TOMATO",
+      "STRAWBERRY",
+      "MELON",
+      "EGG",
+      "MILK",
+      "WOOL"
+    ],
+    "default_center_interval": 24,
+    "default_shop_interval": 4,
+    "max_shop_instances": 8,
+    "shops": {
+      "BAKERY": [
+        "EGG",
+        "WHEAT"
+      ],
+      "BRUNCH_SPOT": [
+        "EGG",
+        "WHEAT",
+        "STRAWBERRY"
+      ],
+      "FARMERS_MARKET": [
+        "WHEAT",
+        "CARROT",
+        "TOMATO",
+        "STRAWBERRY"
+      ],
+      "ICE_CREAM_SHOP": [
+        "STRAWBERRY",
+        "MILK",
+        "WHEAT"
+      ],
+      "PET_CAFE": [
+        "CARROT"
+      ],
+      "PIZZA_SHOP": [
+        "MILK",
+        "TOMATO",
+        "WHEAT"
+      ],
+      "SMOOTHIE_SHOP": [
+        "STRAWBERRY",
+        "MILK"
+      ],
+      "YARN_STORE": [
+        "WOOL"
+      ]
+    }
+  }
+}
