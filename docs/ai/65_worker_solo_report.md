@@ -1,38 +1,54 @@
-# Solo Worker Report — SOT-3008
+# Solo Worker Report — SOT-3033
 
 ## Summary
 
-公式 `kaggle-environments==1.32.7` の engine constants/functions から経済 oracle snapshot を再構築した。engine／AGENTS／license の hash と version を固定し、crop・animal・market・town・labor・land・shed・最終 step の恒等式を offline で再生成できる。incumbent／C95／Hamburger を screen と分離 confirm の同一 seed／both-seat で実測し、entity/opponent/lineage/seed/seat/time/action-family 別の計画値・実現値乖離を 730 件記録した。Kaggle 提出は行っていない。
+Pinned Kaggle kernel 129971739 / script version 341206423, notebook SHA-256
+`e28aa997dc5317cad8e2a8ee5887efa7c12c40fc17e41af366f2723f29f21406`,
+embedded artifact SHA-256
+`9bdfbafb6755067182d88ce594fd46fb1d712713ffd6931e83d5d50e84bc6fb2`,
+and Apache-2.0 provenance. The notebook declares its 719-action backbone was
+reconstructed from a public replay, so the exact artifact was kept fetch-only.
+
+Built an independent clean-room whole-agent package from the separately
+Apache-2.0 Agent Builder foundation, retaining only v25's portable sheep-first
+basin and public-market SELL-slot ordering. Candidate SHA-256 is
+`5db1a9e17227ee7b049bafd12c0d758b9a210df1b9c1ef2124767e583fcbfc02`.
+The incumbent and submission archive were not modified; no Kaggle submission
+was made.
 
 ## Changed Files
 
-- `scripts/evaluation/economic_oracle.py` / snapshot — engine-derived formulas and fail-closed pinning
-- `scripts/build_economic_oracle_snapshot.py` — offline reproduction/check command
-- `scripts/measure_engine_economic_oracle.py` — paired trajectory-gap measurement
-- `tests/evaluation/test_economic_oracle.py` / `test_measure_engine_economic_oracle.py` — identity/property/drift/split tests
-- `docs/measurements/SOT-3008/engine-economic-oracle.json` — 12-game evidence
-- `docs/ai/experiment_ledger.jsonl` — cycle-4 inconclusive axis record
+- `candidates/v25-strict-future-cleanroom/` — independent artifact, policy, provenance, license, and documentation
+- `scripts/package_v25_strict_future.py` — deterministic package builder
+- `scripts/measure_v25_strict_future.py` — static audit and direct screen/confirm runner
+- `tests/fixtures/v25_strict_future.json` — preregistered disjoint panels
+- `tests/test_v25_strict_future.py` — provenance, independence, contract, and evidence gates
+- `docs/measurements/SOT-3033/v25-screen-confirm.json` — complete measured evidence
+- `docs/ai/experiment_ledger.jsonl` — promoted result with qualification
 
 ## Verification
 
-- Python compileall: PASS
-- Unit tests: 267 PASS, 2 existing optional skips
-- Snapshot regeneration check: PASS
-- 12/12 official-engine episodes: 720 steps, DONE/DONE
-- `main.py` / `submission.tar.gz`: unchanged
-- npm lint/typecheck/e2e: N/A (Python-only repository; no package.json/UI)
+- Targeted unit tests: 3 passed
+- Full suite: 288 passed, 2 skipped (upstream checkout unavailable)
+- Python compileall: passed
+- Submission contract validator: passed
+- Static audit: longest literal sequence 9; no large action lookup, network import, or sensitive runtime identity tokens
+- Screen: all four candidate episodes DONE, invalid actions 0; foundation-relative mean-margin delta +19,344, worst-margin delta +856
+- Sealed confirm: opponent/lineage/episode/seed/seat/time disjoint; all four candidate episodes DONE, invalid actions 0; foundation-relative mean-margin delta +13,523.75, worst-margin delta +13,251
+- npm lint/typecheck/test/e2e: N/A (repository has no package.json; Python gates above are canonical)
 
 ## Acceptance Criteria
 
-- [x] engine/source version/hash/license and derived formulas recorded
-- [x] oracle reproduces offline without replay bytes or credentials
-- [x] same-seed screen and isolated confirm trajectory-gap report recorded
-- [x] engine/version/hash/identity mismatch fails closed
-- [x] no Kaggle submission
+- [x] Provenance and artifact hashes recorded
+- [x] Independent whole-agent screen and sealed confirm completed
+- [x] Experiment ledger records `promoted` with direct A/B evidence and absolute-performance qualification
+- [x] Kaggle submission not performed
 
 ## Risks
 
-The notebook declares no redistribution license, so it is provenance/design-only and no code was copied. The measurements validate attribution, not candidate promotion; ledger result is correctly `inconclusive`.
+Promotion is relative to the independent foundation. The candidate lost all
+four absolute confirm matchups despite improving every aggregate margin gate,
+so it is retained as a hedge and does not replace the incumbent.
 
 ## Linear Report: POSTED
 
