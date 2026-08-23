@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "manifest_sha256": "7ca64565b5dce64012adea0195744975d3476203a6e190b16882a98ad4dfd4a0",
+  "kaggle_submission": "NOT_PERFORMED",
+  "selection_policy": {
+    "selection_inputs": ["screen"],
+    "confirm_role": "sealed-post-selection-trust-check"
+  },
+  "targets": [
+    {"id": "incumbent", "role": "incumbent", "path": "main.py", "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"},
+    {"id": "C95", "role": "c95", "path": "candidates/c95-high-score/agent.py", "sha256": "ed8c8420514acb5a96c0d44cfd42a8786e49c7cdc01a0de61d2e6b8997dda87a"},
+    {"id": "care-production", "role": "independent-candidate", "path": "candidates/lonespear-care-production/agent.py", "sha256": "eb5b5f59a8ec2d40b77cc99d4ffe3b932136fdcf9f6b6e168726b7f07ab47cb0"}
+  ],
+  "sources": [
+    {"id": "top-farms-live-meta", "url": "https://www.kaggle.com/code/cjlcjlcjl/kaggriculture-what-the-top-farms-do-a-live-meta", "version": "observed 2026-08-23", "sha256": "a7447511510ed22b73f2315246b6bf4de66f219ffe3ba692a377f3fb47931331", "license": "Apache-2.0", "boundary": "fetch-only-not-committed"},
+    {"id": "daily-replays-live-meta", "url": "https://www.kaggle.com/code/georgymamarin/kaggriculture-daily-replays-the-live-meta-report", "version": "v19 observed 2026-08-22", "sha256": "6556a8307132fe45c22cc0d3821333d028e342167dfcbd880421f9e15668fb13", "license": "Apache-2.0", "boundary": "fetch-only-not-committed"},
+    {"id": "official-runtime", "url": "https://github.com/Kaggle/kaggle-environments/blob/1.32.4/kaggle_environments/envs/kaggriculture/kaggriculture.py", "version": "kaggle-environments==1.32.4", "sha256": "9741c0470a8db98a70644491d5121ae6295413343d1a08ef9fcee35e0b76f2c5", "license": "Apache-2.0", "boundary": "fetch-only-not-committed"}
+  ],
+  "cohort": {
+    "screen_count": 3,
+    "records": [
+      {"opponent_id":"meta-a","lineage_id":"lineage-a","episode_id":"screen-a","seed":303501,"time_cohort":"2026-08-20","observed_at":"2026-08-20T01:00:00Z","results":{"incumbent":{"seat_margins":{"0":2200,"1":600},"rank":1},"C95":{"seat_margins":{"0":3100,"1":900},"rank":1},"care-production":{"seat_margins":{"0":-800,"1":-1400},"rank":2}}},
+      {"opponent_id":"meta-b","lineage_id":"lineage-b","episode_id":"screen-b","seed":303502,"time_cohort":"2026-08-20","observed_at":"2026-08-20T07:00:00Z","results":{"incumbent":{"seat_margins":{"0":-500,"1":900},"rank":1},"C95":{"seat_margins":{"0":1800,"1":400},"rank":1},"care-production":{"seat_margins":{"0":-2000,"1":500},"rank":2}}},
+      {"opponent_id":"meta-c","lineage_id":"lineage-c","episode_id":"screen-c","seed":303503,"time_cohort":"2026-08-21","observed_at":"2026-08-21T02:00:00Z","results":{"incumbent":{"seat_margins":{"0":1200,"1":-200},"rank":1},"C95":{"seat_margins":{"0":700,"1":1100},"rank":1},"care-production":{"seat_margins":{"0":300,"1":-900},"rank":2}}},
+      {"opponent_id":"meta-d","lineage_id":"lineage-d","episode_id":"confirm-a","seed":303511,"time_cohort":"2026-08-22","observed_at":"2026-08-22T01:00:00Z","results":{"incumbent":{"seat_margins":{"0":1900,"1":500},"rank":1},"C95":{"seat_margins":{"0":-1800,"1":-600},"rank":2},"care-production":{"seat_margins":{"0":-1100,"1":200},"rank":2}}},
+      {"opponent_id":"meta-e","lineage_id":"lineage-e","episode_id":"confirm-b","seed":303512,"time_cohort":"2026-08-22","observed_at":"2026-08-22T09:00:00Z","results":{"incumbent":{"seat_margins":{"0":800,"1":200},"rank":1},"C95":{"seat_margins":{"0":500,"1":-1700},"rank":2},"care-production":{"seat_margins":{"0":400,"1":-400},"rank":1}}},
+      {"opponent_id":"meta-f","lineage_id":"lineage-f","episode_id":"confirm-c","seed":303513,"time_cohort":"2026-08-23","observed_at":"2026-08-23T00:10:00Z","results":{"incumbent":{"seat_margins":{"0":-200,"1":1000},"rank":1},"C95":{"seat_margins":{"0":-900,"1":300},"rank":2},"care-production":{"seat_margins":{"0":-500,"1":100},"rank":2}}}
+    ]
+  }
+}
