@@ -53,6 +53,7 @@
 | public whole-agent 探索 | V16-RC5、Strict-Future v27、V111、V16-RC5-R5A、HarvestForge-X 3094、Moon Counts Melons、Kaito、V7 などを provenance 監査し、verbatim または clean-room 候補を分離 | V111 clean-room は same-seed screen mean margin `-91,990.5`、confirm `-88,756.5` で rejected。R5A と Hamburger V27 も isolated confirm で rejected。V16-RC5 / Strict-Future は local closed-loop が強くても無ライセンスの固定 route/action trace のため fail-closed。HarvestForge-X 3094 と Moon 系も無ライセンス部分を vendoring せず、default-off/fetch-only または限定 clean-room に留めた |
 | oracle 再アンカー | authenticated current-top replay、C22 control、Strict-Future live-field panel、official-engine economic oracle、current-field Stage A/B | C22 panel は既知 live ordering `incumbent 781.5 > Conditional Memory 600.0` を逆転して oracle 自体が rejected。Strict-Future は current replay refresh 不可で inconclusive。current-field Stage B は incumbent を選んだが、trajectory 不足と final holdout 未開封のため診断用途に限定 |
 | 採用＋提出＋観測への転換（PR #418 以降のドクトリン） | `cv_representative=false` では研究だけで止めず、provenance を通る強い whole-agent を exact artifact として governed submit し、incumbent を hedge 保存 | Conditional Memory `600.0`、Apache clean-room `600.0`、C95 `600.0` と、local 高評価が live へ転移しないことを実測。C95 は incumbent `792.7` に対し `-192.7` で rejected。この実観測により「local CV を昇格 oracle にする」方針から「live 分布へ oracle を再アンカーする」方針へ移行 |
+| cycle 6 — external whole-agent / provenance / oracle portfolio | Adaptive Replay、v25 Strict-Future、chronological live-meta oracle、engine-grounded attribution を独立評価 | Adaptive Replay は無ライセンスの 719-step replay table 依存で provenance reject。v25 は Apache-2.0 foundation 比で sealed mean margin `+13,523.75` だが絶対勝敗 `0/4` のため hedge 止まり。chronological oracle は screen の C95 優位が confirm で逆転し transfer trust rejected。engine 恒等式は残差 0 と相互作用発火を確認したが trajectory bytes 不在で因果帰属は inconclusive。提出可能な champion 改善はなく、incumbent と既存 archive を維持 |
 
 V16-RC5 の verbatim probe（SOT-2988）は特に重要な転換点だった。静的監査で `_ACTIONS` に 720 step の
 固定 action table（展開後約 106 KB）が埋め込まれ、公開 submission `55440039` の replay 3 件から schedule を
@@ -74,6 +75,10 @@ V16-RC5 の verbatim probe（SOT-2988）は特に重要な転換点だった。�
    spacing、daily cap を守って一度観測する。結果は非定常な一標本として扱い、incumbent hedge を必ず残す。
 5. **champion は現 incumbent のまま。** C95 exact は local readiness を満たしたが live `600.0` で棄却済み。
    V111、R5A、Apache clean-room、Conditional Memory、Hamburger V27 も新しい opponent-distribution evidence なしに再試行しない。
+6. **cycle 6 でも local-positive 単独は live 提出根拠にならなかった。** v25 clean-room は provenance と runtime を通過し
+   foundation-relative A/B を改善した一方、sealed absolute matchup は `0/4` だった。加えて current-field metadata oracle は
+   screen→confirm ordering を維持できなかったため、この組合せで public 枠を使うのは evidence-driven observation ではなく
+   public lottery になる。候補は hedge として保存し、incumbent を置換・提出しない。
 
 ## 4. 今後の方針
 
@@ -115,6 +120,14 @@ V16-RC5 の verbatim probe（SOT-2988）は特に重要な転換点だった。�
    incumbent hedge と直接比較する。
 5. **M4 — converge portfolio**: 締切接近時のみ、live evidence と構造差に基づき incumbent + 独立 hedge の最終候補を選ぶ。
    public 最大値だけで二枠を埋めない。
+
+### Cycle 6 からの次のマイルストーン
+
+- current-field trajectory を credentials・replay bytes 非保存で安全に集計できる取得境界を設計し、metadata-only oracle の
+  ordering failure を action/economic attribution へ接続する。
+- v25 は新しい live-distribution evidence が得られるまで再調整・提出せず、独立 hedge artifact として固定する。
+- 新規 whole-agent は replay table を除外しても独立 policy が成立し、明示 license と absolute sealed competitiveness を同時に
+  満たすものだけを次の live-observation 候補にする。
 
 ## 5. 参照
 
