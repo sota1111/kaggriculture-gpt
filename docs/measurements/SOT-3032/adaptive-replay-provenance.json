@@ -1,0 +1,78 @@
+{
+  "axis": "Adaptive Replay Agent provenance boundary",
+  "checks": {
+    "fixed_schedule_proven": true,
+    "incumbent_preserved": true,
+    "license_fails_closed": true,
+    "no_clean_room_candidate_claim": true,
+    "no_forbidden_artifact_committed": true,
+    "no_private_trace_or_credentials": true,
+    "no_submission": true,
+    "replay_identity_dependencies_proven": true,
+    "sealed_confirm_unopened": true,
+    "source_url_version_hash_license_pinned": true,
+    "transient_metadata_hash_matches": true,
+    "transient_notebook_hash_matches": true
+  },
+  "decision": "fetch-only-rejected-no-portable-candidate",
+  "intervention_firing_log": "NOT_APPLICABLE_NO_CANDIDATE",
+  "issue": "SOT-3032",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "provenance": {
+    "acquisition": "authenticated Kaggle kernels pull --metadata; transient notebook and decoded bytes excluded from repository",
+    "artifact": "02 Adaptive Replay Agent provenance-only descriptor",
+    "author": "junaid512",
+    "candidate_ablation": "NOT_APPLICABLE_NO_PORTABLE_CANDIDATE",
+    "clean_room_decision": "NO_STANDALONE_CANDIDATE",
+    "clean_room_reason": "The adapters only repair, reorder, or shift actions supplied by the forbidden fixed schedule. The remaining generic ideas do not define an independently executable whole-agent direction and overlap conventional repository mechanisms.",
+    "decoded_action_table_sha256": "04354aa03513bfc1dcfbbeaf25a4a2074317681bd3c839a9550db21fa3e0d406",
+    "embedded_agent_sha256": "3c41010de37114c082d481e4a4c3e42ca5148e826a140e2aa02964aca8636dd8",
+    "excluded": [
+      "notebook source",
+      "embedded agent source",
+      "compressed or decoded action table",
+      "fixed schedule",
+      "replay bytes",
+      "private traces",
+      "credentials"
+    ],
+    "incumbent_modified": false,
+    "kaggle_submission": "NOT_PERFORMED",
+    "kernel_id": 130115367,
+    "kernel_last_run_utc": "2026-08-17T10:49:38.633Z",
+    "kernel_metadata_sha256": "22d87950a87bd64da7e23f1e4265c9cb6835a9cb5ce150e7e72aa73b69a4caa5",
+    "kernel_version": "public snapshot pulled 2026-08-23T00:27:00Z; Kaggle metadata exposed no numeric version",
+    "license": "UNDECLARED",
+    "notebook_filename": "02-adaptive-replay-agent.ipynb",
+    "notebook_sha256": "e60ecb9ac0ab624be2344ccf33a917047fbf5efe9fa450bb00e2310d35fb60e6",
+    "redistribution": "fetch-only",
+    "sealed_confirm": "NOT_OPENED_NO_CANDIDATE",
+    "source_url": "https://www.kaggle.com/code/junaid512/02-adaptive-replay-agent",
+    "structure": {
+      "agent_source_bytes": 25939,
+      "credential_or_network_dependency": false,
+      "decoded_action_table_bytes": 109619,
+      "fixed_schedule_entrypoint": "agent selects _ACTIONS[current step] before applying adapters",
+      "non_pass_steps": 690,
+      "observation_driven_adapters": [
+        "SELL collision ranking",
+        "near-clone gated premium preemption",
+        "weed repair",
+        "terminal liquidation"
+      ],
+      "private_trace_or_external_replay_bytes": false,
+      "replay_identity_dependencies": [
+        "base farmer, hand, and market actions come from _ACTIONS[step]",
+        "premium preemption reads SELL orders from _ACTIONS[step + 1]",
+        "weed recovery replays actor actions from earlier fixed schedule positions"
+      ],
+      "schedule_steps": 719,
+      "unique_actions": 666
+    },
+    "verbatim_decision": "PROHIBITED",
+    "verbatim_reason": "No redistribution license is declared and the executable is dominated by a compressed replay-derived fixed action table."
+  },
+  "screen": "NOT_RUN_NO_CANDIDATE",
+  "sealed_confirm": "NOT_OPENED_NO_CANDIDATE"
+}
