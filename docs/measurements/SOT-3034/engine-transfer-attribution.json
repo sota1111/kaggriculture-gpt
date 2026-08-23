@@ -1,0 +1,209 @@
+{
+  "aggregate_firing": {
+    "market_terminal_fired": 2436,
+    "opponent_exposure_fired": 2354
+  },
+  "axis": "engine-grounded-current-field-transfer-interactions",
+  "checks": {
+    "all_official_episodes_done": true,
+    "current_field_unavailable_is_inconclusive": true,
+    "engine_identity_exact": true,
+    "kaggle_submission_not_performed": true,
+    "market_terminal_interaction_fired": true,
+    "opponent_exposure_interaction_fired": true,
+    "same_seed_both_seats": true
+  },
+  "current_field_association": {
+    "association_only_not_causal_attribution": true,
+    "pair_margin_drift": -2033.3333333333333,
+    "reason": "current-field corpus is metadata-only and contains no action/private trajectory bytes",
+    "trajectory_available": false,
+    "windows": {
+      "confirm": {
+        "episodes": 3,
+        "mean_pair_margin": -700.0,
+        "negative_pair_margins": 3
+      },
+      "screen": {
+        "episodes": 3,
+        "mean_pair_margin": 1333.3333333333333,
+        "negative_pair_margins": 0
+      }
+    }
+  },
+  "difference_from_sot_3017": [
+    "adds exact terminal-base/market-impact cross-term residual rather than ranking additive gap buckets only",
+    "adds public opponent-relative capital exposure and co-firing counts by phase",
+    "joins firing evidence to the newer chronological current-field screen/confirm cohort while preserving its metadata-only boundary"
+  ],
+  "issue": "SOT-3034",
+  "kaggle_submission": "NOT_PERFORMED",
+  "metric_contract": {
+    "candidate_independent": true,
+    "opponent_exposure": "delta(own public capital proxy) - delta(opponent public capital proxy)",
+    "public_only_opponent_state": true,
+    "terminal_identity": "market_value = terminal_base + market_impact"
+  },
+  "passed": true,
+  "provenance": {
+    "candidates/c95-high-score/source.json": "f7455c1e880dffb83c68fbabbb6aac98da1368aa769d308ac017fdfd94adee1d",
+    "scripts/evaluation/economic_oracle_snapshot.json": "78af32db45f9f1344ada3e6ee3a957889146f692525b7c7861f332d167e417f9",
+    "tests/fixtures/current_field_transfer_manifest.json": "cb0d28ece7d83da4c86ff8ef90aa7d79bf4bd5b9a96e66e557ae87ca125f30f7"
+  },
+  "reason": "official-engine interactions fire, but metadata-only current-field records cannot support trajectory-level causal attribution",
+  "result": "inconclusive",
+  "rows": [
+    {
+      "firing": {
+        "market_terminal_fired": 610,
+        "opponent_exposure_fired": 587
+      },
+      "lineage": "official-starter",
+      "margin": 156959.0,
+      "max_identity_residual": 0.0,
+      "opponent": "starter",
+      "phase_firing": {
+        "early": {
+          "market_terminal_fired": 164,
+          "opponent_exposure_fired": 158
+        },
+        "late": {
+          "market_terminal_fired": 225,
+          "opponent_exposure_fired": 217
+        },
+        "mid": {
+          "market_terminal_fired": 221,
+          "opponent_exposure_fired": 212
+        }
+      },
+      "seat": 0,
+      "seed": 303401,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720,
+      "totals": {
+        "market_impact_delta": 0.0,
+        "market_value_delta": 0.0,
+        "opponent_relative_capital_delta": 156919.0,
+        "terminal_base_delta": 0.0
+      },
+      "window": "screen"
+    },
+    {
+      "firing": {
+        "market_terminal_fired": 610,
+        "opponent_exposure_fired": 587
+      },
+      "lineage": "official-starter",
+      "margin": 156854.0,
+      "max_identity_residual": 0.0,
+      "opponent": "starter",
+      "phase_firing": {
+        "early": {
+          "market_terminal_fired": 164,
+          "opponent_exposure_fired": 158
+        },
+        "late": {
+          "market_terminal_fired": 225,
+          "opponent_exposure_fired": 217
+        },
+        "mid": {
+          "market_terminal_fired": 221,
+          "opponent_exposure_fired": 212
+        }
+      },
+      "seat": 1,
+      "seed": 303401,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720,
+      "totals": {
+        "market_impact_delta": 0.0,
+        "market_value_delta": 0.0,
+        "opponent_relative_capital_delta": 156814.0,
+        "terminal_base_delta": 0.0
+      },
+      "window": "screen"
+    },
+    {
+      "firing": {
+        "market_terminal_fired": 608,
+        "opponent_exposure_fired": 590
+      },
+      "lineage": "official-random",
+      "margin": 158779.0,
+      "max_identity_residual": 0.0,
+      "opponent": "random",
+      "phase_firing": {
+        "early": {
+          "market_terminal_fired": 164,
+          "opponent_exposure_fired": 159
+        },
+        "late": {
+          "market_terminal_fired": 222,
+          "opponent_exposure_fired": 217
+        },
+        "mid": {
+          "market_terminal_fired": 222,
+          "opponent_exposure_fired": 214
+        }
+      },
+      "seat": 0,
+      "seed": 303411,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720,
+      "totals": {
+        "market_impact_delta": 0.0,
+        "market_value_delta": 0.0,
+        "opponent_relative_capital_delta": 158811.0,
+        "terminal_base_delta": 0.0
+      },
+      "window": "confirm"
+    },
+    {
+      "firing": {
+        "market_terminal_fired": 608,
+        "opponent_exposure_fired": 590
+      },
+      "lineage": "official-random",
+      "margin": 138378.0,
+      "max_identity_residual": 0.0,
+      "opponent": "random",
+      "phase_firing": {
+        "early": {
+          "market_terminal_fired": 164,
+          "opponent_exposure_fired": 159
+        },
+        "late": {
+          "market_terminal_fired": 224,
+          "opponent_exposure_fired": 217
+        },
+        "mid": {
+          "market_terminal_fired": 220,
+          "opponent_exposure_fired": 214
+        }
+      },
+      "seat": 1,
+      "seed": 303411,
+      "status": [
+        "DONE",
+        "DONE"
+      ],
+      "steps": 720,
+      "totals": {
+        "market_impact_delta": 0.0,
+        "market_value_delta": 0.0,
+        "opponent_relative_capital_delta": 138406.0,
+        "terminal_base_delta": 0.0
+      },
+      "window": "confirm"
+    }
+  ]
+}

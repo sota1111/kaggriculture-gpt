@@ -104,6 +104,75 @@ def state_values(obs: dict[str, Any], seat: int, snapshot: dict[str, Any]) -> di
     }
 
 
+def market_terminal_identity(obs: dict[str, Any], snapshot: dict[str, Any]) -> dict[str, float]:
+    """Return the exact engine-price decomposition of own terminal inventory.
+
+    Market value is not an additional reward term: it is base-value inventory
+    plus the shared-market price deviation carried by that inventory.  Keeping
+    all three values makes double counting mechanically detectable.
+    """
+    inv = inventory(obs)
+    prices = obs.get("market", {}).get("prices")
+    if not isinstance(prices, dict):
+        raise EngineDriftError("public market prices are missing")
+    base = {item: data["base"] for item, data in snapshot["market"].items()}
+    terminal_base = 0.0
+    market_impact = 0.0
+    for item, quantity in inv.items():
+        if item in prices:
+            terminal_base += quantity * base[item]
+            market_impact += quantity * (prices[item] - base[item])
+        elif item in snapshot["crops"]:
+            terminal_base += quantity * snapshot["crops"][item]["seed"]
+        elif item in snapshot["animals"]:
+            terminal_base += quantity * snapshot["animals"][item]["cost"]
+    market_value = inventory_value(obs, snapshot)
+    residual = market_value - terminal_base - market_impact
+    return {"terminal_base": float(terminal_base), "market_impact": float(market_impact),
+            "market_value": market_value, "identity_residual": float(residual)}
+
+
+def public_capital_proxy(obs: dict[str, Any], seat: int, snapshot: dict[str, Any]) -> float:
+    """Candidate-independent, public-only productive-capital proxy for a seat."""
+    farms = obs.get("farms")
+    if not isinstance(farms, list) or seat >= len(farms):
+        raise EngineDriftError("public farm identity is missing")
+    money = farms[seat].get("money")
+    if not isinstance(money, (int, float)):
+        raise EngineDriftError("public farm money identity is missing")
+    return float(money + crop_tile_value(obs, seat) + animal_payback_value(obs, seat, snapshot))
+
+
+def interaction_transition(obs: dict[str, Any], nxt: dict[str, Any], seat: int,
+                           snapshot: dict[str, Any]) -> dict[str, float | bool]:
+    """Measure market/terminal co-firing and public opponent-relative exposure."""
+    before, after = market_terminal_identity(obs, snapshot), market_terminal_identity(nxt, snapshot)
+    terminal_delta = after["terminal_base"] - before["terminal_base"]
+    impact_delta = after["market_impact"] - before["market_impact"]
+    market_value_delta = after["market_value"] - before["market_value"]
+    residual = market_value_delta - terminal_delta - impact_delta
+    farms = obs.get("farms", [])
+    next_farms = nxt.get("farms", [])
+    if len(farms) != 2 or len(next_farms) != 2:
+        opponent_delta = 0.0
+        opponent_available = False
+    else:
+        other = 1 - seat
+        own_delta = public_capital_proxy(nxt, seat, snapshot) - public_capital_proxy(obs, seat, snapshot)
+        other_delta = public_capital_proxy(nxt, other, snapshot) - public_capital_proxy(obs, other, snapshot)
+        opponent_delta = own_delta - other_delta
+        opponent_available = True
+    return {
+        "terminal_base_delta": terminal_delta,
+        "market_impact_delta": impact_delta,
+        "market_value_delta": market_value_delta,
+        "identity_residual": residual,
+        "market_terminal_fired": terminal_delta != 0.0 and impact_delta != 0.0,
+        "opponent_relative_capital_delta": opponent_delta,
+        "opponent_exposure_fired": opponent_available and impact_delta != 0.0 and opponent_delta != 0.0,
+    }
+
+
 def planned_values(action: Any, obs: dict[str, Any], snapshot: dict[str, Any]) -> dict[str, float]:
     values = {name: 0.0 for name in IDENTITIES}
     if not isinstance(action, dict):
