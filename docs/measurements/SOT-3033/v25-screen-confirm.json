@@ -1,0 +1,449 @@
+{
+  "artifact": {
+    "bytes": 28156,
+    "path": "candidates/v25-strict-future-cleanroom/agent.py",
+    "sha256": "5db1a9e17227ee7b049bafd12c0d758b9a210df1b9c1ef2124767e583fcbfc02"
+  },
+  "confirm": {
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "2df187527fb41258c3035b9f0bf746d61423b9acc8f9817443fa4f7e6a5d9743",
+        "cohort": "confirm",
+        "episode": "v25-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": -57905.0,
+        "non_pass_actions": 6406,
+        "opponent": "moon-v102",
+        "opponent_reward": 81174.0,
+        "policy": "candidate",
+        "reward": 23269.0,
+        "runtime_seconds": 3.23,
+        "seat": 0,
+        "seed": 303311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "232fc3038198d45ccc0e0e1eec230119b791baf7a9cfde4da612f0f3d4216e33",
+        "cohort": "confirm",
+        "episode": "v25-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": -70986.0,
+        "non_pass_actions": 6419,
+        "opponent": "moon-v102",
+        "opponent_reward": 103457.0,
+        "policy": "candidate",
+        "reward": 32471.0,
+        "runtime_seconds": 3.317,
+        "seat": 1,
+        "seed": 303311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "62ee51849b18ad19bbbada8742985200c0ac0ca81af7aa3d4b72115d83d50a74",
+        "cohort": "confirm",
+        "episode": "v25-confirm-c95",
+        "invalid_actions": 0,
+        "lineage": "bruceqdu/c95",
+        "margin": -87942.0,
+        "non_pass_actions": 5978,
+        "opponent": "c95",
+        "opponent_reward": 125345.0,
+        "policy": "candidate",
+        "reward": 37403.0,
+        "runtime_seconds": 3.293,
+        "seat": 0,
+        "seed": 303313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "a77c54aa454c39710ca5915634793bccf32d53e7072916869cdf2240ae79a233",
+        "cohort": "confirm",
+        "episode": "v25-confirm-c95",
+        "invalid_actions": 0,
+        "lineage": "bruceqdu/c95",
+        "margin": -77465.0,
+        "non_pass_actions": 6404,
+        "opponent": "c95",
+        "opponent_reward": 111405.0,
+        "policy": "candidate",
+        "reward": 33940.0,
+        "runtime_seconds": 3.341,
+        "seat": 1,
+        "seed": 303313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "delta": {
+      "mean_margin": 13523.75,
+      "worst_margin": 13251.0
+    },
+    "foundation_rows": [
+      {
+        "action_trace_sha256": "dc4538f1f28515cabcb0cc824e917debba1887839c2f178b70196e3033dbc0f4",
+        "cohort": "confirm",
+        "episode": "v25-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": -97617.0,
+        "non_pass_actions": 6511,
+        "opponent": "moon-v102",
+        "opponent_reward": 117375.0,
+        "policy": "foundation",
+        "reward": 19758.0,
+        "runtime_seconds": 3.475,
+        "seat": 0,
+        "seed": 303311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "3e69942133caee2ebe58d2ab31df5650c36e1875e3c96e42870146acd7aa97de",
+        "cohort": "confirm",
+        "episode": "v25-confirm-moon",
+        "invalid_actions": 0,
+        "lineage": "prvsiyan/moon-v102",
+        "margin": -101193.0,
+        "non_pass_actions": 6439,
+        "opponent": "moon-v102",
+        "opponent_reward": 131420.0,
+        "policy": "foundation",
+        "reward": 30227.0,
+        "runtime_seconds": 3.504,
+        "seat": 1,
+        "seed": 303311,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 11
+      },
+      {
+        "action_trace_sha256": "1bf5fd63f51d6e811fddd9a2194ed50ee5942a71fcf731448157b309b519dca1",
+        "cohort": "confirm",
+        "episode": "v25-confirm-c95",
+        "invalid_actions": 0,
+        "lineage": "bruceqdu/c95",
+        "margin": -78541.0,
+        "non_pass_actions": 6533,
+        "opponent": "c95",
+        "opponent_reward": 104622.0,
+        "policy": "foundation",
+        "reward": 26081.0,
+        "runtime_seconds": 3.385,
+        "seat": 0,
+        "seed": 303313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      },
+      {
+        "action_trace_sha256": "b6998da6fd06375dcffc85f6c138958f3d19c19cd3ff78613d144d15d0ed3ccc",
+        "cohort": "confirm",
+        "episode": "v25-confirm-c95",
+        "invalid_actions": 0,
+        "lineage": "bruceqdu/c95",
+        "margin": -71042.0,
+        "non_pass_actions": 6575,
+        "opponent": "c95",
+        "opponent_reward": 108171.0,
+        "policy": "foundation",
+        "reward": 37129.0,
+        "runtime_seconds": 3.399,
+        "seat": 1,
+        "seed": 303313,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 13
+      }
+    ],
+    "foundation_summary": {
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "mean_margin": -87098.25,
+      "non_pass_actions": 26058,
+      "wins_or_ties": 0,
+      "worst_margin": -101193.0
+    },
+    "summary": {
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "mean_margin": -73574.5,
+      "non_pass_actions": 25207,
+      "wins_or_ties": 0,
+      "worst_margin": -87942.0
+    }
+  },
+  "decision": "promoted",
+  "decision_reason": "Sealed direct A/B met the positive promotion gate.",
+  "engine": "kaggle-environments==1.32.7",
+  "foundation": {
+    "path": "candidates/apache-agent-builder/agent.py",
+    "sha256": "92be5db3aebb3ce84186cb4d537b194c6444ce5a4b0b88717daaa7425ce9d471"
+  },
+  "incumbent": {
+    "modified": false,
+    "path": "main.py",
+    "sha256": "0c10cbf2a2c806f87c0d04257c5f90c87074dce26566d6450fc8276a5d48a14f"
+  },
+  "isolation": {
+    "episode": true,
+    "lineage": true,
+    "opponent": true,
+    "seat": true,
+    "seed": true,
+    "time_index": true
+  },
+  "issue": "SOT-3033",
+  "kaggle_submission": "NOT_PERFORMED",
+  "passed": true,
+  "public_score_used_for_promotion": false,
+  "recorded_at": "2026-08-23T01:00:48.925850+00:00",
+  "runtime_contract_passed": true,
+  "screen": {
+    "candidate_rows": [
+      {
+        "action_trace_sha256": "1e9aa692ca971c29b36f010562af9e80abb83808c0a405f4b21d0317e7f75a23",
+        "cohort": "screen",
+        "episode": "v25-screen-inc",
+        "invalid_actions": 0,
+        "lineage": "repo/incumbent",
+        "margin": 98192.0,
+        "non_pass_actions": 7095,
+        "opponent": "incumbent",
+        "opponent_reward": 1295.0,
+        "policy": "candidate",
+        "reward": 99487.0,
+        "runtime_seconds": 2.644,
+        "seat": 0,
+        "seed": 303301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "2b151adead22fc7fdd758343c17bac5724b0ace878a0b52dbe91b06c1a547c58",
+        "cohort": "screen",
+        "episode": "v25-screen-inc",
+        "invalid_actions": 0,
+        "lineage": "repo/incumbent",
+        "margin": 106919.0,
+        "non_pass_actions": 7104,
+        "opponent": "incumbent",
+        "opponent_reward": 1295.0,
+        "policy": "candidate",
+        "reward": 108214.0,
+        "runtime_seconds": 2.628,
+        "seat": 1,
+        "seed": 303301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "9feeb8fbb6566c806509b283831c1c0d3c79b04c34dfe7b02ebf0033ce142eee",
+        "cohort": "screen",
+        "episode": "v25-screen-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care",
+        "margin": -22197.0,
+        "non_pass_actions": 6053,
+        "opponent": "lonespear-care",
+        "opponent_reward": 55057.0,
+        "policy": "candidate",
+        "reward": 32860.0,
+        "runtime_seconds": 3.323,
+        "seat": 0,
+        "seed": 303303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "25209c465e5eb223ca30ec46cef5ba02364ab90c395e409a68f465cbd34eb63e",
+        "cohort": "screen",
+        "episode": "v25-screen-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care",
+        "margin": -32713.0,
+        "non_pass_actions": 5619,
+        "opponent": "lonespear-care",
+        "opponent_reward": 55610.0,
+        "policy": "candidate",
+        "reward": 22897.0,
+        "runtime_seconds": 2.912,
+        "seat": 1,
+        "seed": 303303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "delta": {
+      "mean_margin": 19344.0,
+      "worst_margin": 856.0
+    },
+    "foundation_rows": [
+      {
+        "action_trace_sha256": "6e8be8d601dfee806cec4a12880b474c488778e5b01b7b61075c97ebd3753a2c",
+        "cohort": "screen",
+        "episode": "v25-screen-inc",
+        "invalid_actions": 0,
+        "lineage": "repo/incumbent",
+        "margin": 74141.0,
+        "non_pass_actions": 6818,
+        "opponent": "incumbent",
+        "opponent_reward": 1295.0,
+        "policy": "foundation",
+        "reward": 75436.0,
+        "runtime_seconds": 2.546,
+        "seat": 0,
+        "seed": 303301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "3dfaa6f2fc1deb274474cd40ac358fd59a0bec08308d6934d76303caedfa8b93",
+        "cohort": "screen",
+        "episode": "v25-screen-inc",
+        "invalid_actions": 0,
+        "lineage": "repo/incumbent",
+        "margin": 61974.0,
+        "non_pass_actions": 6833,
+        "opponent": "incumbent",
+        "opponent_reward": 1295.0,
+        "policy": "foundation",
+        "reward": 63269.0,
+        "runtime_seconds": 2.567,
+        "seat": 1,
+        "seed": 303301,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 1
+      },
+      {
+        "action_trace_sha256": "ee0064d8a4235ac7c6f397454da3fdbecb007d12764fb95c96ea99537c9a990e",
+        "cohort": "screen",
+        "episode": "v25-screen-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care",
+        "margin": -29721.0,
+        "non_pass_actions": 6251,
+        "opponent": "lonespear-care",
+        "opponent_reward": 82146.0,
+        "policy": "foundation",
+        "reward": 52425.0,
+        "runtime_seconds": 3.093,
+        "seat": 0,
+        "seed": 303303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      },
+      {
+        "action_trace_sha256": "780fa084478118319713c2f70448edd4297019f8230395d52df03686b4396617",
+        "cohort": "screen",
+        "episode": "v25-screen-care",
+        "invalid_actions": 0,
+        "lineage": "lonespear/care",
+        "margin": -33569.0,
+        "non_pass_actions": 6273,
+        "opponent": "lonespear-care",
+        "opponent_reward": 86226.0,
+        "policy": "foundation",
+        "reward": 52657.0,
+        "runtime_seconds": 3.1,
+        "seat": 1,
+        "seed": 303303,
+        "statuses": [
+          "DONE",
+          "DONE"
+        ],
+        "steps": 720,
+        "time_index": 3
+      }
+    ],
+    "foundation_summary": {
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "mean_margin": 18206.25,
+      "non_pass_actions": 26175,
+      "wins_or_ties": 2,
+      "worst_margin": -33569.0
+    },
+    "summary": {
+      "all_done": true,
+      "episodes": 4,
+      "invalid_actions": 0,
+      "mean_margin": 37550.25,
+      "non_pass_actions": 25871,
+      "wins_or_ties": 2,
+      "worst_margin": -32713.0
+    }
+  },
+  "static_audit": {
+    "compiles": true,
+    "longest_literal_sequence": 9,
+    "no_large_action_lookup": true,
+    "no_network_import": true,
+    "no_sensitive_runtime_tokens": true
+  },
+  "submission_contract_passed": true
+}
